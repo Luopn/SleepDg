@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_wifi_name"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@android:color/white"
+        android:text="wifi名称"
+        android:gravity="center_vertical"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/tv_wifi_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:background="@android:color/white"
+        android:text="wifi密码"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:padding="10dp"
+     android:text="发生时间"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:background="@android:color/white"
+        android:textColor="@android:color/black" />
+    <TextView
+        android:id="@+id/tv_jiare"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:padding="10dp"
+        android:text="加热强度"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:background="@android:color/white"
+        android:textColor="@android:color/black" />
+    <TextView
+        android:id="@+id/tv_chongqi"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:padding="10dp"
+        android:text="充气强度"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:background="@android:color/white"
+        android:textColor="@android:color/black" />
+    <TextView
+        android:id="@+id/tv_jiyi"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:padding="10dp"
+        android:text="充气强度记忆"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:background="@android:color/white"
+        android:textColor="@android:color/black" />
+    <TextView
+        android:id="@+id/tv_dianji"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:padding="10dp"
+        android:text="电机升降"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:background="@android:color/white"
+        android:textColor="@android:color/black" />
+    <TextView
+        android:id="@+id/tv_shengji"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:padding="10dp"
+        android:text="空中升级"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:background="@android:color/white"
+        android:textColor="@android:color/black" />
+=======        android:text="发送名称"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/textSize_14" />
+>>>>>>> .theirs
+</LinearLayout>

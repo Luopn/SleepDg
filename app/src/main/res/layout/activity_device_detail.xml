@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="80dp"
+        android:background="@mipmap/pic_bed" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="智能床001号"
+        android:layout_marginTop="15dp"
+        android:textSize="@dimen/textSize_14"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@android:color/white"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="规格尺寸：200mm*300mm"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="60dp"
+        android:textSize="@dimen/textSize_14"
+        android:textColor="@android:color/white"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="输出：2000A"
+        android:layout_marginTop="15dp"
+        android:textSize="@dimen/textSize_14"
+        android:layout_marginLeft="60dp"
+
+        android:textColor="@android:color/white"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="功率：220V"
+        android:layout_marginTop="15dp"
+        android:textSize="@dimen/textSize_14"
+        android:layout_marginLeft="60dp"
+
+        android:textColor="@android:color/white"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="主要功能：加热、升降、硬度调节"
+        android:layout_marginTop="15dp"
+        android:textSize="@dimen/textSize_14"
+        android:layout_marginLeft="60dp"
+
+        android:textColor="@android:color/white"/>
+</LinearLayout>

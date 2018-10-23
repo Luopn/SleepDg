@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#181b32</color>
+    <color name="colorPrimaryDark">#111323</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="progress_gray">#FFD8D8D8</color>
+    <color name="progress_gray_dark">#FF383838</color>
+    <color name="default_blue_light">#ff33b5e5</color>
+
+    <color name="grey_background">#f0f0f0</color>
+    <color name="home_text">#ff7800</color>
+    <color name="grey333">#333333</color>
+    <color name="yellows">#fe7e12</color>
+    <color name="green">#397c55</color>
+    <color name="grey">#7c7c7c</color>
+    <color name="white">#ffffff</color>
+    <color name="lightGray">#ddd</color>
+
+</resources>

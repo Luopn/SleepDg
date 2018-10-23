@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="title_height">56dp</dimen>
+    <dimen name="activity_view">0.5dp</dimen>
+    <dimen name="view_height">1dp</dimen>
+    <dimen name="textSize_10">10sp</dimen>
+    <dimen name="textSize_11">11sp</dimen>
+    <dimen name="textSize_12">12sp</dimen>
+    <dimen name="textSize_13">13sp</dimen>
+    <dimen name="textSize_14">14sp</dimen>
+    <dimen name="textSize_15">15sp</dimen>
+    <dimen name="textSize_16">16sp</dimen>
+    <dimen name="textSize_17">17sp</dimen>
+    <dimen name="textSize_18">18sp</dimen>
+    <dimen name="textSize_19">19sp</dimen>
+    <dimen name="textSize_20">20sp</dimen>
+    <dimen name="textSize_21">21sp</dimen>
+    <dimen name="textSize_22">22sp</dimen>
+    <dimen name="textSize_23">23sp</dimen>
+    <dimen name="textSize_24">24sp</dimen>
+    <dimen name="textSize_25">25sp</dimen>
+    <dimen name="textSize_26">26sp</dimen>
+    <dimen name="textSize_27">27sp</dimen>
+    <dimen name="textSize_28">28sp</dimen>
+    <dimen name="textSize_29">29sp</dimen>
+    <dimen name="textSize_30">30sp</dimen>
+    <dimen name="home_ad_text">21sp</dimen>
+    <dimen name="textSize_40">40sp</dimen>
+    <dimen name="home_more_text">18sp</dimen>
+    <dimen name="login_jingshi">18sp</dimen>
+    <dimen name="nomal">18sp</dimen>
+    <dimen name="login_bianhao">16sp</dimen>
+    <dimen name="regist_nomal">16sp</dimen>
+    <dimen name="regist_finish">24sp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="spacing">10dp</dimen>
+    <dimen name="top_spacing">15dp</dimen>
+    <dimen name="spacing_12">12dp</dimen>
+    <dimen name="spacing_11">11dp</dimen>
+    <dimen name="spacing_13">13dp</dimen>
+    <dimen name="spacing_15">15dp</dimen>
+    <dimen name="spacing_18">18dp</dimen>
+    <dimen name="spacing_10">10dp</dimen>
+    <dimen name="spacing_16">16dp</dimen>
+    <dimen name="spacing_25">25dp</dimen>
+    <!--<dimen name="_70dp">70dp</dimen>-->
+
+    <dimen name="grid_expected_size">120dp</dimen>
+
+
+</resources>

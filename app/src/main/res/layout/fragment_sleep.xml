@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#181b32"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        android:background="#111323"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="睡眠统计"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/textSize_18" />
+
+    </FrameLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1">
+
+                    <com.jx.sleep_dg.view.circlebar.CircleProgressBar
+                        android:id="@+id/circle_progress_bar3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:antiAlias="true"
+                        app:arcWidth="5dp"
+                        app:bgArcColor="#303247"
+                        app:bgArcWidth="5dp"
+                        app:maxValue="100"
+                        app:startAngle="270" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="睡眠评分"
+                            android:textColor="#8d8be8"
+                            android:textSize="@dimen/textSize_13" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="90"
+                                android:textColor="@android:color/white"
+                                android:textSize="44dp" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@mipmap/wenhao" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="请继续保持"
+                            android:textColor="#8d8be8"
+                            android:textSize="@dimen/textSize_13" />
+
+                    </LinearLayout>
+
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="总睡时长: 1小时59分"
+                        android:textColor="#33ffffff"
+                        android:textSize="9dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="深睡时长: 1小时59分"
+
+                        android:textColor="#33ffffff"
+                        android:textSize="9dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="清醒时长: 1小时43分"
+                        android:textColor="#33ffffff"
+                        android:textSize="9dp" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="浅睡时长: 1小时59分"
+                        android:textColor="#33ffffff"
+                        android:textSize="9dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="入睡时间: AM23:59分"
+                        android:textColor="#33ffffff"
+                        android:textSize="9dp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="15dp"
+                android:text="睡眠报告"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/textSize_17" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="8dp"
+                android:drawableLeft="@mipmap/clock"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                android:text="睡眠时间"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/textSize_15" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="8dp"
+                android:gravity="right"
+                android:text="记录时间12:00~次日12:00"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/textSize_13" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="20dp"
+                android:background="@mipmap/sleepkuang" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@mipmap/yuan1"
+                        android:drawablePadding="8dp"
+                        android:text="深度睡眠  25%"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/textSize_14" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:drawableLeft="@mipmap/yuan2"
+                        android:drawablePadding="8dp"
+                        android:text="未眠状态  25%"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/textSize_14" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@mipmap/yuan4"
+                        android:drawablePadding="8dp"
+                        android:text="浅度睡眠  25%"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/textSize_14" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:drawableLeft="@mipmap/yuan3"
+                        android:drawablePadding="8dp"
+                        android:text="不在床上  25%"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/textSize_14" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="45dp"
+                android:layout_marginTop="15dp"
+                android:text="总睡时长: 1小时59分"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/textSize_12" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="45dp"
+                android:layout_marginTop="10dp"
+                android:text="深度睡眠: 1小时59分"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/textSize_12"
+
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="45dp"
+                android:layout_marginTop="10dp"
+                android:text="浅度睡眠: 1小时43分"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/textSize_12" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="45dp"
+                android:layout_marginTop="10dp"
+                android:text="未眠状态: 1小时59分"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/textSize_12" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="45dp"
+                android:layout_marginTop="10dp"
+                android:text="不在床上: AM23:59分"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/textSize_12" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_height"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/white" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp">
+
+
+                <TextView
+                    android:id="@+id/tv_heartrate_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:text="心率"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/textSize_15" />
+
+                <TextView
+                    android:id="@+id/tv_xinlv_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="15dp"
+                    android:text="左 0"
+                    android:textColor="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/tv_xinlv_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/tv_xinlv_left"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="3dp"
+                    android:text="右 0"
+                    android:textColor="@android:color/white" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:id="@+id/tv_huxi_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:text="呼吸率"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/textSize_15" />
+
+                <TextView
+                    android:id="@+id/tv_huxi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_toRightOf="@id/tv_huxi_text"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/textSize_17" />
+
+                <TextView
+                    android:id="@+id/tv_huxi_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="15dp"
+                    android:text="左 0"
+                    android:textColor="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/tv_huxi_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/tv_huxi_left"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="3dp"
+                    android:text="右 0"
+                    android:textColor="@android:color/white" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:id="@+id/tv_fanshen_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:text="翻身次数(分钟)"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/textSize_15" />
+
+                <TextView
+                    android:id="@+id/tv_fanshen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_toRightOf="@id/tv_fanshen_text"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/textSize_17" />
+
+                <TextView
+                    android:id="@+id/tv_fanshen_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="15dp"
+                    android:text="左 0"
+                    android:textColor="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/tv_fanshen_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/tv_fanshen_left"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="3dp"
+                    android:text="右 0"
+                    android:textColor="@android:color/white" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:id="@+id/tv_zhihan_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:text="止鼾"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/textSize_15" />
+
+                <TextView
+                    android:id="@+id/tv_zhihan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_toRightOf="@id/tv_zhihan_text"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/textSize_17" />
+
+                <TextView
+                    android:id="@+id/tv_zhihan_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="15dp"
+                    android:text="左 0"
+                    android:textColor="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/tv_zhihan_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/tv_zhihan_left"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="3dp"
+                    android:text="右 0"
+                    android:textColor="@android:color/white" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

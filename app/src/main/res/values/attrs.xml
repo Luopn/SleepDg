@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 是否开启抗锯齿 -->
+    <attr name="antiAlias" format="boolean" />
+    <!-- 圆弧起始角度，3点钟方向为0，顺时针递增，小于0或大于360进行取余 -->
+    <attr name="startAngle" format="float" />
+    <!-- 圆弧度数 -->
+    <attr name="sweepAngle" format="float" />
+    <!-- 设置动画时间 -->
+    <attr name="animTime" format="integer" />
+    <!-- 绘制内容的数值 -->
+    <attr name="maxValue" format="float" />
+    <attr name="value" format="float" />
+    <!-- 绘制内容的单位 -->
+    <attr name="unit" format="string|reference" />
+    <attr name="unitSize" format="dimension" />
+    <attr name="unitColor" format="color|reference" />
+    <!-- 绘制内容相应的提示语 -->
+    <attr name="hint" format="string|reference" />
+    <attr name="hintSize" format="dimension" />
+    <attr name="hintColor" format="color|reference" />
+    <!-- 精度，默认为0 -->
+    <attr name="precision" format="integer" />
+    <attr name="valueSize" format="dimension" />
+    <attr name="valueColor" format="color|reference" />
+    <!-- 圆弧颜色，设置多个可实现渐变 -->
+    <attr name="arcColor1" format="color|reference" />
+    <attr name="arcColor2" format="color|reference" />
+    <attr name="arcColor3" format="color|reference" />
+    <!-- 背景圆弧颜色，默认白色 -->
+    <attr name="bgArcColor" format="color|reference" />
+    <!-- 圆弧宽度 -->
+    <attr name="arcWidth" format="dimension" />
+    <!-- 圆弧颜色， -->
+    <attr name="arcColors" format="color|reference" />
+    <!-- 文字的偏移量。相对于圆半径而言，默认三分之一 -->
+    <attr name="textOffsetPercentInRadius" format="float" />
+
+    <!-- 圆形进度条 -->
+    <declare-styleable name="CircleProgressBar">
+        <attr name="antiAlias" />
+        <attr name="startAngle" />
+        <attr name="sweepAngle" />
+        <attr name="animTime" />
+        <attr name="maxValue" />
+        <attr name="value" />
+        <attr name="precision" />
+        <attr name="valueSize" />
+        <attr name="valueColor" />
+        <attr name="textOffsetPercentInRadius" />
+        <!-- 绘制内容相应的提示语 -->
+        <attr name="hint" />
+        <attr name="hintSize" />
+        <attr name="hintColor" />
+        <!-- 绘制内容的单位 -->
+        <attr name="unit" />
+        <attr name="unitSize" />
+        <attr name="unitColor" />
+        <!-- 圆弧宽度 -->
+        <attr name="arcWidth" />
+        <attr name="arcColors" />
+        <!-- 背景圆弧颜色 -->
+        <attr name="bgArcColor" />
+        <!-- 背景圆弧宽度 -->
+        <attr name="bgArcWidth" format="dimension" />
+    </declare-styleable>
+
+    <!--<declare-styleable name="DialProgress">-->
+        <!--<attr name="antiAlias" />-->
+        <!--<attr name="startAngle" />-->
+        <!--<attr name="sweepAngle" />-->
+        <!--<attr name="animTime" />-->
+        <!--<attr name="maxValue" />-->
+        <!--<attr name="value" />-->
+        <!--<attr name="precision" />-->
+        <!--<attr name="valueSize" />-->
+        <!--<attr name="valueColor" />-->
+        <!--<attr name="textOffsetPercentInRadius" />-->
+        <!--&lt;!&ndash; 绘制内容的单位 &ndash;&gt;-->
+        <!--<attr name="unit" />-->
+        <!--<attr name="unitSize" />-->
+        <!--<attr name="unitColor" />-->
+        <!--&lt;!&ndash; 绘制内容相应的提示语 &ndash;&gt;-->
+        <!--<attr name="hint" />-->
+        <!--<attr name="hintSize" />-->
+        <!--<attr name="hintColor" />-->
+        <!--&lt;!&ndash; 圆弧的宽度 &ndash;&gt;-->
+        <!--<attr name="arcWidth" />-->
+        <!--&lt;!&ndash; 刻度的宽度 &ndash;&gt;-->
+        <!--<attr name="dialWidth" format="dimension|reference" />-->
+        <!--&lt;!&ndash; 刻度之间的间隔 &ndash;&gt;-->
+        <!--<attr name="dialIntervalDegree" format="integer" />-->
+        <!--&lt;!&ndash; 圆弧颜色， &ndash;&gt;-->
+        <!--<attr name="arcColors" />-->
+        <!--&lt;!&ndash; 背景圆弧线颜色 &ndash;&gt;-->
+        <!--<attr name="bgArcColor" />-->
+        <!--&lt;!&ndash; 刻度线颜色 &ndash;&gt;-->
+        <!--<attr name="dialColor" format="color|reference" />-->
+    <!--</declare-styleable>-->
+
+    <!--<declare-styleable name="WaveProgress">-->
+        <!--&lt;!&ndash; 是否开启抗锯齿 &ndash;&gt;-->
+        <!--<attr name="antiAlias" />-->
+        <!--&lt;!&ndash; 深色水波动画时间 &ndash;&gt;-->
+        <!--<attr name="darkWaveAnimTime" format="integer" />-->
+        <!--&lt;!&ndash; 浅色水波动画时间 &ndash;&gt;-->
+        <!--<attr name="lightWaveAnimTime" format="integer" />-->
+        <!--&lt;!&ndash; 最大值 &ndash;&gt;-->
+        <!--<attr name="maxValue" />-->
+        <!--&lt;!&ndash; 当前值 &ndash;&gt;-->
+        <!--<attr name="value" />-->
+        <!--<attr name="valueColor" />-->
+        <!--<attr name="valueSize" />-->
+        <!--&lt;!&ndash; 绘制内容相应的提示语 &ndash;&gt;-->
+        <!--<attr name="hint" />-->
+        <!--<attr name="hintSize" />-->
+        <!--<attr name="hintColor" />-->
+        <!--&lt;!&ndash; 圆环宽度 &ndash;&gt;-->
+        <!--<attr name="circleWidth" format="dimension" />-->
+        <!--&lt;!&ndash; 圆环颜色 &ndash;&gt;-->
+        <!--<attr name="circleColor" format="color|reference" />-->
+        <!--&lt;!&ndash; 背景圆环颜色 &ndash;&gt;-->
+        <!--<attr name="bgCircleColor" format="color|reference" />-->
+        <!--&lt;!&ndash; 锁定水波不随圆环进度改变，默认锁定在50%处 &ndash;&gt;-->
+        <!--<attr name="lockWave" format="boolean" />-->
+        <!--&lt;!&ndash; 水波数量 &ndash;&gt;-->
+        <!--<attr name="waveNum" format="integer" />-->
+        <!--&lt;!&ndash; 水波高度，峰值和谷值之和 &ndash;&gt;-->
+        <!--<attr name="waveHeight" format="dimension" />-->
+        <!--&lt;!&ndash; 深色水波颜色 &ndash;&gt;-->
+        <!--<attr name="darkWaveColor" format="color|reference" />-->
+        <!--&lt;!&ndash; 是否显示浅色水波 &ndash;&gt;-->
+        <!--<attr name="showLightWave" format="boolean" />-->
+        <!--&lt;!&ndash; 浅色水波颜色 &ndash;&gt;-->
+        <!--<attr name="lightWaveColor" format="color|reference" />-->
+        <!--&lt;!&ndash; 浅色水波的方向 &ndash;&gt;-->
+        <!--<attr name="lightWaveDirect" format="enum">-->
+            <!--<enum name="L2R" value="0" />-->
+            <!--<enum name="R2L" value="1" />-->
+        <!--</attr>-->
+    <!--</declare-styleable>-->
+
+
+    <!--<declare-styleable name="RoundProgressBar">-->
+        <!--<attr name="roundColor" format="color" />-->
+        <!--<attr name="roundProgressColor" format="color" />-->
+        <!--<attr name="roundWidth" format="dimension"></attr>-->
+        <!--<attr name="textColor" format="color" />-->
+        <!--<attr name="textSize" format="dimension" />-->
+        <!--<attr name="max" format="integer"></attr>-->
+        <!--<attr name="textIsDisplayable" format="boolean"></attr>-->
+        <!--<attr name="style">-->
+            <!--<enum name="STROKE" value="0"></enum>-->
+            <!--<enum name="FILL" value="1"></enum>-->
+        <!--</attr>-->
+    <!--</declare-styleable>-->
+    <!--<declare-styleable name="swipelistviewstyle">-->
+        <!--<attr name="right_width" format="dimension"></attr>-->
+    <!--</declare-styleable>-->
+
+
+
+
+    <!--自定义的半圆环带刻度可拖动SeekBar进度条效果-->
+    <declare-styleable name="MySeekBar"
+        >
+        <!--圆环的宽度-->
+        <attr name="ringWidth" format="float"/>
+        <!--滑动圆弧的背景-->
+        <attr name="slideRingCorlor" format="integer"/>
+        <!--底部圆弧的背景-->
+        <attr name="ringBgCorlor" format="integer"/>
+        <!--当前文字的背景-->
+        <attr name="wordCorlor" format="integer"/>
+        <!--当前文字的大小-->
+        <attr name="wordSize" format="integer"/>
+        <!--同心圆外圆的半径-->
+        <attr name="radius" format="integer"/>
+        <!--最大显示进度-->
+        <attr name="maxProgress" format="integer"/>
+        <!--最小显示进度-->
+        <attr name="minProgress" format="integer"/>
+        <!--当前显示进度-->
+        <attr name="progress" format="integer"/>
+
+        <!--下面这是刻度线的一些属性-->
+        <!--刻度线的总数-->
+        <attr name="scaleLineCount" format="integer"/>
+        <!--普通刻度线的长度-->
+        <attr name="scaleLineLength" format="integer"/>
+        <!--特殊刻度线的长度-->
+        <attr name="specialScaleLineLength" format="integer"/>
+        <!--线条的宽度-->
+        <attr name="scaleLineWidth" format="integer"/>
+        <!--刻度线距离圆环的宽度-->
+        <attr name="scaleToRingSpace" format="integer"/>
+        <!--普通线的颜色-->
+        <attr name="scaleLineNormalCorlor" format="integer"/>
+        <!--特殊线的颜色-->
+        <attr name="specialScaleCorlor" format="integer"/>
+    </declare-styleable>
+
+
+
+    <declare-styleable name="SeekArc">
+        <attr name="thumb" format="reference" />
+        <attr name="thumbOffset" format="dimension" />
+        <attr name="maxSeekProgress" format="integer" />
+        <attr name="progressWidth" format="dimension" />
+        <attr name="arcSeekWidth" format="dimension" />
+        <attr name="progressSeek" format="integer" />
+        <attr name="rotation" format="integer" />
+        <attr name="startAngleSeekArc" format="integer" />
+        <attr name="sweepAngleSeekArc" format="integer" />
+        <attr name="arcColor" format="color" />
+        <attr name="progressColor" format="color" />
+        <attr name="roundEdges" format="boolean" />
+        <attr name="touchInside" format="boolean" />
+        <attr name="clockwise" format="boolean" />
+        <attr name="enabled" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="SeekArcTheme">
+        <attr name="seekArcStyle" format="reference"></attr>
+    </declare-styleable>
+
+
+
+
+</resources>

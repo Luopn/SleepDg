@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#181b32"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        android:background="#111323"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="设置"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/textSize_18" />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_detail"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shape_set_item"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="床垫信息"
+            android:textColor="#8f8f8f"
+            android:textSize="@dimen/textSize_14" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/ic_data_right" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_guanzhu"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shape_set_item"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="床垫互联"
+            android:textColor="#8f8f8f"
+            android:textSize="@dimen/textSize_14" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/ic_data_right" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shape_set_item"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="止鼾模式"
+            android:textColor="#8f8f8f"
+            android:textSize="@dimen/textSize_14" />
+
+        <Switch
+            android:id="@+id/sw_zhihan"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:switchMinWidth="44dp"
+            android:textOff=""
+            android:textOn=""
+            android:thumb="@android:color/transparent"
+            android:track="@drawable/switch_track" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shape_set_item"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="私人模式"
+            android:textColor="#8f8f8f"
+            android:textSize="@dimen/textSize_14" />
+
+        <Switch
+            android:id="@+id/sw_siren"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:switchMinWidth="44dp"
+            android:textOff=""
+            android:textOn=""
+            android:thumb="@android:color/transparent"
+            android:track="@drawable/switch_track" />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:text="启用后将关闭设备WiFi,对睡眠数据不记录不上传"
+        android:textColor="#808f8f8f"
+        android:textSize="@dimen/textSize_10" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shape_set_item"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="儿童模式"
+            android:textColor="#8f8f8f"
+            android:textSize="@dimen/textSize_14" />
+
+        <Switch
+            android:id="@+id/sw_ertong"
+
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:switchMinWidth="44dp"
+            android:textOff=""
+            android:textOn=""
+            android:thumb="@android:color/transparent"
+            android:track="@drawable/switch_track" />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:text="启用后无法对床头、床位进行升降处理."
+        android:textColor="#808f8f8f"
+        android:textSize="@dimen/textSize_10" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shape_set_item"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="孕妇模式"
+            android:textColor="#8f8f8f"
+            android:textSize="@dimen/textSize_14" />
+
+        <Switch
+            android:id="@+id/sw_yunfu"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:switchMinWidth="44dp"
+            android:textOff=""
+            android:textOn=""
+            android:thumb="@android:color/transparent"
+            android:track="@drawable/switch_track" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:text="启用后床位升降幅度只限于小于35°能调整."
+        android:textColor="#808f8f8f"
+        android:textSize="@dimen/textSize_10" />
+
+</LinearLayout>

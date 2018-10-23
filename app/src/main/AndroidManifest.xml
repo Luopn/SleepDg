@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.jx.sleep_dg">
+
+    <application
+        android:name=".utils.MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".ui.LauncherActivity"
+            android:noHistory="true"
+            android:theme="@style/LaunchPageTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.MainActivity" />
+        <activity android:name=".ui.LoginActivity" />
+        <activity android:name=".ui.RegistActivity" />
+        <activity android:name=".ble.DeviceScanActivity" />
+        <activity android:name=".ui.SearchActivity" />
+        <activity android:name=".ui.TestActivity" />
+        <activity android:name=".ui.DeviceDetailActivity" />
+        <activity android:name=".ui.DeviceTempActivity" />
+        <activity android:name=".ui.DeviseHardnessActivity" />
+        <activity android:name=".ui.HardnessActivity" />
+        <activity android:name=".ui.DeviceLiftAcyivity" />
+        <activity android:name=".ui.HistoryDateActivity" />
+        <activity android:name=".ui.AssociatedActivity" />
+        <activity android:name=".ui.AddAssociatedActivity" />
+        <activity android:name=".ui.UserInfoActivity" />
+
+        <service
+            android:name=".ble.BluetoothLeService"
+            android:enabled="true" />
+    </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+
+</manifest>

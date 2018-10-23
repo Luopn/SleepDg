@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/chart1"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@mipmap/bg_data1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#333154">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1">
+
+                    <com.jx.sleep_dg.view.circlebar.CircleProgressBar
+                        android:id="@+id/circle_progress_bar1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:antiAlias="true"
+                        app:arcWidth="5dp"
+                        app:bgArcColor="#a5a066"
+                        app:bgArcWidth="5dp"
+                        app:maxValue="100"
+                        app:precision="15"
+                        app:startAngle="270" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="00%"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/textSize_14" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1">
+
+                    <com.jx.sleep_dg.view.circlebar.CircleProgressBar
+                        android:id="@+id/circle_progress_bar2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:antiAlias="true"
+                        app:arcWidth="5dp"
+                        app:bgArcColor="#7fcab8"
+                        app:bgArcWidth="5dp"
+                        app:maxValue="100"
+                        app:precision="40"
+                        app:startAngle="270" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="00%"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/textSize_14" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1">
+
+                    <com.jx.sleep_dg.view.circlebar.CircleProgressBar
+                        android:id="@+id/circle_progress_bar3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        app:antiAlias="true"
+                        app:arcWidth="5dp"
+                        app:bgArcColor="#5773a0"
+                        app:bgArcWidth="5dp"
+
+                        app:maxValue="100"
+                        app:precision="65"
+                        app:startAngle="270" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="00%"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/textSize_14" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1">
+
+                    <com.jx.sleep_dg.view.circlebar.CircleProgressBar
+                        android:id="@+id/circle_progress_bar4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        app:antiAlias="true"
+                        app:arcWidth="5dp"
+                        app:bgArcColor="#c266b6"
+                        app:bgArcWidth="5dp"
+                        app:maxValue="100"
+                        app:precision="80"
+                        app:startAngle="270" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="00%"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/textSize_14" />
+                </FrameLayout>
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#2d264a"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@mipmap/button_open" />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="睡眠统计"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/textSize_17" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|left"
+                    android:layout_marginLeft="12dp">
+
+                    <ImageView
+                        android:id="@+id/iv_heartrate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:background="@mipmap/ic_heartrate" />
+
+                    <TextView
+                        android:id="@+id/tv_heartrate_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@id/iv_heartrate"
+                        android:text="平均心率"
+                        android:textColor="@android:color/white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_heartrate_text"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_toRightOf="@id/iv_heartrate"
+                        android:text="55次/分"
+                        android:textColor="@android:color/white" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+
+                    <ImageView
+                        android:id="@+id/iv_breath"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:background="@mipmap/ic_breath" />
+
+                    <TextView
+                        android:id="@+id/tv_breath_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@id/iv_breath"
+                        android:text="平均呼吸率"
+                        android:textColor="@android:color/white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_breath_text"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_toRightOf="@id/iv_breath"
+                        android:text="15次/分"
+                        android:textColor="@android:color/white" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_marginRight="12dp">
+
+                    <ImageView
+                        android:id="@+id/iv_sleeps"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:background="@mipmap/ic_sleeps" />
+
+                    <TextView
+                        android:id="@+id/tv_sleeps_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@id/iv_sleeps"
+                        android:text="入睡时长"
+                        android:textColor="@android:color/white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_sleeps_text"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_toRightOf="@id/iv_sleeps"
+                        android:text="11分钟"
+                        android:textColor="@android:color/white" />
+                </RelativeLayout>
+            </FrameLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="20dp"
+                android:text="心率\n次/分"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/textSize_15" />
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/chart2"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:layout_marginTop="30dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="30dp"
+                android:text="呼吸\n次/分"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/textSize_15" />
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/chart3"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="30dp"
+                android:text="翻身\n次"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/textSize_15" />
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/chart4"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:layout_marginTop="20dp"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</ScrollView>
