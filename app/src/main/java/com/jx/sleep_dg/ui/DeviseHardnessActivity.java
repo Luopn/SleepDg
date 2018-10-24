@@ -24,6 +24,9 @@ import java.util.Locale;
  */
 public class DeviseHardnessActivity extends BaseActivity implements View.OnClickListener {
     private boolean isSwitch = true;
+
+    private boolean isNeedRefreshLevel = true;//更新档位数据，防止不停刷新
+
     private MySeekBar leftSeekbar;
     private MySeekBar rightSeekbar;
     private ToggleButton togglebutton;
@@ -63,6 +66,7 @@ public class DeviseHardnessActivity extends BaseActivity implements View.OnClick
         leftSeekbar.setSeekBarClickListener(new MySeekBar.onSeekBarClickListener() {
             @Override
             public void onSeekBarClick(int position) {
+                isNeedRefreshLevel = false;//停止档位数据更新
                 leftIndex = position;
                 tvGear.setText(String.format(Locale.getDefault(), "档位%d", position));
                 shanshuo();
@@ -73,6 +77,7 @@ public class DeviseHardnessActivity extends BaseActivity implements View.OnClick
         rightSeekbar.setSeekBarClickListener(new MySeekBar.onSeekBarClickListener() {
             @Override
             public void onSeekBarClick(int position) {
+                isNeedRefreshLevel = false;//停止档位数据更新
                 rightIndex = position;
                 tvGear.setText(String.format(Locale.getDefault(), "档位%d", position));
                 shanshuo();
@@ -93,13 +98,27 @@ public class DeviseHardnessActivity extends BaseActivity implements View.OnClick
     private void bindViewData() {
         if (mspProtocol == null) return;
         if (isSwitch) {
+            int lPresureCurVal = mspProtocol.getlPresureCurVal();
             tvMemHardless.setText(String.format("左床记忆强度：%s", mspProtocol.getlPresureMemVal()));
-            tvCurHardness.setText(String.format("左床实时强度：%s", mspProtocol.getlPresureCurVal()));
-            tvGear.setText(String.format(Locale.getDefault(), "档位%d", leftIndex));
+            tvCurHardness.setText(String.format("左床实时强度：%s", lPresureCurVal));
+
+            leftIndex = (int) Math.ceil((double) lPresureCurVal / 5);
+            leftIndex = leftIndex < 1 ? 1 : leftIndex > 20 ? 20 : leftIndex;
+            if (isNeedRefreshLevel) {
+                leftSeekbar.setProgress(Double.valueOf(leftIndex + ""));
+                tvGear.setText(String.format(Locale.getDefault(), "档位%d", leftIndex));
+            }
         } else {
+            int rPresureCurVal = mspProtocol.getrPresureCurVal();
             tvMemHardless.setText(String.format("右床记忆强度：%s", mspProtocol.getrPresureMemVal()));
-            tvCurHardness.setText(String.format("右床实时强度：%s", mspProtocol.getrPresureCurVal()));
-            tvGear.setText(String.format(Locale.getDefault(), "档位%d", rightIndex));
+            tvCurHardness.setText(String.format("右床实时强度：%s", rPresureCurVal));
+
+            rightIndex = (int) Math.ceil((double) rPresureCurVal / 5);
+            rightIndex = rightIndex < 1 ? 1 : rightIndex > 20 ? 20 : rightIndex;
+            if (isNeedRefreshLevel) {
+                rightSeekbar.setProgress(Double.valueOf(rightIndex + ""));
+                tvGear.setText(String.format(Locale.getDefault(), "档位%d", rightIndex));
+            }
         }
     }
 
@@ -108,6 +127,7 @@ public class DeviseHardnessActivity extends BaseActivity implements View.OnClick
         super.onClick(view);
         switch (view.getId()) {
             case R.id.togglebutton:
+                isNeedRefreshLevel = true;//档位数据更新
                 if (isSwitch) {
                     isSwitch = false;
                     togglebutton.setChecked(true);
@@ -122,6 +142,7 @@ public class DeviseHardnessActivity extends BaseActivity implements View.OnClick
                 bindViewData();
                 break;
             case R.id.iv_jian:
+                isNeedRefreshLevel = false;//停止档位数据更新
                 if (isSwitch) {
                     if (leftIndex > 1) {
                         leftIndex--;
@@ -140,17 +161,18 @@ public class DeviseHardnessActivity extends BaseActivity implements View.OnClick
                 BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary(leftIndex * 5 + "") + BleUtils.convertDecimalToBinary(rightIndex * 5 + ""));
                 break;
             case R.id.iv_jia:
+                isNeedRefreshLevel = false;//停止档位数据更新
                 if (isSwitch) {
                     if (leftIndex < 20) {
                         leftIndex++;
                         leftSeekbar.setProgress(Double.valueOf(leftIndex + ""));
-                        tvGear.setText(leftIndex + "");
+                        tvGear.setText(String.format(Locale.getDefault(), "%d", leftIndex));
                     }
                 } else {
                     if (rightIndex < 20) {
                         rightIndex++;
                         rightSeekbar.setProgress(Double.valueOf(rightIndex + ""));
-                        tvGear.setText(rightIndex + "");
+                        tvGear.setText(String.format(Locale.getDefault(), "%d", rightIndex));
                     }
                 }
                 shanshuo();

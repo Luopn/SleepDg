@@ -2,6 +2,8 @@ package com.jx.sleep_dg;
 
 import org.junit.Test;
 
+import java.util.Locale;
+
 import static org.junit.Assert.*;
 
 /**
@@ -17,13 +19,7 @@ public class ExampleUnitTest {
 
     @Test
     public void exam() {
-        byte[] b = new byte[]{(byte) 0xBB, (byte) 0x14, (byte) 0x31, (byte) 0x02, (byte) 0x64, (byte) 0x64,
-                (byte) 0x64, (byte) 0x64, (byte) 0x64, (byte) 0x64, (byte) 0x64, (byte) 0x64, (byte) 0x64,
-                (byte) 0x64, (byte) 0x64, (byte) 0x64, (byte) 0x64, (byte) 0x64, (byte) 0x64, (byte) 0x43};
-        byte res = 0;
-        for (int i = 1; i < b.length-2; i++) {
-            res ^= b[i];
-        }
-        System.out.print(res & 0xff);
+        int leftBreathFreq = 96;
+        System.out.print(String.format(Locale.getDefault(), "%d次/分钟", (int) Math.ceil((double)leftBreathFreq / 5)));
     }
 }

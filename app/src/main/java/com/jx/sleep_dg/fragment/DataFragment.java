@@ -50,6 +50,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 /**
@@ -101,13 +102,13 @@ public class DataFragment extends BaseFragment {
         if (mspProtocol != null) {
             int leftBreathFreq = mspProtocol.getlBreathFreq() & 0xff;
             int rightBreathFreq = mspProtocol.getrBreathFreq() & 0xff;
-            int leftHeartBeat = mspProtocol.getlBreathFreq() & 0xff;
-            int rightHeartBeat = mspProtocol.getrBreathFreq() & 0xff;
+            int leftHeartBeat = mspProtocol.getlHeartBeat() & 0xff;
+            int rightHeartBeat = mspProtocol.getrHeartBeat() & 0xff;
 
-            tvHuxiLeft.setText(String.format("%s次/分钟", leftBreathFreq));
-            tvHuxiRight.setText(String.format("%s次/分钟", rightBreathFreq));
-            tvXinlvLeft.setText(String.format("%s次/分钟", leftHeartBeat));
-            tvXinlvRight.setText(String.format("%s次/分钟", rightHeartBeat));
+            tvHuxiLeft.setText(String.format(Locale.getDefault(), "呼吸%d次/分钟", leftBreathFreq));
+            tvHuxiRight.setText(String.format(Locale.getDefault(), "呼吸%d次/分钟", rightBreathFreq));
+            tvXinlvLeft.setText(String.format(Locale.getDefault(), "心率%d次/分钟", leftHeartBeat));
+            tvXinlvRight.setText(String.format(Locale.getDefault(), "心率%d次/分钟", rightHeartBeat));
 
             if (leftBreathFreq > 0) {
                 if (!isHuxi) {

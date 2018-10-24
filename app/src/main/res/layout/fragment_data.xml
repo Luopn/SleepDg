@@ -154,114 +154,125 @@
                 </LinearLayout>
             </LinearLayout>
 
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="15dp"
-                android:text="实时统计"
+                android:layout_marginBottom="15dp"
+                android:text="实时"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/textSize_17" />
 
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp">
-
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
 
                 <TextView
                     android:id="@+id/tv_heartrate_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="8dp"
-                    android:text="心率"
+                    android:layout_marginRight="5dp"
+                    android:text="左"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/textSize_15" />
 
-                <TextView
-                    android:id="@+id/tv_xinlv_left"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="15dp"
-                    android:text="左 0"
-                    android:textColor="@android:color/white" />
+                <com.jx.sleep_dg.view.EcgView
+                    android:id="@+id/ecg_xinlv"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_centerInParent="true"
+                    android:layout_toLeftOf="@id/group1"
+                    android:layout_toRightOf="@id/tv_heartrate_text" />
 
-                <TextView
-                    android:id="@+id/tv_xinlv_right"
+                <LinearLayout
+                    android:id="@+id/group1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_xinlv_left"
                     android:layout_alignParentRight="true"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginRight="15dp"
-                    android:text="右 0"
-                    android:textColor="@android:color/white" />
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:divider="@drawable/shape_divider_horizontal"
+                    android:orientation="vertical"
+                    android:showDividers="middle">
+
+                    <TextView
+                        android:id="@+id/tv_xinlv_left"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:text="心率000次/分钟"
+                        android:textColor="@android:color/white" />
+
+                    <TextView
+                        android:id="@+id/tv_huxi_left"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="呼吸000次/分钟"
+                        android:textColor="@android:color/white" />
+                </LinearLayout>
+
+
             </RelativeLayout>
-
-            <com.jx.sleep_dg.view.EcgView
-                android:id="@+id/ecg_xinlv"
-                android:layout_width="match_parent"
-
-                android:layout_height="80dp"
-                android:layout_marginTop="10dp" />
 
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="15dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
 
                 <TextView
                     android:id="@+id/tv_huxi_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="8dp"
-                    android:text="呼吸率"
+                    android:layout_marginRight="5dp"
+                    android:text="右"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/textSize_15" />
 
-                <TextView
-                    android:id="@+id/tv_huxi"
+                <com.jx.sleep_dg.view.HuxiEcgView
+                    android:id="@+id/ecg_huxi"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toLeftOf="@id/group2"
+                    android:layout_toRightOf="@id/tv_huxi_text" />
+
+                <LinearLayout
+                    android:id="@+id/group2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="15dp"
-                    android:layout_toRightOf="@id/tv_huxi_text"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/textSize_17" />
+                    android:layout_marginLeft="5dp"
+                    android:divider="@drawable/shape_divider_horizontal"
+                    android:orientation="vertical"
+                    android:showDividers="middle">
 
-                <TextView
-                    android:id="@+id/tv_huxi_left"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="15dp"
-                    android:text="左 0"
-                    android:textColor="@android:color/white" />
+                    <TextView
+                        android:id="@+id/tv_xinlv_right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_huxi_right"
+                        android:layout_marginBottom="2dp"
+                        android:text="心率000次/分钟"
+                        android:textColor="@android:color/white" />
 
-                <TextView
-                    android:id="@+id/tv_huxi_right"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_huxi_left"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginRight="15dp"
-                    android:text="右 0"
-                    android:textColor="@android:color/white" />
-
+                    <TextView
+                        android:id="@+id/tv_huxi_right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="呼吸000次/分钟"
+                        android:textColor="@android:color/white" />
+                </LinearLayout>
             </RelativeLayout>
-
-            <com.jx.sleep_dg.view.HuxiEcgView
-                android:id="@+id/ecg_huxi"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginTop="10dp" />
-
         </LinearLayout>
     </ScrollView>
 
