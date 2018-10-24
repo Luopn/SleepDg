@@ -148,7 +148,10 @@ public class DeviceLiftAcyivity extends BaseActivity implements View.OnClickList
                     }
                 }
                 chang();
-                BleComUtils.senddianji(BleUtils.convertDecimalToBinary((leftTouIndex + 1) + "") + BleUtils.convertDecimalToBinary((leftJiaoIndex + 1) + "") + BleUtils.convertDecimalToBinary((rightTouIndex + 1) + "") + BleUtils.convertDecimalToBinary((rightJiaoIndex + 1) + ""));
+                BleComUtils.senddianji(BleUtils.convertDecimalToBinary((leftTouIndex + 1) + "")
+                        + BleUtils.convertDecimalToBinary((leftJiaoIndex + 1) + "")
+                        + BleUtils.convertDecimalToBinary((rightTouIndex + 1) + "")
+                        + BleUtils.convertDecimalToBinary((rightJiaoIndex + 1) + ""));
 
                 break;
             case R.id.iv_tou_jian:
@@ -167,7 +170,10 @@ public class DeviceLiftAcyivity extends BaseActivity implements View.OnClickList
                     }
                 }
                 chang();
-                BleComUtils.senddianji(BleUtils.convertDecimalToBinary((leftTouIndex + 1) + "") + BleUtils.convertDecimalToBinary((leftJiaoIndex + 1) + "") + BleUtils.convertDecimalToBinary((rightTouIndex + 1) + "") + BleUtils.convertDecimalToBinary((rightJiaoIndex + 1) + ""));
+                BleComUtils.senddianji(BleUtils.convertDecimalToBinary((leftTouIndex + 1) + "")
+                        + BleUtils.convertDecimalToBinary((leftJiaoIndex + 1) + "")
+                        + BleUtils.convertDecimalToBinary((rightTouIndex + 1) + "")
+                        + BleUtils.convertDecimalToBinary((rightJiaoIndex + 1) + ""));
 
                 break;
             case R.id.iv_jiao_jia:
@@ -186,7 +192,10 @@ public class DeviceLiftAcyivity extends BaseActivity implements View.OnClickList
                     }
                 }
                 chang();
-                BleComUtils.senddianji(BleUtils.convertDecimalToBinary((leftTouIndex + 1) + "") + BleUtils.convertDecimalToBinary((leftJiaoIndex + 1) + "") + BleUtils.convertDecimalToBinary((rightTouIndex + 1) + "") + BleUtils.convertDecimalToBinary((rightJiaoIndex + 1) + ""));
+                BleComUtils.senddianji(BleUtils.convertDecimalToBinary((leftTouIndex + 1) + "")
+                        + BleUtils.convertDecimalToBinary((leftJiaoIndex + 1) + "")
+                        + BleUtils.convertDecimalToBinary((rightTouIndex + 1) + "")
+                        + BleUtils.convertDecimalToBinary((rightJiaoIndex + 1) + ""));
 
                 break;
             case R.id.iv_jiao_jian:
@@ -205,7 +214,10 @@ public class DeviceLiftAcyivity extends BaseActivity implements View.OnClickList
                     }
                 }
                 chang();
-                BleComUtils.senddianji(BleUtils.convertDecimalToBinary((leftTouIndex + 1) + "") + BleUtils.convertDecimalToBinary((leftJiaoIndex + 1) + "") + BleUtils.convertDecimalToBinary((rightTouIndex + 1) + "") + BleUtils.convertDecimalToBinary((rightJiaoIndex + 1) + ""));
+                BleComUtils.senddianji(BleUtils.convertDecimalToBinary((leftTouIndex + 1) + "")
+                        + BleUtils.convertDecimalToBinary((leftJiaoIndex + 1) + "")
+                        + BleUtils.convertDecimalToBinary((rightTouIndex + 1) + "")
+                        + BleUtils.convertDecimalToBinary((rightJiaoIndex + 1) + ""));
 
                 break;
         }
@@ -277,7 +289,6 @@ public class DeviceLiftAcyivity extends BaseActivity implements View.OnClickList
 
                 } else if (12 <= rightJiaoIndex && rightJiaoIndex <= 17) {
                     ivYouChuang.setBackgroundResource(R.mipmap.head4_foot4);
-
                 }
             }
         }
