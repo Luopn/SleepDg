@@ -80,7 +80,7 @@ public class DeviseHardnessActivity extends BaseActivity implements View.OnClick
             public void onSeekBarClick(int position) {
                 isNeedRefreshLevel = false;//停止档位数据更新
                 leftIndex = position;
-                tvGear.setText(String.format(Locale.getDefault(), "档位%d", position));
+                tvGear.setText(String.format(Locale.getDefault(), "档位%d", position * 5));
                 shanshuo();
                 BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary(leftIndex * 5 + "")
                         + BleUtils.convertDecimalToBinary(rightIndex * 5 + ""));
@@ -91,7 +91,7 @@ public class DeviseHardnessActivity extends BaseActivity implements View.OnClick
             public void onSeekBarClick(int position) {
                 isNeedRefreshLevel = false;//停止档位数据更新
                 rightIndex = position;
-                tvGear.setText(String.format(Locale.getDefault(), "档位%d", position));
+                tvGear.setText(String.format(Locale.getDefault(), "档位%d", position * 5));
                 shanshuo();
                 BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary(leftIndex * 5 + "")
                         + BleUtils.convertDecimalToBinary(rightIndex * 5 + ""));
@@ -118,7 +118,7 @@ public class DeviseHardnessActivity extends BaseActivity implements View.OnClick
             leftIndex = leftIndex < 1 ? 1 : leftIndex > 20 ? 20 : leftIndex;
             if (isNeedRefreshLevel) {
                 leftSeekbar.setProgress(Double.valueOf(leftIndex + ""));
-                tvGear.setText(String.format(Locale.getDefault(), "档位%d", leftIndex));
+                tvGear.setText(String.format(Locale.getDefault(), "档位%d", leftIndex * 5));
             }
         } else {
             int rPresureCurVal = mspProtocol.getrPresureCurVal();
@@ -129,7 +129,7 @@ public class DeviseHardnessActivity extends BaseActivity implements View.OnClick
             rightIndex = rightIndex < 1 ? 1 : rightIndex > 20 ? 20 : rightIndex;
             if (isNeedRefreshLevel) {
                 rightSeekbar.setProgress(Double.valueOf(rightIndex + ""));
-                tvGear.setText(String.format(Locale.getDefault(), "档位%d", rightIndex));
+                tvGear.setText(String.format(Locale.getDefault(), "档位%d", rightIndex * 5));
             }
         }
     }
@@ -170,13 +170,13 @@ public class DeviseHardnessActivity extends BaseActivity implements View.OnClick
                     if (leftIndex > 1) {
                         leftIndex--;
                         leftSeekbar.setProgress(Double.valueOf(leftIndex + ""));
-                        tvGear.setText(String.format(Locale.getDefault(), "档位%d", leftIndex));
+                        tvGear.setText(String.format(Locale.getDefault(), "档位%d", leftIndex * 5));
                     }
                 } else {
                     if (rightIndex > 1) {
                         rightIndex--;
                         rightSeekbar.setProgress(Double.valueOf(rightIndex + ""));
-                        tvGear.setText(String.format(Locale.getDefault(), "档位%d", rightIndex));
+                        tvGear.setText(String.format(Locale.getDefault(), "档位%d", rightIndex * 5));
                     }
                 }
                 LogUtil.e("rightIndex:" + rightIndex + "leftIndex:" + leftIndex);
@@ -188,13 +188,13 @@ public class DeviseHardnessActivity extends BaseActivity implements View.OnClick
                     if (leftIndex < 20) {
                         leftIndex++;
                         leftSeekbar.setProgress(Double.valueOf(leftIndex + ""));
-                        tvGear.setText(String.format(Locale.getDefault(), "%d", leftIndex));
+                        tvGear.setText(String.format(Locale.getDefault(), "档位%d", leftIndex * 5));
                     }
                 } else {
                     if (rightIndex < 20) {
                         rightIndex++;
                         rightSeekbar.setProgress(Double.valueOf(rightIndex + ""));
-                        tvGear.setText(String.format(Locale.getDefault(), "%d", rightIndex));
+                        tvGear.setText(String.format(Locale.getDefault(), "档位%d", rightIndex * 5));
                     }
                 }
                 shanshuo();

@@ -105,10 +105,10 @@ public class DataFragment extends BaseFragment {
             int leftHeartBeat = mspProtocol.getlHeartBeat() & 0xff;
             int rightHeartBeat = mspProtocol.getrHeartBeat() & 0xff;
 
-            tvHuxiLeft.setText(String.format(Locale.getDefault(), "呼吸%d次/分钟", leftBreathFreq));
-            tvHuxiRight.setText(String.format(Locale.getDefault(), "呼吸%d次/分钟", rightBreathFreq));
-            tvXinlvLeft.setText(String.format(Locale.getDefault(), "心率%d次/分钟", leftHeartBeat));
-            tvXinlvRight.setText(String.format(Locale.getDefault(), "心率%d次/分钟", rightHeartBeat));
+            tvHuxiLeft.setText(String.format(Locale.getDefault(), getResources().getString(R.string.breath_rate), leftBreathFreq));
+            tvHuxiRight.setText(String.format(Locale.getDefault(), getResources().getString(R.string.breath_rate), rightBreathFreq));
+            tvXinlvLeft.setText(String.format(Locale.getDefault(), getResources().getString(R.string.heart_rate), leftHeartBeat));
+            tvXinlvRight.setText(String.format(Locale.getDefault(), getResources().getString(R.string.heart_rate), rightHeartBeat));
 
             if (leftBreathFreq > 0) {
                 if (!isHuxi) {

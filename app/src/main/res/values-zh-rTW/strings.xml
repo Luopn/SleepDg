@@ -1,0 +1,36 @@
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <string name="app_name">SLEEP.DG</string>
+    <string name="loading">正在加载中..</string>
+
+    <string name="settings">setting</string>
+    <string name="help">help</string>
+    <string name="string_help_text">當前應用缺少必要權限。\n\n請點擊\"設置\"-\"權限\"-打開所需權限。\n\n最後點擊兩次後退按鈕，即可返回。</string>
+    <string name="quit">exit</string>
+
+    <!--登录注册-->
+    <string name="hint_account_name">請輸入您的手機號碼</string>
+    <string name="hint_pwd">請輸入您的密碼</string>
+    <string name="login">登錄</string>
+    <string name="register">註冊賬號</string>
+    <string name="pwd_forget">忘記密碼</string>
+    <string name="normal_input_null">輸入不能為空</string>
+    <string name="register_new_account">註冊新賬號</string>
+    <string name="get_verity">獲取驗證碼</string>
+    <string name="account_verity_hint">請輸入驗證碼</string>
+    <string name="register_success">註冊成功</string>
+
+    <!--数据页面-->
+    <string name="sleep_score">睡眠評分</string>
+    <string name="sleep_congress">請繼續保持</string>
+    <string name="sleep_total">總睡時長：1小时59分</string>
+    <string name="sleep_deep">深睡時長：1小时59分</string>
+    <string name="sleep_clear">清醒時長：1小时59分</string>
+    <string name="sleep_shallow">淺睡時長：1小时59分</string>
+    <string name="sleep_time">入睡時間：AM23:59分</string>
+    <string name="real_time">實時</string>
+    <string name="left">左</string>
+    <string name="right">右</string>
+    <string name="heart_rate">心率%d次/分鐘</string>
+    <string name="breath_rate">呼吸%d次/分鐘</string>
+
+</resources>

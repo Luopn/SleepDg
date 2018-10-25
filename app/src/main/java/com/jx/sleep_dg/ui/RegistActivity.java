@@ -57,7 +57,7 @@ public class RegistActivity extends BaseActivity {
     public void bindView() {
     }
 
-    @OnClick({ R.id.btn_finish, R.id.tv_code})
+    @OnClick({R.id.btn_finish, R.id.tv_code})
     @Override
     public void onClick(View view) {
         super.onClick(view);
@@ -68,7 +68,8 @@ public class RegistActivity extends BaseActivity {
                 break;
             case R.id.tv_code:
                 if (TextUtils.isEmpty(etPhone.getText().toString())) {
-                    ToastUtil.showMessage("请输入手机号");
+                    etPhone.requestFocus();
+                    etPhone.setError(getResources().getString(R.string.normal_input_null));
                     return;
                 }
                 //短信验证码
@@ -85,17 +86,20 @@ public class RegistActivity extends BaseActivity {
         String pwd = etPwd.getText().toString();
 
         if (TextUtils.isEmpty(phone)) {
-            ToastUtil.showMessage("手机号码不能为空");
+            etPhone.requestFocus();
+            etPhone.setError(getResources().getString(R.string.normal_input_null));
             return;
         }
 
         if (TextUtils.isEmpty(code)) {
-            ToastUtil.showMessage("验证码不能为空");
+            etCode.requestFocus();
+            etCode.setError(getResources().getString(R.string.normal_input_null));
             return;
         }
 
         if (TextUtils.isEmpty(pwd)) {
-            ToastUtil.showMessage("密码不能为空");
+            etPwd.requestFocus();
+            etPwd.setError(getResources().getString(R.string.normal_input_null));
             return;
         }
 
@@ -110,7 +114,7 @@ public class RegistActivity extends BaseActivity {
     public void onNetJSONObject(JSONObject jsonObject, String trxcode) {
         super.onNetJSONObject(jsonObject, trxcode);
         if (InterfaceMethod.ADDUSER.equals(trxcode)) {
-            ToastUtil.showMessage("注册成功");
+            ToastUtil.showMessage(R.string.register_success);
             PreferenceUtils.putString(Constance.USERNAME, "");
             PreferenceUtils.putString(Constance.PASSWORD, "");
             finish();
