@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="设备控制"
+            android:text="@string/control_title"
             android:textColor="@android:color/white"
             android:textSize="@dimen/textSize_18" />
 

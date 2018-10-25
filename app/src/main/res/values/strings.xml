@@ -8,6 +8,15 @@
     <string name="string_help_text">No Permission</string>
     <string name="quit">exit</string>
 
+    <!--主页-->
+    <string name="data">Data</string>
+    <string name="control">Control</string>
+    <string name="control_title">Device Control</string>
+    <string name="statistics">Statistics</string>
+    <string name="statistics_title">Sleep Statistics</string>
+    <string name="mall">Mall</string>
+    <string name="set">Settings</string>
+
     <!--登录注册-->
     <string name="hint_account_name">Phone Number</string>
     <string name="hint_pwd">Password</string>

@@ -7,6 +7,15 @@
     <string name="string_help_text">当前应用缺少必要权限。\n\n请点击\"设置\"-\"权限\"-打开所需权限。\n\n最后点击两次后退按钮，即可返回。</string>
     <string name="quit">exit</string>
 
+    <!--主页-->
+    <string name="data">数据</string>
+    <string name="control">控制</string>
+    <string name="control_title">设备控制</string>
+    <string name="statistics">统计</string>
+    <string name="statistics_title">睡眠统计</string>
+    <string name="mall">商城</string>
+    <string name="set">设置</string>
+
     <!--登录注册-->
     <string name="hint_account_name">请输入手机号码</string>
     <string name="hint_pwd">请输入密码</string>

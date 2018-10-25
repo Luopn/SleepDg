@@ -7,6 +7,15 @@
     <string name="string_help_text">當前應用缺少必要權限。\n\n請點擊\"設置\"-\"權限\"-打開所需權限。\n\n最後點擊兩次後退按鈕，即可返回。</string>
     <string name="quit">exit</string>
 
+    <!--主页-->
+    <string name="data">數據</string>
+    <string name="control">控制</string>
+    <string name="control_title">設備控制</string>
+    <string name="statistics">統計</string>
+    <string name="statistics_title">睡眠統計</string>
+    <string name="mall">商城</string>
+    <string name="set">設置</string>
+
     <!--登录注册-->
     <string name="hint_account_name">請輸入您的手機號碼</string>
     <string name="hint_pwd">請輸入您的密碼</string>

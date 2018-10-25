@@ -44,7 +44,7 @@ public class MainActivity extends NewBaseActivity {
     private List<Fragment> mFragmentList;
     private Class mClass[] = {DataFragment.class, ControlFragment.class, StatisticsFragment.class, ShopFragment.class, SettingFragment.class};
     private Fragment mFragment[] = {new DataFragment(), new ControlFragment(), new StatisticsFragment(), new ShopFragment(), new SettingFragment()};
-    private String mTitles[] = {"数据", "控制", "统计", "商城", "设置"};
+    private String[] mTitles;
     private int mImages[] = {
             R.drawable.tab_data,
             R.drawable.tab_control,
@@ -56,6 +56,13 @@ public class MainActivity extends NewBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mTitles = new String[]{
+                getResources().getString(R.string.data),
+                getResources().getString(R.string.control),
+                getResources().getString(R.string.statistics),
+                getResources().getString(R.string.mall),
+                getResources().getString(R.string.set)
+        };
         bindView();
     }
 
@@ -104,10 +111,6 @@ public class MainActivity extends NewBaseActivity {
     public void bindView() {
         initView();
         initEvent();
-        if (!TextUtils.isEmpty(PreferenceUtils.getString(Constance.ADDRESS))) {
-            LogUtil.e("连接的地址" + PreferenceUtils.getString(Constance.ADDRESS));
-            //  LauncherActivity.Connect(PreferenceUtils.getString(Constance.ADDRESS));
-        }
     }
 
     private View getTabView(int index) {
