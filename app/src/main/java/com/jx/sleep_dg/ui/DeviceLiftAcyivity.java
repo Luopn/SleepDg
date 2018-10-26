@@ -19,7 +19,7 @@ import com.jx.sleep_dg.view.VerticalSeekBar;
  * 设备升降
  */
 
-public class DeviceLiftAcyivity extends BaseActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener, VerticalSeekBar.SlideChangeListener {
+public class DeviceLiftAcyivity extends BaseActivity implements View.OnClickListener, VerticalSeekBar.SlideChangeListener {
 
     private MSPProtocol mspProtocol;
 
@@ -148,7 +148,10 @@ public class DeviceLiftAcyivity extends BaseActivity implements View.OnClickList
                     }
                 }
                 chang();
-                BleComUtils.senddianji(BleUtils.convertDecimalToBinary((leftTouIndex + 1) + "") + BleUtils.convertDecimalToBinary((leftJiaoIndex + 1) + "") + BleUtils.convertDecimalToBinary((rightTouIndex + 1) + "") + BleUtils.convertDecimalToBinary((rightJiaoIndex + 1) + ""));
+                BleComUtils.senddianji(BleUtils.convertDecimalToBinary((leftTouIndex + 1) + "")
+                        + BleUtils.convertDecimalToBinary((leftJiaoIndex + 1) + "")
+                        + BleUtils.convertDecimalToBinary((rightTouIndex + 1) + "")
+                        + BleUtils.convertDecimalToBinary((rightJiaoIndex + 1) + ""));
 
                 break;
             case R.id.iv_tou_jian:
@@ -167,7 +170,10 @@ public class DeviceLiftAcyivity extends BaseActivity implements View.OnClickList
                     }
                 }
                 chang();
-                BleComUtils.senddianji(BleUtils.convertDecimalToBinary((leftTouIndex + 1) + "") + BleUtils.convertDecimalToBinary((leftJiaoIndex + 1) + "") + BleUtils.convertDecimalToBinary((rightTouIndex + 1) + "") + BleUtils.convertDecimalToBinary((rightJiaoIndex + 1) + ""));
+                BleComUtils.senddianji(BleUtils.convertDecimalToBinary((leftTouIndex + 1) + "")
+                        + BleUtils.convertDecimalToBinary((leftJiaoIndex + 1) + "")
+                        + BleUtils.convertDecimalToBinary((rightTouIndex + 1) + "")
+                        + BleUtils.convertDecimalToBinary((rightJiaoIndex + 1) + ""));
 
                 break;
             case R.id.iv_jiao_jia:
@@ -186,7 +192,10 @@ public class DeviceLiftAcyivity extends BaseActivity implements View.OnClickList
                     }
                 }
                 chang();
-                BleComUtils.senddianji(BleUtils.convertDecimalToBinary((leftTouIndex + 1) + "") + BleUtils.convertDecimalToBinary((leftJiaoIndex + 1) + "") + BleUtils.convertDecimalToBinary((rightTouIndex + 1) + "") + BleUtils.convertDecimalToBinary((rightJiaoIndex + 1) + ""));
+                BleComUtils.senddianji(BleUtils.convertDecimalToBinary((leftTouIndex + 1) + "")
+                        + BleUtils.convertDecimalToBinary((leftJiaoIndex + 1) + "")
+                        + BleUtils.convertDecimalToBinary((rightTouIndex + 1) + "")
+                        + BleUtils.convertDecimalToBinary((rightJiaoIndex + 1) + ""));
 
                 break;
             case R.id.iv_jiao_jian:
@@ -205,42 +214,13 @@ public class DeviceLiftAcyivity extends BaseActivity implements View.OnClickList
                     }
                 }
                 chang();
-                BleComUtils.senddianji(BleUtils.convertDecimalToBinary((leftTouIndex + 1) + "") + BleUtils.convertDecimalToBinary((leftJiaoIndex + 1) + "") + BleUtils.convertDecimalToBinary((rightTouIndex + 1) + "") + BleUtils.convertDecimalToBinary((rightJiaoIndex + 1) + ""));
+                BleComUtils.senddianji(BleUtils.convertDecimalToBinary((leftTouIndex + 1) + "")
+                        + BleUtils.convertDecimalToBinary((leftJiaoIndex + 1) + "")
+                        + BleUtils.convertDecimalToBinary((rightTouIndex + 1) + "")
+                        + BleUtils.convertDecimalToBinary((rightJiaoIndex + 1) + ""));
 
                 break;
         }
-    }
-
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        if (seekBar.getId() == R.id.seeb_left_tou) {
-            leftTouIndex = progress;
-            LogUtil.e("leftTouIndex:" + leftTouIndex);
-        } else if (seekBar.getId() == R.id.seeb_left_jiao) {
-            leftJiaoIndex = progress;
-            LogUtil.e("leftJiaoIndex:" + leftJiaoIndex);
-
-        } else if (seekBar.getId() == R.id.seeb_right_tou) {
-            rightTouIndex = progress;
-            LogUtil.e("rightTouIndex:" + rightTouIndex);
-
-        } else if (seekBar.getId() == R.id.seeb_right_jiao) {
-            rightJiaoIndex = progress;
-            LogUtil.e("rightJiaoIndex:" + rightJiaoIndex);
-
-        }
-        chang();
-        BleComUtils.senddianji(BleUtils.convertDecimalToBinary((leftTouIndex + 1) + "") + BleUtils.convertDecimalToBinary((leftJiaoIndex + 1) + "") + BleUtils.convertDecimalToBinary((rightTouIndex + 1) + "") + BleUtils.convertDecimalToBinary((rightJiaoIndex + 1) + ""));
-
-    }
-
-    @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
-
-    }
-
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
     }
 
     public void chang() {
@@ -282,10 +262,10 @@ public class DeviceLiftAcyivity extends BaseActivity implements View.OnClickList
             if (rightTouIndex < 6) {
                 if (rightJiaoIndex < 6) {
                     ivYouChuang.setBackgroundResource(R.mipmap.head1_foot1);
-                } else if (6 <= rightJiaoIndex && rightJiaoIndex < 12) {
+                } else if (rightJiaoIndex < 12) {
                     ivYouChuang.setBackgroundResource(R.mipmap.head1_foot3);
 
-                } else if (12 <= rightJiaoIndex && rightJiaoIndex <= 17) {
+                } else if ((12 <= rightJiaoIndex) && (rightJiaoIndex <= 17)) {
                     ivYouChuang.setBackgroundResource(R.mipmap.head1_foot4);
                 }
             }
@@ -309,7 +289,6 @@ public class DeviceLiftAcyivity extends BaseActivity implements View.OnClickList
 
                 } else if (12 <= rightJiaoIndex && rightJiaoIndex <= 17) {
                     ivYouChuang.setBackgroundResource(R.mipmap.head4_foot4);
-
                 }
             }
         }
@@ -322,6 +301,7 @@ public class DeviceLiftAcyivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void onProgress(VerticalSeekBar slideView, int progress) {
+
     }
 
     @Override
@@ -343,7 +323,10 @@ public class DeviceLiftAcyivity extends BaseActivity implements View.OnClickList
 
         }
         chang();
-        BleComUtils.senddianji(BleUtils.convertDecimalToBinary((leftTouIndex + 1) + "") + BleUtils.convertDecimalToBinary((leftJiaoIndex + 1) + "") + BleUtils.convertDecimalToBinary((rightTouIndex + 1) + "") + BleUtils.convertDecimalToBinary((rightJiaoIndex + 1) + ""));
+        BleComUtils.senddianji(BleUtils.convertDecimalToBinary((leftTouIndex + 1) + "")
+                + BleUtils.convertDecimalToBinary((leftJiaoIndex + 1) + "")
+                + BleUtils.convertDecimalToBinary((rightTouIndex + 1) + "")
+                + BleUtils.convertDecimalToBinary((rightJiaoIndex + 1) + ""));
 
     }
 }

@@ -176,7 +176,6 @@
                 android:layout_marginTop="5dp"
                 android:visibility="gone" />
 
-
             <ImageView
                 android:id="@+id/iv_tou_jian"
                 android:layout_width="33dp"

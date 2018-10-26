@@ -115,12 +115,14 @@ public class LoginActivity extends BaseActivity {
         String pwd = et_password.getText().toString();
 
         if (TextUtils.isEmpty(phone)) {
-            ToastUtil.showMessage("电话号码不能为空");
+            et_phone.requestFocus();
+            et_phone.setError(getResources().getString(R.string.normal_input_null));
             return;
         }
 
         if (TextUtils.isEmpty(pwd)) {
-            ToastUtil.showMessage("密码不能为空");
+            et_password.requestFocus();
+            et_password.setError(getResources().getString(R.string.normal_input_null));
             return;
         }
 //        showLoadingDialog(getString(R.string.please_wait));

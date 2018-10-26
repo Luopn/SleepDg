@@ -29,7 +29,6 @@
         <activity android:name=".ui.DeviceDetailActivity" />
         <activity android:name=".ui.DeviceTempActivity" />
         <activity android:name=".ui.DeviseHardnessActivity" />
-        <activity android:name=".ui.HardnessActivity" />
         <activity android:name=".ui.DeviceLiftAcyivity" />
         <activity android:name=".ui.HistoryDateActivity" />
         <activity android:name=".ui.AssociatedActivity" />

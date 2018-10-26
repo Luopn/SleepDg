@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ll_login_bg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,10 +14,11 @@
         android:layout_marginTop="44dp"
         android:gravity="center">
 
-        <ImageView
-            android:layout_width="125dp"
-            android:layout_height="172dp"
-            android:src="@mipmap/ic_launcher" />
+        <com.jx.sleep_dg.ui.RoundedImageView.RoundedImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@mipmap/ic_launcher"
+            app:riv_corner_radius="60dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -46,7 +48,7 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/login_shape"
                 android:gravity="center_vertical"
-                android:hint="请输入手机号码"
+                android:hint="@string/hint_account_name"
                 android:imeOptions="actionNext"
                 android:inputType="phone"
                 android:maxLength="11"
@@ -85,7 +87,7 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/login_shape"
                 android:gravity="center_vertical"
-                android:hint="请输入密码"
+                android:hint="@string/hint_pwd"
                 android:inputType="textPassword"
                 android:maxLength="20"
                 android:paddingLeft="15dp"
@@ -109,7 +111,7 @@
         android:gravity="center"
         android:paddingLeft="60dp"
         android:paddingRight="60dp"
-        android:text="登  录"
+        android:text="@string/login"
         android:textColor="@android:color/white"
         android:textSize="@dimen/textSize_18"
         android:textStyle="bold" />
@@ -126,7 +128,7 @@
             android:id="@+id/tv_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="注册账号"
+            android:text="@string/register"
             android:textColor="@android:color/white"
             android:textSize="@dimen/textSize_14"
             android:textStyle="bold" />
@@ -136,7 +138,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="忘记密码"
+            android:text="@string/pwd_forget"
             android:textColor="@android:color/white"
             android:textSize="@dimen/textSize_14"
             android:textStyle="bold" />
