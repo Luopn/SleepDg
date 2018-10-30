@@ -9,12 +9,13 @@
 
     <!--主页-->
     <string name="data">數據</string>
+    <string name="device">設備</string>
     <string name="control">控制</string>
     <string name="control_title">設備控制</string>
     <string name="statistics">統計</string>
     <string name="statistics_title">睡眠統計</string>
     <string name="mall">商城</string>
-    <string name="set">設置</string>
+    <string name="set">設定</string>
 
     <!--登录注册-->
     <string name="hint_account_name">請輸入您的手機號碼</string>
@@ -41,5 +42,28 @@
     <string name="right">右</string>
     <string name="heart_rate">心率%d次/分鐘</string>
     <string name="breath_rate">呼吸%d次/分鐘</string>
+    <string name="more">更多</string>
+    <string name="model">模式</string>
 
+    <!--控制页面-->
+    <string name="height">床體升降</string>
+    <string name="hardness">床體軟硬度</string>
+    <string name="temperature">床體溫度</string>
+    <string name="custom_mode">自定義模式</string>
+    <string name="save_mode">保存當前設定</string>
+    <string name="lift_ctrl">升降調節</string>
+    <string name="head">頭部</string>
+    <string name="head_value">頭部&#160;%d</string>
+    <string name="feet">腳部</string>
+    <string name="feet_value">腳部&#160;%d</string>
+    <string name="left_mem_hardness">左床記憶強度&#160;%d</string>
+    <string name="left_cur_hardness">左床實時強度&#160;%d</string>
+    <string name="right_mem_hardness">右床記憶強度&#160;%d</string>
+    <string name="right_cur_hardness">右床實時強度&#160;%d</string>
+    <string name="gear_val">檔位%d</string>
+    <string name="off">關</string>
+    <string name="on">開</string>
+    <string name="low">低</string>
+    <string name="mid">中</string>
+    <string name="high">高</string>
 </resources>

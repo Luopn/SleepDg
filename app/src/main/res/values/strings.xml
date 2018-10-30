@@ -10,6 +10,7 @@
 
     <!--主页-->
     <string name="data">Data</string>
+    <string name="device">Device</string>
     <string name="control">Control</string>
     <string name="control_title">Device Control</string>
     <string name="statistics">Statistics</string>
@@ -37,11 +38,34 @@
     <string name="sleep_clear">清醒时长：1小时59分</string>
     <string name="sleep_shallow">浅睡时长：1小时59分</string>
     <string name="sleep_time">入睡时间：AM23:59分</string>
-    <string name="real_time">实时</string>
+    <string name="real_time">Real Time</string>
     <string name="left">Left</string>
     <string name="right">Right</string>
     <string name="heart_rate">Heart Rate%d/m</string>
     <string name="breath_rate">Respiratory Rate%d/m</string>
+    <string name="more">More</string>
+    <string name="model">Model</string>
 
+    <!--控制页面-->
+    <string name="height">Bed Height</string>
+    <string name="hardness">Bed Hardness</string>
+    <string name="temperature">Bed Temperature</string>
+    <string name="custom_mode">Custom Mode</string>
+    <string name="save_mode">Save</string>
+    <string name="lift_ctrl">Elevating Regulation</string>
+    <string name="head">Head</string>
+    <string name="head_value">Head&#160;%d</string>
+    <string name="feet">Feet</string>
+    <string name="feet_value">Feet&#160;%d</string>
+    <string name="left_mem_hardness">Left bed memory hardness&#160;%d</string>
+    <string name="left_cur_hardness">Left bed current hardness&#160;%d</string>
+    <string name="right_mem_hardness">Right bed memory hardness&#160;%d</string>
+    <string name="right_cur_hardness">Right bed current hardness&#160;%d</string>
+    <string name="gear_val">Gear%d</string>
+    <string name="off">OFF</string>
+    <string name="on">ON</string>
+    <string name="low">LOW</string>
+    <string name="mid">MID</string>
+    <string name="high">HIGH</string>
 </resources>
 

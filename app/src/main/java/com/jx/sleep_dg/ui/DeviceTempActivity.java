@@ -30,7 +30,7 @@ public class DeviceTempActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void bindView() {
-        setToolbarTitle("床位温度");
+        setToolbarTitle(R.string.temperature);
         tvGear = findViewById(R.id.tv_gear);
         ivChuang = findViewById(R.id.iv_chuang);
         ivGear = findViewById(R.id.iv_gear);
@@ -54,37 +54,37 @@ public class DeviceTempActivity extends BaseActivity implements View.OnClickList
                         case 0:
                             ivChuang.setBackgroundResource(R.mipmap.warmbed_0);
                             ivGear.setBackgroundResource(R.mipmap.control_heat0);
-                            tvGear.setText("关");
+                            tvGear.setText(R.string.off);
 
                             break;
                         case 1:
                             ivChuang.setBackgroundResource(R.mipmap.warmbed_1);
                             ivGear.setBackgroundResource(R.mipmap.control_heat1);
-                            tvGear.setText("低");
+                            tvGear.setText(R.string.low);
 
                             break;
                         case 2:
                             ivChuang.setBackgroundResource(R.mipmap.warmbed_2);
                             ivGear.setBackgroundResource(R.mipmap.control_heat2);
-                            tvGear.setText("低");
+                            tvGear.setText(R.string.low);
 
                             break;
                         case 3:
                             ivChuang.setBackgroundResource(R.mipmap.warmbed_3);
                             ivGear.setBackgroundResource(R.mipmap.control_heat3);
-                            tvGear.setText("中");
+                            tvGear.setText(R.string.mid);
 
                             break;
                         case 4:
                             ivChuang.setBackgroundResource(R.mipmap.warmbed_4);
                             ivGear.setBackgroundResource(R.mipmap.control_heat4);
-                            tvGear.setText("高");
+                            tvGear.setText(R.string.high);
 
                             break;
                         case 5:
                             ivChuang.setBackgroundResource(R.mipmap.warmbed_5);
                             ivGear.setBackgroundResource(R.mipmap.control_heat5);
-                            tvGear.setText("高");
+                            tvGear.setText(R.string.high);
 
                             break;
                     }
@@ -104,27 +104,27 @@ public class DeviceTempActivity extends BaseActivity implements View.OnClickList
                         case 1:
                             ivChuang.setBackgroundResource(R.mipmap.warmbed_1);
                             ivGear.setBackgroundResource(R.mipmap.control_heat1);
-                            tvGear.setText("低");
+                            tvGear.setText(R.string.low);
                             break;
                         case 2:
                             ivChuang.setBackgroundResource(R.mipmap.warmbed_2);
                             ivGear.setBackgroundResource(R.mipmap.control_heat2);
-                            tvGear.setText("低");
+                            tvGear.setText(R.string.low);
                             break;
                         case 3:
                             ivChuang.setBackgroundResource(R.mipmap.warmbed_3);
                             ivGear.setBackgroundResource(R.mipmap.control_heat3);
-                            tvGear.setText("中");
+                            tvGear.setText(R.string.mid);
                             break;
                         case 4:
                             ivChuang.setBackgroundResource(R.mipmap.warmbed_4);
                             ivGear.setBackgroundResource(R.mipmap.control_heat4);
-                            tvGear.setText("高");
+                            tvGear.setText(R.string.high);
                             break;
                         case 5:
                             ivChuang.setBackgroundResource(R.mipmap.warmbed_5);
                             ivGear.setBackgroundResource(R.mipmap.control_heat5);
-                            tvGear.setText("高");
+                            tvGear.setText(R.string.high);
                             break;
                     }
                     LogUtil.e("index:" + index);

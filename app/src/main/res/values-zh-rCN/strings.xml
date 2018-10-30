@@ -9,6 +9,7 @@
 
     <!--主页-->
     <string name="data">数据</string>
+    <string name="device">设备</string>
     <string name="control">控制</string>
     <string name="control_title">设备控制</string>
     <string name="statistics">统计</string>
@@ -41,4 +42,28 @@
     <string name="right">右</string>
     <string name="heart_rate">心率%d次/分钟</string>
     <string name="breath_rate">呼吸%d次/分钟</string>
+    <string name="more">更多</string>
+    <string name="model">模式</string>
+
+    <!--控制页面-->
+    <string name="height">床位升降</string>
+    <string name="hardness">床位软硬度</string>
+    <string name="temperature">床位温度</string>
+    <string name="custom_mode">自定义模式</string>
+    <string name="save_mode">保存当前设定</string>
+    <string name="lift_ctrl">升降调节</string>
+    <string name="head">头部</string>
+    <string name="head_value">头部&#160;%d</string>
+    <string name="feet">脚部</string>
+    <string name="feet_value">脚部&#160;%d</string>
+    <string name="left_mem_hardness">左床记忆强度&#160;%d</string>
+    <string name="left_cur_hardness">左床实时強度&#160;%d</string>
+    <string name="right_mem_hardness">右床记忆强度&#160;%d</string>
+    <string name="right_cur_hardness">右床实时強度&#160;%d</string>
+    <string name="gear_val">档位%d</string>
+    <string name="off">关</string>
+    <string name="on">开</string>
+    <string name="low">低</string>
+    <string name="mid">中</string>
+    <string name="high">高</string>
 </resources>

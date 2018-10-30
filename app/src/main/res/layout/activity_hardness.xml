@@ -64,7 +64,7 @@
             android:id="@+id/tv_mem_hardless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="左床记忆强度"
+            android:text="@string/left_mem_hardness"
             android:textColor="@android:color/white"
             android:textSize="@dimen/textSize_12" />
 
@@ -74,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="10dp"
-            android:text="左床实时强度"
+            android:text="@string/left_cur_hardness"
             android:textColor="@android:color/white"
             android:textSize="@dimen/textSize_12" />
     </LinearLayout>

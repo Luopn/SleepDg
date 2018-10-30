@@ -44,9 +44,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="关"
+            android:text="@string/off"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/textSize_40" />
+            android:textSize="@dimen/textSize_30" />
 
         <ImageView
             android:id="@+id/iv_jia"
