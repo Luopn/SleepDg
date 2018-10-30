@@ -18,6 +18,15 @@
     <string name="set">設定</string>
 
     <!--登录注册-->
+    <string name="account_name">用戶名</string>
+    <string name="user_info">個人信息</string>
+    <string name="user_associated">我關聯的人</string>
+    <string name="user_avater">頭像</string>
+    <string name="user_nickname">昵稱</string>
+    <string name="user_gender">性別</string>
+    <string name="user_height">身高</string>
+    <string name="user_weight">體重</string>
+    <string name="sign_out">退出登錄</string>
     <string name="hint_account_name">請輸入您的手機號碼</string>
     <string name="hint_pwd">請輸入您的密碼</string>
     <string name="login">登錄</string>
@@ -37,13 +46,22 @@
     <string name="sleep_clear">清醒時長：1小时59分</string>
     <string name="sleep_shallow">淺睡時長：1小时59分</string>
     <string name="sleep_time">入睡時間：AM23:59分</string>
+    <string name="sleep_negative">未眠狀態: 1小时59分</string>
+    <string name="sleep_not_bed">不在床上: AM23:59分</string>
+    <string name="sleep_report">睡眠報告</string>
+    <string name="sleep_tim">睡眠時間</string>
+    <string name="sleep_record_time">記錄時間2:00~次日12:00</string>
     <string name="real_time">實時</string>
     <string name="left">左</string>
     <string name="right">右</string>
-    <string name="heart_rate">心率%d次/分鐘</string>
-    <string name="breath_rate">呼吸%d次/分鐘</string>
+    <string name="heart_rate">心率</string>
+    <string name="heart_rate_value">心率%d次/分鐘</string>
+    <string name="breath_rate">呼吸率</string>
+    <string name="breath_rate_value">呼吸%d次/分鐘</string>
     <string name="more">更多</string>
     <string name="model">模式</string>
+    <string name="roll_body_rate">翻身次數(分鐘))</string>
+    <string name="snoring">止鼾</string>
 
     <!--控制页面-->
     <string name="height">床體升降</string>
@@ -66,4 +84,21 @@
     <string name="low">低</string>
     <string name="mid">中</string>
     <string name="high">高</string>
+
+    <!--设置页面-->
+    <string name="mattress_info">床墊信息</string>
+    <string name="mattress_inter">床墊互聯</string>
+    <string name="snore_mode">止鼾模式</string>
+    <string name="private_mode">私人模式</string>
+    <string name="private_mode_hint">啟動後將關閉設備WiFi,數據不記錄不上傳.</string>
+    <string name="child_mode">兒童模式</string>
+    <string name="child_mode_hint">啟動後無法對床頭、床位進行升降處理.</string>
+    <string name="pregnant_mode">孕婦模式</string>
+    <string name="pregnant_mode_hint">啟動後床位升降幅度只限於35°以内調整.</string>
+    <string name="me_associated">我關聯的</string>
+    <string name="associated_me">關聯我的</string>
+    <string name="associated">已關聯</string>
+    <string name="associated_together">互相關聯</string>
+    <string name="unused">未使用</string>
+    <string name="using">正在使用</string>
 </resources>

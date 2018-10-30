@@ -1,57 +1,19 @@
 package com.jx.sleep_dg.fragment;
 
-import android.annotation.SuppressLint;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.graphics.Color;
-import android.media.Image;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.view.GravityCompat;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.ToggleButton;
 
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.AxisBase;
-import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
-import com.github.mikephil.charting.utils.EntryXComparator;
-import com.jx.sleep_dg.Bean.EveXinlvBean;
-import com.jx.sleep_dg.Bean.HeartRateBean;
 import com.jx.sleep_dg.R;
-import com.jx.sleep_dg.ble.BleUtils;
 import com.jx.sleep_dg.protocol.MSPProtocol;
-import com.jx.sleep_dg.ui.HistoryDateActivity;
 import com.jx.sleep_dg.ui.MainActivity;
 import com.jx.sleep_dg.ui.SearchActivity;
-import com.jx.sleep_dg.utils.EveBusUtil;
-import com.jx.sleep_dg.utils.LogUtil;
-import com.jx.sleep_dg.utils.MyMouthValueFormatter;
-import com.jx.sleep_dg.utils.ToastUtil;
 import com.jx.sleep_dg.view.EcgView;
 import com.jx.sleep_dg.view.HuxiEcgView;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Locale;
-import java.util.Random;
 
 /**
  * 数据
@@ -105,10 +67,10 @@ public class DataFragment extends BaseFragment {
             int leftHeartBeat = mspProtocol.getlHeartBeat() & 0xff;
             int rightHeartBeat = mspProtocol.getrHeartBeat() & 0xff;
 
-            tvHuxiLeft.setText(String.format(Locale.getDefault(), getResources().getString(R.string.breath_rate), leftBreathFreq));
-            tvHuxiRight.setText(String.format(Locale.getDefault(), getResources().getString(R.string.breath_rate), rightBreathFreq));
-            tvXinlvLeft.setText(String.format(Locale.getDefault(), getResources().getString(R.string.heart_rate), leftHeartBeat));
-            tvXinlvRight.setText(String.format(Locale.getDefault(), getResources().getString(R.string.heart_rate), rightHeartBeat));
+            tvHuxiLeft.setText(String.format(Locale.getDefault(), getResources().getString(R.string.breath_rate_value), leftBreathFreq));
+            tvHuxiRight.setText(String.format(Locale.getDefault(), getResources().getString(R.string.breath_rate_value), rightBreathFreq));
+            tvXinlvLeft.setText(String.format(Locale.getDefault(), getResources().getString(R.string.heart_rate_value), leftHeartBeat));
+            tvXinlvRight.setText(String.format(Locale.getDefault(), getResources().getString(R.string.heart_rate_value), rightHeartBeat));
 
             if (leftBreathFreq > 0) {
                 if (!isHuxi) {

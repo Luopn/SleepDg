@@ -12,7 +12,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_control"
-            android:hint="请输入手机号码"
+            android:hint="@string/hint_account_name"
             android:imeOptions="actionDone"
             android:layout_weight="1"
             android:inputType="number"
@@ -32,6 +32,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="15dp"
-            android:text="取消"/>
+            android:text="@android:string/cancel"/>
     </LinearLayout>
 </LinearLayout>

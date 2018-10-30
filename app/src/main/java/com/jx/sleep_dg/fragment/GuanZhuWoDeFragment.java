@@ -54,13 +54,14 @@ public class GuanZhuWoDeFragment extends BaseFragment {
                 bean.setState("2");
 
             }
-            bean.setName("设备" + i);
+            bean.setName(getResources().getString(R.string.device) + i);
             guanzhuWodeList.add(bean);
         }
 
         recyclerView = view.findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.addItemDecoration(new RecycleViewDivider(getActivity(), LinearLayoutManager.VERTICAL, 1, getActivity().getResources().getColor(R.color.white)));
+        recyclerView.addItemDecoration(new RecycleViewDivider(getActivity(), LinearLayoutManager.VERTICAL,
+                1, getActivity().getResources().getColor(R.color.white)));
 
         adapter = new GuanzhuWoDeAdapter(getActivity(), R.layout.recycler_item_guanzhuwode, guanzhuWodeList);
         recyclerView.setAdapter(adapter);

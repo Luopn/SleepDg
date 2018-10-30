@@ -19,6 +19,15 @@
     <string name="set">Settings</string>
 
     <!--登录注册-->
+    <string name="account_name">User Name</string>
+    <string name="user_info">User Information</string>
+    <string name="user_associated">My Association</string>
+    <string name="user_avater">Avater</string>
+    <string name="user_nickname">Nickname</string>
+    <string name="user_gender">Gender</string>
+    <string name="user_height">Height</string>
+    <string name="user_weight">Weight</string>
+    <string name="sign_out">Sign Out</string>
     <string name="hint_account_name">Phone Number</string>
     <string name="hint_pwd">Password</string>
     <string name="login">Sign in</string>
@@ -38,13 +47,22 @@
     <string name="sleep_clear">清醒时长：1小时59分</string>
     <string name="sleep_shallow">浅睡时长：1小时59分</string>
     <string name="sleep_time">入睡时间：AM23:59分</string>
+    <string name="sleep_negative">未眠状态: 1小时59分</string>
+    <string name="sleep_not_bed">不在床上: AM23:59分</string>
+    <string name="sleep_report">Sleep Report</string>
+    <string name="sleep_tim">Sleep Time</string>
     <string name="real_time">Real Time</string>
+    <string name="sleep_record_time">Record Time 12:00~12:00</string>
     <string name="left">Left</string>
     <string name="right">Right</string>
-    <string name="heart_rate">Heart Rate%d/m</string>
-    <string name="breath_rate">Respiratory Rate%d/m</string>
+    <string name="heart_rate">Heart Rate</string>
+    <string name="heart_rate_value">Heart Rate%d/m</string>
+    <string name="breath_rate">Respiratory Rate</string>
+    <string name="breath_rate_value">Respiratory Rate%d/m</string>
     <string name="more">More</string>
     <string name="model">Model</string>
+    <string name="roll_body_rate">Body roll(m))</string>
+    <string name="snoring">Snoring</string>
 
     <!--控制页面-->
     <string name="height">Bed Height</string>
@@ -67,5 +85,23 @@
     <string name="low">LOW</string>
     <string name="mid">MID</string>
     <string name="high">HIGH</string>
+
+    <!--设置页面-->
+    <string name="mattress_info">Mattress Information</string>
+    <string name="mattress_inter">Mattress Interconnection</string>
+    <string name="snore_mode">Snoring Pattern</string>
+    <string name="private_mode">Private Pattern</string>
+    <string name="private_mode_hint">If turned on,device will be closed, device WiFi will be turned off. No sleep data will be recorded.</string>
+    <string name="child_mode">Child Pattern</string>
+    <string name="child_mode_hint">If turned on, the bed can not be lifted.</string>
+    <string name="pregnant_mode">Pregnant Pattern</string>
+    <string name="pregnant_mode_hint">If turned on,the amplitude of bed movements is limited to 35 degree adjustment.</string>
+    <string name="me_associated">Me Associated</string>
+    <string name="associated_me">Associated Me</string>
+    <string name="associated">Associated</string>
+    <string name="associated_together">Inter Associated</string>
+    <string name="unused">Unused</string>
+    <string name="using">Using</string>
+
 </resources>
 

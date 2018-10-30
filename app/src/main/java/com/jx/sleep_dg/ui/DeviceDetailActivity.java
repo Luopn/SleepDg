@@ -21,6 +21,6 @@ public class DeviceDetailActivity extends BaseActivity {
 
     @Override
     public void bindView() {
-        setToolbarTitle("床垫信息");
+        setToolbarTitle(R.string.mattress_info);
     }
 }

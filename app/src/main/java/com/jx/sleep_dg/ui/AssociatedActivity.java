@@ -30,7 +30,7 @@ public class AssociatedActivity extends BaseActivity {
     private CommonTabLayout tablay;
     private ViewPager viewpager;
 
-    private String[] mTitles = {"我关联的", "关联我的"};
+    private String[] mTitles;
     private List<BaseFragment> mFragments;
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
 
@@ -38,12 +38,16 @@ public class AssociatedActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setLayout(R.layout.activity_associated);
+        mTitles = new String[]{getResources().getString(
+                R.string.me_associated),
+                getResources().getString(R.string.associated_me)
+        };
         bindView();
     }
 
     @Override
     public void bindView() {
-        setToolbarTitle("床位关联");
+        setToolbarTitle(R.string.mattress_inter);
         tablay = findViewById(R.id.tablay);
         viewpager = findViewById(R.id.viewpager);
         initData();

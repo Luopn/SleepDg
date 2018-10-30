@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.StrictMode;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * 作者：  王静波
@@ -29,18 +31,7 @@ public class MyApplication extends Application {
             StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
             StrictMode.setVmPolicy(builder.build());
         }
-        //蓝牙相关配置修改
-//        ViseBle.config()
-//                .setScanTimeout(10)//扫描超时时间，这里设置为永久扫描
-//                .setConnectTimeout(10 * 1000)//连接超时时间
-//                .setOperateTimeout(5 * 1000)//设置数据操作超时时间
-//                .setConnectRetryCount(3)//设置连接失败重试次数
-//                .setConnectRetryInterval(1000)//设置连接失败重试间隔时间
-//                .setOperateRetryCount(3)//设置数据操作失败重试次数
-//                .setOperateRetryInterval(1000)//设置数据操作失败重试间隔时间
-//                .setMaxConnectCount(5);//设置最大连接设备数量
-//                    //蓝牙信息初始化，全局唯一，必须在应用初始化时调用
-//        ViseBle.getInstance().init(this);
+        registerActivityLifecycleCallbacks(callbacks);
     }
 
     public static Context getContext() {
@@ -48,7 +39,6 @@ public class MyApplication extends Application {
             return instance.getApplicationContext();
         }
     }
-
 
     public static MyApplication getInstance() {
         if (instance == null) {
@@ -79,4 +69,45 @@ public class MyApplication extends Application {
         }
     }
 
+    ActivityLifecycleCallbacks callbacks = new ActivityLifecycleCallbacks() {
+        @Override
+        public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+            //强制修改应用语言
+            Locale locale = LanguageUtil.getAppLocale();
+            if (locale != null && !LanguageUtil.isSameWithSetting(instance)) {
+                LanguageUtil.changeAppLanguage(instance, locale, false);
+            }
+        }
+
+        @Override
+        public void onActivityStarted(Activity activity) {
+
+        }
+
+        @Override
+        public void onActivityResumed(Activity activity) {
+
+        }
+
+        @Override
+        public void onActivityPaused(Activity activity) {
+
+        }
+
+        @Override
+        public void onActivityStopped(Activity activity) {
+
+        }
+
+        @Override
+        public void onActivitySaveInstanceState(Activity activity, Bundle bundle) {
+
+        }
+
+        @Override
+        public void onActivityDestroyed(Activity activity) {
+
+        }
+        //Activity 其它生命周期的回调
+    };
 }

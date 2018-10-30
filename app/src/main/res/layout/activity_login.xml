@@ -8,26 +8,61 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_height="200dp"
         android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="right">
+
+            <TextView
+                android:id="@+id/tv_ch_simple"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="25dp"
+                android:gravity="center_vertical"
+                android:text="中文"
+                android:layout_marginTop="10dp"
+                android:textColor="#ababab" />
+
+            <TextView
+                android:id="@+id/tv_ch_tradition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="25dp"
+                android:gravity="center_vertical"
+                android:text="繁體"
+                android:textColor="#ababab" />
+
+            <TextView
+                android:id="@+id/tv_en"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="25dp"
+                android:gravity="center_vertical"
+                android:text="English"
+                android:textColor="#ababab" />
+        </LinearLayout>
 
         <com.jx.sleep_dg.ui.RoundedImageView.RoundedImageView
             android:layout_width="120dp"
             android:layout_height="120dp"
+            android:layout_gravity="center"
             android:src="@mipmap/ic_launcher"
             app:riv_corner_radius="60dp" />
-    </LinearLayout>
+    </FrameLayout>
 
     <LinearLayout
         android:id="@+id/ll_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -63,16 +98,16 @@
             android:id="@+id/iv_login_view"
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
             android:layout_marginRight="10dp"
-            android:layout_marginBottom="5dp" />
+            android:layout_marginTop="5dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -105,8 +140,8 @@
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="40dp"
         android:layout_marginRight="20dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/sel_login_btn"
         android:gravity="center"
         android:paddingLeft="60dp"
@@ -120,8 +155,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="14dp"
-        android:layout_marginTop="30dp"
         android:layout_marginRight="14dp"
+        android:layout_marginTop="30dp"
         android:orientation="horizontal">
 
         <TextView
