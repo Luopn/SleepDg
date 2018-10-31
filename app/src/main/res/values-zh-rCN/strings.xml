@@ -63,6 +63,15 @@
     <string name="roll_body_rate">翻身次数(分钟)</string>
     <string name="snoring">止鼾</string>
 
+    <!--扫描设备-->
+    <string name="devie_scan">扫描设备</string>
+    <string name="scan">扫描</string>
+    <string name="connecting">连接中,请稍后..</string>
+    <string name="connect_success">连接成功</string>
+    <string name="ble_open_fail">蓝牙打开失败</string>
+    <string name="bind_success">绑定设备成功</string>
+    <string name="add_error">添加异常</string>
+
     <!--控制页面-->
     <string name="height">床位升降</string>
     <string name="hardness">床位软硬度</string>

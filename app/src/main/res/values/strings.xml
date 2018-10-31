@@ -64,6 +64,15 @@
     <string name="roll_body_rate">Body roll(m))</string>
     <string name="snoring">Snoring</string>
 
+    <!--扫描设备-->
+    <string name="devie_scan">Device Scan</string>
+    <string name="scan">Scan</string>
+    <string name="connecting">Connecting..</string>
+    <string name="connect_success">Connected</string>
+    <string name="ble_open_fail">Bluetooth open failed</string>
+    <string name="bind_success">Bind device succeed</string>
+    <string name="add_error">Error happened when adding</string>
+
     <!--控制页面-->
     <string name="height">Bed Height</string>
     <string name="hardness">Bed Hardness</string>

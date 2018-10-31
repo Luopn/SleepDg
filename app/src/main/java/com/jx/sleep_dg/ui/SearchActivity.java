@@ -142,7 +142,7 @@ public class SearchActivity extends BaseActivity {
         Permission();
         activityFlag = getIntent().getStringExtra("flag");//用来区分是从登陆页面跳转过来还是从设备管理页面跳转过来.
 
-        setToolbarTitle("扫描设备");
+        setToolbarTitle(R.string.devie_scan);
 
         deviceList = (ListView) findViewById(R.id.deviceList);
         mLeDeviceListAdapter = new LeDeviceListAdapter(this);
@@ -153,17 +153,17 @@ public class SearchActivity extends BaseActivity {
                 isAutoFinish = true;
                 macAddress = mLeDeviceListAdapter.getmLeDevices().get(position).getAddress();
                 BluetoothLeService.mThis.connect(macAddress);
-                showLoadingDialog("连接中,请稍后...");
+                showLoadingDialog(R.string.connecting);
             }
         });
         if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
-            Toast.makeText(this, "打开蓝牙失败", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.ble_open_fail, Toast.LENGTH_SHORT).show();
             finish();
         }
         final BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         mBluetoothAdapter = bluetoothManager.getAdapter();
         if (mBluetoothAdapter == null) {
-            Toast.makeText(this, "打开蓝牙失败", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.ble_open_fail, Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
@@ -195,7 +195,7 @@ public class SearchActivity extends BaseActivity {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (BluetoothLeService.ACTION_GATT_CONNECTED.equals(action)) {
-                ToastUtil.showMessage("连接成功");
+                ToastUtil.showMessage(R.string.connect_success);
 
                 PreferenceUtils.putString(Constance.MAC, macAddress);
 
@@ -222,7 +222,7 @@ public class SearchActivity extends BaseActivity {
     public void onNetJSONObject(JSONObject jsonObject, String trxcode) {
         super.onNetJSONObject(jsonObject, trxcode);
         if (InterfaceMethod.BINDDEVICE.equals(trxcode)) {
-            ToastUtil.showMessage("绑定设备成功");
+            ToastUtil.showMessage(R.string.bind_success);
             if (activityFlag.equals("Login")) {
                 // PreferenceUtils.putString(Constance.ADDRESS, macAddress);
                 // PreferenceUtils.putString(Constance.BLE_NAME, name);
@@ -242,7 +242,7 @@ public class SearchActivity extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_toolbar, menu);
-        menu.findItem(R.id.action_do).setTitle("扫描");
+        menu.findItem(R.id.action_do).setTitle(R.string.scan);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -296,7 +296,7 @@ public class SearchActivity extends BaseActivity {
                     //  deviceBeans.add(deviceBean);
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    ToastUtil.showMessage("添加异常");
+                    ToastUtil.showMessage(R.string.add_error);
                 }
             }
         }

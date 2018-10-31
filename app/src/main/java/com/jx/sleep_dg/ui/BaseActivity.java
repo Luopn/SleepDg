@@ -179,6 +179,14 @@ public abstract class BaseActivity extends SupportActivity implements View.OnCli
         }
     }
 
+    protected void showLoadingDialog(@StringRes int str) {
+        if (mLoadingDialog != null) {
+            TextView tv = (TextView) mLoadingDialog.findViewById(R.id.tv_load_dialog);
+            tv.setText(str);
+            mLoadingDialog.show();
+        }
+    }
+
     protected void hideLoadingDialog() {
         if (mLoadingDialog != null && mLoadingDialog.isShowing()) {
             mLoadingDialog.dismiss();
