@@ -1,15 +1,15 @@
 package com.jx.sleep_dg.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.jx.sleep_dg.R;
-import com.jx.sleep_dg.ble.BleComUtils;
+import com.jx.sleep_dg.protocol.BleComUtils;
 import com.jx.sleep_dg.ble.BleUtils;
 import com.jx.sleep_dg.protocol.MSPProtocol;
 import com.jx.sleep_dg.utils.LogUtil;
@@ -98,8 +98,8 @@ public class DeviceLiftAcyivity extends BaseActivity implements View.OnClickList
     }
 
     @Override
-    protected void notifyUIDataSetChanged() {
-        super.notifyUIDataSetChanged();
+    protected void notifyUIDataSetChanged(Intent intent) {
+        super.notifyUIDataSetChanged(intent);
         bindViewData();
     }
 

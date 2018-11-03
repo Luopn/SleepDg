@@ -1,5 +1,9 @@
 package com.jx.sleep_dg.protocol;
 
+import com.jx.sleep_dg.event.ConfigureResEvent;
+
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -87,71 +91,17 @@ public class MSPProtocol {
                             int checkSumVal = dataList.get(dataLen - 1) & 0xff;
                             //if (checkSumVal == checkSum(dataList, dataLen)) {//校验
                             if (commandType == 0x31) {//设备的状态
+                                onDeviceStateInfo();
+                            }
+                            if (commandType == 0x21) {//WiFi SSID发送情况
                                 int dataPackOrder = dataList.get(3) & 0xff;//包序
-                                switch (dataPackOrder) {
-                                    case 0x1://第1包
-                                        heatLevel = dataList.get(4);
-                                        lPresureSetVal = dataList.get(5);
-                                        rPresureSetVal = dataList.get(6);
-                                        lPresureMemVal = dataList.get(7);
-                                        rPresureMemVal = dataList.get(8);
-                                        lPresureCurVal = dataList.get(9);
-                                        rPresureCurVal = dataList.get(10);
-                                        isWiFiConnSign = dataList.get(11);
-                                        lHeartBeat = dataList.get(12);
-                                        lBreathFreq = dataList.get(13);
-                                        lSnoreSign = dataList.get(14);
-                                        lBodyMoveByMinuteSign = dataList.get(15);
-                                        lBodyMoveBySecondSign = dataList.get(16);
-                                        break;
-                                    case 0x2: { //第2包
-                                        List<Byte> byteList = new ArrayList<>();
-                                        //从第5个字节开始，高位左体动值占15个字节
-                                        for (int i = 0; i < 15; i++) {
-                                            byteList.add(dataList.get(i + 4));
-                                        }
-                                        lBodyMoveValH = bytesToInt(byteList);
-                                        break;
-                                    }
-                                    case 0x3: {//第3包
-                                        List<Byte> lbyteList = new ArrayList<>();
-                                        //从第5个字节开始，低位左体动值占5个字节
-                                        for (int i = 0; i < 5; i++) {
-                                            lbyteList.add(dataList.get(i + 4));
-                                        }
-                                        lBodyMoveValL = bytesToInt(lbyteList);
-
-                                        rHeartBeat = dataList.get(9);
-                                        rBreathFreq = dataList.get(10);
-                                        rSnoreSign = dataList.get(11);
-                                        rBodyMoveByMinuteSign = dataList.get(12);
-                                        rBodyMoveBySecondSign = dataList.get(13);
-
-                                        List<Byte> rbyteList = new ArrayList<>();
-                                        //从15个字节开始，高位右体动值占5个字节
-                                        for (int i = 0; i < 5; i++) {
-                                            rbyteList.add(dataList.get(i + 14));
-                                        }
-                                        rBodyMoveValH = bytesToInt(rbyteList);
-                                        break;
-                                    }
-                                    case 0x4: {//第4包
-                                        List<Byte> byteList = new ArrayList<>();
-                                        //从第5个字节开始，低位右体动值占15个字节
-                                        for (int i = 0; i < 15; i++) {
-                                            byteList.add(dataList.get(i + 4));
-                                        }
-                                        rBodyMoveValL = bytesToInt(byteList);
-                                        break;
-                                    }
-                                    case 0x5://第5包
-                                        high1 = dataList.get(4);
-                                        high2 = dataList.get(5);
-                                        high3 = dataList.get(6);
-                                        high4 = dataList.get(7);
-                                        mode = dataList.get(8);
-                                        break;
-                                }
+                                int res = dataList.get(4) & 0xff;
+                                EventBus.getDefault().post(new ConfigureResEvent(commandType, dataPackOrder, res));
+                            }
+                            if (commandType == 0x22) {//WiFi 密码发送情况
+                                int dataPackOrder = dataList.get(3) & 0xff;//包序
+                                int res = dataList.get(4) & 0xff;
+                                EventBus.getDefault().post(new ConfigureResEvent(commandType, dataPackOrder, res));
                             }
                             //}
                             for (int i = 0; i < dataLen; i++) {
@@ -170,6 +120,75 @@ public class MSPProtocol {
             }
         }
     };
+
+    //处理设备上报信息
+    private void onDeviceStateInfo() {
+        int dataPackOrder = dataList.get(3) & 0xff;//包序
+        switch (dataPackOrder) {
+            case 0x1://第1包
+                heatLevel = dataList.get(4);
+                lPresureSetVal = dataList.get(5);
+                rPresureSetVal = dataList.get(6);
+                lPresureMemVal = dataList.get(7);
+                rPresureMemVal = dataList.get(8);
+                lPresureCurVal = dataList.get(9);
+                rPresureCurVal = dataList.get(10);
+                isWiFiConnSign = dataList.get(11);
+                lHeartBeat = dataList.get(12);
+                lBreathFreq = dataList.get(13);
+                lSnoreSign = dataList.get(14);
+                lBodyMoveByMinuteSign = dataList.get(15);
+                lBodyMoveBySecondSign = dataList.get(16);
+                break;
+            case 0x2: { //第2包
+                List<Byte> byteList = new ArrayList<>();
+                //从第5个字节开始，高位左体动值占15个字节
+                for (int i = 0; i < 15; i++) {
+                    byteList.add(dataList.get(i + 4));
+                }
+                lBodyMoveValH = bytesToInt(byteList);
+                break;
+            }
+            case 0x3: {//第3包
+                List<Byte> lbyteList = new ArrayList<>();
+                //从第5个字节开始，低位左体动值占5个字节
+                for (int i = 0; i < 5; i++) {
+                    lbyteList.add(dataList.get(i + 4));
+                }
+                lBodyMoveValL = bytesToInt(lbyteList);
+
+                rHeartBeat = dataList.get(9);
+                rBreathFreq = dataList.get(10);
+                rSnoreSign = dataList.get(11);
+                rBodyMoveByMinuteSign = dataList.get(12);
+                rBodyMoveBySecondSign = dataList.get(13);
+
+                List<Byte> rbyteList = new ArrayList<>();
+                //从15个字节开始，高位右体动值占5个字节
+                for (int i = 0; i < 5; i++) {
+                    rbyteList.add(dataList.get(i + 14));
+                }
+                rBodyMoveValH = bytesToInt(rbyteList);
+                break;
+            }
+            case 0x4: {//第4包
+                List<Byte> byteList = new ArrayList<>();
+                //从第5个字节开始，低位右体动值占15个字节
+                for (int i = 0; i < 15; i++) {
+                    byteList.add(dataList.get(i + 4));
+                }
+                rBodyMoveValL = bytesToInt(byteList);
+                break;
+            }
+            case 0x5://第5包
+                high1 = dataList.get(4);
+                high2 = dataList.get(5);
+                high3 = dataList.get(6);
+                high4 = dataList.get(7);
+                mode = dataList.get(8);
+                break;
+        }
+    }
 
     //高位-->低位
     private int bytesToInt(List<Byte> byteList) {

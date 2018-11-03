@@ -82,12 +82,12 @@ public abstract class BaseActivity extends SupportActivity implements View.OnCli
         //监听蓝牙状态
         receiver = new BroadcastReceiver() {
             @Override
-            public void onReceive(Context context, Intent intent) {
+            public void onReceive(Context context, final Intent intent) {
                 if (intent.getAction() != null && intent.getAction().equals(BluetoothLeService.ACTION_DATA_AVAILABLE)) {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            notifyUIDataSetChanged();
+                            notifyUIDataSetChanged(intent);
                         }
                     });
                 }
@@ -98,7 +98,7 @@ public abstract class BaseActivity extends SupportActivity implements View.OnCli
     }
 
     //蓝牙数据变动，UI更新
-    protected void notifyUIDataSetChanged() {
+    protected void notifyUIDataSetChanged(Intent intent) {
 
     }
 

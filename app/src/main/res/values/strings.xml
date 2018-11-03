@@ -67,6 +67,7 @@
     <!--扫描设备-->
     <string name="devie_scan">Device Scan</string>
     <string name="scan">Scan</string>
+    <string name="connect">Connect</string>
     <string name="connecting">Connecting..</string>
     <string name="connect_success">Connected</string>
     <string name="ble_open_fail">Bluetooth open failed</string>

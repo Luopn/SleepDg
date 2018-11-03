@@ -16,6 +16,7 @@ import com.jx.sleep_dg.Bean.ControlBean;
 import com.jx.sleep_dg.R;
 import com.jx.sleep_dg.protocol.MSPProtocol;
 import com.jx.sleep_dg.ui.DeviceLiftAcyivity;
+import com.jx.sleep_dg.ui.DeviceNetConfigAcyivity;
 import com.jx.sleep_dg.ui.DeviceTempActivity;
 import com.jx.sleep_dg.ui.DeviseHardnessActivity;
 import com.jx.sleep_dg.view.MyListView;
@@ -31,7 +32,7 @@ import java.util.List;
 public class ControlFragment extends BaseFragment {
 
     private MSPProtocol mspProtocol;
-
+    private TextView tvNetConfig;
     private TextView tvHeadHigh, tvTailHigh;//床头，床尾高度
     private TextView tvLHardness, tvRHardness;//左，右床位硬度
     private MyListView listview;
@@ -55,6 +56,7 @@ public class ControlFragment extends BaseFragment {
         view.findViewById(R.id.ll_hardness).setOnClickListener(this);
         view.findViewById(R.id.ll_lift).setOnClickListener(this);
         view.findViewById(R.id.ll_temp).setOnClickListener(this);
+        view.findViewById(R.id.tv_right).setOnClickListener(this);
         listview = view.findViewById(R.id.listview);
         myadapter = new Myadapter(getActivity(), 0, controlList);
         listview.setAdapter(myadapter);
@@ -71,8 +73,8 @@ public class ControlFragment extends BaseFragment {
     }
 
     @Override
-    protected void notifyUIDataSetChanged() {
-        super.notifyUIDataSetChanged();
+    protected void notifyUIDataSetChanged(Intent intent) {
+        super.notifyUIDataSetChanged(intent);
         bindViewData();
     }
 
@@ -90,6 +92,9 @@ public class ControlFragment extends BaseFragment {
     public void onClick(View v) {
         super.onClick(v);
         switch (v.getId()) {
+            case R.id.tv_right:
+                startActivity(new Intent(getActivity(), DeviceNetConfigAcyivity.class));
+                break;
             case R.id.ll_lift:
                 //床位升降
                 startActivity(new Intent(getActivity(), DeviceLiftAcyivity.class));

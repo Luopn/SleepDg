@@ -1,5 +1,6 @@
 package com.jx.sleep_dg.fragment;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -48,8 +49,8 @@ public class StatisticsFragment extends BaseFragment {
     }
 
     @Override
-    protected void notifyUIDataSetChanged() {
-        super.notifyUIDataSetChanged();
+    protected void notifyUIDataSetChanged(Intent intent) {
+        super.notifyUIDataSetChanged(intent);
         bindViewData();
     }
 }

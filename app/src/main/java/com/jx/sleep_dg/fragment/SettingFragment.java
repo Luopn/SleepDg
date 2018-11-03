@@ -6,7 +6,7 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 
 import com.jx.sleep_dg.R;
-import com.jx.sleep_dg.ble.BleComUtils;
+import com.jx.sleep_dg.protocol.BleComUtils;
 import com.jx.sleep_dg.ui.AssociatedActivity;
 import com.jx.sleep_dg.ui.DeviceDetailActivity;
 

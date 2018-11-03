@@ -7,7 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jx.sleep_dg.R;
-import com.jx.sleep_dg.ble.BleComUtils;
+import com.jx.sleep_dg.protocol.BleComUtils;
 import com.jx.sleep_dg.utils.LogUtil;
 
 /**
@@ -36,7 +36,6 @@ public class DeviceTempActivity extends BaseActivity implements View.OnClickList
         ivGear = findViewById(R.id.iv_gear);
         findViewById(R.id.iv_jian).setOnClickListener(this);
         findViewById(R.id.iv_jia).setOnClickListener(this);
-
     }
 
     @Override

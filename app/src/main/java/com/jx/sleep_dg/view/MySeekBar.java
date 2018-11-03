@@ -1,6 +1,7 @@
 package com.jx.sleep_dg.view;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -260,6 +261,7 @@ public class MySeekBar extends View {
         setMeasuredDimension(widthSize, heightSize);
     }
 
+    @SuppressLint("DrawAllocation")
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:divider="@drawable/shape_divider_horizontal"
+        android:gravity="center"
+        android:showDividers="beginning|middle|end">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:minHeight="48dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="当前WiFi"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/textSize_13" />
+
+            <com.jx.sleep_dg.view.ClearableEditText
+                android:id="@+id/wifi_name"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:completionThreshold="1"
+                android:drawableRight="@mipmap/ic_close"
+                android:hint="请输入WiFi名"
+                android:imeOptions="actionNext"
+                android:singleLine="true"
+                android:text=""
+                android:textColor="@android:color/white"
+                android:textColorHint="#ddd" />
+
+            <ImageButton
+                android:id="@+id/wifi_list"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:src="@mipmap/ic_arrow_down_dark" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:minHeight="48dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="WiFi密码"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/sp_14" />
+
+            <com.jx.sleep_dg.view.ClearableEditText
+                android:id="@+id/wifi_pwd"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:drawableRight="@mipmap/ic_close"
+                android:hint="请输入 Wi-Fi 密码"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:textColor="@android:color/white"
+                android:textColorHint="#ddd" />
+
+            <ImageButton
+                android:id="@+id/wifi_pwd_hidden"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:src="@mipmap/ic_password_hidden" />
+        </TableRow>
+    </TableLayout>
+
+    <com.jx.sleep_dg.view.RippleBackground
+        android:id="@+id/sendback"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:rb_color="@color/colorAccent"
+        app:rb_duration="3000"
+        app:rb_radius="16dp"
+        app:rb_scale="8"
+        app:rb_type="fillRipple">
+
+        <Button
+            android:id="@+id/send_btn"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/sel_send_wave_icon"
+            android:gravity="center"
+            android:text="开始配置"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/textSize_13" />
+    </com.jx.sleep_dg.view.RippleBackground>
+</LinearLayout>

@@ -1,11 +1,15 @@
-package com.jx.sleep_dg.ble;
+package com.jx.sleep_dg.protocol;
 
 
 import android.text.TextUtils;
 
+import com.jx.sleep_dg.ble.BleCommunication;
+import com.jx.sleep_dg.ble.BleUtils;
+import com.jx.sleep_dg.ble.BluetoothLeService;
 import com.jx.sleep_dg.ui.LauncherActivity;
 import com.jx.sleep_dg.utils.LogUtil;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -15,141 +19,96 @@ import java.util.Calendar;
 
 public class BleComUtils {
 
-    // /**
-    //  * 发送wifi
-    //  *
-    //  * @param name
-    //  * @param pwd
-    //  */
-    // public static void sendWifi(String name, String pwd) {
-    //     BleCommunication.sendData(LauncherActivity.mBLE, LauncherActivity.bcWrite, "AT+CWJAP_DEF=" + "\"" + name + "\"" + ",\"" + pwd + "\"" + "\r\n");
-    // }
-    // /**
-    //  * 发送ip 端口
-    //  */
-    // public static void sendIP(String ipAddress, String port) {
-    //     BleCommunication.sendData(LauncherActivity.mBLE, LauncherActivity.bcWrite, "AT+CIPSTART=\"TCP\",\"" + ipAddress + "\"," + port + "\r\n");
-    // }
+    /**
+     * 发送wifi
+     *
+     * @param name
+     * @param pwd
+     */
+    //public static void sendWifi(String name, String pwd) {
+    //    BleCommunication.sendData(LauncherActivity.mBLE, LauncherActivity.bcWrite, "AT+CWJAP_DEF=" + "\"" + name + "\"" + ",\"" + pwd + "\"" + "\r\n");
+    //}
 
     /**
-     * 发送数据
+     * 发送ip 端口
      */
-    public static void sendwifiName1() {
-        String yihuo = BleUtils.XORAnd("14C101000000000000010203040506070809");
-        // String data = "AA14C101000000000000010203040506070809" + yihuo;
-
-        byte[] data = new byte[19];
-        data[0] = (byte) 0xaa;
-        data[1] = (byte) 0x14;
-        data[2] = (byte) 0xc1;
-        data[3] = (byte) 0x01;
-        data[4] = (byte) 0x00;
-        data[5] = (byte) 0x00;
-        data[6] = (byte) 0x00;
-        data[7] = (byte) 0x00;
-        data[8] = (byte) 0x00;
-        data[9] = (byte) 0x00;
-        data[10] = (byte) 0x01;
-        data[11] = (byte) 0x02;
-        data[12] = (byte) 0x03;
-        data[13] = (byte) 0x04;
-        data[14] = (byte) 0x05;
-        data[15] = (byte) 0x06;
-        data[16] = (byte) 0x07;
-        data[17] = (byte) 0x08;
-        data[18] = (byte) 0x09;
-        BleCommunication.sendData2(LauncherActivity.mBLE, LauncherActivity.bcWrite, data);
-
-    }
+    //public static void sendIP(String ipAddress, String port) {
+    //    BleCommunication.sendData(LauncherActivity.mBLE, LauncherActivity.bcWrite, "AT+CIPSTART=\"TCP\",\"" + ipAddress + "\"," + port + "\r\n");
+    //}
 
     /**
-     * 发送数据
+     * WiFi SSID
+     *
+     * @param ssid wifi名
+     * @return 两包数据
      */
-    public static void sendwifiName2() {
-        String yihuo = BleUtils.XORAnd("14C102000000000000000000000000000000");
-//        String data = "AA14C102000000000000000000000000000000" + yihuo;
-        byte[] data = new byte[19];
-        data[0] = (byte) 0xaa;
-        data[1] = (byte) 0x14;
-        data[2] = (byte) 0xc1;
-        data[3] = (byte) 0x02;
-        data[4] = (byte) 0x00;
-        data[5] = (byte) 0x00;
-        data[6] = (byte) 0x00;
-        data[7] = (byte) 0x00;
-        data[8] = (byte) 0x00;
-        data[9] = (byte) 0x00;
-        data[10] = (byte) 0x00;
-        data[11] = (byte) 0x00;
-        data[12] = (byte) 0x00;
-        data[13] = (byte) 0x00;
-        data[14] = (byte) 0x00;
-        data[15] = (byte) 0x00;
-        data[16] = (byte) 0x00;
-        data[17] = (byte) 0x00;
-        data[18] = (byte) 0x00;
-        BleCommunication.sendData2(LauncherActivity.mBLE, LauncherActivity.bcWrite, data);
+    public static ArrayList<byte[]> a2c_SendSSID(String ssid) {
 
+        ArrayList<byte[]> list = new ArrayList<>(2);
+
+        byte[] srcBytes = ssid.getBytes();
+        byte[] data1 = new byte[20];
+        data1[0] = (byte) 0xAA;
+        data1[1] = (byte) 0x14;
+        data1[2] = (byte) 0xC1;
+        data1[3] = (byte) 0x01;
+        if (srcBytes.length <= 15)
+            System.arraycopy(srcBytes, 0, data1, 4, srcBytes.length);
+        else
+            System.arraycopy(srcBytes, 0, data1, 4, 15);
+        data1[19] = checkSum(data1);
+        list.add(data1);
+
+        byte[] data2 = new byte[20];
+        data2[0] = (byte) 0xAA;
+        data2[1] = (byte) 0x14;
+        data2[2] = (byte) 0xC1;
+        data2[3] = (byte) 0x02;
+        if (srcBytes.length > 15 && srcBytes.length <= 30)
+            System.arraycopy(srcBytes, 15, data2, 4, srcBytes.length - 15);
+        data2[19] = checkSum(data2);
+        list.add(data2);
+
+        return list;
     }
+
 
     /**
-     * 发送数据
+     * WiFi 密码
+     *
+     * @param wifiPwd wifi密码
+     * @return 两包数据
      */
-    public static void sendwifiPwd1() {
-        String yihuo = BleUtils.XORAnd("14C201000000000000010203040506070809");
-        //String data = "AA14C201000000000000010203040506070809" + yihuo;
-        byte[] data = new byte[19];
-        data[0] = (byte) 0xaa;
-        data[1] = (byte) 0x14;
-        data[2] = (byte) 0xc2;
-        data[3] = (byte) 0x01;
-        data[4] = (byte) 0x00;
-        data[5] = (byte) 0x00;
-        data[6] = (byte) 0x00;
-        data[7] = (byte) 0x00;
-        data[8] = (byte) 0x00;
-        data[9] = (byte) 0x00;
-        data[10] = (byte) 0x01;
-        data[11] = (byte) 0x02;
-        data[12] = (byte) 0x03;
-        data[13] = (byte) 0x04;
-        data[14] = (byte) 0x05;
-        data[15] = (byte) 0x06;
-        data[16] = (byte) 0x07;
-        data[17] = (byte) 0x08;
-        data[18] = (byte) 0x09;
-        BleCommunication.sendData2(LauncherActivity.mBLE, LauncherActivity.bcWrite, data);
+    public static ArrayList<byte[]> a2c_SendWiFiPwd(String wifiPwd) {
 
+        ArrayList<byte[]> list = new ArrayList<>(2);
+
+        byte[] srcBytes = wifiPwd.getBytes();
+        byte[] data1 = new byte[20];
+        data1[0] = (byte) 0xAA;
+        data1[1] = (byte) 0x14;
+        data1[2] = (byte) 0xC2;
+        data1[3] = (byte) 0x01;
+        if (srcBytes.length <= 15)
+            System.arraycopy(srcBytes, 0, data1, 4, srcBytes.length);
+        else
+            System.arraycopy(srcBytes, 0, data1, 4, 15);
+        data1[19] = checkSum(data1);
+        list.add(data1);
+
+        byte[] data2 = new byte[20];
+        data2[0] = (byte) 0xAA;
+        data2[1] = (byte) 0x14;
+        data2[2] = (byte) 0xC2;
+        data2[3] = (byte) 0x02;
+        if (srcBytes.length > 15 && srcBytes.length <= 30)
+            System.arraycopy(srcBytes, 15, data2, 4, srcBytes.length - 15);
+        data2[19] = checkSum(data2);
+        list.add(data2);
+
+        return list;
     }
 
-    /**
-     * 发送数据
-     */
-    public static void sendwifiPwd2() {
-        String yihuo = BleUtils.XORAnd("14C102000000000000000000000000000000");
-        //String data = "AA14C202000000000000000000000000000000" + yihuo;
-        byte[] data = new byte[19];
-        data[0] = (byte) 0xaa;
-        data[1] = (byte) 0x14;
-        data[2] = (byte) 0xc2;
-        data[3] = (byte) 0x02;
-        data[4] = (byte) 0x00;
-        data[5] = (byte) 0x00;
-        data[6] = (byte) 0x00;
-        data[7] = (byte) 0x00;
-        data[8] = (byte) 0x00;
-        data[9] = (byte) 0x00;
-        data[10] = (byte) 0x00;
-        data[11] = (byte) 0x00;
-        data[12] = (byte) 0x00;
-        data[13] = (byte) 0x00;
-        data[14] = (byte) 0x00;
-        data[15] = (byte) 0x00;
-        data[16] = (byte) 0x00;
-        data[17] = (byte) 0x00;
-        data[18] = (byte) 0x00;
-        BleCommunication.sendData2(LauncherActivity.mBLE, LauncherActivity.bcWrite, data);
-    }
 
     /**
      * 发送数据
@@ -158,7 +117,6 @@ public class BleComUtils {
         LogUtil.e("data:" + data);
         String yihuo = BleUtils.XORAnd("05C401");
         // String data = "aa05c401";
-
         // byte[] data = new byte[4];
         // data[0] = (byte) 0xaa;
         // data[1] = (byte) 0x05;
@@ -172,7 +130,6 @@ public class BleComUtils {
         // String yihuo = BleUtils.XORAnd("06C50A0A");
         // String data = "aa06a50a0a";
         // BleCommunication.sendData(LauncherActivity.mBLE, LauncherActivity.bcWrite, data);
-
         // byte[] a = new byte[5];
         // a[0] = (byte) 0xaa;
         // a[1] = (byte) 0x06;
@@ -213,25 +170,23 @@ public class BleComUtils {
     public static void senddianji(String data) {
 
         String yihuo = BleUtils.XORAnd("06C702040608");
-//        String data = "AA06C702040608";
+        // String data = "AA06C702040608";
         LogUtil.e("data:" + data);
-
-//        byte[] data = new byte[7];
-//        data[0] = (byte) 0xaa;
-//        data[1] = (byte) 0x06;
-//        data[2] = (byte) 0xc7;
-//        data[3] = (byte) 0x02;
-//        data[4] = (byte) 0x04;
-//        data[5] = (byte) 0x06;
-//        data[6] = (byte) 0x08;
+        //byte[] data = new byte[7];
+        //data[0] = (byte) 0xaa;
+        //data[1] = (byte) 0x06;
+        //data[2] = (byte) 0xc7;
+        //data[3] = (byte) 0x02;
+        //data[4] = (byte) 0x04;
+        //data[5] = (byte) 0x06;
+        //data[6] = (byte) 0x08;
         //BleCommunication.sendData2(LauncherActivity.mBLE, LauncherActivity.bcWrite, toByteArray("aa08c7" + data));
-
         BluetoothLeService.mThis.writeCMD(toByteArray("aa08c7" + data));
     }
 
     public static void sendShengji() {
         String yihuo = BleUtils.XORAnd("06ca0100");
-//        String data = "aa06ac0100";
+        //String data = "aa06ac0100";
 
         byte[] data = new byte[5];
         data[0] = (byte) 0xaa;
@@ -240,6 +195,17 @@ public class BleComUtils {
         data[3] = (byte) 0x01;
         data[4] = (byte) 0x00;
         BleCommunication.sendData2(LauncherActivity.mBLE, LauncherActivity.bcWrite, data);
+    }
+
+    /**
+     * 获取校验
+     */
+    private static byte checkSum(byte[] data) {
+        byte checksum = 0;
+        for (byte aData : data) {
+            checksum ^= aData;
+        }
+        return checksum;
     }
 
     /**
@@ -294,9 +260,9 @@ public class BleComUtils {
     public static byte[] toByteArray(String hexString) {
         if (TextUtils.isEmpty(hexString)) {
             throw new IllegalArgumentException("this hexString must not be empty");
-//            byte[] byteArray = new byte[1];
-//            byteArray[0]= (byte) 0xaa;
-//            return byteArray;
+            //byte[] byteArray = new byte[1];
+            //byteArray[0]= (byte) 0xaa;
+            //return byteArray;
         }
         hexString = hexString.toLowerCase();
         final byte[] byteArray = new byte[hexString.length() / 2];

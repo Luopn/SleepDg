@@ -1,6 +1,7 @@
 package com.jx.sleep_dg.ui;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.MotionEvent;
@@ -14,7 +15,7 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.jx.sleep_dg.R;
-import com.jx.sleep_dg.ble.BleComUtils;
+import com.jx.sleep_dg.protocol.BleComUtils;
 import com.jx.sleep_dg.ble.BleUtils;
 import com.jx.sleep_dg.protocol.MSPProtocol;
 import com.jx.sleep_dg.utils.LogUtil;
@@ -101,8 +102,8 @@ public class DeviseHardnessActivity extends BaseActivity implements View.OnClick
     }
 
     @Override
-    protected void notifyUIDataSetChanged() {
-        super.notifyUIDataSetChanged();
+    protected void notifyUIDataSetChanged(Intent intent) {
+        super.notifyUIDataSetChanged(intent);
         bindViewData();
     }
 

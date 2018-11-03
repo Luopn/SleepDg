@@ -66,6 +66,7 @@
     <!--扫描设备-->
     <string name="devie_scan">扫描设备</string>
     <string name="scan">扫描</string>
+    <string name="connect">连接</string>
     <string name="connecting">连接中,请稍后..</string>
     <string name="connect_success">连接成功</string>
     <string name="ble_open_fail">蓝牙打开失败</string>

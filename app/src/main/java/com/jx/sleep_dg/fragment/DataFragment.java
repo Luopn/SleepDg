@@ -31,11 +31,11 @@ public class DataFragment extends BaseFragment {
     private MSPProtocol mspProtocol;
     private boolean isSwitch = true;
 
-    private EcgView ecgXinlv;
-    private HuxiEcgView ecgHuxi;
+    private EcgView lecgXinlv;
+    private HuxiEcgView recgXinlv;
 
-    private boolean isXinlv;
-    private boolean isHuxi;
+    private boolean isrXinlv;
+    private boolean islXinlv;
 
     @Override
     protected int getLayoutId() {
@@ -53,8 +53,8 @@ public class DataFragment extends BaseFragment {
 
         ivUserImage = view.findViewById(R.id.iv_user_image);
         ivUserImage.setOnClickListener(this);
-        ecgXinlv = view.findViewById(R.id.ecg_xinlv);
-        ecgHuxi = view.findViewById(R.id.ecg_huxi);
+        lecgXinlv = view.findViewById(R.id.l_ecg_xinlv);
+        recgXinlv = view.findViewById(R.id.r_ecg_xinlv);
 
         mspProtocol = MSPProtocol.getInstance();
         bindViewData();
@@ -73,39 +73,40 @@ public class DataFragment extends BaseFragment {
             tvXinlvRight.setText(String.format(Locale.getDefault(), getResources().getString(R.string.heart_rate_value), rightHeartBeat));
 
             if (leftBreathFreq > 0) {
-                if (!isHuxi) {
-                    ecgHuxi.startDraw();
-                    isHuxi = true;
+                if (!islXinlv) {
+                    lecgXinlv.startDraw();
+                    islXinlv = true;
                 }
             } else {
-                ecgHuxi.stop();
-                isHuxi = false;
+                lecgXinlv.stop();
+                islXinlv = false;
             }
+
             if (rightHeartBeat > 0) {
-                if (!isXinlv) {
-                    ecgXinlv.startDraw();
-                    isXinlv = true;
+                if (!isrXinlv) {
+                    recgXinlv.startDraw();
+                    isrXinlv = true;
                 }
             } else {
-                ecgXinlv.stop();
-                isXinlv = false;
+                recgXinlv.stop();
+                isrXinlv = false;
             }
         }
     }
 
     @Override
-    protected void notifyUIDataSetChanged() {
-        super.notifyUIDataSetChanged();
+    protected void notifyUIDataSetChanged(Intent intent) {
+        super.notifyUIDataSetChanged(intent);
         bindViewData();
     }
 
     @Override
     protected void notifyDeviceDisconnected() {
         super.notifyDeviceDisconnected();
-        ecgXinlv.stop();
-        ecgHuxi.stop();
-        isXinlv = false;
-        isHuxi = false;
+        lecgXinlv.stop();
+        recgXinlv.stop();
+        isrXinlv = false;
+        islXinlv = false;
     }
 
     @Override

@@ -37,9 +37,11 @@ import android.os.IBinder;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.jx.sleep_dg.R;
 import com.jx.sleep_dg.protocol.MSPProtocol;
 import com.jx.sleep_dg.utils.Constance;
 import com.jx.sleep_dg.utils.PreferenceUtils;
+import com.jx.sleep_dg.utils.ToastUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -57,7 +59,6 @@ public class BluetoothLeService extends Service {
 
     private static final String TAG = "BluetoothLeService";
 
-    private boolean isRun;
     private static final int STATE_DISCONNECTED = 0;
     private static final int STATE_CONNECTING = 1;
     private static final int STATE_CONNECTED = 2;
@@ -90,15 +91,6 @@ public class BluetoothLeService extends Service {
     }
 
     Timer connectTimer = new Timer(true);//获取信号强度
-    Timer rssiTimer = new Timer(true);//定时连接
-
-    TimerTask rssiTimerTask = new TimerTask() {
-        public void run() {
-            if (!TextUtils.isEmpty(lastConnectAddress)) {
-                getRssi(lastConnectAddress);
-            }
-        }
-    };
 
     TimerTask connectTimerTask = new TimerTask() {
         public void run() {
@@ -126,6 +118,7 @@ public class BluetoothLeService extends Service {
         public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
             String intentAction;
             if (newState == BluetoothProfile.STATE_CONNECTED) {
+                ToastUtil.showMessage("蓝牙已连接");
                 intentAction = ACTION_GATT_CONNECTED;
                 broadcastUpdate(intentAction, gatt.getDevice().getAddress());
                 Log.i(TAG, "Connected to GATT server.");
@@ -133,6 +126,7 @@ public class BluetoothLeService extends Service {
                 Log.i(TAG, "Attempting to start service discovery:(" + gatt.getDevice().getAddress() + ")"
                         + gatt.discoverServices());
             } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
+                ToastUtil.showMessage("蓝牙断开");
                 if (!TextUtils.isEmpty(lastConnectAddress)) {
                     lastConnectAddress = gatt.getDevice().getAddress();
                     broadcastUpdate(ACTION_RSSI_AVAILABLE);
@@ -164,14 +158,15 @@ public class BluetoothLeService extends Service {
         public void onCharacteristicRead(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
             if (status == BluetoothGatt.GATT_SUCCESS) {
                 broadcastUpdate(ACTION_DATA_AVAILABLE, gatt.getDevice().getAddress(), characteristic);
-                byte[] value = characteristic.getValue();
-                mspProtocol.setRawBytes(value);
             }
         }
 
         @Override
         public void onCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic) {
             broadcastUpdate(ACTION_DATA_AVAILABLE, gatt.getDevice().getAddress(), characteristic);
+            byte[] value = characteristic.getValue();
+            //解析数据
+            mspProtocol.setRawBytes(value);
         }
 
         @Override
@@ -207,46 +202,6 @@ public class BluetoothLeService extends Service {
                     setCharacteristicNotification(address, gattCharacteristic, true);
                 }
             }
-        }
-    }
-
-    private void broadcastUpdate(final String action, int rssi) {
-        final Intent intent = new Intent(action);
-        intent.putExtra("rssi", rssi);
-        sendBroadcast(intent);
-    }
-
-    private void broadcastUpdate(final String action) {
-        final Intent intent = new Intent(action);
-        sendBroadcast(intent);
-    }
-
-    private void broadcastUpdate(final String action, String address) {
-        final Intent intent = new Intent(action);
-        intent.putExtra(EXTRA_DATA_ADDRESS, address);
-        sendBroadcast(intent);
-    }
-
-    private void broadcastUpdate(final String action, BluetoothDevice device) {
-        final Intent intent = new Intent(action);
-        intent.putExtra(EXTRA_GATT_DEVICES, device);
-        sendBroadcast(intent);
-    }
-
-    private void broadcastUpdate(final String action, final String address,
-                                 final BluetoothGattCharacteristic characteristic) {
-        final Intent intent = new Intent(action);
-        final byte[] data = characteristic.getValue();
-        if (data != null && data.length > 0) {
-            final StringBuilder stringBuilder = new StringBuilder(data.length);
-            for (byte byteChar : data)
-                stringBuilder.append(String.format("%02X ", byteChar));
-            Log.i(TAG, stringBuilder.toString());
-        }
-        if (data != null && data.length > 0) {
-            intent.putExtra(EXTRA_DATA, data);
-            intent.putExtra(EXTRA_DATA_ADDRESS, address);
-            sendBroadcast(intent);
         }
     }
 
@@ -309,6 +264,7 @@ public class BluetoothLeService extends Service {
                         return true;
                     } else {
                         if (bg.connect()) {
+                            ToastUtil.showMessage(getResources().getString(R.string.connect) + ":" + address);
                             return true;
                         } else {
                             bg.disconnect();
@@ -491,7 +447,7 @@ public class BluetoothLeService extends Service {
 
         BluetoothGattCharacteristic characteristic = getWriteChara(lastConnectAddress);
         if (characteristic != null) {
-            characteristic.setValue(cmd);
+            boolean write = characteristic.setValue(cmd);
             mBluetoothGatt.writeCharacteristic(characteristic);
         }
     }
@@ -506,7 +462,6 @@ public class BluetoothLeService extends Service {
         }
 
         if (mBluetoothAdapter == null || mBluetoothGatt == null) {
-            Log.w(TAG, "BluetoothAdapter not initialized");
             broadcastUpdate(ACTION_GATT_DISCONNECTED, lastConnectAddress);
             return;
         }
@@ -575,6 +530,47 @@ public class BluetoothLeService extends Service {
         return null;
     }
 
+    //各种广播
+    private void broadcastUpdate(final String action, int rssi) {
+        final Intent intent = new Intent(action);
+        intent.putExtra("rssi", rssi);
+        sendBroadcast(intent);
+    }
+
+    private void broadcastUpdate(final String action) {
+        final Intent intent = new Intent(action);
+        sendBroadcast(intent);
+    }
+
+    private void broadcastUpdate(final String action, String address) {
+        final Intent intent = new Intent(action);
+        intent.putExtra(EXTRA_DATA_ADDRESS, address);
+        sendBroadcast(intent);
+    }
+
+    private void broadcastUpdate(final String action, BluetoothDevice device) {
+        final Intent intent = new Intent(action);
+        intent.putExtra(EXTRA_GATT_DEVICES, device);
+        sendBroadcast(intent);
+    }
+
+    private void broadcastUpdate(final String action, final String address,
+                                 final BluetoothGattCharacteristic characteristic) {
+        final Intent intent = new Intent(action);
+        final byte[] data = characteristic.getValue();
+        if (data != null && data.length > 0) {
+            final StringBuilder stringBuilder = new StringBuilder(data.length);
+            for (byte byteChar : data)
+                stringBuilder.append(String.format("%02X ", byteChar));
+            Log.i(TAG, stringBuilder.toString());
+        }
+        if (data != null && data.length > 0) {
+            intent.putExtra(EXTRA_DATA, data);
+            intent.putExtra(EXTRA_DATA_ADDRESS, address);
+            sendBroadcast(intent);
+        }
+    }
+
     public void getRssi(String address) {
         if (mBluetoothAdapter == null || mBluetoothGatts == null) {
             Log.w(TAG, "BluetoothAdapter not initialized");
@@ -600,27 +596,22 @@ public class BluetoothLeService extends Service {
         return false;
     }
 
+    public void disconnectAll() {
+        if (mBluetoothAdapter == null || mBluetoothGatts == null) {
+            Log.w(TAG, "BluetoothAdapter not initialized");
+            return;
+        }
+        for (BluetoothGatt bg : mBluetoothGatts) {
+            if (bg != null) {
+                bg.disconnect();
+            }
+        }
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
-        isRun = true;
         connectTimer.schedule(connectTimerTask, 10, 5 * 1000);
-        rssiTimer.schedule(rssiTimerTask, 10, 20);
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (isRun) {
-                    //接收蓝牙端定时发过来的数据
-                    readChars();
-                    try {
-                        Thread.sleep(40);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }).start();
     }
 
     @Override
@@ -644,7 +635,6 @@ public class BluetoothLeService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        isRun = false;
         mspProtocol.setDataTrdRun(false);
 
         disconnect(lastConnectAddress);
@@ -652,19 +642,5 @@ public class BluetoothLeService extends Service {
 
         if (connectTimer != null)
             connectTimer.cancel();
-        if (rssiTimer != null)
-            rssiTimer.cancel();
-    }
-
-    public void disconnectAll() {
-        if (mBluetoothAdapter == null || mBluetoothGatts == null) {
-            Log.w(TAG, "BluetoothAdapter not initialized");
-            return;
-        }
-        for (BluetoothGatt bg : mBluetoothGatts) {
-            if (bg != null) {
-                bg.disconnect();
-            }
-        }
     }
 }

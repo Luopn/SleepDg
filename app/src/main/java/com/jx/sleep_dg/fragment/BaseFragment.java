@@ -56,12 +56,12 @@ public abstract class BaseFragment extends SupportFragment implements View.OnCli
         //监听蓝牙状态
         receiver = new BroadcastReceiver() {
             @Override
-            public void onReceive(Context context, Intent intent) {
+            public void onReceive(Context context, final Intent intent) {
                 if (intent.getAction() != null && intent.getAction().equals(BluetoothLeService.ACTION_DATA_AVAILABLE)) {
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            notifyUIDataSetChanged();
+                            notifyUIDataSetChanged(intent);
                         }
                     });
                 } else if (intent.getAction() != null && intent.getAction().equals(BluetoothLeService.ACTION_GATT_DISCONNECTED)) {
@@ -77,7 +77,7 @@ public abstract class BaseFragment extends SupportFragment implements View.OnCli
     }
 
     //更新UI数据
-    protected void notifyUIDataSetChanged() {
+    protected void notifyUIDataSetChanged(Intent intent) {
     }
 
     protected void notifyDeviceDisconnected() {

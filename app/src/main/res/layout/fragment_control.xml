@@ -20,6 +20,15 @@
             android:text="@string/control_title"
             android:textColor="@android:color/white"
             android:textSize="@dimen/textSize_18" />
+
+        <TextView
+            android:id="@+id/tv_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            android:textColor="@android:color/white"
+            android:text="设备配网" />
+
     </FrameLayout>
 
     <ScrollView

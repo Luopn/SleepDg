@@ -180,11 +180,11 @@
                     android:textSize="@dimen/textSize_15" />
 
                 <com.jx.sleep_dg.view.EcgView
-                    android:id="@+id/ecg_xinlv"
+                    android:id="@+id/l_ecg_xinlv"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:layout_centerInParent="true"
-                    android:layout_toLeftOf="@id/group1"
+                    android:layout_toLeftOf="@+id/group1"
                     android:layout_toRightOf="@id/tv_heartrate_text" />
 
                 <LinearLayout
@@ -235,11 +235,11 @@
                     android:textSize="@dimen/textSize_15" />
 
                 <com.jx.sleep_dg.view.HuxiEcgView
-                    android:id="@+id/ecg_huxi"
+                    android:id="@+id/r_ecg_xinlv"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:layout_marginTop="10dp"
-                    android:layout_toLeftOf="@id/group2"
+                    android:layout_toLeftOf="@+id/group2"
                     android:layout_toRightOf="@id/tv_huxi_text" />
 
                 <LinearLayout
