@@ -8,7 +8,7 @@ import android.view.View;
 import com.jx.sleep_dg.Bean.WodeGuanzhuBean;
 import com.jx.sleep_dg.R;
 import com.jx.sleep_dg.adapter.WoDeGuanzhuAdapter;
-import com.jx.sleep_dg.utils.RecycleViewDivider;
+import com.jx.sleep_dg.ui.RecycleViewDivider;
 
 import java.util.ArrayList;
 import java.util.List;

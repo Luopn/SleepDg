@@ -1,4 +1,4 @@
-package com.jx.sleep_dg.utils;
+package com.jx.sleep_dg.ui;
 
 import android.content.Context;
 import android.content.res.TypedArray;

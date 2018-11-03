@@ -8,9 +8,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.support.annotation.IntegerRes;
+import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,7 +28,8 @@ import com.jx.sleep_dg.ble.BluetoothLeService;
 import com.jx.sleep_dg.http.Config;
 import com.jx.sleep_dg.http.OkHttpUtils;
 import com.jx.sleep_dg.utils.LogUtil;
-import com.jx.sleep_dg.utils.MyApplication;
+import com.jx.sleep_dg.MyApplication;
+import com.jx.sleep_dg.utils.QMUIStatusBarHelper;
 import com.jx.sleep_dg.utils.ToastUtil;
 import com.jx.sleep_dg.view.dialog.DialogHelper;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -217,8 +219,9 @@ public abstract class BaseActivity extends SupportActivity implements View.OnCli
      *
      * @param titleCol
      */
-    public void setTitleCol(int titleCol) {
+    public void setTitleCol(@ColorInt int titleCol) {
         tvTitle.setTextColor(titleCol);
+        QMUIStatusBarHelper.translucent(this, titleCol);
     }
 
     /**
@@ -229,6 +232,7 @@ public abstract class BaseActivity extends SupportActivity implements View.OnCli
     public void setTitleLayoutVisiable(boolean visiable) {
         if (!visiable) {
             toolbar.setVisibility(View.GONE);
+            QMUIStatusBarHelper.translucent(this);
         }
     }
 
@@ -252,36 +256,6 @@ public abstract class BaseActivity extends SupportActivity implements View.OnCli
     }
 
     /*************************************其他相关***************************************************/
-//    /**
-//     * 6.0权限申请
-//     */
-//    // 配置需要取的权限
-//    public final String[] PERMISSION = new String[]{Manifest.permission.CAMERA, // 相机
-//            Manifest.permission.READ_EXTERNAL_STORAGE,
-//            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-//            Manifest.permission.ACCESS_COARSE_LOCATION,
-//            Manifest.permission.ACCESS_FINE_LOCATION,
-//            Manifest.permission.READ_PHONE_STATE,
-//            Manifest.permission.INTERNET,
-//    };
-//
-//    public void permissions() {
-//        if (PermissionsUtil.isGranted1(this, PERMISSION)) {
-//
-//        } else {
-//            PermissionsUtil.requestPermission(this, new PermissionListener() {
-//                @Override
-//                public void permissionGranted(String[] permissions) {
-//                }
-//
-//                @Override
-//                public void permissionDenied(String[] permissions) {
-//                }
-//            }, PERMISSION);
-//        }
-//
-//    }
-
     //蓝牙数据相关
     private static IntentFilter makeGattUpdateIntentFilter() {
         final IntentFilter intentFilter = new IntentFilter();

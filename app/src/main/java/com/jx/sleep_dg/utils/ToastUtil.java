@@ -15,6 +15,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.widget.Toast;
 
+import com.jx.sleep_dg.MyApplication;
+
 
 /**
  * Toast工具类 Created by Jorstin on 2015/3/17.

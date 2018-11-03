@@ -4,7 +4,6 @@
     android:id="@+id/ll_login_bg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/bg_login"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
@@ -13,40 +12,48 @@
         android:layout_height="200dp"
         android:gravity="center">
 
-        <LinearLayout
+        <RadioGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="right">
+            android:layout_gravity="right"
+            android:layout_marginRight="5dp"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_ch_simple"
-                android:layout_width="wrap_content"
+            <RadioButton
+                android:id="@+id/rb_ch_simple"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
-                android:minHeight="25dp"
-                android:gravity="center_vertical"
-                android:text="中文"
                 android:layout_marginTop="10dp"
+                android:background="@drawable/sel_lang_checked"
+                android:button="@null"
+                android:checked="true"
+                android:gravity="center"
+                android:minHeight="25dp"
+                android:text="中文"
                 android:textColor="#ababab" />
 
-            <TextView
-                android:id="@+id/tv_ch_tradition"
-                android:layout_width="wrap_content"
+            <RadioButton
+                android:id="@+id/rb_ch_tradition"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
+                android:background="@drawable/sel_lang_checked"
+                android:button="@null"
+                android:gravity="center"
                 android:minHeight="25dp"
-                android:gravity="center_vertical"
                 android:text="繁體"
                 android:textColor="#ababab" />
 
-            <TextView
-                android:id="@+id/tv_en"
-                android:layout_width="wrap_content"
+            <RadioButton
+                android:id="@+id/rb_en"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
+                android:background="@drawable/sel_lang_checked"
+                android:button="@null"
+                android:gravity="center"
                 android:minHeight="25dp"
-                android:gravity="center_vertical"
                 android:text="English"
                 android:textColor="#ababab" />
-        </LinearLayout>
+        </RadioGroup>
 
         <com.jx.sleep_dg.ui.RoundedImageView.RoundedImageView
             android:layout_width="120dp"
@@ -61,8 +68,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -81,7 +88,8 @@
                 android:id="@+id/et_phone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/login_shape"
+                android:drawableLeft="@mipmap/ic_phonenumber"
+                android:drawablePadding="10dp"
                 android:gravity="center_vertical"
                 android:hint="@string/hint_account_name"
                 android:imeOptions="actionNext"
@@ -90,24 +98,15 @@
                 android:paddingLeft="15dp"
                 android:singleLine="true"
                 android:textColor="#ffffff"
-                android:textColorHint="#ffffff"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:theme="@style/EditText" />
         </LinearLayout>
-
-        <View
-            android:id="@+id/iv_login_view"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginBottom="10dp"
             android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -120,7 +119,8 @@
                 android:id="@+id/et_password"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/login_shape"
+                android:drawableLeft="@mipmap/ic_password"
+                android:drawablePadding="10dp"
                 android:gravity="center_vertical"
                 android:hint="@string/hint_pwd"
                 android:inputType="textPassword"
@@ -128,8 +128,8 @@
                 android:paddingLeft="15dp"
                 android:singleLine="true"
                 android:textColor="#ffffff"
-                android:textColorHint="#ffffff"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:theme="@style/EditText" />
         </LinearLayout>
 
     </LinearLayout>
@@ -139,13 +139,9 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="center"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="40dp"
+        android:layout_margin="20dp"
         android:background="@drawable/sel_login_btn"
         android:gravity="center"
-        android:paddingLeft="60dp"
-        android:paddingRight="60dp"
         android:text="@string/login"
         android:textColor="@android:color/white"
         android:textSize="@dimen/textSize_18"
@@ -154,9 +150,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="14dp"
-        android:layout_marginRight="14dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:orientation="horizontal">
 
         <TextView

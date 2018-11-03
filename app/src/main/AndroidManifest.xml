@@ -11,7 +11,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
-        android:name=".utils.MyApplication"
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -28,18 +28,54 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.MainActivity" />
-        <activity android:name=".ui.LoginActivity" />
-        <activity android:name=".ui.RegistActivity" />
-        <activity android:name=".ble.DeviceScanActivity" />
-        <activity android:name=".ui.SearchActivity" />
-        <activity android:name=".ui.DeviceDetailActivity" />
-        <activity android:name=".ui.DeviceTempActivity" />
-        <activity android:name=".ui.DeviseHardnessActivity" />
-        <activity android:name=".ui.DeviceLiftAcyivity" />
-        <activity android:name=".ui.HistoryDateActivity" />
-        <activity android:name=".ui.AssociatedActivity" />
-        <activity android:name=".ui.AddAssociatedActivity" />
+        <activity
+            android:name=".ui.MainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.LoginActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.RegistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ble.DeviceScanActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.SearchActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.DeviceDetailActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.DeviceTempActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.DeviseHardnessActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.DeviceLiftAcyivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.HistoryDateActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.AssociatedActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.AddAssociatedActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.UserInfoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"

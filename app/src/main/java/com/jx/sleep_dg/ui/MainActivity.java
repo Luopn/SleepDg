@@ -2,17 +2,14 @@ package com.jx.sleep_dg.ui;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTabHost;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
-import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -22,15 +19,10 @@ import android.widget.TextView;
 import com.jx.sleep_dg.R;
 import com.jx.sleep_dg.fragment.ControlFragment;
 import com.jx.sleep_dg.fragment.DataFragment;
-import com.jx.sleep_dg.fragment.StatisticsFragment;
 import com.jx.sleep_dg.fragment.SettingFragment;
 import com.jx.sleep_dg.fragment.ShopFragment;
-import com.jx.sleep_dg.utils.Constance;
-import com.jx.sleep_dg.utils.LogUtil;
-import com.jx.sleep_dg.utils.MyApplication;
-import com.jx.sleep_dg.utils.PreferenceUtils;
-import com.jx.sleep_dg.utils.StatusBarUtil;
-import com.jx.sleep_dg.view.menu.DragLayout;
+import com.jx.sleep_dg.fragment.StatisticsFragment;
+import com.jx.sleep_dg.MyApplication;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -169,8 +161,6 @@ public class MainActivity extends NewBaseActivity {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressedSupport();
-            LauncherActivity.mBLE.disconnect();
-            LauncherActivity.mBLE.close();
             MyApplication.getInstance().extiApp();
         }
     }

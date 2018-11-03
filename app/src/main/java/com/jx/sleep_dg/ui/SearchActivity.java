@@ -26,13 +26,12 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.jx.sleep_dg.R;
-import com.jx.sleep_dg.ble.BleUtils;
 import com.jx.sleep_dg.ble.BluetoothLeClass;
 import com.jx.sleep_dg.ble.BluetoothLeService;
 import com.jx.sleep_dg.ble.LeDeviceListAdapter;
 import com.jx.sleep_dg.http.InterfaceMethod;
 import com.jx.sleep_dg.utils.Constance;
-import com.jx.sleep_dg.utils.MyApplication;
+import com.jx.sleep_dg.MyApplication;
 import com.jx.sleep_dg.utils.PreferenceUtils;
 import com.jx.sleep_dg.utils.ToastUtil;
 import com.tbruyelle.rxpermissions2.RxPermissions;

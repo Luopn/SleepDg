@@ -1,15 +1,15 @@
-package com.jx.sleep_dg.utils;
+package com.jx.sleep_dg;
 
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.StrictMode;
+
+import com.jx.sleep_dg.utils.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * 作者：  王静波
@@ -31,7 +31,6 @@ public class MyApplication extends Application {
             StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
             StrictMode.setVmPolicy(builder.build());
         }
-        registerActivityLifecycleCallbacks(callbacks);
     }
 
     public static Context getContext() {
@@ -68,46 +67,4 @@ public class MyApplication extends Application {
             }
         }
     }
-
-    ActivityLifecycleCallbacks callbacks = new ActivityLifecycleCallbacks() {
-        @Override
-        public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-            //强制修改应用语言
-            Locale locale = LanguageUtil.getAppLocale();
-            if (locale != null && !LanguageUtil.isSameWithSetting(instance)) {
-                LanguageUtil.changeAppLanguage(instance, locale, false);
-            }
-        }
-
-        @Override
-        public void onActivityStarted(Activity activity) {
-
-        }
-
-        @Override
-        public void onActivityResumed(Activity activity) {
-
-        }
-
-        @Override
-        public void onActivityPaused(Activity activity) {
-
-        }
-
-        @Override
-        public void onActivityStopped(Activity activity) {
-
-        }
-
-        @Override
-        public void onActivitySaveInstanceState(Activity activity, Bundle bundle) {
-
-        }
-
-        @Override
-        public void onActivityDestroyed(Activity activity) {
-
-        }
-        //Activity 其它生命周期的回调
-    };
 }

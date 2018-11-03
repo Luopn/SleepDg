@@ -1,16 +1,14 @@
 package com.jx.sleep_dg.fragment;
 
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.jx.sleep_dg.Bean.GuanzhuWodeBean;
-import com.jx.sleep_dg.Bean.WodeGuanzhuBean;
 import com.jx.sleep_dg.R;
 import com.jx.sleep_dg.adapter.GuanzhuWoDeAdapter;
-import com.jx.sleep_dg.utils.RecycleViewDivider;
+import com.jx.sleep_dg.ui.RecycleViewDivider;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -13,8 +13,7 @@ import java.util.Locale;
 
 public class LanguageUtil {
 
-    private static final String LANGUAGE = "prefs.language";
-    private static final String COUNTRY = "prefs.country";
+    public static final String LANGUAGE = "prefs.language";
 
     /**
      * 更改应用语言
@@ -30,18 +29,7 @@ public class LanguageUtil {
         configuration.setLocale(locale);
         resources.updateConfiguration(configuration, metrics);
         if (persistence) {
-            PreferenceUtils.putString(LANGUAGE, locale.getLanguage());
+            PreferenceUtils.putString(LANGUAGE, PreferenceUtils.serialize(locale));
         }
-    }
-
-    public static boolean isSameWithSetting(Context context) {
-        String language = context.getResources().getConfiguration().locale.getLanguage();
-        return language.equals(PreferenceUtils.getString(LANGUAGE));
-    }
-
-    public static Locale getAppLocale() {
-        String languate = PreferenceUtils.getString(LANGUAGE);
-        if (TextUtils.isEmpty(languate)) return null;
-        return new Locale(languate);
     }
 }

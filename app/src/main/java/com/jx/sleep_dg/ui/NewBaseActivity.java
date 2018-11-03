@@ -23,7 +23,7 @@ import com.jx.sleep_dg.http.OkHttpUtils;
 import com.jx.sleep_dg.permission.PermissionListener;
 import com.jx.sleep_dg.permission.PermissionsUtil;
 import com.jx.sleep_dg.utils.LogUtil;
-import com.jx.sleep_dg.utils.MyApplication;
+import com.jx.sleep_dg.MyApplication;
 import com.jx.sleep_dg.utils.ToastUtil;
 
 import org.apache.http.conn.ConnectTimeoutException;

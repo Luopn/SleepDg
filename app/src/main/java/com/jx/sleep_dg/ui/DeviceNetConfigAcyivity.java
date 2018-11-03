@@ -108,7 +108,7 @@ public class DeviceNetConfigAcyivity extends BaseActivity implements View.OnClic
                     BluetoothLeService.mThis.writeCMD(cmd);//发送SSID第二个包
                     PrintLog.d(cmd, cmd.length);
                 } else {
-                    ToastUtil.showMessage("配置失败，请重试");
+                    ToastUtil.showMessage("发送失败，请重试");
                     rippleBackground.stopRippleAnimation();
                     sendBtn.setEnabled(true);
                 }
@@ -120,7 +120,7 @@ public class DeviceNetConfigAcyivity extends BaseActivity implements View.OnClic
                     PrintLog.d(cmd, cmd.length);
                     BluetoothLeService.mThis.writeCMD(cmd);
                 } else {
-                    ToastUtil.showMessage("配置失败，请重试");
+                    ToastUtil.showMessage("发送失败，请重试");
                     rippleBackground.stopRippleAnimation();
                     sendBtn.setEnabled(true);
                 }
@@ -134,18 +134,18 @@ public class DeviceNetConfigAcyivity extends BaseActivity implements View.OnClic
                     BluetoothLeService.mThis.writeCMD(cmd);//发送密码第二个包
                     PrintLog.d(cmd, cmd.length);
                 } else {
-                    ToastUtil.showMessage("配置失败，请重试");
+                    ToastUtil.showMessage("发送失败，请重试");
                     rippleBackground.stopRippleAnimation();
                     sendBtn.setEnabled(true);
                 }
             }
             if (orderSerial == 2) {
                 if (orderRes == 1) {
-                    ToastUtil.showMessage("配置成功");
+                    ToastUtil.showMessage("发送成功");
                     sendBtn.setEnabled(true);
                     rippleBackground.stopRippleAnimation();
                 } else {
-                    ToastUtil.showMessage("配置失败，请重试");
+                    ToastUtil.showMessage("发送失败，请重试");
                     sendBtn.setEnabled(true);
                     rippleBackground.stopRippleAnimation();
                 }

@@ -9,15 +9,15 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.jx.sleep_dg.R;
 import com.jx.sleep_dg.http.InterfaceMethod;
 import com.jx.sleep_dg.utils.Constance;
 import com.jx.sleep_dg.utils.LanguageUtil;
-import com.jx.sleep_dg.utils.MyApplication;
+import com.jx.sleep_dg.MyApplication;
 import com.jx.sleep_dg.utils.PreferenceUtils;
-import com.jx.sleep_dg.utils.ToastUtil;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,7 +28,6 @@ import java.util.Locale;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * Created by 覃微 on 2018/5/17.
@@ -36,16 +35,10 @@ import butterknife.OnClick;
 
 public class LoginActivity extends BaseActivity {
 
-    @BindView(R.id.tv_ch_simple)
-    TextView tvChSimple;
-    @BindView(R.id.tv_ch_tradition)
-    TextView tvChTradition;
-    @BindView(R.id.tv_en)
-    TextView tvEn;
-    @BindView(R.id.tv_forget_pw)
-    TextView tv_forget_pw;
-    @BindView(R.id.btn_login)
-    TextView btn_login;
+    private RadioButton rbChSimple;
+    private RadioButton rbChTradition;
+    private RadioButton rbEn;
+
     @BindView(R.id.et_phone)
     EditText et_phone;
     @BindView(R.id.et_password)
@@ -56,7 +49,6 @@ public class LoginActivity extends BaseActivity {
     ImageView iv_password_view;
     @BindView(R.id.ll_login)
     LinearLayout ll_login;
-    View iv_login_view;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,13 +60,29 @@ public class LoginActivity extends BaseActivity {
     @Override
     public void bindView() {
         setTitleLayoutVisiable(false);
-        iv_login_view = findViewById(R.id.iv_login_view);
+
+        rbChSimple = findViewById(R.id.rb_ch_simple);
+        rbChTradition = findViewById(R.id.rb_ch_tradition);
+        rbEn = findViewById(R.id.rb_en);
 
         findViewById(R.id.tv_register).setOnClickListener(this);
         findViewById(R.id.btn_login).setOnClickListener(this);
-        findViewById(R.id.tv_ch_simple).setOnClickListener(this);
-        findViewById(R.id.tv_ch_tradition).setOnClickListener(this);
-        findViewById(R.id.tv_en).setOnClickListener(this);
+        rbChSimple.setOnClickListener(this);
+        rbChTradition.setOnClickListener(this);
+        rbEn.setOnClickListener(this);
+
+        Locale locale = (Locale) PreferenceUtils.deSerialization(PreferenceUtils.getString(LanguageUtil.LANGUAGE));
+        if (locale != null) {
+            if (locale == Locale.SIMPLIFIED_CHINESE) {
+                rbChSimple.setChecked(true);
+            }
+            if (locale == Locale.TRADITIONAL_CHINESE) {
+                rbChTradition.setChecked(true);
+            }
+            if (locale == Locale.US) {
+                rbEn.setChecked(true);
+            }
+        }
 
         String username = PreferenceUtils.getString(Constance.USERNAME);
         String password = PreferenceUtils.getString(Constance.PASSWORD);
@@ -87,22 +95,6 @@ public class LoginActivity extends BaseActivity {
             doLogin();
         }
     }
-
-//    public void OnClick(View v) {
-//        switch (v.getId()) {
-//            case R.id.tv_register:
-//                //注册
-//                startActivity(new Intent(this, RegistActivity.class));
-//                break;
-//            case R.id.tv_forget_pw:
-//                //忘记密码
-////                startActivity(new Intent(this, ForgetPwdActivity.class));
-//                break;
-//            case R.id.btn_login:
-////                doLogin();
-//                break;
-//        }
-//    }
 
     @Override
     public void onClick(View view) {
@@ -117,15 +109,15 @@ public class LoginActivity extends BaseActivity {
                 startActivity(new Intent(this, MainActivity.class));
                 finish();
                 break;
-            case R.id.tv_ch_simple:
+            case R.id.rb_ch_simple:
                 LanguageUtil.changeAppLanguage(this, Locale.SIMPLIFIED_CHINESE, true);
                 restartApplication();
                 break;
-            case R.id.tv_ch_tradition:
+            case R.id.rb_ch_tradition:
                 LanguageUtil.changeAppLanguage(this, Locale.TRADITIONAL_CHINESE, true);
                 restartApplication();
                 break;
-            case R.id.tv_en:
+            case R.id.rb_en:
                 LanguageUtil.changeAppLanguage(this, Locale.US, true);
                 restartApplication();
                 break;
