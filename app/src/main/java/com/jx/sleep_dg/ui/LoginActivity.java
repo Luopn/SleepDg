@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.jx.sleep_dg.R;
 import com.jx.sleep_dg.http.InterfaceMethod;
 import com.jx.sleep_dg.utils.Constance;
+import com.jx.sleep_dg.utils.LanguageUtil;
 import com.jx.sleep_dg.utils.MyApplication;
 import com.jx.sleep_dg.utils.PreferenceUtils;
 import com.jx.sleep_dg.utils.ToastUtil;
@@ -23,9 +24,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by 覃微 on 2018/5/17.
@@ -33,6 +36,12 @@ import butterknife.BindView;
 
 public class LoginActivity extends BaseActivity {
 
+    @BindView(R.id.tv_ch_simple)
+    TextView tvChSimple;
+    @BindView(R.id.tv_ch_tradition)
+    TextView tvChTradition;
+    @BindView(R.id.tv_en)
+    TextView tvEn;
     @BindView(R.id.tv_forget_pw)
     TextView tv_forget_pw;
     @BindView(R.id.btn_login)
@@ -63,6 +72,9 @@ public class LoginActivity extends BaseActivity {
 
         findViewById(R.id.tv_register).setOnClickListener(this);
         findViewById(R.id.btn_login).setOnClickListener(this);
+        findViewById(R.id.tv_ch_simple).setOnClickListener(this);
+        findViewById(R.id.tv_ch_tradition).setOnClickListener(this);
+        findViewById(R.id.tv_en).setOnClickListener(this);
 
         String username = PreferenceUtils.getString(Constance.USERNAME);
         String password = PreferenceUtils.getString(Constance.PASSWORD);
@@ -92,7 +104,6 @@ public class LoginActivity extends BaseActivity {
 //        }
 //    }
 
-
     @Override
     public void onClick(View view) {
         super.onClick(view);
@@ -101,11 +112,22 @@ public class LoginActivity extends BaseActivity {
                 //注册
                 startActivity(new Intent(this, RegistActivity.class));
                 break;
-
             case R.id.btn_login:
                 //登录
                 startActivity(new Intent(this, MainActivity.class));
                 finish();
+                break;
+            case R.id.tv_ch_simple:
+                LanguageUtil.changeAppLanguage(this, Locale.SIMPLIFIED_CHINESE, true);
+                restartApplication();
+                break;
+            case R.id.tv_ch_tradition:
+                LanguageUtil.changeAppLanguage(this, Locale.TRADITIONAL_CHINESE, true);
+                restartApplication();
+                break;
+            case R.id.tv_en:
+                LanguageUtil.changeAppLanguage(this, Locale.US, true);
+                restartApplication();
                 break;
         }
     }
@@ -119,13 +141,12 @@ public class LoginActivity extends BaseActivity {
             et_phone.setError(getResources().getString(R.string.normal_input_null));
             return;
         }
-
         if (TextUtils.isEmpty(pwd)) {
             et_password.requestFocus();
             et_password.setError(getResources().getString(R.string.normal_input_null));
             return;
         }
-//        showLoadingDialog(getString(R.string.please_wait));
+        // showLoadingDialog(getString(R.string.please_wait));
         Map<String, String> map = new HashMap<>();
         map.put("phone_number", phone);
         map.put("password", pwd);
@@ -202,5 +223,12 @@ public class LoginActivity extends BaseActivity {
         } else {
             return super.onKeyDown(keyCode, event);
         }
+    }
+
+    private void restartApplication() {
+        //切换语言信息，需要重启 Activity 才能实现
+        Intent intent = new Intent(this, LauncherActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }

@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="15dp"
-        android:text="用户名"
+        android:text="@string/account_name"
         android:textColor="@color/white" />
 
     <View
@@ -36,7 +36,7 @@
         android:gravity="center"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
-        android:text="个人信息"
+        android:text="@string/user_info"
         android:textColor="@color/white" />
 
     <TextView
@@ -47,7 +47,7 @@
         android:gravity="center"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
-        android:text="我关联的人"
+        android:text="@string/user_associated"
         android:textColor="@color/white" />
 
     <TextView
@@ -58,6 +58,6 @@
         android:gravity="center"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
-        android:text="退出登录"
+        android:text="@string/sign_out"
         android:textColor="@color/white" />
 </LinearLayout>

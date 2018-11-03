@@ -20,7 +20,6 @@
             android:text="@string/control_title"
             android:textColor="@android:color/white"
             android:textSize="@dimen/textSize_18" />
-
     </FrameLayout>
 
     <ScrollView
@@ -65,7 +64,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
                             android:layout_gravity="center_horizontal"
-                            android:text="床位升降"
+                            android:text="@string/height"
                             android:textColor="#3a397c"
                             android:textSize="@dimen/textSize_14" />
 
@@ -86,35 +85,33 @@
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:layout_width="30dp"
+                            android:layout_width="0dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="15dp"
-                            android:background="@mipmap/ic_head" />
+                            android:layout_weight="1"
+                            android:src="@mipmap/ic_head" />
 
                         <ImageView
-                            android:layout_width="wrap_content"
+                            android:layout_width="40dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="33dp"
-                            android:background="@mipmap/ic_up" />
+                            android:src="@mipmap/ic_up" />
 
                         <TextView
                             android:id="@+id/tv_head_high"
-                            android:layout_width="30dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
                             android:gravity="center"
+                            android:minWidth="40dp"
                             android:text="0"
                             android:textColor="@android:color/white"
                             android:textSize="@dimen/textSize_17" />
 
                         <ImageView
-                            android:layout_width="wrap_content"
+                            android:layout_width="40dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="20dp"
-                            android:background="@mipmap/ic_down" />
+                            android:src="@mipmap/ic_down" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -125,36 +122,33 @@
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:layout_width="30dp"
+                            android:layout_width="0dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="15dp"
-                            android:background="@mipmap/ic_foot" />
+                            android:layout_weight="1"
+                            android:src="@mipmap/ic_foot" />
 
                         <ImageView
-                            android:layout_width="wrap_content"
+                            android:layout_width="40dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="33dp"
-                            android:background="@mipmap/ic_up" />
+                            android:src="@mipmap/ic_up" />
 
                         <TextView
                             android:id="@+id/tv_tail_high"
-                            android:layout_width="30dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
                             android:gravity="center"
+                            android:minWidth="40dp"
                             android:text="0"
                             android:textColor="@android:color/white"
                             android:textSize="@dimen/textSize_17" />
 
                         <ImageView
-                            android:layout_width="wrap_content"
+                            android:layout_width="40dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="20dp"
-                            android:background="@mipmap/ic_down"
-                            android:scaleType="fitXY" />
+                            android:src="@mipmap/ic_down" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -187,7 +181,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="35dp"
                         android:gravity="center"
-                        android:text="床位硬度数据"
+                        android:text="@string/hardness"
                         android:textColor="#3a397c"
                         android:textSize="@dimen/textSize_14" />
 
@@ -199,35 +193,33 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="30dp"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="15dp"
+                            android:layout_weight="1"
                             android:gravity="center"
-                            android:text="左"
+                            android:text="@string/left"
                             android:textColor="@android:color/white"
                             android:textSize="@dimen/textSize_17" />
 
                         <ImageView
-                            android:layout_width="wrap_content"
+                            android:layout_width="40dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="33dp"
-                            android:background="@mipmap/ic_reduce" />
+                            android:src="@mipmap/ic_reduce" />
 
                         <TextView
                             android:id="@+id/tv_l_hardness"
-                            android:layout_width="30dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
                             android:gravity="center"
+                            android:minWidth="40dp"
                             android:text="80"
                             android:textColor="@android:color/white"
                             android:textSize="@dimen/textSize_17" />
 
                         <ImageView
-                            android:layout_width="wrap_content"
+                            android:layout_width="40dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:background="@mipmap/ic_add" />
+                            android:src="@mipmap/ic_add" />
 
                     </LinearLayout>
 
@@ -239,35 +231,33 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="30dp"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="15dp"
+                            android:layout_weight="1"
                             android:gravity="center"
-                            android:text="右"
+                            android:text="@string/right"
                             android:textColor="@android:color/white"
                             android:textSize="@dimen/textSize_17" />
 
                         <ImageView
-                            android:layout_width="wrap_content"
+                            android:layout_width="40dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="33dp"
-                            android:background="@mipmap/ic_reduce" />
+                            android:src="@mipmap/ic_reduce" />
 
                         <TextView
                             android:id="@+id/tv_r_hardness"
-                            android:layout_width="30dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
                             android:gravity="center"
+                            android:minWidth="40dp"
                             android:text="80"
                             android:textColor="@android:color/white"
                             android:textSize="@dimen/textSize_17" />
 
                         <ImageView
-                            android:layout_width="wrap_content"
+                            android:layout_width="40dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:background="@mipmap/ic_add" />
+                            android:src="@mipmap/ic_add" />
 
                     </LinearLayout>
 
@@ -303,10 +293,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="35dp"
                         android:gravity="center"
-                        android:text="床位温度数据"
+                        android:text="@string/temperature"
                         android:textColor="#3a397c"
                         android:textSize="@dimen/textSize_14" />
-
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -326,7 +315,7 @@
                             android:layout_marginRight="20dp"
                             android:text="80"
                             android:textColor="@android:color/white"
-                            android:textSize="35dp" />
+                            android:textSize="@dimen/textSize_17" />
 
                         <ImageView
                             android:layout_width="wrap_content"
@@ -334,9 +323,7 @@
                             android:background="@mipmap/ic_add" />
 
                     </LinearLayout>
-
                 </LinearLayout>
-
             </LinearLayout>
 
             <LinearLayout
@@ -345,30 +332,39 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="20dp"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="15dp"
-                    android:background="@mipmap/ic_custom" />
+                <Button
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/sel_round_back_blue"
+                    android:drawableTop="@mipmap/ic_custom_mode"
+                    android:padding="10dp"
+                    android:text="@string/custom_mode"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/textSize_10" />
 
                 <com.jx.sleep_dg.view.MyListView
                     android:id="@+id/listview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:layout_weight="1"
                     android:divider="#00000000"
                     android:dividerHeight="10dp" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="20dp"
-
-                    android:background="@mipmap/ic_saves" />
+                <Button
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/sel_round_back_darkgray"
+                    android:drawableTop="@mipmap/ic_sace_mode"
+                    android:padding="10dp"
+                    android:text="@string/save_mode"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/textSize_10" />
             </LinearLayout>
 
         </LinearLayout>

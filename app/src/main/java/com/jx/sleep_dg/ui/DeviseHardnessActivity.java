@@ -57,7 +57,7 @@ public class DeviseHardnessActivity extends BaseActivity implements View.OnClick
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public void bindView() {
-        setToolbarTitle("床位硬度");
+        setToolbarTitle(R.string.hardness);
         tvMemHardless = findViewById(R.id.tv_mem_hardless);
         tvCurHardness = findViewById(R.id.tv_cur_hardness);
         tvGear = findViewById(R.id.tv_gear);
@@ -80,7 +80,7 @@ public class DeviseHardnessActivity extends BaseActivity implements View.OnClick
             public void onSeekBarClick(int position) {
                 isNeedRefreshLevel = false;//停止档位数据更新
                 leftIndex = position;
-                tvGear.setText(String.format(Locale.getDefault(), "档位%d", position * 5));
+                tvGear.setText(String.format(Locale.getDefault(), getResources().getString(R.string.gear_val), position * 5));
                 shanshuo();
                 BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary(leftIndex * 5 + "")
                         + BleUtils.convertDecimalToBinary(rightIndex * 5 + ""));
@@ -91,7 +91,7 @@ public class DeviseHardnessActivity extends BaseActivity implements View.OnClick
             public void onSeekBarClick(int position) {
                 isNeedRefreshLevel = false;//停止档位数据更新
                 rightIndex = position;
-                tvGear.setText(String.format(Locale.getDefault(), "档位%d", position * 5));
+                tvGear.setText(String.format(Locale.getDefault(), getResources().getString(R.string.gear_val), position * 5));
                 shanshuo();
                 BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary(leftIndex * 5 + "")
                         + BleUtils.convertDecimalToBinary(rightIndex * 5 + ""));
@@ -110,26 +110,26 @@ public class DeviseHardnessActivity extends BaseActivity implements View.OnClick
     private void bindViewData() {
         if (mspProtocol == null) return;
         if (isSwitch) {
-            int lPresureCurVal = mspProtocol.getlPresureCurVal();
-            tvMemHardless.setText(String.format("左床记忆强度：%s", mspProtocol.getlPresureMemVal()));
-            tvCurHardness.setText(String.format("左床实时强度：%s", lPresureCurVal));
+            int lPresureCurVal = mspProtocol.getlPresureCurVal() & 0xff;
+            tvMemHardless.setText(String.format(getResources().getString(R.string.left_mem_hardness), mspProtocol.getlPresureMemVal() & 0xff));
+            tvCurHardness.setText(String.format(getResources().getString(R.string.left_cur_hardness), lPresureCurVal));
 
             leftIndex = (int) Math.ceil((double) lPresureCurVal / 5);
             leftIndex = leftIndex < 1 ? 1 : leftIndex > 20 ? 20 : leftIndex;
             if (isNeedRefreshLevel) {
                 leftSeekbar.setProgress(Double.valueOf(leftIndex + ""));
-                tvGear.setText(String.format(Locale.getDefault(), "档位%d", leftIndex * 5));
+                tvGear.setText(String.format(Locale.getDefault(), getResources().getString(R.string.gear_val), leftIndex * 5));
             }
         } else {
-            int rPresureCurVal = mspProtocol.getrPresureCurVal();
-            tvMemHardless.setText(String.format("右床记忆强度：%s", mspProtocol.getrPresureMemVal()));
-            tvCurHardness.setText(String.format("右床实时强度：%s", rPresureCurVal));
+            int rPresureCurVal = mspProtocol.getrPresureCurVal() & 0xff;
+            tvMemHardless.setText(String.format(getResources().getString(R.string.right_mem_hardness), mspProtocol.getrPresureMemVal() & 0xff));
+            tvCurHardness.setText(String.format(getResources().getString(R.string.right_cur_hardness), rPresureCurVal));
 
             rightIndex = (int) Math.ceil((double) rPresureCurVal / 5);
             rightIndex = rightIndex < 1 ? 1 : rightIndex > 20 ? 20 : rightIndex;
             if (isNeedRefreshLevel) {
                 rightSeekbar.setProgress(Double.valueOf(rightIndex + ""));
-                tvGear.setText(String.format(Locale.getDefault(), "档位%d", rightIndex * 5));
+                tvGear.setText(String.format(Locale.getDefault(), getResources().getString(R.string.gear_val), rightIndex * 5));
             }
         }
     }
@@ -170,13 +170,13 @@ public class DeviseHardnessActivity extends BaseActivity implements View.OnClick
                     if (leftIndex > 1) {
                         leftIndex--;
                         leftSeekbar.setProgress(Double.valueOf(leftIndex + ""));
-                        tvGear.setText(String.format(Locale.getDefault(), "档位%d", leftIndex * 5));
+                        tvGear.setText(String.format(Locale.getDefault(), getResources().getString(R.string.gear_val), leftIndex * 5));
                     }
                 } else {
                     if (rightIndex > 1) {
                         rightIndex--;
                         rightSeekbar.setProgress(Double.valueOf(rightIndex + ""));
-                        tvGear.setText(String.format(Locale.getDefault(), "档位%d", rightIndex * 5));
+                        tvGear.setText(String.format(Locale.getDefault(), getResources().getString(R.string.gear_val), rightIndex * 5));
                     }
                 }
                 LogUtil.e("rightIndex:" + rightIndex + "leftIndex:" + leftIndex);
@@ -188,13 +188,13 @@ public class DeviseHardnessActivity extends BaseActivity implements View.OnClick
                     if (leftIndex < 20) {
                         leftIndex++;
                         leftSeekbar.setProgress(Double.valueOf(leftIndex + ""));
-                        tvGear.setText(String.format(Locale.getDefault(), "档位%d", leftIndex * 5));
+                        tvGear.setText(String.format(Locale.getDefault(), getResources().getString(R.string.gear_val), leftIndex * 5));
                     }
                 } else {
                     if (rightIndex < 20) {
                         rightIndex++;
                         rightSeekbar.setProgress(Double.valueOf(rightIndex + ""));
-                        tvGear.setText(String.format(Locale.getDefault(), "档位%d", rightIndex * 5));
+                        tvGear.setText(String.format(Locale.getDefault(), getResources().getString(R.string.gear_val), rightIndex * 5));
                     }
                 }
                 shanshuo();

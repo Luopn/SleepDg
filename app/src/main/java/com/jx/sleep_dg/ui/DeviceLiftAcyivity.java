@@ -45,13 +45,13 @@ public class DeviceLiftAcyivity extends BaseActivity implements View.OnClickList
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setLayout(R.layout.activity_device_lift);
-        bindView();
         mspProtocol = MSPProtocol.getInstance();
+        bindView();
     }
 
     @Override
     public void bindView() {
-        setToolbarTitle("升降调节");
+        setToolbarTitle(R.string.lift_ctrl);
         togglebutton = findViewById(R.id.togglebutton);
         togglebutton.setOnClickListener(this);
 
@@ -90,10 +90,10 @@ public class DeviceLiftAcyivity extends BaseActivity implements View.OnClickList
 
     private void bindViewData() {
         if (mspProtocol != null) {
-            tvZuoTou.setText(String.format("头部 %s", mspProtocol.getHigh2()));
-            tvYouTou.setText(String.format("头部 %s", mspProtocol.getHigh2()));
-            tvZuoJiao.setText(String.format("脚部 %s", mspProtocol.getHigh1()));
-            tvYouJiao.setText(String.format("脚部 %s", mspProtocol.getHigh1()));
+            tvZuoTou.setText(String.format(getResources().getString(R.string.head_value), mspProtocol.getHigh2() & 0xff));
+            tvYouTou.setText(String.format(getResources().getString(R.string.head_value), mspProtocol.getHigh2() & 0xff));
+            tvZuoJiao.setText(String.format(getResources().getString(R.string.feet_value), mspProtocol.getHigh1() & 0xff));
+            tvYouJiao.setText(String.format(getResources().getString(R.string.feet_value), mspProtocol.getHigh1() & 0xff));
         }
     }
 
@@ -265,7 +265,7 @@ public class DeviceLiftAcyivity extends BaseActivity implements View.OnClickList
                 } else if (rightJiaoIndex < 12) {
                     ivYouChuang.setBackgroundResource(R.mipmap.head1_foot3);
 
-                } else if ((12 <= rightJiaoIndex) && (rightJiaoIndex <= 17)) {
+                } else if (rightJiaoIndex <= 17) {
                     ivYouChuang.setBackgroundResource(R.mipmap.head1_foot4);
                 }
             }

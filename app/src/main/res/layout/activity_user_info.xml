@@ -14,7 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:text="头像"
+            android:text="@string/user_avater"
             android:textColor="@color/white"
             android:textSize="@dimen/textSize_15" />
 
@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:text="昵称"
+            android:text="@string/user_nickname"
             android:textColor="@color/white"
             android:textSize="@dimen/textSize_15" />
 
@@ -50,7 +50,7 @@
             android:layout_gravity="center_vertical|right"
             android:layout_marginRight="10dp"
             android:drawablePadding="8dp"
-            android:text="用户名"
+            android:text="@string/account_name"
             android:textColor="@color/white"
             android:textSize="@dimen/textSize_15"
             android:drawableRight="@mipmap/into"/>
@@ -70,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:text="性别"
+            android:text="@string/user_gender"
             android:textColor="@color/white"
             android:textSize="@dimen/textSize_15" />
 
@@ -100,7 +100,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:text="身高"
+            android:text="@string/user_height"
             android:textColor="@color/white"
             android:textSize="@dimen/textSize_15" />
 
@@ -130,7 +130,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:text="体重"
+            android:text="@string/user_weight"
             android:textColor="@color/white"
             android:textSize="@dimen/textSize_15" />
 

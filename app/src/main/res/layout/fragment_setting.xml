@@ -40,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="床垫信息"
+            android:text="@string/mattress_info"
             android:textColor="#8f8f8f"
             android:textSize="@dimen/textSize_14" />
 
@@ -68,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="床垫互联"
+            android:text="@string/mattress_inter"
             android:textColor="#8f8f8f"
             android:textSize="@dimen/textSize_14" />
 
@@ -92,10 +92,10 @@
         android:paddingRight="10dp">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="止鼾模式"
+            android:text="@string/snore_mode"
             android:textColor="#8f8f8f"
             android:textSize="@dimen/textSize_14" />
 
@@ -125,10 +125,10 @@
         android:paddingRight="10dp">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="私人模式"
+            android:text="@string/private_mode"
             android:textColor="#8f8f8f"
             android:textSize="@dimen/textSize_14" />
 
@@ -149,7 +149,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
-        android:text="启用后将关闭设备WiFi,对睡眠数据不记录不上传"
+        android:text="@string/private_mode_hint"
         android:textColor="#808f8f8f"
         android:textSize="@dimen/textSize_10" />
 
@@ -166,10 +166,10 @@
         android:paddingRight="10dp">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="儿童模式"
+            android:text="@string/child_mode"
             android:textColor="#8f8f8f"
             android:textSize="@dimen/textSize_14" />
 
@@ -191,7 +191,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
-        android:text="启用后无法对床头、床位进行升降处理."
+        android:text="@string/child_mode_hint"
         android:textColor="#808f8f8f"
         android:textSize="@dimen/textSize_10" />
 
@@ -211,7 +211,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="孕妇模式"
+            android:text="@string/pregnant_mode"
             android:textColor="#8f8f8f"
             android:textSize="@dimen/textSize_14" />
 
@@ -231,7 +231,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
-        android:text="启用后床位升降幅度只限于小于35°能调整."
+        android:text="@string/pregnant_mode_hint"
         android:textColor="#808f8f8f"
         android:textSize="@dimen/textSize_10" />
 

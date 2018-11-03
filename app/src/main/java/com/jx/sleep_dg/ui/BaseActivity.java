@@ -8,7 +8,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.annotation.IntegerRes;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -177,6 +179,14 @@ public abstract class BaseActivity extends SupportActivity implements View.OnCli
         }
     }
 
+    protected void showLoadingDialog(@StringRes int str) {
+        if (mLoadingDialog != null) {
+            TextView tv = (TextView) mLoadingDialog.findViewById(R.id.tv_load_dialog);
+            tv.setText(str);
+            mLoadingDialog.show();
+        }
+    }
+
     protected void hideLoadingDialog() {
         if (mLoadingDialog != null && mLoadingDialog.isShowing()) {
             mLoadingDialog.dismiss();
@@ -191,6 +201,16 @@ public abstract class BaseActivity extends SupportActivity implements View.OnCli
     public void setToolbarTitle(String title) {
         tvTitle.setText(title);
     }
+
+    /**
+     * 设置标题栏标题
+     *
+     * @param stringRes
+     */
+    public void setToolbarTitle(@StringRes int stringRes) {
+        tvTitle.setText(getResources().getString(stringRes));
+    }
+
 
     /**
      * 设置标题栏颜色

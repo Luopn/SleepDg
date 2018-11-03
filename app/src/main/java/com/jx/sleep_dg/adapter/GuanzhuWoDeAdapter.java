@@ -29,21 +29,21 @@ public class GuanzhuWoDeAdapter extends BaseQuickAdapter<GuanzhuWodeBean, BaseVi
 
         helper.setText(R.id.tv_nickname, item.getName());
         if (item.getState().equals("1")) {
-            helper.setText(R.id.tv_state, "正在使用");
+            helper.setText(R.id.tv_state, R.string.using);
             helper.setTextColor(R.id.tv_state, context.getResources().getColor(R.color.green));
             IvSrate.setBackgroundResource(R.mipmap.green);
 
         } else {
-            helper.setText(R.id.tv_state, "未使用");
+            helper.setText(R.id.tv_state, R.string.unused);
             helper.setTextColor(R.id.tv_state, context.getResources().getColor(R.color.grey));
             IvSrate.setBackgroundResource(R.mipmap.grey);
 
         }
         if (item.isGuanZhu()) {
-            helper.setText(R.id.tv_guanlian, "互相关联");
+            helper.setText(R.id.tv_guanlian, R.string.associated_together);
             ivChakan.setBackgroundResource(R.mipmap.ic_eyes);
         } else {
-            helper.setText(R.id.tv_guanlian, "已关联");
+            helper.setText(R.id.tv_guanlian, R.string.associated);
             ivChakan.setBackgroundResource(R.mipmap.ic_noeyes);
 
 

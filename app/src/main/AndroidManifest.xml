@@ -25,7 +25,6 @@
         <activity android:name=".ui.RegistActivity" />
         <activity android:name=".ble.DeviceScanActivity" />
         <activity android:name=".ui.SearchActivity" />
-        <activity android:name=".ui.TestActivity" />
         <activity android:name=".ui.DeviceDetailActivity" />
         <activity android:name=".ui.DeviceTempActivity" />
         <activity android:name=".ui.DeviseHardnessActivity" />

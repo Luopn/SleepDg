@@ -204,7 +204,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="2dp"
-                        android:text="@string/heart_rate"
+                        android:text="@string/heart_rate_value"
                         android:textColor="@android:color/white" />
 
                     <TextView
@@ -212,7 +212,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:text="@string/breath_rate"
+                        android:text="@string/breath_rate_value"
                         android:textColor="@android:color/white" />
                 </LinearLayout>
             </RelativeLayout>
@@ -260,7 +260,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/tv_huxi_right"
                         android:layout_marginBottom="2dp"
-                        android:text="@string/heart_rate"
+                        android:text="@string/heart_rate_value"
                         android:textColor="@android:color/white" />
 
                     <TextView
@@ -268,7 +268,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:text="@string/breath_rate"
+                        android:text="@string/breath_rate_value"
                         android:textColor="@android:color/white" />
                 </LinearLayout>
             </RelativeLayout>

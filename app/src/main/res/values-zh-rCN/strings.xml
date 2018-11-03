@@ -9,6 +9,7 @@
 
     <!--主页-->
     <string name="data">数据</string>
+    <string name="device">设备</string>
     <string name="control">控制</string>
     <string name="control_title">设备控制</string>
     <string name="statistics">统计</string>
@@ -17,6 +18,15 @@
     <string name="set">设置</string>
 
     <!--登录注册-->
+    <string name="account_name">用户名</string>
+    <string name="user_info">个人信息</string>
+    <string name="user_associated">我关联的人</string>
+    <string name="user_avater">头像</string>
+    <string name="user_nickname">昵称</string>
+    <string name="user_gender">性别</string>
+    <string name="user_height">身高</string>
+    <string name="user_weight">体重</string>
+    <string name="sign_out">退出登录</string>
     <string name="hint_account_name">请输入手机号码</string>
     <string name="hint_pwd">请输入密码</string>
     <string name="login">登录</string>
@@ -36,9 +46,68 @@
     <string name="sleep_clear">清醒时长：1小时59分</string>
     <string name="sleep_shallow">浅睡时长：1小时59分</string>
     <string name="sleep_time">入睡时间：AM23:59分</string>
+    <string name="sleep_negative">未眠状态: 1小时59分</string>
+    <string name="sleep_not_bed">不在床上: AM23:59分</string>
+    <string name="sleep_report">睡眠报告</string>
+    <string name="sleep_tim">睡眠时间</string>
+    <string name="sleep_record_time">记录时间12:00~次日12:00</string>
     <string name="real_time">实时</string>
     <string name="left">左</string>
     <string name="right">右</string>
-    <string name="heart_rate">心率%d次/分钟</string>
-    <string name="breath_rate">呼吸%d次/分钟</string>
+    <string name="heart_rate">心率</string>
+    <string name="heart_rate_value">心率%d次/分钟</string>
+    <string name="breath_rate">呼吸率</string>
+    <string name="breath_rate_value">呼吸%d次/分钟</string>
+    <string name="more">更多</string>
+    <string name="model">模式</string>
+    <string name="roll_body_rate">翻身次数(分钟)</string>
+    <string name="snoring">止鼾</string>
+
+    <!--扫描设备-->
+    <string name="devie_scan">扫描设备</string>
+    <string name="scan">扫描</string>
+    <string name="connecting">连接中,请稍后..</string>
+    <string name="connect_success">连接成功</string>
+    <string name="ble_open_fail">蓝牙打开失败</string>
+    <string name="bind_success">绑定设备成功</string>
+    <string name="add_error">添加异常</string>
+
+    <!--控制页面-->
+    <string name="height">床位升降</string>
+    <string name="hardness">床位软硬度</string>
+    <string name="temperature">床位温度</string>
+    <string name="custom_mode">自定义模式</string>
+    <string name="save_mode">保存当前设定</string>
+    <string name="lift_ctrl">升降调节</string>
+    <string name="head">头部</string>
+    <string name="head_value">头部&#160;%d</string>
+    <string name="feet">脚部</string>
+    <string name="feet_value">脚部&#160;%d</string>
+    <string name="left_mem_hardness">左床记忆强度&#160;%d</string>
+    <string name="left_cur_hardness">左床实时強度&#160;%d</string>
+    <string name="right_mem_hardness">右床记忆强度&#160;%d</string>
+    <string name="right_cur_hardness">右床实时強度&#160;%d</string>
+    <string name="gear_val">档位%d</string>
+    <string name="off">关</string>
+    <string name="on">开</string>
+    <string name="low">低</string>
+    <string name="mid">中</string>
+    <string name="high">高</string>
+
+    <!--设置页面-->
+    <string name="mattress_info">床垫信息</string>
+    <string name="mattress_inter">床垫互联</string>
+    <string name="snore_mode">止鼾模式</string>
+    <string name="private_mode">私人模式</string>
+    <string name="private_mode_hint">启用后将关闭设备WiFi,对睡眠数据不记录不上传.</string>
+    <string name="child_mode">儿童模式</string>
+    <string name="child_mode_hint">启用后无法对床头、床位进行升降处理.</string>
+    <string name="pregnant_mode">孕妇模式</string>
+    <string name="pregnant_mode_hint">启用后床位升降幅度只限于小于35°能调整.</string>
+    <string name="me_associated">我关联的</string>
+    <string name="associated_me">关联我的</string>
+    <string name="associated">已关联</string>
+    <string name="associated_together">互相关联</string>
+    <string name="unused">未使用</string>
+    <string name="using">正在使用</string>
 </resources>

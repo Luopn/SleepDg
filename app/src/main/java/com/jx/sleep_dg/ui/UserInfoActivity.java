@@ -19,6 +19,6 @@ public class UserInfoActivity extends BaseActivity{
 
     @Override
     public void bindView() {
-        setToolbarTitle("个人信息");
+        setToolbarTitle(R.string.user_info);
     }
 }

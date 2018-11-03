@@ -4,14 +4,18 @@
     android:layout_height="wrap_content"
     android:background="@drawable/shape_control"
     android:orientation="horizontal"
-    android:padding="10dp">
+    android:paddingLeft="5dp"
+    android:paddingTop="10dp"
+    android:paddingRight="5dp"
+    android:paddingBottom="10dp">
 
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:gravity="center_vertical"
+        android:gravity="center"
+        android:maxLines="1"
         android:textColor="@android:color/white"
         android:textSize="@dimen/textSize_12" />
 
@@ -19,10 +23,10 @@
         android:id="@+id/tv_use"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="更多"
-        android:padding="8dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="5dp"
         android:background="@drawable/shape_use"
+        android:padding="8dp"
+        android:text="@string/more"
         android:textColor="@android:color/white"
         android:textSize="@dimen/textSize_10" />
 
@@ -30,11 +34,10 @@
         android:id="@+id/tv_mode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="5dp"
         android:background="@drawable/shape_mode"
-        android:text="模式"
         android:padding="8dp"
-
+        android:text="@string/model"
         android:textColor="@android:color/white"
         android:textSize="@dimen/textSize_10" />
 </LinearLayout>
