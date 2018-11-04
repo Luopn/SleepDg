@@ -41,7 +41,7 @@
     <!--数据页面-->
     <string name="sleep_score">睡眠評分</string>
     <string name="sleep_congress">請繼續保持</string>
-    <string name="sleep_total">總睡時長：1小时59分</string>
+    <string name="sleep_total">總睡時長:8.8h</string>
     <string name="sleep_deep">深睡時長：1小时59分</string>
     <string name="sleep_clear">清醒時長：1小时59分</string>
     <string name="sleep_shallow">淺睡時長：1小时59分</string>

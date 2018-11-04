@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_gravity="center"
-            android:textColor="@android:color/white"
+            android:textColor="@color/textTitleColor"
             android:textSize="@dimen/textSize_18" />
     </android.support.v7.widget.Toolbar>
 

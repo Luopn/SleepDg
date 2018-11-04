@@ -48,13 +48,14 @@ public class RegistActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_regist);
+        setLayout(R.layout.activity_regist);
         mUnbinder = ButterKnife.bind(this);
         bindView();
     }
 
     @Override
     public void bindView() {
+        setToolbarTitle(R.string.register);
     }
 
     @OnClick({R.id.btn_finish, R.id.tv_code})

@@ -68,14 +68,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginBottom="5dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -98,15 +96,14 @@
                 android:paddingLeft="15dp"
                 android:singleLine="true"
                 android:textColor="#ffffff"
-                android:textSize="14sp"
+                android:textSize="@dimen/sp_16"
                 android:theme="@style/EditText" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -125,10 +122,10 @@
                 android:hint="@string/hint_pwd"
                 android:inputType="textPassword"
                 android:maxLength="20"
-                android:paddingLeft="15dp"
+                android:paddingLeft="12dp"
                 android:singleLine="true"
                 android:textColor="#ffffff"
-                android:textSize="14sp"
+                android:textSize="@dimen/sp_16"
                 android:theme="@style/EditText" />
         </LinearLayout>
 
@@ -147,32 +144,41 @@
         android:textSize="@dimen/textSize_18"
         android:textStyle="bold" />
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:orientation="horizontal">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/tv_register"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/register"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/textSize_14"
-            android:textStyle="bold" />
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_forget_pw"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="@string/pwd_forget"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/textSize_14"
-            android:textStyle="bold" />
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/tv_forget_pw"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:text="@string/pwd_forget"
+                android:textColor="@color/textTitleColor"
+                android:textSize="@dimen/textSize_14"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_register"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="@string/register"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/textSize_14"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </FrameLayout>
 
 </LinearLayout>
 

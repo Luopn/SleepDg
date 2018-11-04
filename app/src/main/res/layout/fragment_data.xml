@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     android:orientation="vertical">
 
     <FrameLayout
@@ -24,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/app_name"
-            android:textColor="@android:color/white"
+            android:textColor="@color/textTitleColor"
             android:textSize="@dimen/textSize_18" />
 
         <ImageView
@@ -33,245 +34,223 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|right"
             android:background="@mipmap/ic_hardware" />
-
     </FrameLayout>
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <FrameLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1">
+
+            <com.jx.sleep_dg.view.circlebar.CircleProgressBar
+                android:id="@+id/circle_progress_bar3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:antiAlias="true"
+                app:arcWidth="10dp"
+                app:bgArcColor="#303247"
+                app:bgArcWidth="10dp"
+                app:maxValue="100"
+                app:startAngle="270"
+                app:value="70" />
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="vertical">
 
-                <FrameLayout
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_weight="1">
+                    android:text="@string/sleep_score"
+                    android:textColor="@color/textTitleColor"
+                    android:textSize="@dimen/textSize_10" />
 
-                    <com.jx.sleep_dg.view.circlebar.CircleProgressBar
-                        android:id="@+id/circle_progress_bar3"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:antiAlias="true"
-                        app:arcWidth="5dp"
-                        app:bgArcColor="#303247"
-                        app:bgArcWidth="5dp"
-                        app:maxValue="100"
-                        app:startAngle="270" />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/sleep_score"
-                            android:textColor="#8d8be8"
-                            android:textSize="@dimen/textSize_13" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="90"
-                            android:textColor="@android:color/white"
-                            android:textSize="44dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/sleep_congress"
-                            android:textColor="#8d8be8"
-                            android:textSize="@dimen/textSize_13" />
-
-                    </LinearLayout>
-
-                </FrameLayout>
-
-                <LinearLayout
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
+                    android:text="90"
+                    android:textColor="@color/textAccentColor"
+                    android:textSize="44dp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/sleep_total"
-                        android:textColor="#33ffffff"
-                        android:textSize="9dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="@string/sleep_deep"
-                        android:textColor="#33ffffff"
-                        android:textSize="9dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="@string/sleep_clear"
-                        android:textColor="#33ffffff"
-                        android:textSize="9dp" />
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="@string/sleep_shallow"
-                        android:textColor="#33ffffff"
-                        android:textSize="9dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="@string/sleep_time"
-                        android:textColor="#33ffffff"
-                        android:textSize="9dp" />
-
-                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sleep_total"
+                    android:textColor="@color/textTitleColor"
+                    android:textSize="@dimen/textSize_10" />
             </LinearLayout>
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
-                android:text="@string/real_time"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/textSize_17" />
+                android:layout_marginTop="10dp"
+                android:text="@string/sleep_deep"
+                android:textColor="@color/textTitleColor"
+                android:textSize="9dp" />
 
-            <RelativeLayout
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="5dp"
-                android:paddingRight="10dp">
+                android:layout_marginTop="10dp"
+                android:text="@string/sleep_clear"
+                android:textColor="@color/textTitleColor"
+                android:textSize="9dp" />
 
-                <TextView
-                    android:id="@+id/tv_heartrate_text"
-                    android:layout_width="35dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:gravity="center"
-                    android:text="@string/left"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/textSize_15" />
-
-                <com.jx.sleep_dg.view.EcgView
-                    android:id="@+id/l_ecg_xinlv"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_centerInParent="true"
-                    android:layout_toLeftOf="@+id/group1"
-                    android:layout_toRightOf="@id/tv_heartrate_text" />
-
-                <LinearLayout
-                    android:id="@+id/group1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="5dp"
-                    android:divider="@drawable/shape_divider_horizontal"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:showDividers="middle">
-
-                    <TextView
-                        android:id="@+id/tv_xinlv_left"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="2dp"
-                        android:text="@string/heart_rate_value"
-                        android:textColor="@android:color/white" />
-
-                    <TextView
-                        android:id="@+id/tv_huxi_left"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:text="@string/breath_rate_value"
-                        android:textColor="@android:color/white" />
-                </LinearLayout>
-            </RelativeLayout>
-
-            <RelativeLayout
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:paddingLeft="5dp"
-                android:paddingRight="10dp">
+                android:layout_marginTop="10dp"
+                android:text="@string/sleep_shallow"
+                android:textColor="@color/textTitleColor"
+                android:textSize="9dp" />
 
-                <TextView
-                    android:id="@+id/tv_huxi_text"
-                    android:layout_width="35dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:gravity="center"
-                    android:text="@string/right"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/textSize_15" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/sleep_time"
+                android:textColor="@color/textTitleColor"
+                android:textSize="9dp" />
 
-                <com.jx.sleep_dg.view.HuxiEcgView
-                    android:id="@+id/r_ecg_xinlv"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_toLeftOf="@+id/group2"
-                    android:layout_toRightOf="@id/tv_huxi_text" />
-
-                <LinearLayout
-                    android:id="@+id/group2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="5dp"
-                    android:divider="@drawable/shape_divider_horizontal"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:showDividers="middle">
-
-                    <TextView
-                        android:id="@+id/tv_xinlv_right"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/tv_huxi_right"
-                        android:layout_marginBottom="2dp"
-                        android:text="@string/heart_rate_value"
-                        android:textColor="@android:color/white" />
-
-                    <TextView
-                        android:id="@+id/tv_huxi_right"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:text="@string/breath_rate_value"
-                        android:textColor="@android:color/white" />
-                </LinearLayout>
-            </RelativeLayout>
         </LinearLayout>
-    </ScrollView>
+    </LinearLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:text="@string/real_time"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/textSize_17" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:id="@+id/tv_heartrate_text"
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="@string/left"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/textSize_15" />
+
+        <com.jx.sleep_dg.view.EcgView
+            android:id="@+id/l_ecg_xinlv"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_centerInParent="true"
+            android:layout_toLeftOf="@+id/group1"
+            android:layout_toRightOf="@id/tv_heartrate_text" />
+
+        <LinearLayout
+            android:id="@+id/group1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:divider="@drawable/shape_divider_horizontal"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:showDividers="middle">
+
+            <TextView
+                android:id="@+id/tv_xinlv_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:text="@string/heart_rate_value"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/tv_huxi_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="@string/breath_rate_value"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:id="@+id/tv_huxi_text"
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="@string/right"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/textSize_15" />
+
+        <com.jx.sleep_dg.view.HuxiEcgView
+            android:id="@+id/r_ecg_xinlv"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="10dp"
+            android:layout_toLeftOf="@+id/group2"
+            android:layout_toRightOf="@id/tv_huxi_text" />
+
+        <LinearLayout
+            android:id="@+id/group2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:divider="@drawable/shape_divider_horizontal"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:showDividers="middle">
+
+            <TextView
+                android:id="@+id/tv_xinlv_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_huxi_right"
+                android:layout_marginBottom="2dp"
+                android:text="@string/heart_rate_value"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/tv_huxi_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="@string/breath_rate_value"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>

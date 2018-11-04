@@ -30,7 +30,7 @@
     <string name="hint_account_name">请输入手机号码</string>
     <string name="hint_pwd">请输入密码</string>
     <string name="login">登录</string>
-    <string name="register">注册</string>
+    <string name="register">马上注册</string>
     <string name="pwd_forget">忘记密码</string>
     <string name="normal_input_null">输入不能为空</string>
     <string name="register_new_account">注册新账号</string>
@@ -41,8 +41,8 @@
     <!--数据页面-->
     <string name="sleep_score">睡眠评分</string>
     <string name="sleep_congress">请继续保持</string>
-    <string name="sleep_total">总睡时长：1小时59分</string>
-    <string name="sleep_deep">深睡時長：1小时59分</string>
+    <string name="sleep_total">总睡时长:8.8h</string>
+    <string name="sleep_deep">深睡时长：1小时59分</string>
     <string name="sleep_clear">清醒时长：1小时59分</string>
     <string name="sleep_shallow">浅睡时长：1小时59分</string>
     <string name="sleep_time">入睡时间：AM23:59分</string>

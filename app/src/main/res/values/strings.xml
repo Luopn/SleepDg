@@ -42,7 +42,7 @@
     <!--数据页面-->
     <string name="sleep_score">Sleep VAS</string>
     <string name="sleep_congress">Please Go On</string>
-    <string name="sleep_total">总睡时长：1小时59分</string>
+    <string name="sleep_total">总睡时长:8.8h</string>
     <string name="sleep_deep">深睡時長：1小时59分</string>
     <string name="sleep_clear">清醒时长：1小时59分</string>
     <string name="sleep_shallow">浅睡时长：1小时59分</string>
