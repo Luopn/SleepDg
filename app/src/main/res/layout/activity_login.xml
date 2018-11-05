@@ -55,11 +55,11 @@
                 android:textColor="#ababab" />
         </RadioGroup>
 
-        <com.jx.sleep_dg.ui.RoundedImageView.RoundedImageView
+        <com.jx.sleep_dg.view.imageview.RoundedImageView
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_gravity="center"
-            android:src="@mipmap/ic_launcher"
+            android:src="@mipmap/ic_launcher_login"
             app:riv_corner_radius="60dp" />
     </FrameLayout>
 

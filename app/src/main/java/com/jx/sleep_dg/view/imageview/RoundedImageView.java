@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 
-package com.jx.sleep_dg.ui.RoundedImageView;
+package com.jx.sleep_dg.view.imageview;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
