@@ -73,13 +73,13 @@ public class LoginActivity extends BaseActivity {
 
         Locale locale = (Locale) PreferenceUtils.deSerialization(PreferenceUtils.getString(LanguageUtil.LANGUAGE));
         if (locale != null) {
-            if (locale == Locale.SIMPLIFIED_CHINESE) {
+            if (locale.getCountry().equals(Locale.SIMPLIFIED_CHINESE.getCountry())) {
                 rbChSimple.setChecked(true);
             }
-            if (locale == Locale.TRADITIONAL_CHINESE) {
+            if (locale.getCountry().equals(Locale.TRADITIONAL_CHINESE.getCountry())) {
                 rbChTradition.setChecked(true);
             }
-            if (locale == Locale.US) {
+            if (locale.getCountry().equals(Locale.US.getCountry())) {
                 rbEn.setChecked(true);
             }
         }

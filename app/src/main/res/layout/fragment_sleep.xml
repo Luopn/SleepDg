@@ -8,7 +8,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height"
-        android:background="#111323"
+        android:background="@color/colorPrimaryDark"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 
@@ -17,9 +17,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/statistics_title"
-            android:textColor="@android:color/white"
+            android:textColor="@color/textTitleColor"
             android:textSize="@dimen/textSize_18" />
-
     </FrameLayout>
 
     <ScrollView
@@ -243,7 +242,6 @@
                         android:text="不在床上  25%"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/textSize_14" />
-
                 </LinearLayout>
             </LinearLayout>
 
@@ -263,9 +261,7 @@
                 android:layout_marginTop="10dp"
                 android:text="@string/sleep_deep"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/textSize_12"
-
-                />
+                android:textSize="@dimen/textSize_12" />
 
             <TextView
                 android:layout_width="wrap_content"

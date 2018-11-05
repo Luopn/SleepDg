@@ -8,7 +8,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height"
-        android:background="#111323"
+        android:background="@color/colorPrimaryDark"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 
@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/set"
-            android:textColor="@android:color/white"
+            android:textColor="@color/textTitleColor"
             android:textSize="@dimen/textSize_18" />
 
     </FrameLayout>
