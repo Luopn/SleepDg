@@ -172,7 +172,7 @@
         android:layout_height="35dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:background="@drawable/sel_login_btn"
+        android:background="@drawable/sel_blue_bg_btn"
         android:text="@string/register"
         android:textColor="@android:color/white"
         android:textSize="@dimen/textSize_14" />

@@ -9,6 +9,7 @@ import com.jx.sleep_dg.R;
 import com.jx.sleep_dg.protocol.BleComUtils;
 import com.jx.sleep_dg.ui.AssociatedActivity;
 import com.jx.sleep_dg.ui.DeviceDetailActivity;
+import com.jx.sleep_dg.ui.GaugeActivity;
 
 /**
  * 设置
@@ -30,6 +31,7 @@ public class SettingFragment extends BaseFragment implements CompoundButton.OnCh
     public void onBindView(View view) {
         view.findViewById(R.id.ll_detail).setOnClickListener(this);
         view.findViewById(R.id.ll_guanzhu).setOnClickListener(this);
+        view.findViewById(R.id.tv_gauge).setOnClickListener(this);
         swYunfu = view.findViewById(R.id.sw_yunfu);
         swYunfu.setOnCheckedChangeListener(this);
         swErTong = view.findViewById(R.id.sw_ertong);
@@ -50,7 +52,10 @@ public class SettingFragment extends BaseFragment implements CompoundButton.OnCh
                 getActivity().startActivity(intent);
                 break;
             case R.id.ll_guanzhu:
-              startActivity(new Intent(getActivity(), AssociatedActivity.class));
+                startActivity(new Intent(getActivity(), AssociatedActivity.class));
+                break;
+            case R.id.tv_gauge:
+                startActivity(new Intent(getActivity(), GaugeActivity.class));
                 break;
         }
     }
@@ -59,30 +64,30 @@ public class SettingFragment extends BaseFragment implements CompoundButton.OnCh
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         switch (buttonView.getId()) {
             case R.id.sw_zhihan:
-                if (isChecked){
+                if (isChecked) {
                     BleComUtils.sendMoShi("01");
-                }else {
+                } else {
                     BleComUtils.sendMoShi("00");
                 }
                 break;
             case R.id.sw_ertong:
-                if (isChecked){
+                if (isChecked) {
                     BleComUtils.sendMoShi("02");
-                }else {
+                } else {
                     BleComUtils.sendMoShi("00");
                 }
                 break;
             case R.id.sw_siren:
-                if (isChecked){
+                if (isChecked) {
                     BleComUtils.sendMoShi("03");
-                }else {
+                } else {
                     BleComUtils.sendMoShi("00");
                 }
                 break;
             case R.id.sw_yunfu:
-                if (isChecked){
+                if (isChecked) {
                     BleComUtils.sendMoShi("04");
-                }else {
+                } else {
                     BleComUtils.sendMoShi("00");
                 }
                 break;

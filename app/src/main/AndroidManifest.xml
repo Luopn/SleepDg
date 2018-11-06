@@ -88,6 +88,8 @@
         <service
             android:name=".ble.BluetoothLeService"
             android:enabled="true" />
+
+        <activity android:name=".ui.GaugeActivity"></activity>
     </application>
 
 </manifest>

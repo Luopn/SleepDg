@@ -137,7 +137,7 @@
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_margin="20dp"
-        android:background="@drawable/sel_login_btn"
+        android:background="@drawable/sel_blue_bg_btn"
         android:gravity="center"
         android:text="@string/login"
         android:textColor="@android:color/white"
