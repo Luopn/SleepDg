@@ -25,7 +25,7 @@ import java.util.Locale;
  * Created by woxingxiao on 2016-11-28.
  */
 
-public class DashboardView2 extends View {
+public class DashboardView extends View {
 
     private int mRadius; // 画布边缘半径（去除padding后的半径）
     private int mStartAngle = 150; // 起始角度
@@ -47,15 +47,15 @@ public class DashboardView2 extends View {
     private Path mPath;
     private int[] mBgColors;
 
-    public DashboardView2(Context context) {
+    public DashboardView(Context context) {
         this(context, null);
     }
 
-    public DashboardView2(Context context, AttributeSet attrs) {
+    public DashboardView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public DashboardView2(Context context, AttributeSet attrs, int defStyleAttr) {
+    public DashboardView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         init();

@@ -163,13 +163,13 @@
                 android:layout_height="33dp"
                 android:background="@mipmap/ic_add_big" />
 
-            <com.jx.sleep_dg.view.VerticalSeekBar
+            <com.jx.sleep_dg.view.bar.VerticalSeekBar
                 android:id="@+id/seeb_left_tou"
                 android:layout_width="50dp"
                 android:layout_height="200dp"
                 android:layout_marginTop="5dp" />
 
-            <com.jx.sleep_dg.view.VerticalSeekBar
+            <com.jx.sleep_dg.view.bar.VerticalSeekBar
                 android:id="@+id/seeb_right_tou"
                 android:layout_width="50dp"
                 android:layout_height="200dp"
@@ -217,13 +217,13 @@
                 android:layout_height="33dp"
                 android:background="@mipmap/ic_add_big" />
 
-            <com.jx.sleep_dg.view.VerticalSeekBar
+            <com.jx.sleep_dg.view.bar.VerticalSeekBar
                 android:id="@+id/seeb_left_jiao"
                 android:layout_width="50dp"
                 android:layout_height="200dp"
                 android:layout_marginTop="5dp" />
 
-            <com.jx.sleep_dg.view.VerticalSeekBar
+            <com.jx.sleep_dg.view.bar.VerticalSeekBar
                 android:id="@+id/seeb_right_jiao"
                 android:layout_width="50dp"
                 android:layout_height="200dp"

@@ -19,7 +19,7 @@ import com.jx.sleep_dg.protocol.BleComUtils;
 import com.jx.sleep_dg.ble.BleUtils;
 import com.jx.sleep_dg.protocol.MSPProtocol;
 import com.jx.sleep_dg.utils.LogUtil;
-import com.jx.sleep_dg.view.MySeekBar;
+import com.jx.sleep_dg.view.bar.MySeekBar;
 
 import java.util.Locale;
 

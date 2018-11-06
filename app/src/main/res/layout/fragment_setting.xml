@@ -1,9 +1,251 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:layout_marginTop="@dimen/title_height"
+        android:background="@color/colorPrimary">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="16dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="16dp">
+
+            <TextView
+                android:id="@+id/ll_detail"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/sel_set_item"
+                android:drawableRight="@mipmap/ic_data_right"
+                android:gravity="center_vertical"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:text="@string/mattress_info"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize_14" />
+
+            <TextView
+                android:id="@+id/ll_guanzhu"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/sel_set_item"
+                android:drawableRight="@mipmap/ic_data_right"
+                android:gravity="center_vertical"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:text="@string/mattress_inter"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize_14" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/sel_set_item"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/snore_mode"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize_14" />
+
+                <Switch
+                    android:id="@+id/sw_zhihan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:switchMinWidth="44dp"
+                    android:textOff=""
+                    android:textOn=""
+                    android:thumb="@android:color/transparent"
+                    android:track="@drawable/switch_track" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/sel_set_item"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/private_mode"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize_14" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:text="@string/private_mode_hint"
+                    android:textColor="#808f8f8f"
+                    android:textSize="@dimen/textSize_10" />
+
+                <Switch
+                    android:id="@+id/sw_siren"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:switchMinWidth="44dp"
+                    android:textOff=""
+                    android:textOn=""
+                    android:thumb="@android:color/transparent"
+                    android:track="@drawable/switch_track" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/sel_set_item"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/child_mode"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize_14" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:text="@string/child_mode_hint"
+                    android:textColor="#808f8f8f"
+                    android:textSize="@dimen/textSize_10" />
+
+                <Switch
+                    android:id="@+id/sw_ertong"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:switchMinWidth="44dp"
+                    android:textOff=""
+                    android:textOn=""
+                    android:thumb="@android:color/transparent"
+                    android:track="@drawable/switch_track" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/sel_set_item"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pregnant_mode"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize_14" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:text="@string/pregnant_mode_hint"
+                    android:textColor="#808f8f8f"
+                    android:textSize="@dimen/textSize_10" />
+
+                <Switch
+                    android:id="@+id/sw_yunfu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:switchMinWidth="44dp"
+                    android:textOff=""
+                    android:textOn=""
+                    android:thumb="@android:color/transparent"
+                    android:track="@drawable/switch_track" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_gauge"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/sel_set_item"
+                android:drawableRight="@mipmap/ic_data_right"
+                android:gravity="center_vertical"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:text="一键检测"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize_14" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/sel_set_item"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_ch_tradition"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:background="@drawable/sel_set_language_left"
+                    android:text="繁體"
+                    android:textColor="@color/white" />
+
+                <RadioButton
+                    android:id="@+id/rb_ch_simple"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/sel_set_language_center"
+                    android:button="@null"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:text="中文"
+                    android:textColor="@color/white" />
+
+                <RadioButton
+                    android:id="@+id/rb_en"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:background="@drawable/sel_set_language_right"
+                    android:gravity="center"
+                    android:text="English"
+                    android:textColor="@color/white" />
+            </RadioGroup>
+        </LinearLayout>
+    </ScrollView>
+
+    <!--ToolBar-->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height"
@@ -19,242 +261,4 @@
             android:textColor="@color/textTitleColor"
             android:textSize="@dimen/textSize_18" />
     </FrameLayout>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorPrimary">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="16dp">
-
-            <LinearLayout
-                android:id="@+id/ll_detail"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/shape_set_item"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/mattress_info"
-                    android:textColor="#8f8f8f"
-                    android:textSize="@dimen/textSize_14" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@mipmap/ic_data_right" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_guanzhu"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/shape_set_item"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/mattress_inter"
-                    android:textColor="#8f8f8f"
-                    android:textSize="@dimen/textSize_14" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@mipmap/ic_data_right" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/shape_set_item"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/snore_mode"
-                    android:textColor="#8f8f8f"
-                    android:textSize="@dimen/textSize_14" />
-
-                <Switch
-                    android:id="@+id/sw_zhihan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:switchMinWidth="44dp"
-                    android:textOff=""
-                    android:textOn=""
-                    android:thumb="@android:color/transparent"
-                    android:track="@drawable/switch_track" />
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/shape_set_item"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/private_mode"
-                    android:textColor="#8f8f8f"
-                    android:textSize="@dimen/textSize_14" />
-
-                <Switch
-                    android:id="@+id/sw_siren"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:switchMinWidth="44dp"
-                    android:textOff=""
-                    android:textOn=""
-                    android:thumb="@android:color/transparent"
-                    android:track="@drawable/switch_track" />
-
-
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:text="@string/private_mode_hint"
-                android:textColor="#808f8f8f"
-                android:textSize="@dimen/textSize_10" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/shape_set_item"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/child_mode"
-                    android:textColor="#8f8f8f"
-                    android:textSize="@dimen/textSize_14" />
-
-                <Switch
-                    android:id="@+id/sw_ertong"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:switchMinWidth="44dp"
-                    android:textOff=""
-                    android:textOn=""
-                    android:thumb="@android:color/transparent"
-                    android:track="@drawable/switch_track" />
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:text="@string/child_mode_hint"
-                android:textColor="#808f8f8f"
-                android:textSize="@dimen/textSize_10" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/shape_set_item"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/pregnant_mode"
-                    android:textColor="#8f8f8f"
-                    android:textSize="@dimen/textSize_14" />
-
-                <Switch
-                    android:id="@+id/sw_yunfu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:switchMinWidth="44dp"
-                    android:textOff=""
-                    android:textOn=""
-                    android:thumb="@android:color/transparent"
-                    android:track="@drawable/switch_track" />
-
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:text="@string/pregnant_mode_hint"
-                android:textColor="#808f8f8f"
-                android:textSize="@dimen/textSize_10" />
-
-            <TextView
-                android:id="@+id/tv_gauge"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/shape_set_item"
-                android:drawableRight="@mipmap/ic_data_right"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="一键检测"
-                android:textColor="#8f8f8f"
-                android:textSize="@dimen/textSize_14" />
-        </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+</FrameLayout>

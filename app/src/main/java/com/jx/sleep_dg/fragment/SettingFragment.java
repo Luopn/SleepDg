@@ -3,6 +3,8 @@ package com.jx.sleep_dg.fragment;
 import android.content.Intent;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.RadioButton;
+import android.widget.ScrollView;
 import android.widget.Switch;
 
 import com.jx.sleep_dg.R;
@@ -10,6 +12,15 @@ import com.jx.sleep_dg.protocol.BleComUtils;
 import com.jx.sleep_dg.ui.AssociatedActivity;
 import com.jx.sleep_dg.ui.DeviceDetailActivity;
 import com.jx.sleep_dg.ui.GaugeActivity;
+import com.jx.sleep_dg.ui.LauncherActivity;
+import com.jx.sleep_dg.ui.LoginActivity;
+import com.jx.sleep_dg.ui.MainActivity;
+import com.jx.sleep_dg.utils.LanguageUtil;
+import com.jx.sleep_dg.utils.PreferenceUtils;
+
+import java.util.Locale;
+
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 
 /**
  * 设置
@@ -17,10 +28,10 @@ import com.jx.sleep_dg.ui.GaugeActivity;
  */
 
 public class SettingFragment extends BaseFragment implements CompoundButton.OnCheckedChangeListener {
-    private Switch swYunfu;
-    private Switch swErTong;
-    private Switch swSiRen;
-    private Switch swZhiHan;
+
+    private Switch swYunfu, swErTong, swSiRen, swZhiHan;
+    private RadioButton rbZhSimple, rbZhTradion, rbEn;
+    private ScrollView scrollView;
 
     @Override
     protected int getLayoutId() {
@@ -40,6 +51,29 @@ public class SettingFragment extends BaseFragment implements CompoundButton.OnCh
         swSiRen.setOnCheckedChangeListener(this);
         swZhiHan = view.findViewById(R.id.sw_zhihan);
         swZhiHan.setOnCheckedChangeListener(this);
+
+        rbZhSimple = view.findViewById(R.id.rb_ch_simple);
+        rbZhTradion = view.findViewById(R.id.rb_ch_tradition);
+        rbEn = view.findViewById(R.id.rb_en);
+        rbZhSimple.setOnClickListener(this);
+        rbZhTradion.setOnClickListener(this);
+        rbEn.setOnClickListener(this);
+        //初始化语言选项
+        Locale locale = (Locale) PreferenceUtils.deSerialization(PreferenceUtils.getString(LanguageUtil.LANGUAGE));
+        if (locale != null) {
+            if (locale.getCountry().equals(Locale.SIMPLIFIED_CHINESE.getCountry())) {
+                rbZhSimple.setChecked(true);
+            }
+            if (locale.getCountry().equals(Locale.TRADITIONAL_CHINESE.getCountry())) {
+                rbZhTradion.setChecked(true);
+            }
+            if (locale.getCountry().equals(Locale.US.getCountry())) {
+                rbEn.setChecked(true);
+            }
+        }
+
+        scrollView = view.findViewById(R.id.scrollView);
+        OverScrollDecoratorHelper.setUpOverScroll(scrollView);
     }
 
     @Override
@@ -56,6 +90,18 @@ public class SettingFragment extends BaseFragment implements CompoundButton.OnCh
                 break;
             case R.id.tv_gauge:
                 startActivity(new Intent(getActivity(), GaugeActivity.class));
+                break;
+            case R.id.rb_ch_simple:
+                LanguageUtil.changeAppLanguage(getActivity(), Locale.SIMPLIFIED_CHINESE, true);
+                restartApplication();
+                break;
+            case R.id.rb_ch_tradition:
+                LanguageUtil.changeAppLanguage(getActivity(), Locale.TRADITIONAL_CHINESE, true);
+                restartApplication();
+                break;
+            case R.id.rb_en:
+                LanguageUtil.changeAppLanguage(getActivity(), Locale.US, true);
+                restartApplication();
                 break;
         }
     }
@@ -92,6 +138,14 @@ public class SettingFragment extends BaseFragment implements CompoundButton.OnCh
                 }
                 break;
         }
+    }
+
+    private void restartApplication() {
+        //切换语言信息，需要重启 Activity 才能实现
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        intent.putExtra(MainActivity.KEY_FRAGMENT, 4);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }
 

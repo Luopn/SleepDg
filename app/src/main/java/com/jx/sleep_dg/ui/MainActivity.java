@@ -29,6 +29,7 @@ import java.util.List;
 
 public class MainActivity extends NewBaseActivity {
 
+    public static final String KEY_FRAGMENT = "key_fragment";
     public static DrawerLayout mDrawerLayout;
     private FragmentTabHost mTabHost;
     private ViewPager mViewPager;

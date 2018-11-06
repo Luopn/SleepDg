@@ -1,5 +1,6 @@
 package com.jx.sleep_dg.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Handler;
@@ -23,10 +24,12 @@ public class NumberRollingView extends TextView {
 
     private static final int MONEY_TYPE = 0;
     private static final int NUM_TYPE = 1;
+    private static final int PERCENT_TYPE = 2;
 
     private int frameNum;// 总共跳跃的帧数，默认30跳
-    private int textType;// 内容的类型，默认是金钱类型
-    private boolean useCommaFormat;// 是否使用每三位数字一个逗号的格式，让数字显得比较好看，默认使用
+    private int frameDuration;// 每帧间隔时间 单位毫秒
+    private int textType;// 内容的类型，默认是百分比类型
+    private boolean useCommaFormat;// 是否使用每三位数字一个逗号的格式，让数字显得比较好看，默认不使用
     private boolean runWhenChange;// 是否当内容有改变才使用动画,默认是
 
     private ExecutorService threadPool = Executors.newFixedThreadPool(1);// 1个线程的线程池
@@ -52,8 +55,9 @@ public class NumberRollingView extends TextView {
 
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.NumberRollingView);
         frameNum = ta.getInt(R.styleable.NumberRollingView_frameNum, 30);
-        textType = ta.getInt(R.styleable.NumberRollingView_textType, MONEY_TYPE);
-        useCommaFormat = ta.getBoolean(R.styleable.NumberRollingView_useCommaFormat, true);
+        frameDuration = ta.getInt(R.styleable.NumberRollingView_duration, 20);
+        textType = ta.getInt(R.styleable.NumberRollingView_textType, PERCENT_TYPE);
+        useCommaFormat = ta.getBoolean(R.styleable.NumberRollingView_useCommaFormat, false);
         runWhenChange = ta.getBoolean(R.styleable.NumberRollingView_runWhenChange, true);
     }
 
@@ -153,6 +157,40 @@ public class NumberRollingView extends TextView {
     }
 
     /**
+     * @Description 开始百分比动画的方法
+     */
+    public void startPercentAnim(String numStr) {
+        // 如果传入的数字已经格式化了，则将包含的符号去除
+        String num = numStr.replace(",", "").replace("-", "").replace("%","");
+        try {
+            finalNum = Integer.parseInt(num);
+            if (finalNum < frameNum) {
+                // 如果传入的数字比帧数小，则直接使用setText()
+                NumberRollingView.this.setText(numStr);
+                return;
+            }
+            // 默认从0开始动画
+            nowNum = 0;
+            threadPool.execute(new Runnable() {
+                @Override
+                public void run() {
+                    Message msg = handler.obtainMessage();
+                    // 将传入的数字除以帧数，得到每帧间隔的大小
+                    int temp = finalNum / frameNum;
+                    msg.what = PERCENT_TYPE;
+                    msg.obj = temp;
+                    // 发送消息改变UI
+                    handler.sendMessage(msg);
+                }
+            });
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            //如果转换Integer失败则直接用setText
+            NumberRollingView.this.setText(numStr);
+        }
+    }
+
+    /**
      * @Description 开始数字动画的方法
      */
     public void startNumAnim(String numStr) {
@@ -186,6 +224,7 @@ public class NumberRollingView extends TextView {
         }
     }
 
+    @SuppressLint("HandlerLeak")
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -248,6 +287,39 @@ public class NumberRollingView extends TextView {
                             NumberRollingView.this.setText(StringUtil.addComma(String.valueOf(finalNum), false));
                         } else {
                             NumberRollingView.this.setText(String.valueOf(finalNum));
+                        }
+                    }
+                    break;
+                case PERCENT_TYPE://百分比数字滚动
+                    // 更新显示的内容
+                    if (useCommaFormat) {
+                        //使用每三位数字一个逗号格式的字符串
+                        String formatStr = StringUtil.addComma(String.valueOf(nowNum), false);
+                        NumberRollingView.this.setText(String.format("%s%%", formatStr));
+                    } else {
+                        NumberRollingView.this.setText(String.format("%s%%", String.valueOf(nowNum)));
+                    }
+
+                    //记录当前每帧递增后的数字
+                    nowNum += (Integer) msg.obj;
+                    if (nowNum < finalNum) {
+                        //如果当前记录的数字小于目标数字，即还没达到目标数字，继续递增
+                        Message msg2 = handler.obtainMessage();
+                        msg2.what = PERCENT_TYPE;
+                        msg2.obj = msg.obj;
+                        // 继续发送通知改变UI
+                        try {
+                            Thread.sleep(frameDuration);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        handler.sendMessage(msg2);
+                    } else {
+                        //已经达到目标的数字，显示最终的内容
+                        if (useCommaFormat) {
+                            NumberRollingView.this.setText(StringUtil.addComma(String.valueOf(finalNum), false));
+                        } else {
+                            NumberRollingView.this.setText(String.format("%s%%", String.valueOf(finalNum)));
                         }
                     }
                     break;

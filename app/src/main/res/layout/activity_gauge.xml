@@ -68,7 +68,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
+                <com.jx.sleep_dg.view.NumberRollingView
                     android:id="@+id/tv_weight"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
                     android:text="0kg"
                     android:textColor="@android:color/white" />
 
-                <TextView
+                <com.jx.sleep_dg.view.NumberRollingView
                     android:id="@+id/tv_weight_per"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -84,7 +84,7 @@
                     android:textColor="@android:color/white" />
             </LinearLayout>
 
-            <com.jx.sleep_dg.view.AnimatedProgressBar
+            <com.jx.sleep_dg.view.bar.AnimatedProgressBar
                 android:id="@+id/pb_weight"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
@@ -114,7 +114,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
+                <com.jx.sleep_dg.view.NumberRollingView
                     android:id="@+id/tv_height"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -122,7 +122,7 @@
                     android:text="0cm"
                     android:textColor="@android:color/white" />
 
-                <TextView
+                <com.jx.sleep_dg.view.NumberRollingView
                     android:id="@+id/tv_height_per"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -130,7 +130,7 @@
                     android:textColor="@android:color/white" />
             </LinearLayout>
 
-            <com.jx.sleep_dg.view.AnimatedProgressBar
+            <com.jx.sleep_dg.view.bar.AnimatedProgressBar
                 android:id="@+id/pb_height"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
@@ -167,7 +167,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
+                <com.jx.sleep_dg.view.NumberRollingView
                     android:id="@+id/tv_heartbeat"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -175,7 +175,7 @@
                     android:text="0次/分钟"
                     android:textColor="@android:color/white" />
 
-                <TextView
+                <com.jx.sleep_dg.view.NumberRollingView
                     android:id="@+id/tv_heartbeat_per"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -183,7 +183,7 @@
                     android:textColor="@android:color/white" />
             </LinearLayout>
 
-            <com.jx.sleep_dg.view.AnimatedProgressBar
+            <com.jx.sleep_dg.view.bar.AnimatedProgressBar
                 android:id="@+id/pb_heartbeat"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
@@ -213,7 +213,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
+                <com.jx.sleep_dg.view.NumberRollingView
                     android:id="@+id/tv_breath"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -221,7 +221,7 @@
                     android:text="0次/分钟"
                     android:textColor="@android:color/white" />
 
-                <TextView
+                <com.jx.sleep_dg.view.NumberRollingView
                     android:id="@+id/tv_breath_per"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -229,7 +229,7 @@
                     android:textColor="@android:color/white" />
             </LinearLayout>
 
-            <com.jx.sleep_dg.view.AnimatedProgressBar
+            <com.jx.sleep_dg.view.bar.AnimatedProgressBar
                 android:id="@+id/pb_breath"
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
@@ -265,7 +265,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
+                <com.jx.sleep_dg.view.NumberRollingView
                     android:id="@+id/tv_bodyTem"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -273,7 +273,7 @@
                     android:text="0°"
                     android:textColor="@android:color/white" />
 
-                <TextView
+                <com.jx.sleep_dg.view.NumberRollingView
                     android:id="@+id/tv_bodyTem_per"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -281,7 +281,7 @@
                     android:textColor="@android:color/white" />
             </LinearLayout>
 
-            <com.jx.sleep_dg.view.AnimatedProgressBar
+            <com.jx.sleep_dg.view.bar.AnimatedProgressBar
                 android:id="@+id/pb_bodyTem"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
@@ -328,7 +328,7 @@
                     app:runWhenChange="true" />
             </LinearLayout>
 
-            <com.jx.sleep_dg.view.AnimatedProgressBar
+            <com.jx.sleep_dg.view.bar.AnimatedProgressBar
                 android:id="@+id/pb_roomTem"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
@@ -355,12 +355,13 @@
             android:text=""
             android:textColor="@android:color/white" />
 
-        <com.jx.sleep_dg.view.AnimatedProgressBar
+        <com.jx.sleep_dg.view.bar.AnimatedProgressBar
             android:id="@+id/pb_result"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="8dp"
             android:progress="0"
+            android:background="@color/colorPrimaryLight"
             app:barColor="@color/white"
             app:bidirectionalAnimate="true" />
     </LinearLayout>

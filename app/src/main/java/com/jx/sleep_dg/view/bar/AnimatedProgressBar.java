@@ -1,5 +1,5 @@
 
-package com.jx.sleep_dg.view;
+package com.jx.sleep_dg.view.bar;
 
 import android.content.Context;
 import android.content.res.TypedArray;

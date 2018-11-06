@@ -100,7 +100,7 @@
     <string name="mattress_inter">床垫互联</string>
     <string name="snore_mode">止鼾模式</string>
     <string name="private_mode">私人模式</string>
-    <string name="private_mode_hint">启用后将关闭设备WiFi,对睡眠数据不记录不上传.</string>
+    <string name="private_mode_hint">启用后关闭设备WiFi,对睡眠数据不记录不上传.</string>
     <string name="child_mode">儿童模式</string>
     <string name="child_mode_hint">启用后无法对床头、床位进行升降处理.</string>
     <string name="pregnant_mode">孕妇模式</string>

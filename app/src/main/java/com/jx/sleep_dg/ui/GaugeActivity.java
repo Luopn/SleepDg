@@ -2,23 +2,20 @@ package com.jx.sleep_dg.ui;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.os.CountDownTimer;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.jx.sleep_dg.R;
 import com.jx.sleep_dg.ble.BleUtils;
 import com.jx.sleep_dg.protocol.BleComUtils;
-import com.jx.sleep_dg.view.AnimatedProgressBar;
+import com.jx.sleep_dg.view.bar.AnimatedProgressBar;
+import com.jx.sleep_dg.view.NumberRollingView;
 
 import java.util.Locale;
 
@@ -33,7 +30,7 @@ public class GaugeActivity extends BaseActivity {
     private LinearLayout ll_res;
     private AnimatedProgressBar pb_weight, pb_height, pb_heartbeat, pb_breath, pb_bodyTem, pb_roomTem, pb_result;
     private TextView tv_weight, tv_height, tv_heartbeat, tv_breath, tv_bodyTem, tv_roomTem, tv__result;
-    private TextView tv_weight_per, tv_height_per, tv_heartbeat_per, tv_breath_per, tv_bodyTem_per, tv_roomTem_per, tv__result_per;
+    private NumberRollingView tv_weight_per, tv_height_per, tv_heartbeat_per, tv_breath_per, tv_bodyTem_per, tv_roomTem_per, tv__result_per;
 
     private ObjectAnimator rotate;
 
@@ -76,7 +73,8 @@ public class GaugeActivity extends BaseActivity {
 
         btn_start_gauge.setOnClickListener(this);
 
-        rotate = ObjectAnimator.ofFloat(iv_gauge, "rotation", 0, 359).setDuration(SEARCH_DURATION);
+        rotate = ObjectAnimator.ofFloat(iv_gauge, "rotation", 0, 359).
+                setDuration(SEARCH_DURATION);
         rotate.setRepeatCount(SEARCH_REACPEAT_COUNT);
         rotate.setInterpolator(new LinearInterpolator());
         rotate.setRepeatMode(ObjectAnimator.RESTART);
@@ -95,34 +93,47 @@ public class GaugeActivity extends BaseActivity {
                         if (progress == 5) {
                             tv_weight.setText("62kg");
                             pb_weight.setProgress(100);
+                            tv_weight_per.startPercentAnim("100%");
                             tv_height.setText("172cm");
                             pb_height.setProgress(100);
+                            tv_height_per.startPercentAnim("100%");
+                            BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary("40")
+                                    + BleUtils.convertDecimalToBinary("40"));
 
-                            BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary("100") + BleUtils.convertDecimalToBinary("100"));
+                        } else if(progress == 30){
+
+                            BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary("20")
+                                    + BleUtils.convertDecimalToBinary("20"));
 
                         } else if (progress == 50) {
                             tv_heartbeat.setText("68次/分钟");
+                            tv_heartbeat_per.startPercentAnim("100%");
                             pb_heartbeat.setProgress(100);
                             tv_breath.setText("72次/分钟");
+                            tv_breath_per.startPercentAnim("100%");
                             pb_breath.setProgress(100);
 
-                            BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary("40") + BleUtils.convertDecimalToBinary("40"));
+                            BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary("100")
+                                    + BleUtils.convertDecimalToBinary("100"));
 
                         } else if (progress == 70) {
                             tv_bodyTem.setText("36°");
+                            tv_bodyTem_per.startPercentAnim("100%");
                             pb_bodyTem.setProgress(100);
                             tv_roomTem.setText("28°");
+                            tv_roomTem_per.startPercentAnim("100%");
                             pb_roomTem.setProgress(100);
 
-                            BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary("70") + BleUtils.convertDecimalToBinary("70"));
+                            BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary("65")
+                                    + BleUtils.convertDecimalToBinary("65"));
                         }
                     }
 
                     @Override
                     public void onFinish() {
                         rotate.end();
-                        tv__result.setText("您最适合的硬度:85档");
-                        pb_result.setProgress(100);
+                        tv__result.setText("您最适合的硬度:65档");
+                        pb_result.setProgress(65);
                         cancel();
                     }
                 }.start();
@@ -132,7 +143,7 @@ public class GaugeActivity extends BaseActivity {
             public void onAnimationEnd(Animator animation) {
                 btn_start_gauge.setAlpha(1.0f);
                 btn_start_gauge.setEnabled(true);
-                pb_result.setProgress(100);
+                tv_gauge_val.setText(String.format(Locale.getDefault(), "%d", 100));
             }
 
             @Override
