@@ -1,17 +1,24 @@
 package com.jx.sleep_dg.fragment;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.os.CountDownTimer;
 import android.support.v4.view.GravityCompat;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jx.sleep_dg.R;
+import com.jx.sleep_dg.ble.BleUtils;
+import com.jx.sleep_dg.protocol.BleComUtils;
 import com.jx.sleep_dg.protocol.MSPProtocol;
 import com.jx.sleep_dg.ui.MainActivity;
 import com.jx.sleep_dg.ui.SearchActivity;
 import com.jx.sleep_dg.view.EcgView;
 import com.jx.sleep_dg.view.HuxiEcgView;
+import com.jx.sleep_dg.view.NumberRollingView;
 
 import java.util.Locale;
 
@@ -22,17 +29,21 @@ import java.util.Locale;
 
 public class DataFragment extends BaseFragment {
 
+    private static final int SEARCH_DURATION = 1000;
+    private static final int SEARCH_REACPEAT_COUNT = 5;
+
+    private NumberRollingView tvSleepScore;
     private TextView tvXinlvRight;
     private TextView tvXinlvLeft;
     private TextView tvHuxiLeft;
     private TextView tvHuxiRight;
     private ImageView ivUserImage;
-
-    private MSPProtocol mspProtocol;
-    private boolean isSwitch = true;
-
+    private ImageView ivSleepProgress;
     private EcgView lecgXinlv;
     private HuxiEcgView recgXinlv;
+
+    private MSPProtocol mspProtocol;
+    private ObjectAnimator rotate;
 
     private boolean isrXinlv;
     private boolean islXinlv;
@@ -46,20 +57,27 @@ public class DataFragment extends BaseFragment {
     public void onBindView(View view) {
 
         view.findViewById(R.id.iv_right).setOnClickListener(this);
+        ivUserImage = view.findViewById(R.id.iv_user_image);
+        ivUserImage.setOnClickListener(this);
+        ivSleepProgress = view.findViewById(R.id.iv_circle_progress);
+        tvSleepScore = view.findViewById(R.id.tv_sleep_score);
+
+        //心电数据
         tvXinlvRight = view.findViewById(R.id.tv_xinlv_right);
         tvXinlvLeft = view.findViewById(R.id.tv_xinlv_left);
         tvHuxiLeft = view.findViewById(R.id.tv_huxi_left);
         tvHuxiRight = view.findViewById(R.id.tv_huxi_right);
 
-        ivUserImage = view.findViewById(R.id.iv_user_image);
-        ivUserImage.setOnClickListener(this);
         lecgXinlv = view.findViewById(R.id.l_ecg_xinlv);
         recgXinlv = view.findViewById(R.id.r_ecg_xinlv);
+
+        dummyProgress();
 
         mspProtocol = MSPProtocol.getInstance();
         bindViewData();
     }
 
+    //绑定数据更新
     private void bindViewData() {
         if (mspProtocol != null) {
             int leftBreathFreq = mspProtocol.getlBreathFreq() & 0xff;
@@ -122,5 +140,46 @@ public class DataFragment extends BaseFragment {
                 MainActivity.mDrawerLayout.openDrawer(GravityCompat.START);
                 break;
         }
+    }
+
+    private void dummyProgress() {
+        rotate = ObjectAnimator.ofFloat(ivSleepProgress, "rotation", 0, 359).
+                setDuration(SEARCH_DURATION);
+        rotate.setRepeatCount(SEARCH_REACPEAT_COUNT);
+        rotate.setInterpolator(new LinearInterpolator());
+        rotate.setRepeatMode(ObjectAnimator.RESTART);
+        rotate.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                final int res = 90;
+                tvSleepScore.startNumAnim(90 + "");
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+        ivSleepProgress.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                rotate.start();
+            }
+        }, 100);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        rotate.cancel();
     }
 }

@@ -28,11 +28,11 @@ public class WoDeGuanzhuAdapter extends BaseQuickAdapter<WodeGuanzhuBean, BaseVi
         if (item.getState().equals("1")) {
             helper.setText(R.id.tv_state, R.string.using);
             helper.setTextColor(R.id.tv_state, context.getResources().getColor(R.color.green));
-            IvSrate.setBackgroundResource(R.mipmap.green);
+            IvSrate.setBackgroundResource(R.mipmap.ic_circle_green);
         } else {
             helper.setText(R.id.tv_state, R.string.unused);
             helper.setTextColor(R.id.tv_state, context.getResources().getColor(R.color.grey));
-            IvSrate.setBackgroundResource(R.mipmap.grey);
+            IvSrate.setBackgroundResource(R.mipmap.ic_circle_grey);
 
         }
         if (item.isGuanZhu()) {

@@ -8,18 +8,16 @@
     <color name="colorAccentLight">#8800a1e9</color>
 
     <color name="textTitleColor">#6d70ff</color>
+    <color name="textTitleColorLight">#5d73b1</color>
     <color name="textGrayColor">#8f8f8f</color>
     <color name="textAccentColor">#9f64ae</color>
 
+    <color name="color_bg">#191b32</color>
 
     <color name="progress_gray">#FFD8D8D8</color>
     <color name="progress_gray_dark">#FF383838</color>
     <color name="default_blue_light">#ff33b5e5</color>
 
-    <color name="grey_background">#f0f0f0</color>
-    <color name="home_text">#ff7800</color>
-    <color name="text_gray">#9fa0a0</color>
-    <color name="yellows">#fe7e12</color>
     <color name="green">#397c55</color>
     <color name="grey">#7c7c7c</color>
     <color name="white">#ffffff</color>
