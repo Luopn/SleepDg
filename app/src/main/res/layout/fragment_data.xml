@@ -127,7 +127,9 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:drawableLeft="@mipmap/ic_circle_green"
+                                android:drawableLeft="@mipmap/ic_circle_gray"
+                                android:drawablePadding="5dp"
+                                android:drawableTint="#1d2088"
                                 android:gravity="center_vertical"
                                 android:text="@string/sleep_deep"
                                 android:textColor="@color/textTitleColor"

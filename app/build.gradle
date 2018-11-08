@@ -6,8 +6,8 @@ android {
         applicationId "com.jx.sleep_dg"
         minSdkVersion 18
         targetSdkVersion 26
-        versionCode 11
-        versionName "1.0.41"
+        versionCode 12
+        versionName "1.0.42"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
