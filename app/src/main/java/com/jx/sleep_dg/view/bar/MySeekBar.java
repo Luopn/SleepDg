@@ -17,7 +17,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.jx.sleep_dg.R;
-import com.jx.sleep_dg.utils.CommentUtil;
+import com.jx.sleep_dg.utils.CommonUtil;
 
 import java.text.DecimalFormat;
 
@@ -146,23 +146,23 @@ public class MySeekBar extends View {
     }
 
     private void init(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        slideAbleLocation = CommentUtil.dip2px(context, 30);
+        slideAbleLocation = CommonUtil.dip2px(context, 30);
 
-        bitmapWidth = CommentUtil.dip2px(context, 30);
-        bitmapHight = CommentUtil.dip2px(context, 30);
+        bitmapWidth = CommonUtil.dip2px(context, 30);
+        bitmapHight = CommonUtil.dip2px(context, 30);
 
         mDragBitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.ring_dot);
-        mDragBitmap = CommentUtil.conversionBitmap(mDragBitmap
+        mDragBitmap = CommonUtil.conversionBitmap(mDragBitmap
                 , bitmapWidth
                 , bitmapHight);
 
         TypedArray array = context.getTheme().obtainStyledAttributes(attrs
                 , R.styleable.MySeekBar
                 , defStyleAttr, 0);
-        ringWidth = array.getInt(R.styleable.MySeekBar_ringWidth, CommentUtil.dip2px(context, 10));
+        ringWidth = array.getInt(R.styleable.MySeekBar_ringWidth, CommonUtil.dip2px(context, 10));
         slideRingCorlor = array.getInt(R.styleable.MySeekBar_slideRingCorlor, 0xFF6a6aff);
         ringBgCorlor = array.getInt(R.styleable.MySeekBar_ringBgCorlor, 0xFFbebebe);
-        radius = array.getInt(R.styleable.MySeekBar_radius, CommentUtil.dip2px(context, 100));
+        radius = array.getInt(R.styleable.MySeekBar_radius, CommonUtil.dip2px(context, 100));
 //        wordCorlor = array.getInt(R.styleable.MyHalfCircularSildeView_wordCorlor, Color.BLUE);
 //        wordSize = array.getInt(R.styleable.MyHalfCircularSildeView_wordSize, 18);
         maxProgress = array.getInt(R.styleable.MySeekBar_maxProgress, 100);
@@ -172,12 +172,12 @@ public class MySeekBar extends View {
         beginLocation = 180;
         //下面是刻度线的属性
 //        scaleLineCount = array.getInt(R.styleable.MyHalfCircularSildeView_scaleLineCount, 100);
-//        scaleLineLength = array.getInt(R.styleable.MyHalfCircularSildeView_scaleLineLength, CommentUtil.dip2px(context, 10));
-        specialScaleLineLength = array.getInt(R.styleable.MySeekBar_specialScaleLineLength, CommentUtil.dip2px(context, 15));
-        scaleToRingSpace = array.getInt(R.styleable.MySeekBar_scaleToRingSpace, CommentUtil.dip2px(context, 10));
+//        scaleLineLength = array.getInt(R.styleable.MyHalfCircularSildeView_scaleLineLength, CommonUtil.dip2px(context, 10));
+        specialScaleLineLength = array.getInt(R.styleable.MySeekBar_specialScaleLineLength, CommonUtil.dip2px(context, 15));
+        scaleToRingSpace = array.getInt(R.styleable.MySeekBar_scaleToRingSpace, CommonUtil.dip2px(context, 10));
         scaleLineNormalCorlor = array.getInt(R.styleable.MySeekBar_scaleLineNormalCorlor, 0xFFbebebe);
         specialScaleCorlor = array.getInt(R.styleable.MySeekBar_specialScaleCorlor, 0xFF6a6aff);
-        scaleLineWidth = array.getInt(R.styleable.MySeekBar_scaleLineWidth, CommentUtil.dip2px(context, 2));
+        scaleLineWidth = array.getInt(R.styleable.MySeekBar_scaleLineWidth, CommonUtil.dip2px(context, 2));
         //记得使用完销毁
         array.recycle();
 
@@ -206,7 +206,7 @@ public class MySeekBar extends View {
         //写中间文字的画笔初始化
 //        wordPaint = new Paint();
 //        wordPaint.setColor(wordCorlor);
-//        wordPaint.setTextSize(CommentUtil.sp2px(context, wordSize));
+//        wordPaint.setTextSize(CommonUtil.sp2px(context, wordSize));
 //        rect = new Rect();
 //        String str = progress+" C";
 //        wordPaint.getTextBounds(str, 0, str.length(),rect);
@@ -277,7 +277,7 @@ public class MySeekBar extends View {
                         , 2 * radius - ringWidth / 2 + getPaddingTop() + specialScaleLineLength + scaleToRingSpace)
                 , beginLocation, progress * 180 / 100, false, slideRingPaint);
         //画上滑动图标
-        PointF progressPoint = CommentUtil.calcArcEndPointXY(radius + getPaddingLeft() + specialScaleLineLength + scaleToRingSpace
+        PointF progressPoint = CommonUtil.calcArcEndPointXY(radius + getPaddingLeft() + specialScaleLineLength + scaleToRingSpace
                 , radius + getPaddingTop() + specialScaleLineLength + scaleToRingSpace
                 , radius - ringWidth / 2
                 , progress * 180 / 100, 180);

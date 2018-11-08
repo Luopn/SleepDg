@@ -57,7 +57,7 @@ public class AssociatedActivity extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_toolbar, menu);
-        menu.findItem(R.id.action_do).setIcon(R.mipmap.add);
+        menu.findItem(R.id.action_do).setIcon(R.mipmap.ic_add_white);
         return super.onCreateOptionsMenu(menu);
     }
 

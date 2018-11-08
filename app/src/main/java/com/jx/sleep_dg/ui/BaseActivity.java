@@ -694,9 +694,9 @@ public abstract class BaseActivity extends SupportActivity implements View.OnCli
     public void doNewPost(final String trxcode, Map<String, String> params) {
         LogUtil.e("提交的参数" + params.toString());
 //        FormBody.Builder builder = new FormBody.Builder();
-//        builder.add("jsonParameters", str);
-//        builder.add("trxcode", trxcode);
-//        builder.add("encodeFlag", "1");
+//        builder.ic_add_white("jsonParameters", str);
+//        builder.ic_add_white("trxcode", trxcode);
+//        builder.ic_add_white("encodeFlag", "1");
 //        FormBody formBody = builder.build();
         FormBody.Builder formBodyBuilder = new FormBody.Builder();
         Set<String> keySet = params.keySet();

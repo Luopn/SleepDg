@@ -3,10 +3,10 @@
     <color name="colorPrimary">#000330</color>
     <color name="colorPrimaryDark">#121325</color>
     <color name="colorAccent">#00a1e9</color>
-
     <color name="colorPrimaryLight">#212546</color>
     <color name="colorAccentLight">#8800a1e9</color>
 
+    <!--文字的颜色-->
     <color name="textTitleColor">#6d70ff</color>
     <color name="textTitleColorLight">#5d73b1</color>
     <color name="textGrayColor">#8f8f8f</color>
@@ -14,13 +14,16 @@
 
     <color name="color_bg">#191b32</color>
 
+    <!-- 中兰色 -->
+    <color name="mediumblue">#1d2088</color>
+
     <color name="progress_gray">#FFD8D8D8</color>
     <color name="progress_gray_dark">#FF383838</color>
+    <!--青色-->
     <color name="default_blue_light">#ff33b5e5</color>
 
     <color name="green">#397c55</color>
     <color name="grey">#7c7c7c</color>
     <color name="white">#ffffff</color>
     <color name="lightGray">#ddd</color>
-
 </resources>

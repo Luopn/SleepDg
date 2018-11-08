@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     android:orientation="vertical">
 
     <FrameLayout
@@ -42,19 +43,51 @@
             <LinearLayout
                 android:id="@+id/ll_lift"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="120dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/shape_control_item"
                 android:orientation="horizontal"
                 android:padding="10dp">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:background="@mipmap/controlmattress" />
+                <LinearLayout
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/height"
+                        android:textColor="@color/textTitleColor"
+                        android:textSize="@dimen/textSize_14" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:background="@mipmap/controlmattress" />
+
+                    <com.jx.sleep_dg.view.SegmentControl
+                        android:layout_width="80dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="16dp"
+                        app:scv_BackgroundNormalColor="@color/colorAccent"
+                        app:scv_BackgroundSelectedColor="@android:color/transparent"
+                        app:scv_FrameColor="@color/textTitleColor"
+                        app:scv_FrameCornerRadius="12dp"
+                        app:scv_SelectedIndex="1"
+                        app:scv_TextArray="@array/left_right"
+                        app:scv_TextNormalColor="@color/colorAccent"
+                        app:scv_TextSelectedColor="@android:color/white"
+                        app:scv_TextSize="@dimen/textSize_12" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -62,28 +95,6 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="35dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:layout_gravity="center_horizontal"
-                            android:text="@string/height"
-                            android:textColor="#3a397c"
-                            android:textSize="@dimen/textSize_14" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:src="@mipmap/button_right" />
-                    </RelativeLayout>
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -166,8 +177,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/shape_control_item"
                 android:orientation="horizontal"
                 android:padding="10dp">
@@ -278,8 +289,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/shape_control_item"
                 android:orientation="horizontal"
                 android:padding="10dp">
@@ -288,7 +299,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:background="@mipmap/bed" />
+                    android:background="@mipmap/ic_bed" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -337,8 +348,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
                 android:layout_marginBottom="20dp"
+                android:layout_marginTop="15dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingLeft="10dp"

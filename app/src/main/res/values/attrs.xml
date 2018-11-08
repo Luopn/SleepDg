@@ -65,100 +65,6 @@
         <attr name="bgArcWidth" format="dimension" />
     </declare-styleable>
 
-    <!--<declare-styleable name="DialProgress">-->
-    <!--<attr name="antiAlias" />-->
-    <!--<attr name="startAngle" />-->
-    <!--<attr name="sweepAngle" />-->
-    <!--<attr name="animTime" />-->
-    <!--<attr name="maxValue" />-->
-    <!--<attr name="value" />-->
-    <!--<attr name="precision" />-->
-    <!--<attr name="valueSize" />-->
-    <!--<attr name="valueColor" />-->
-    <!--<attr name="textOffsetPercentInRadius" />-->
-    <!--&lt;!&ndash; 绘制内容的单位 &ndash;&gt;-->
-    <!--<attr name="unit" />-->
-    <!--<attr name="unitSize" />-->
-    <!--<attr name="unitColor" />-->
-    <!--&lt;!&ndash; 绘制内容相应的提示语 &ndash;&gt;-->
-    <!--<attr name="hint" />-->
-    <!--<attr name="hintSize" />-->
-    <!--<attr name="hintColor" />-->
-    <!--&lt;!&ndash; 圆弧的宽度 &ndash;&gt;-->
-    <!--<attr name="arcWidth" />-->
-    <!--&lt;!&ndash; 刻度的宽度 &ndash;&gt;-->
-    <!--<attr name="dialWidth" format="dimension|reference" />-->
-    <!--&lt;!&ndash; 刻度之间的间隔 &ndash;&gt;-->
-    <!--<attr name="dialIntervalDegree" format="integer" />-->
-    <!--&lt;!&ndash; 圆弧颜色， &ndash;&gt;-->
-    <!--<attr name="arcColors" />-->
-    <!--&lt;!&ndash; 背景圆弧线颜色 &ndash;&gt;-->
-    <!--<attr name="bgArcColor" />-->
-    <!--&lt;!&ndash; 刻度线颜色 &ndash;&gt;-->
-    <!--<attr name="dialColor" format="color|reference" />-->
-    <!--</declare-styleable>-->
-
-    <!--<declare-styleable name="WaveProgress">-->
-    <!--&lt;!&ndash; 是否开启抗锯齿 &ndash;&gt;-->
-    <!--<attr name="antiAlias" />-->
-    <!--&lt;!&ndash; 深色水波动画时间 &ndash;&gt;-->
-    <!--<attr name="darkWaveAnimTime" format="integer" />-->
-    <!--&lt;!&ndash; 浅色水波动画时间 &ndash;&gt;-->
-    <!--<attr name="lightWaveAnimTime" format="integer" />-->
-    <!--&lt;!&ndash; 最大值 &ndash;&gt;-->
-    <!--<attr name="maxValue" />-->
-    <!--&lt;!&ndash; 当前值 &ndash;&gt;-->
-    <!--<attr name="value" />-->
-    <!--<attr name="valueColor" />-->
-    <!--<attr name="valueSize" />-->
-    <!--&lt;!&ndash; 绘制内容相应的提示语 &ndash;&gt;-->
-    <!--<attr name="hint" />-->
-    <!--<attr name="hintSize" />-->
-    <!--<attr name="hintColor" />-->
-    <!--&lt;!&ndash; 圆环宽度 &ndash;&gt;-->
-    <!--<attr name="circleWidth" format="dimension" />-->
-    <!--&lt;!&ndash; 圆环颜色 &ndash;&gt;-->
-    <!--<attr name="circleColor" format="color|reference" />-->
-    <!--&lt;!&ndash; 背景圆环颜色 &ndash;&gt;-->
-    <!--<attr name="bgCircleColor" format="color|reference" />-->
-    <!--&lt;!&ndash; 锁定水波不随圆环进度改变，默认锁定在50%处 &ndash;&gt;-->
-    <!--<attr name="lockWave" format="boolean" />-->
-    <!--&lt;!&ndash; 水波数量 &ndash;&gt;-->
-    <!--<attr name="waveNum" format="integer" />-->
-    <!--&lt;!&ndash; 水波高度，峰值和谷值之和 &ndash;&gt;-->
-    <!--<attr name="waveHeight" format="dimension" />-->
-    <!--&lt;!&ndash; 深色水波颜色 &ndash;&gt;-->
-    <!--<attr name="darkWaveColor" format="color|reference" />-->
-    <!--&lt;!&ndash; 是否显示浅色水波 &ndash;&gt;-->
-    <!--<attr name="showLightWave" format="boolean" />-->
-    <!--&lt;!&ndash; 浅色水波颜色 &ndash;&gt;-->
-    <!--<attr name="lightWaveColor" format="color|reference" />-->
-    <!--&lt;!&ndash; 浅色水波的方向 &ndash;&gt;-->
-    <!--<attr name="lightWaveDirect" format="enum">-->
-    <!--<enum name="L2R" value="0" />-->
-    <!--<enum name="R2L" value="1" />-->
-    <!--</attr>-->
-    <!--</declare-styleable>-->
-
-
-    <!--<declare-styleable name="RoundProgressBar">-->
-    <!--<attr name="roundColor" format="color" />-->
-    <!--<attr name="roundProgressColor" format="color" />-->
-    <!--<attr name="roundWidth" format="dimension"></attr>-->
-    <!--<attr name="textColor" format="color" />-->
-    <!--<attr name="textSize" format="dimension" />-->
-    <!--<attr name="max" format="integer"></attr>-->
-    <!--<attr name="textIsDisplayable" format="boolean"></attr>-->
-    <!--<attr name="style">-->
-    <!--<enum name="STROKE" value="0"></enum>-->
-    <!--<enum name="FILL" value="1"></enum>-->
-    <!--</attr>-->
-    <!--</declare-styleable>-->
-    <!--<declare-styleable name="swipelistviewstyle">-->
-    <!--<attr name="right_width" format="dimension"></attr>-->
-    <!--</declare-styleable>-->
-
-
     <!--自定义的半圆环带刻度可拖动SeekBar进度条效果-->
     <declare-styleable name="MySeekBar">
         <!--圆环的宽度-->
@@ -284,6 +190,36 @@
         <attr name="barColor" format="color" />
         <attr name="bidirectionalAnimate" format="boolean" />
         <attr name="animationDuration" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="SegmentControl">
+        <attr name="cornerRadius" format="dimension|reference" />
+        <!--选中segment的背景颜色-->
+        <attr name="scv_BackgroundSelectedColor" format="reference|color" />
+        <!--未选中segment的背景颜色-->
+        <attr name="scv_BackgroundNormalColor" format="reference|color" />
+        <!--//选中segment的文字颜色-->
+        <attr name="scv_TextSelectedColor" format="reference|color" />
+        <!--//未选中segment的文字颜色-->
+        <attr name="scv_TextNormalColor" format="reference|color" />
+        <!--//segment边框的颜色-->
+        <attr name="scv_FrameColor" format="reference|color" />
+        <!--//segment边框的宽度-->
+        <attr name="scv_FrameWidth" format="reference|dimension" />
+        <!--//segment四个圆角的半径大小-->
+        <attr name="scv_FrameCornerRadius" format="reference|dimension" />
+        <!--//文字大小-->
+        <attr name="scv_TextSize" format="reference|dimension" />
+        <!--//string数组，每一个string都会填充到一个segment中-->
+        <attr name="scv_TextArray" format="reference" />
+        <!--//默认选中的segment-->
+        <attr name="scv_SelectedIndex" format="reference|integer" />
+        <!--//每一个segment内部的水平padding-->
+        <attr name="scv_SegmentPaddingHorizontal" format="reference|dimension" />
+        <!--每一个Segment的竖直方向的padding-->
+        <attr name="scv_SegmentPaddingVertical" format="reference|dimension" />
+        <!--//Segment改变时是否使用颜色渐变效果-->
+        <attr name="scv_Gradient" format="reference|boolean" />
     </declare-styleable>
 
 </resources>

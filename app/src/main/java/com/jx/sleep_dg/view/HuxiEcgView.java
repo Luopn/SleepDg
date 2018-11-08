@@ -207,7 +207,7 @@ public class HuxiEcgView extends View {
 //                random = - Math.random();
             }
 //            float value = (float) (maxLevel * random);	// 最大值为 maxLevel
-//            datas.add(value);
+//            datas.ic_add_white(value);
         }
 
         // 下面的代码和上面一样
@@ -228,7 +228,7 @@ public class HuxiEcgView extends View {
 //                random = - Math.random();
             }
 //            float value = (float) (maxLevel * random);
-//            datas.add(value);
+//            datas.ic_add_white(value);
         }
 
         for (int i = 0; i < 6; i++) {

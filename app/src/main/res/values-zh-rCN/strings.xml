@@ -74,7 +74,7 @@
     <string name="add_error">添加异常</string>
 
     <!--控制页面-->
-    <string name="height">床位升降</string>
+    <string name="height">升降智控</string>
     <string name="hardness">床位软硬度</string>
     <string name="temperature">床位温度</string>
     <string name="custom_mode">自定义模式</string>

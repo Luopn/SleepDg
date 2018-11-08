@@ -96,7 +96,7 @@
                 android:paddingLeft="15dp"
                 android:singleLine="true"
                 android:textColor="#ffffff"
-                android:textSize="@dimen/sp_16"
+                android:textSize="@dimen/textSize_16"
                 android:theme="@style/EditText" />
         </LinearLayout>
 
@@ -125,7 +125,7 @@
                 android:paddingLeft="12dp"
                 android:singleLine="true"
                 android:textColor="#ffffff"
-                android:textSize="@dimen/sp_16"
+                android:textSize="@dimen/textSize_16"
                 android:theme="@style/EditText" />
         </LinearLayout>
 

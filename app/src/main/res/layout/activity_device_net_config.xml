@@ -68,7 +68,7 @@
                 android:paddingRight="10dp"
                 android:text="WiFi密码"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/sp_14" />
+                android:textSize="@dimen/textSize_14" />
 
             <com.jx.sleep_dg.view.ClearableEditText
                 android:id="@+id/wifi_pwd"

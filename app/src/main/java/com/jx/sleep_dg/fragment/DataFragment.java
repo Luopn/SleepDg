@@ -3,7 +3,9 @@ package com.jx.sleep_dg.fragment;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.CountDownTimer;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
@@ -16,9 +18,12 @@ import com.jx.sleep_dg.protocol.BleComUtils;
 import com.jx.sleep_dg.protocol.MSPProtocol;
 import com.jx.sleep_dg.ui.MainActivity;
 import com.jx.sleep_dg.ui.SearchActivity;
+import com.jx.sleep_dg.utils.CommonUtil;
 import com.jx.sleep_dg.view.EcgView;
 import com.jx.sleep_dg.view.HuxiEcgView;
 import com.jx.sleep_dg.view.NumberRollingView;
+
+import org.w3c.dom.Text;
 
 import java.util.Locale;
 
@@ -33,12 +38,10 @@ public class DataFragment extends BaseFragment {
     private static final int SEARCH_REACPEAT_COUNT = 5;
 
     private NumberRollingView tvSleepScore;
-    private TextView tvXinlvRight;
-    private TextView tvXinlvLeft;
-    private TextView tvHuxiLeft;
-    private TextView tvHuxiRight;
-    private ImageView ivUserImage;
-    private ImageView ivSleepProgress;
+    private TextView tvXinlvRight, tvXinlvLeft, tvHuxiLeft, tvHuxiRight;
+
+    private ImageView ivUserImage, ivSleepProgress;
+
     private EcgView lecgXinlv;
     private HuxiEcgView recgXinlv;
 
@@ -70,6 +73,16 @@ public class DataFragment extends BaseFragment {
 
         lecgXinlv = view.findViewById(R.id.l_ecg_xinlv);
         recgXinlv = view.findViewById(R.id.r_ecg_xinlv);
+
+        TextView tvTitleDeepSleep = view.findViewById(R.id.tv_title_deep_sleep);
+        TextView tvTitleShallowSleep = view.findViewById(R.id.tv_title_shallow_sleep);
+        TextView tvTitleClearSleep = view.findViewById(R.id.tv_title_clear_sleep);
+        TextView tvTitleTimeSleep = view.findViewById(R.id.tv_title_time_sleep);
+        //染色,兼容Android23以下版本
+        CommonUtil.drawableTint(getActivity(), tvTitleDeepSleep, ContextCompat.getColor(getActivity(), R.color.mediumblue));
+        CommonUtil.drawableTint(getActivity(), tvTitleShallowSleep, ContextCompat.getColor(getActivity(), R.color.textAccentColor));
+        CommonUtil.drawableTint(getActivity(), tvTitleClearSleep, ContextCompat.getColor(getActivity(), R.color.default_blue_light));
+        CommonUtil.drawableTint(getActivity(), tvTitleTimeSleep, ContextCompat.getColor(getActivity(), R.color.textTitleColor));
 
         dummyProgress();
 

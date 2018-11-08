@@ -10,8 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimaryDark"
-        android:paddingLeft="@dimen/dp_10"
-        android:paddingRight="@dimen/dp_10">
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
 
         <ImageView
             android:id="@+id/iv_user_image"
@@ -45,14 +45,14 @@
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:elevation="0dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            app:elevation="0dp">
 
             <android.support.design.widget.CollapsingToolbarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:contentScrim="@color/colorPrimaryDark"
                 android:background="@color/color_bg"
+                app:contentScrim="@color/colorPrimaryDark"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                 <LinearLayout
@@ -125,11 +125,12 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/tv_title_deep_sleep"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:drawableLeft="@mipmap/ic_circle_gray"
                                 android:drawablePadding="5dp"
-                                android:drawableTint="#1d2088"
+                                android:drawableTint="@color/mediumblue"
                                 android:gravity="center_vertical"
                                 android:text="@string/sleep_deep"
                                 android:textColor="@color/textTitleColor"
@@ -152,34 +153,12 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/tv_title_shallow_sleep"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:drawableLeft="@mipmap/ic_circle_green"
-                                android:gravity="center_vertical"
-                                android:text="@string/sleep_clear"
-                                android:textColor="@color/textTitleColor"
-                                android:textSize="9dp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5dp"
-                                android:text="1小时59分"
-                                android:textColor="@color/textTitleColor"
-                                android:textSize="9dp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:drawableLeft="@mipmap/ic_circle_green"
+                                android:drawableLeft="@mipmap/ic_circle_gray"
+                                android:drawablePadding="5dp"
+                                android:drawableTint="@color/textAccentColor"
                                 android:gravity="center_vertical"
                                 android:text="@string/sleep_shallow"
                                 android:textColor="@color/textTitleColor"
@@ -202,9 +181,40 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/tv_title_clear_sleep"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:drawableLeft="@mipmap/ic_circle_green"
+                                android:drawableLeft="@mipmap/ic_circle_gray"
+                                android:drawablePadding="5dp"
+                                android:drawableTint="@color/default_blue_light"
+                                android:gravity="center_vertical"
+                                android:text="@string/sleep_clear"
+                                android:textColor="@color/textTitleColor"
+                                android:textSize="9dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:text="1小时59分"
+                                android:textColor="@color/textTitleColor"
+                                android:textSize="9dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_title_time_sleep"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableLeft="@mipmap/ic_circle_gray"
+                                android:drawablePadding="5dp"
+                                android:drawableTint="@color/textTitleColor"
                                 android:gravity="center_vertical"
                                 android:text="@string/sleep_time"
                                 android:textColor="@color/textTitleColor"
@@ -243,39 +253,38 @@
                     android:layout_marginTop="15dp"
                     android:text="@string/real_time"
                     android:textColor="@color/textTitleColorLight"
-                    android:textSize="@dimen/textSize_17" />
+                    android:textSize="@dimen/textSize_15" />
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
                     android:paddingLeft="5dp"
-                    android:paddingRight="10dp">
+                    android:paddingRight="5dp">
+
+                    <com.jx.sleep_dg.view.EcgView
+                        android:id="@+id/l_ecg_xinlv"
+                        android:layout_width="0dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="1" />
 
                     <TextView
                         android:id="@+id/tv_heartrate_text"
-                        android:layout_width="35dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:background="@mipmap/ic_ring"
                         android:gravity="center"
                         android:text="@string/left"
                         android:textColor="@color/textTitleColorLight"
                         android:textSize="@dimen/textSize_15" />
 
-                    <com.jx.sleep_dg.view.EcgView
-                        android:id="@+id/l_ecg_xinlv"
-                        android:layout_width="match_parent"
-                        android:layout_height="80dp"
-                        android:layout_centerInParent="true"
-                        android:layout_toLeftOf="@+id/group1"
-                        android:layout_toRightOf="@id/tv_heartrate_text" />
-
                     <LinearLayout
                         android:id="@+id/group1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="5dp"
                         android:divider="@drawable/shape_divider_horizontal"
                         android:gravity="center_horizontal"
                         android:orientation="vertical"
@@ -287,7 +296,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="2dp"
                             android:text="@string/heart_rate_value"
-                            android:textColor="@color/textTitleColorLight" />
+                            android:textColor="@color/textTitleColorLight"
+                            android:textSize="@dimen/textSize_10" />
 
                         <TextView
                             android:id="@+id/tv_huxi_left"
@@ -295,42 +305,44 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="@string/breath_rate_value"
-                            android:textColor="@color/textTitleColorLight" />
+                            android:textColor="@color/textTitleColorLight"
+                            android:textSize="@dimen/textSize_10" />
                     </LinearLayout>
-                </RelativeLayout>
+                </LinearLayout>
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
+                    android:gravity="center_vertical"
                     android:paddingLeft="5dp"
-                    android:paddingRight="10dp">
+                    android:paddingRight="5dp">
+
+                    <com.jx.sleep_dg.view.HuxiEcgView
+                        android:id="@+id/r_ecg_xinlv"
+                        android:layout_width="0dp"
+                        android:layout_height="80dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_toLeftOf="@+id/group2"
+                        android:layout_toRightOf="@id/tv_huxi_text"
+                        android:layout_weight="1" />
 
                     <TextView
                         android:id="@+id/tv_huxi_text"
-                        android:layout_width="35dp"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:background="@mipmap/ic_ring"
                         android:gravity="center"
                         android:text="@string/right"
                         android:textColor="@color/textTitleColorLight"
                         android:textSize="@dimen/textSize_15" />
 
-                    <com.jx.sleep_dg.view.HuxiEcgView
-                        android:id="@+id/r_ecg_xinlv"
-                        android:layout_width="match_parent"
-                        android:layout_height="80dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_toLeftOf="@+id/group2"
-                        android:layout_toRightOf="@id/tv_huxi_text" />
-
                     <LinearLayout
                         android:id="@+id/group2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="5dp"
                         android:divider="@drawable/shape_divider_horizontal"
                         android:gravity="center_horizontal"
                         android:orientation="vertical"
@@ -343,7 +355,8 @@
                             android:layout_below="@id/tv_huxi_right"
                             android:layout_marginBottom="2dp"
                             android:text="@string/heart_rate_value"
-                            android:textColor="@color/textTitleColorLight" />
+                            android:textColor="@color/textTitleColorLight"
+                            android:textSize="@dimen/textSize_10" />
 
                         <TextView
                             android:id="@+id/tv_huxi_right"
@@ -351,9 +364,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="@string/breath_rate_value"
-                            android:textColor="@color/textTitleColorLight" />
+                            android:textColor="@color/textTitleColorLight"
+                            android:textSize="@dimen/textSize_10" />
                     </LinearLayout>
-                </RelativeLayout>
+                </LinearLayout>
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
     </android.support.design.widget.CoordinatorLayout>
