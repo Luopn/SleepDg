@@ -49,7 +49,7 @@
     <string name="sleep_negative">未眠状态: 1小时59分</string>
     <string name="sleep_not_bed">不在床上: AM23:59分</string>
     <string name="sleep_report">睡眠报告</string>
-    <string name="sleep_tim">睡眠时间</string>
+    <string name="sleep_tim">睡眠时间:22:00</string>
     <string name="sleep_record_time">记录时间12:00~次日12:00</string>
     <string name="real_time">实时数据</string>
     <string name="left">左</string>

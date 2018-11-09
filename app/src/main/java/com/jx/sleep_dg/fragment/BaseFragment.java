@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import com.jx.sleep_dg.ble.BluetoothLeService;
 import com.jx.sleep_dg.http.Config;
 import com.jx.sleep_dg.http.OkHttpUtils;
-import com.jx.sleep_dg.protocol.MSPProtocol;
 import com.jx.sleep_dg.utils.LogUtil;
 import com.jx.sleep_dg.utils.ToastUtil;
 
@@ -61,7 +60,7 @@ public abstract class BaseFragment extends SupportFragment implements View.OnCli
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            notifyUIDataSetChanged(intent);
+                            notifyBleDataChanged(intent);
                         }
                     });
                 } else if (intent.getAction() != null && intent.getAction().equals(BluetoothLeService.ACTION_GATT_DISCONNECTED)) {
@@ -77,7 +76,7 @@ public abstract class BaseFragment extends SupportFragment implements View.OnCli
     }
 
     //更新UI数据
-    protected void notifyUIDataSetChanged(Intent intent) {
+    protected void notifyBleDataChanged(Intent intent) {
     }
 
     protected void notifyDeviceDisconnected() {

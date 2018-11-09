@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?attr/actionBarSize">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <!--进度数据-->
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/circle_progress_bar3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@mipmap/ic_progress2" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/sleep_score"
+                            android:textColor="@color/textTitleColor"
+                            android:textSize="@dimen/textSize_10" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="90"
+                            android:textColor="@color/textAccentColor"
+                            android:textSize="44dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/sleep_congress"
+                            android:textColor="#8d8be8"
+                            android:textSize="@dimen/textSize_10" />
+                    </LinearLayout>
+                </FrameLayout>
+
+                <!--具体数据-->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:minWidth="160dp"
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_title_deep_sleep"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@mipmap/ic_circle_gray"
+                            android:drawablePadding="5dp"
+                            android:drawableTint="@color/mediumblue"
+                            android:gravity="center_vertical"
+                            android:text="@string/sleep_deep"
+                            android:textColor="@color/textTitleColor"
+                            android:textSize="@dimen/textSize_10" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="1小时59分"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/textSize_10" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_title_shallow_sleep"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@mipmap/ic_circle_gray"
+                            android:drawablePadding="5dp"
+                            android:drawableTint="@color/textAccentColor"
+                            android:gravity="center_vertical"
+                            android:text="@string/sleep_shallow"
+                            android:textColor="@color/textTitleColor"
+                            android:textSize="@dimen/textSize_10" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="1小时59分"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/textSize_10" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_title_clear_sleep"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@mipmap/ic_circle_gray"
+                            android:drawablePadding="5dp"
+                            android:drawableTint="@color/default_blue_light"
+                            android:gravity="center_vertical"
+                            android:text="@string/sleep_clear"
+                            android:textColor="@color/textTitleColor"
+                            android:textSize="@dimen/textSize_10" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="1小时59分"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/textSize_10" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_title_time_sleep"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@mipmap/ic_circle_gray"
+                            android:drawablePadding="5dp"
+                            android:drawableTint="@color/textTitleColor"
+                            android:gravity="center_vertical"
+                            android:text="@string/sleep_time"
+                            android:textColor="@color/textTitleColor"
+                            android:textSize="@dimen/textSize_10" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="AM23:59分"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/textSize_10" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/sleep_report"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/textSize_22" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/sleep_tim"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/textSize_12" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginTop="8dp"
+                    android:gravity="right"
+                    android:text="@string/sleep_record_time"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/textSize_12" />
+            </LinearLayout>
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/bar_chat"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_height="250dp" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp">
+
+                <TextView
+                    android:id="@+id/tv_heartrate_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:text="@string/heart_rate"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/textSize_15" />
+
+                <TextView
+                    android:id="@+id/tv_xinlv_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="15dp"
+                    android:text="左 0"
+                    android:textColor="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/tv_xinlv_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/tv_xinlv_left"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="3dp"
+                    android:text="右 0"
+                    android:textColor="@android:color/white" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:id="@+id/tv_huxi_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:text="@string/breath_rate"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/textSize_15" />
+
+                <TextView
+                    android:id="@+id/tv_huxi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_toRightOf="@id/tv_huxi_text"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/textSize_17" />
+
+                <TextView
+                    android:id="@+id/tv_huxi_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="15dp"
+                    android:text="左 0"
+                    android:textColor="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/tv_huxi_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/tv_huxi_left"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="3dp"
+                    android:text="右 0"
+                    android:textColor="@android:color/white" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:id="@+id/tv_fanshen_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:text="@string/roll_body_rate"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/textSize_15" />
+
+                <TextView
+                    android:id="@+id/tv_fanshen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_toRightOf="@id/tv_fanshen_text"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/textSize_17" />
+
+                <TextView
+                    android:id="@+id/tv_fanshen_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="15dp"
+                    android:text="左 0"
+                    android:textColor="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/tv_fanshen_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/tv_fanshen_left"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="3dp"
+                    android:text="右 0"
+                    android:textColor="@android:color/white" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:id="@+id/tv_zhihan_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:text="@string/snoring"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/textSize_15" />
+
+                <TextView
+                    android:id="@+id/tv_zhihan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_toRightOf="@id/tv_zhihan_text"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/textSize_17" />
+
+                <TextView
+                    android:id="@+id/tv_zhihan_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="15dp"
+                    android:text="左 0"
+                    android:textColor="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/tv_zhihan_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/tv_zhihan_left"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="3dp"
+                    android:text="右 0"
+                    android:textColor="@android:color/white" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <!--Toolbar-->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimaryDark"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/statistics_title"
+            android:textColor="@color/textTitleColor"
+            android:textSize="@dimen/textSize_18" />
+    </FrameLayout>
+</FrameLayout>

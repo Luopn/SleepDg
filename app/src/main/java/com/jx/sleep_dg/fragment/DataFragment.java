@@ -3,8 +3,6 @@ package com.jx.sleep_dg.fragment;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.CountDownTimer;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.view.View;
@@ -13,8 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jx.sleep_dg.R;
-import com.jx.sleep_dg.ble.BleUtils;
-import com.jx.sleep_dg.protocol.BleComUtils;
 import com.jx.sleep_dg.protocol.MSPProtocol;
 import com.jx.sleep_dg.ui.MainActivity;
 import com.jx.sleep_dg.ui.SearchActivity;
@@ -22,8 +18,6 @@ import com.jx.sleep_dg.utils.CommonUtil;
 import com.jx.sleep_dg.view.EcgView;
 import com.jx.sleep_dg.view.HuxiEcgView;
 import com.jx.sleep_dg.view.NumberRollingView;
-
-import org.w3c.dom.Text;
 
 import java.util.Locale;
 
@@ -126,8 +120,8 @@ public class DataFragment extends BaseFragment {
     }
 
     @Override
-    protected void notifyUIDataSetChanged(Intent intent) {
-        super.notifyUIDataSetChanged(intent);
+    protected void notifyBleDataChanged(Intent intent) {
+        super.notifyBleDataChanged(intent);
         bindViewData();
     }
 

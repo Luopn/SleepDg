@@ -59,8 +59,8 @@ public class DeviceNetConfigAcyivity extends BaseActivity implements View.OnClic
     }
 
     @Override
-    protected void notifyUIDataSetChanged(Intent intent) {
-        super.notifyUIDataSetChanged(intent);
+    protected void notifyBleDataChanged(Intent intent) {
+        super.notifyBleDataChanged(intent);
 
     }
 

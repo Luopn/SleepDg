@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -89,7 +88,7 @@ public abstract class BaseActivity extends SupportActivity implements View.OnCli
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            notifyUIDataSetChanged(intent);
+                            notifyBleDataChanged(intent);
                         }
                     });
                 }
@@ -100,7 +99,7 @@ public abstract class BaseActivity extends SupportActivity implements View.OnCli
     }
 
     //蓝牙数据变动，UI更新
-    protected void notifyUIDataSetChanged(Intent intent) {
+    protected void notifyBleDataChanged(Intent intent) {
 
     }
 

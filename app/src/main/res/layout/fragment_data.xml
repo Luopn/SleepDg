@@ -74,7 +74,7 @@
                             android:id="@+id/iv_circle_progress"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@mipmap/ic_sleep_score" />
+                            android:src="@mipmap/ic_progress" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"

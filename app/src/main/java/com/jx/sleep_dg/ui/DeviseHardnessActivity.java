@@ -102,8 +102,8 @@ public class DeviseHardnessActivity extends BaseActivity implements View.OnClick
     }
 
     @Override
-    protected void notifyUIDataSetChanged(Intent intent) {
-        super.notifyUIDataSetChanged(intent);
+    protected void notifyBleDataChanged(Intent intent) {
+        super.notifyBleDataChanged(intent);
         bindViewData();
     }
 

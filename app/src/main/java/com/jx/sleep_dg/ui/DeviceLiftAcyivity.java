@@ -98,8 +98,8 @@ public class DeviceLiftAcyivity extends BaseActivity implements View.OnClickList
     }
 
     @Override
-    protected void notifyUIDataSetChanged(Intent intent) {
-        super.notifyUIDataSetChanged(intent);
+    protected void notifyBleDataChanged(Intent intent) {
+        super.notifyBleDataChanged(intent);
         bindViewData();
     }
 
