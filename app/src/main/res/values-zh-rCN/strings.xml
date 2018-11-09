@@ -75,8 +75,8 @@
 
     <!--控制页面-->
     <string name="height">升降智控</string>
-    <string name="hardness">床位软硬度</string>
-    <string name="temperature">床位温度</string>
+    <string name="hardness">软硬智控</string>
+    <string name="temperature">温度智控</string>
     <string name="custom_mode">自定义模式</string>
     <string name="save_mode">保存当前设定</string>
     <string name="lift_ctrl">升降调节</string>

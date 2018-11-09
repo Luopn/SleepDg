@@ -1,28 +1,23 @@
 package com.jx.sleep_dg.fragment;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
+import android.os.Vibrator;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.jx.sleep_dg.Bean.ControlBean;
 import com.jx.sleep_dg.R;
+import com.jx.sleep_dg.ble.BleUtils;
+import com.jx.sleep_dg.protocol.BleComUtils;
 import com.jx.sleep_dg.protocol.MSPProtocol;
 import com.jx.sleep_dg.ui.DeviceLiftAcyivity;
 import com.jx.sleep_dg.ui.DeviceNetConfigAcyivity;
 import com.jx.sleep_dg.ui.DeviceTempActivity;
 import com.jx.sleep_dg.ui.DeviseHardnessActivity;
-import com.jx.sleep_dg.view.MyListView;
+import com.jx.sleep_dg.view.SegmentControl;
 
-import java.util.ArrayList;
-import java.util.List;
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 
 /**
  * 控制
@@ -31,44 +26,66 @@ import java.util.List;
 
 public class ControlFragment extends BaseFragment {
 
+    private static final long VIBRATE_TIME = 20;
+
     private MSPProtocol mspProtocol;
-    private TextView tvNetConfig;
+    private Vibrator vibrator;
+
+    private int mLHeadHigh, mLTailHigh, mRHeadHigh, mRTailHigh, mLHardness, mRHardness;
+    private boolean isHighR;
+
+    private ScrollView scrollView;
+    private SegmentControl scHigh, scHard;
     private TextView tvHeadHigh, tvTailHigh;//床头，床尾高度
     private TextView tvLHardness, tvRHardness;//左，右床位硬度
-    private MyListView listview;
-    private List<ControlBean> controlList;
-
-    private Myadapter myadapter;
 
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_control;
     }
 
-    @SuppressLint("WrongViewCast")
     @Override
     public void onBindView(View view) {
-        controlList = new ArrayList<>();
+        scrollView = view.findViewById(R.id.scrollView);
+
+        scHigh = view.findViewById(R.id.sc_high);
+        scHard = view.findViewById(R.id.sc_hard);
+
         tvHeadHigh = view.findViewById(R.id.tv_head_high);
         tvTailHigh = view.findViewById(R.id.tv_tail_high);
         tvLHardness = view.findViewById(R.id.tv_l_hardness);
         tvRHardness = view.findViewById(R.id.tv_r_hardness);
+
         view.findViewById(R.id.ll_hardness).setOnClickListener(this);
         view.findViewById(R.id.ll_lift).setOnClickListener(this);
         view.findViewById(R.id.ll_temp).setOnClickListener(this);
         view.findViewById(R.id.tv_right).setOnClickListener(this);
-        listview = view.findViewById(R.id.listview);
-        myadapter = new Myadapter(getActivity(), 0, controlList);
-        listview.setAdapter(myadapter);
-        for (int i = 0; i < 3; i++) {
-            ControlBean bean = new ControlBean();
-            bean.setId(i + "");
-            bean.setName(getResources().getString(R.string.device) + i);
-            controlList.add(bean);
-        }
-        myadapter.notifyDataSetChanged();
 
+        scHigh.setOnSegmentChangedListener(new SegmentControl.OnSegmentChangedListener() {
+            @Override
+            public void onSegmentChanged(int newSelectedIndex) {
+                isHighR = newSelectedIndex == 1;
+            }
+        });
+        scHard.setOnSegmentChangedListener(new SegmentControl.OnSegmentChangedListener() {
+            @Override
+            public void onSegmentChanged(int newSelectedIndex) {
+            }
+        });
+        //控制
+        view.findViewById(R.id.iv_height_head_up).setOnClickListener(this);//头部升
+        view.findViewById(R.id.iv_height_head_down).setOnClickListener(this);//头部降
+        view.findViewById(R.id.iv_foot_height_up).setOnClickListener(this);//脚部升
+        view.findViewById(R.id.iv_foot_height_down).setOnClickListener(this);//脚部降
+        view.findViewById(R.id.iv_hard_l_add).setOnClickListener(this);//左边加硬
+        view.findViewById(R.id.iv_hard_l_reduce).setOnClickListener(this);//左边变软
+        view.findViewById(R.id.iv_hard_r_add).setOnClickListener(this);//右边变硬
+        view.findViewById(R.id.iv_hard_r_reduce).setOnClickListener(this);//右边变软
+        //协议
         mspProtocol = MSPProtocol.getInstance();
+
+        OverScrollDecoratorHelper.setUpOverScroll(scrollView);
+        vibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
         bindViewData();
     }
 
@@ -81,10 +98,20 @@ public class ControlFragment extends BaseFragment {
     //绑定UI数据
     private void bindViewData() {
         if (mspProtocol != null) {
-            tvHeadHigh.setText(String.format("%s", mspProtocol.getHigh1()));
-            tvTailHigh.setText(String.format("%s", mspProtocol.getHigh2()));
-            tvLHardness.setText(String.format("%s", mspProtocol.getlPresureCurVal()));
-            tvRHardness.setText(String.format("%s", mspProtocol.getrPresureCurVal()));
+            mLHeadHigh = mspProtocol.getHigh1();
+            mRHeadHigh = mspProtocol.getHigh3();
+            mLTailHigh = mspProtocol.getHigh2();
+            mRTailHigh = mspProtocol.getHigh4();
+            if (isHighR) {
+                tvHeadHigh.setText(String.format("%s", mRHeadHigh = mspProtocol.getHigh3()));
+                tvTailHigh.setText(String.format("%s", mRTailHigh = mspProtocol.getHigh4()));
+            } else {
+                tvHeadHigh.setText(String.format("%s", mLHeadHigh = mspProtocol.getHigh1()));
+                tvTailHigh.setText(String.format("%s", mLTailHigh = mspProtocol.getHigh2()));
+            }
+
+            tvLHardness.setText(String.format("%s", mLHardness = mspProtocol.getlPresureCurVal()));
+            tvRHardness.setText(String.format("%s", mRHardness = mspProtocol.getrPresureCurVal()));
         }
     }
 
@@ -107,37 +134,99 @@ public class ControlFragment extends BaseFragment {
                 //床位温度
                 startActivity(new Intent(getActivity(), DeviceTempActivity.class));
                 break;
+            case R.id.iv_height_head_up://头部升
+                vibrator.vibrate(VIBRATE_TIME);
+
+                if (isHighR) {
+                    mRHeadHigh += 1;
+                    if (mRHeadHigh >= 17) mRHeadHigh = 17;
+                } else {
+                    mLHeadHigh += 1;
+                    if (mLHeadHigh >= 17) mLHeadHigh = 17;
+                }
+                BleComUtils.senddianji(BleUtils.convertDecimalToBinary(mLHeadHigh + "")
+                        + BleUtils.convertDecimalToBinary(mLTailHigh + "")
+                        + BleUtils.convertDecimalToBinary(mRHeadHigh + "")
+                        + BleUtils.convertDecimalToBinary(mRTailHigh + ""));
+                break;
+            case R.id.iv_height_head_down://头部降
+                vibrator.vibrate(VIBRATE_TIME);
+
+                if (isHighR) {
+                    mRHeadHigh -= 1;
+                    if (mRHeadHigh <= 0) mRHeadHigh = 0;
+                } else {
+                    mLHeadHigh -= 1;
+                    if (mLHeadHigh <= 0) mLHeadHigh = 0;
+                }
+                BleComUtils.senddianji(BleUtils.convertDecimalToBinary(mLHeadHigh + "")
+                        + BleUtils.convertDecimalToBinary(mLTailHigh + "")
+                        + BleUtils.convertDecimalToBinary(mRHeadHigh + "")
+                        + BleUtils.convertDecimalToBinary(mRTailHigh + ""));
+                break;
+            case R.id.iv_foot_height_up://脚部升
+                vibrator.vibrate(VIBRATE_TIME);
+
+                if (isHighR) {
+                    mRTailHigh += 1;
+                    if (mRTailHigh >= 17) mRTailHigh = 17;
+                } else {
+                    mLTailHigh += 1;
+                    if (mLTailHigh >= 17) mLTailHigh = 17;
+                }
+                BleComUtils.senddianji(BleUtils.convertDecimalToBinary(mLHeadHigh + "")
+                        + BleUtils.convertDecimalToBinary(mLTailHigh + "")
+                        + BleUtils.convertDecimalToBinary(mRHeadHigh + "")
+                        + BleUtils.convertDecimalToBinary(mRTailHigh + ""));
+                break;
+            case R.id.iv_foot_height_down://脚部降
+                vibrator.vibrate(VIBRATE_TIME);
+
+                if (isHighR) {
+                    mRTailHigh -= 1;
+                    if (mRTailHigh <= 0) mRTailHigh = 0;
+                } else {
+                    mLTailHigh -= 1;
+                    if (mLTailHigh <= 0) mLTailHigh = 0;
+                }
+                BleComUtils.senddianji(BleUtils.convertDecimalToBinary(mLHeadHigh + "")
+                        + BleUtils.convertDecimalToBinary(mLTailHigh + "")
+                        + BleUtils.convertDecimalToBinary(mRHeadHigh + "")
+                        + BleUtils.convertDecimalToBinary(mRTailHigh + ""));
+                break;
+            case R.id.iv_hard_l_add://左边硬
+                vibrator.vibrate(VIBRATE_TIME);
+
+                mLHardness += 5;
+                if (mLHardness >= 100) mLHardness = 100;
+                BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary(mLHardness + "")
+                        + BleUtils.convertDecimalToBinary(mRHardness + ""));
+                break;
+            case R.id.iv_hard_l_reduce://左边软
+                vibrator.vibrate(VIBRATE_TIME);
+
+                mLHardness -= 5;
+                if (mLHardness <= 0) mLHardness = 0;
+                BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary(mLHardness + "")
+                        + BleUtils.convertDecimalToBinary(mRHardness + ""));
+                break;
+            case R.id.iv_hard_r_add://右边硬
+                vibrator.vibrate(VIBRATE_TIME);
+
+                mRHardness += 5;
+                if (mRHardness >= 100) mRHardness = 100;
+                BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary(mLHardness + "")
+                        + BleUtils.convertDecimalToBinary(mRHardness + ""));
+                break;
+            case R.id.iv_hard_r_reduce://右边软
+                vibrator.vibrate(VIBRATE_TIME);
+
+                mRHardness -= 5;
+                if (mLHardness <= 0) mRHardness = 0;
+                BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary(mLHardness + "")
+                        + BleUtils.convertDecimalToBinary(mRHardness + ""));
+                break;
         }
     }
 
-    class Myadapter extends ArrayAdapter<ControlBean> {
-
-        public Myadapter(@NonNull Context context, int resource, @NonNull List<ControlBean> objects) {
-            super(context, resource, objects);
-        }
-
-        @NonNull
-        @Override
-        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            ViewHolder holder;
-            if (convertView == null) {
-                holder = new ViewHolder();
-                convertView = View.inflate(getContext(), R.layout.listview_item_control, null);
-                holder.tvName = convertView.findViewById(R.id.tv_name);
-                holder.tvUse = convertView.findViewById(R.id.tv_use);
-                holder.tvMode = convertView.findViewById(R.id.tv_mode);
-                convertView.setTag(holder);
-            } else {
-                holder = (ViewHolder) convertView.getTag();
-            }
-            holder.tvName.setText(getItem(position).getName());
-            return convertView;
-        }
-    }
-
-    class ViewHolder {
-        TextView tvName;
-        TextView tvUse;
-        TextView tvMode;
-    }
 }
