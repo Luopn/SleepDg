@@ -3,213 +3,170 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     android:orientation="vertical">
 
-    <LinearLayout
+    <!--床位显示-->
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-        <LinearLayout
+        <ImageView
+            android:id="@+id/iv_zuo_chuang"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="5dp"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:layout_gravity="center"
+            android:background="@mipmap/head0_foot1" />
+
+        <ImageView
+            android:id="@+id/iv_you_chuang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@mipmap/head0_foot1"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
 
             <ImageView
                 android:id="@+id/iv_tou"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@mipmap/ic_head" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:text="@string/head"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/textSize_14" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="8dp"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/left"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/textSize_16" />
+                android:layout_weight="1"
+                android:src="@mipmap/ic_head" />
 
             <TextView
                 android:id="@+id/tv_zuo_tou"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="@string/head"
-                android:textColor="#4f4e83"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/left_value"
+                android:textColor="@android:color/white"
                 android:textSize="@dimen/textSize_13" />
 
             <TextView
-                android:id="@+id/tv_zuo_jiao"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_zuo_tou"
-                android:layout_marginTop="5dp"
-                android:text="@string/feet"
-                android:textColor="#4f4e83"
+                android:id="@+id/tv_you_tou"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/right_value"
+                android:textColor="@android:color/white"
                 android:textSize="@dimen/textSize_13" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="8dp"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:layout_marginTop="16dp"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_jiao"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@mipmap/ic_foot" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/right"
+                android:id="@+id/tv_zuo_jiao"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/left_value"
                 android:textColor="@android:color/white"
-
-                android:textSize="@dimen/textSize_16" />
-
-            <TextView
-                android:id="@+id/tv_you_tou"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="@string/head"
-                android:textColor="#4f4e83"
                 android:textSize="@dimen/textSize_13" />
 
             <TextView
                 android:id="@+id/tv_you_jiao"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="@string/feet"
-                android:textColor="#4f4e83"
-                android:textSize="@dimen/textSize_13" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="15dp"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/iv_jiao"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@mipmap/ic_foot" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:text="@string/feet"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/right_value"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/textSize_14" />
+                android:textSize="@dimen/textSize_13" />
         </LinearLayout>
     </LinearLayout>
 
-    <ToggleButton
+    <com.jx.sleep_dg.view.SegmentControl
         android:id="@+id/togglebutton"
-        android:layout_width="90dp"
-        android:layout_height="35dp"
+        android:layout_width="80dp"
+        android:layout_height="24dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/toggle_drawable_selector"
-        android:textOff="@null"
-        android:textOn="@null" />
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
+        app:scv_BackgroundNormalColor="@android:color/transparent"
+        app:scv_BackgroundSelectedColor="@color/colorAccent"
+        app:scv_FrameColor="@color/textTitleColor"
+        app:scv_FrameCornerRadius="12dp"
+        app:scv_TextArray="@array/left_right"
+        app:scv_TextNormalColor="@android:color/white"
+        app:scv_TextSelectedColor="@color/colorAccent"
+        app:scv_TextSize="@dimen/textSize_12" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:layout_marginLeft="43dp"
-        android:layout_marginTop="28dp"
         android:layout_marginRight="43dp"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/iv_tou_jia"
                 android:layout_width="33dp"
                 android:layout_height="33dp"
-                android:background="@mipmap/ic_add_big" />
+                android:src="@mipmap/ic_add_big" />
 
-            <com.jx.sleep_dg.view.bar.VerticalSeekBar
+            <SeekBar
                 android:id="@+id/seeb_left_tou"
-                android:layout_width="50dp"
-                android:layout_height="200dp"
-                android:layout_marginTop="5dp" />
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:max="17" />
 
-            <com.jx.sleep_dg.view.bar.VerticalSeekBar
+            <SeekBar
                 android:id="@+id/seeb_right_tou"
-                android:layout_width="50dp"
-                android:layout_height="200dp"
-                android:layout_marginTop="5dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:max="17"
                 android:visibility="gone" />
 
             <ImageView
                 android:id="@+id/iv_tou_jian"
                 android:layout_width="33dp"
                 android:layout_height="33dp"
-                android:layout_marginTop="5dp"
                 android:background="@mipmap/ic_reduce_big" />
         </LinearLayout>
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <ImageView
-                android:id="@+id/iv_zuo_chuang"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@mipmap/head0_foot1" />
-
-            <ImageView
-                android:id="@+id/iv_you_chuang"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@mipmap/head0_foot1"
-                android:visibility="gone" />
-        </FrameLayout>
-
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/iv_jiao_jia"
@@ -217,25 +174,25 @@
                 android:layout_height="33dp"
                 android:background="@mipmap/ic_add_big" />
 
-            <com.jx.sleep_dg.view.bar.VerticalSeekBar
+            <SeekBar
                 android:id="@+id/seeb_left_jiao"
-                android:layout_width="50dp"
-                android:layout_height="200dp"
-                android:layout_marginTop="5dp" />
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:max="17" />
 
-            <com.jx.sleep_dg.view.bar.VerticalSeekBar
+            <SeekBar
                 android:id="@+id/seeb_right_jiao"
-                android:layout_width="50dp"
-                android:layout_height="200dp"
-                android:layout_marginTop="5dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:max="17"
                 android:visibility="gone" />
 
             <ImageView
                 android:id="@+id/iv_jiao_jian"
                 android:layout_width="33dp"
                 android:layout_height="33dp"
-
-                android:layout_marginTop="5dp"
                 android:background="@mipmap/ic_reduce_big" />
         </LinearLayout>
     </LinearLayout>

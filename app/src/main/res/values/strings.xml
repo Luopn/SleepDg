@@ -43,12 +43,12 @@
     <string name="sleep_score">Sleep VAS</string>
     <string name="sleep_congress">Please Go On</string>
     <string name="sleep_total">总睡时长:8.8h</string>
-    <string name="sleep_deep">深睡時長：1小时59分</string>
-    <string name="sleep_clear">清醒时长：1小时59分</string>
-    <string name="sleep_shallow">浅睡时长：1小时59分</string>
-    <string name="sleep_time">入睡时间：AM23:59分</string>
+    <string name="sleep_deep">深睡</string>
+    <string name="sleep_clear">清醒</string>
+    <string name="sleep_shallow">浅睡</string>
+    <string name="sleep_time">入睡</string>
     <string name="sleep_negative">未眠状态: 1小时59分</string>
-    <string name="sleep_not_bed">不在床上: AM23:59分</string>
+    <string name="sleep_not_bed">离床</string>
     <string name="sleep_report">Sleep Report</string>
     <string name="sleep_tim">Sleep Time</string>
     <string name="real_time">Real Time</string>
@@ -75,16 +75,17 @@
     <string name="add_error">Error happened when adding</string>
 
     <!--控制页面-->
-    <string name="height">Bed Height</string>
+    <string name="lift_ctrl">Elevating Regulation</string>
     <string name="hardness">Bed Hardness</string>
     <string name="temperature">Bed Temperature</string>
     <string name="custom_mode">Custom Mode</string>
     <string name="save_mode">Save</string>
-    <string name="lift_ctrl">Elevating Regulation</string>
     <string name="head">Head</string>
     <string name="head_value">Head&#160;%d</string>
     <string name="feet">Feet</string>
     <string name="feet_value">Feet&#160;%d</string>
+    <string name="left_value">Left&#160;%d</string>
+    <string name="right_value">Right&#160;%d</string>
     <string name="left_mem_hardness">Left bed memory hardness&#160;%d</string>
     <string name="left_cur_hardness">Left bed current hardness&#160;%d</string>
     <string name="right_mem_hardness">Right bed memory hardness&#160;%d</string>

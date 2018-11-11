@@ -42,7 +42,7 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="@string/height"
+                        android:text="@string/lift_ctrl"
                         android:textColor="@color/textTitleColor"
                         android:textSize="@dimen/textSize_14" />
 

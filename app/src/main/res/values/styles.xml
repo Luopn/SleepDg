@@ -13,7 +13,7 @@
         <!-- Customize your theme here. -->
         <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
-        <item name="android:background">@mipmap/bg_enrol</item>
+        <item name="android:background">@mipmap/ic_launch</item>
     </style>
 
     <style name="dialog" parent="@android:style/Theme.Dialog">

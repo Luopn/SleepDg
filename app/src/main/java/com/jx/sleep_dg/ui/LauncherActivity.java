@@ -1,37 +1,16 @@
 package com.jx.sleep_dg.ui;
 
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;
-import android.bluetooth.BluetoothGattService;
-import android.bluetooth.BluetoothManager;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.os.Handler;
-import android.text.TextUtils;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.jx.sleep_dg.Bean.HeartRateBean;
 import com.jx.sleep_dg.R;
-import com.jx.sleep_dg.ble.BleUtils;
 import com.jx.sleep_dg.ble.BluetoothLeClass;
 import com.jx.sleep_dg.ble.BluetoothLeService;
-import com.jx.sleep_dg.ble.SampleGattAttributes;
-import com.jx.sleep_dg.utils.Constance;
 import com.jx.sleep_dg.utils.LanguageUtil;
-import com.jx.sleep_dg.utils.LogUtil;
 import com.jx.sleep_dg.utils.PreferenceUtils;
-import com.jx.sleep_dg.utils.ToastUtil;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 /**
@@ -62,7 +41,7 @@ public class LauncherActivity extends BaseActivity {
     @Override
     public void bindView() {
         ivMain = new ImageView(this);
-        ivMain.setImageResource(R.mipmap.bg_enrol);
+        ivMain.setImageResource(R.mipmap.ic_launch);
         ivMain.setScaleType(ImageView.ScaleType.FIT_XY);
         setContentView(ivMain);
         startService(new Intent(this, BluetoothLeService.class));

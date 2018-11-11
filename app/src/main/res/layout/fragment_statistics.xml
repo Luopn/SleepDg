@@ -15,6 +15,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!--顶部-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -22,10 +23,10 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <!--进度数据-->
+                <!--左边圆环数据-->
                 <FrameLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="150dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_weight="1">
 
@@ -65,7 +66,7 @@
                     </LinearLayout>
                 </FrameLayout>
 
-                <!--具体数据-->
+                <!--右边具体数据-->
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -226,14 +227,15 @@
                     android:textSize="@dimen/textSize_12" />
             </LinearLayout>
 
-            <com.github.mikephil.charting.charts.BarChart
+            <!--柱状图-->
+            <com.jx.sleep_dg.view.barchart.RoundBarChart
                 android:id="@+id/bar_chat"
                 android:background="@android:color/transparent"
                 android:layout_width="match_parent"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_height="250dp" />
+                android:layout_height="230dp" />
 
+            <!--具体数字-->
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -269,7 +271,6 @@
                     android:text="右 0"
                     android:textColor="@android:color/white" />
             </RelativeLayout>
-
 
             <RelativeLayout
                 android:layout_width="wrap_content"

@@ -42,12 +42,12 @@
     <string name="sleep_score">睡眠評分</string>
     <string name="sleep_congress">請繼續保持</string>
     <string name="sleep_total">總睡時長:8.8h</string>
-    <string name="sleep_deep">深睡時長：1小时59分</string>
-    <string name="sleep_clear">清醒時長：1小时59分</string>
-    <string name="sleep_shallow">淺睡時長：1小时59分</string>
-    <string name="sleep_time">入睡時間：AM23:59分</string>
+    <string name="sleep_deep">深睡</string>
+    <string name="sleep_clear">清醒</string>
+    <string name="sleep_shallow">淺睡</string>
+    <string name="sleep_time">入睡</string>
     <string name="sleep_negative">未眠狀態: 1小时59分</string>
-    <string name="sleep_not_bed">不在床上: AM23:59分</string>
+    <string name="sleep_not_bed">離床</string>
     <string name="sleep_report">睡眠報告</string>
     <string name="sleep_tim">睡眠時間</string>
     <string name="sleep_record_time">記錄時間2:00~次日12:00</string>
@@ -74,16 +74,17 @@
     <string name="add_error">添加異常</string>
 
     <!--控制页面-->
-    <string name="height">床體升降</string>
-    <string name="hardness">床體軟硬度</string>
+    <string name="lift_ctrl">升降智控</string>
+    <string name="hardness">軟硬智控</string>
     <string name="temperature">床體溫度</string>
     <string name="custom_mode">自定義模式</string>
     <string name="save_mode">保存當前設定</string>
-    <string name="lift_ctrl">升降調節</string>
     <string name="head">頭部</string>
     <string name="head_value">頭部&#160;%d</string>
     <string name="feet">腳部</string>
     <string name="feet_value">腳部&#160;%d</string>
+    <string name="left_value">左&#160;%d</string>
+    <string name="right_value">右&#160;%d</string>
     <string name="left_mem_hardness">左床記憶強度&#160;%d</string>
     <string name="left_cur_hardness">左床實時強度&#160;%d</string>
     <string name="right_mem_hardness">右床記憶強度&#160;%d</string>

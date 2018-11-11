@@ -47,7 +47,7 @@
     <string name="sleep_shallow">浅睡</string>
     <string name="sleep_time">入睡</string>
     <string name="sleep_negative">未眠状态: 1小时59分</string>
-    <string name="sleep_not_bed">不在床上: AM23:59分</string>
+    <string name="sleep_not_bed">离床</string>
     <string name="sleep_report">睡眠报告</string>
     <string name="sleep_tim">睡眠时间:22:00</string>
     <string name="sleep_record_time">记录时间12:00~次日12:00</string>
@@ -74,16 +74,17 @@
     <string name="add_error">添加异常</string>
 
     <!--控制页面-->
-    <string name="height">升降智控</string>
+    <string name="lift_ctrl">升降智控</string>
     <string name="hardness">软硬智控</string>
     <string name="temperature">温度智控</string>
     <string name="custom_mode">自定义模式</string>
     <string name="save_mode">保存当前设定</string>
-    <string name="lift_ctrl">升降调节</string>
     <string name="head">头部</string>
     <string name="head_value">头部&#160;%d</string>
     <string name="feet">脚部</string>
     <string name="feet_value">脚部&#160;%d</string>
+    <string name="left_value">左&#160;%d</string>
+    <string name="right_value">右&#160;%d</string>
     <string name="left_mem_hardness">左床记忆强度&#160;%d</string>
     <string name="left_cur_hardness">左床实时強度&#160;%d</string>
     <string name="right_mem_hardness">右床记忆强度&#160;%d</string>

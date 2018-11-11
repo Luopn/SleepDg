@@ -13,6 +13,7 @@ import com.jx.sleep_dg.R;
 import com.jx.sleep_dg.protocol.MSPProtocol;
 import com.jx.sleep_dg.utils.BarChartManager;
 import com.jx.sleep_dg.utils.CommonUtil;
+import com.jx.sleep_dg.view.barchart.RoundBarChart;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 
 public class StatisticsFragment extends BaseFragment {
 
-    private BarChart barChart;
+    private RoundBarChart barChart;
     private TextView tvLeftHeartbeat, tvRightHeartbeat;//心率
     private TextView tvLeftBreath, tvRightBreath;//呼吸率
     private TextView tvLeftBodyMove, tvRightBodyMove;//翻身次数（分钟）
@@ -51,15 +52,30 @@ public class StatisticsFragment extends BaseFragment {
 
         //柱状图
         BarChartManager barChartManager = new BarChartManager(barChart);
+        barChartManager.setContext(getActivity());
         List<BarEntry> yVals = new ArrayList<>();
-        yVals.add(new BarEntry(1f, 80f));
-        yVals.add(new BarEntry(2f, 50f));
-        yVals.add(new BarEntry(3f, 60f));
-        yVals.add(new BarEntry(4f, 60f));
-        yVals.add(new BarEntry(5f, 70f));
-        yVals.add(new BarEntry(6f, 80f));
+        String[] xValues = new String[]{
+                getActivity().getResources().getString(R.string.sleep_deep),
+                getActivity().getResources().getString(R.string.sleep_shallow),
+                getActivity().getResources().getString(R.string.sleep_clear),
+                getActivity().getResources().getString(R.string.sleep_time),
+                getActivity().getResources().getString(R.string.sleep_not_bed),
+        };
+        String[] yValues = new String[]{"20", "30", "10", "25", "15"};
+        int[] colors = new int[]{
+                R.color.mediumblue,
+                R.color.textAccentColor,
+                R.color.default_blue_light,
+                R.color.textTitleColor,
+                R.color.textTitleColorLight
+        };
+        yVals.add(new BarEntry(0f, Float.valueOf(yValues[0])));
+        yVals.add(new BarEntry(1f, Float.valueOf(yValues[1])));
+        yVals.add(new BarEntry(2f, Float.valueOf(yValues[2])));
+        yVals.add(new BarEntry(3f, Float.valueOf(yValues[3])));
+        yVals.add(new BarEntry(4f, Float.valueOf(yValues[4])));
         String label = "";
-        barChartManager.showBarChart(yVals, label, Color.parseColor("#233454"));
+        barChartManager.showBarChart(yVals, xValues, yValues, colors);
 
         TextView tvTitleDeepSleep = view.findViewById(R.id.tv_title_deep_sleep);
         TextView tvTitleShallowSleep = view.findViewById(R.id.tv_title_shallow_sleep);
