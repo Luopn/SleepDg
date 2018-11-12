@@ -15,7 +15,11 @@ import com.jx.sleep_dg.ble.BleUtils;
 import com.jx.sleep_dg.protocol.MSPProtocol;
 import com.jx.sleep_dg.utils.LogUtil;
 import com.jx.sleep_dg.view.SegmentControl;
+import com.jx.sleep_dg.view.WheelView;
 import com.jx.sleep_dg.view.bar.VerticalSeekBar;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 设备升降
@@ -73,6 +77,8 @@ public class DeviceLiftAcyivity extends BaseActivity implements View.OnClickList
         seebRightTou.setOnSeekBarChangeListener(this);
         seebLeftJiao.setOnSeekBarChangeListener(this);
         seebRightJiao.setOnSeekBarChangeListener(this);
+
+        initWheelView();
 
         bindViewData();
     }
@@ -315,5 +321,32 @@ public class DeviceLiftAcyivity extends BaseActivity implements View.OnClickList
                 + BleUtils.convertDecimalToBinary((leftJiaoIndex + 1) + "")
                 + BleUtils.convertDecimalToBinary((rightTouIndex + 1) + "")
                 + BleUtils.convertDecimalToBinary((rightJiaoIndex + 1) + ""));
+    }
+
+    private void initWheelView(){
+        WheelView mWheelView3 = findViewById(R.id.wheelview3);
+        List<String> items3 = new ArrayList<>();
+        items3.add("1");
+        items3.add("2");
+        items3.add("3");
+        items3.add("4");
+        items3.add("5");
+        items3.add("5");
+        items3.add("6");
+        items3.add("7");
+        items3.add("8");
+        items3.add("9");
+        items3.add("10");
+        items3.add("11");
+        items3.add("12");
+        items3.add("13");
+        items3.add("14");
+        items3.add("15");
+        items3.add("16");
+        items3.add("17");
+        items3.add("18");
+
+        mWheelView3.setItems(items3);
+        mWheelView3.setAdditionCenterMark("档");
     }
 }

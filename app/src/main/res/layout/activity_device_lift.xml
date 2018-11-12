@@ -196,4 +196,15 @@
                 android:background="@mipmap/ic_reduce_big" />
         </LinearLayout>
     </LinearLayout>
+
+    <com.jx.sleep_dg.view.WheelView
+        android:id="@+id/wheelview3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@color/color_bg"
+        app:lwvHighlightColor="@color/textTitleColor"
+        app:lwvIntervalFactor="1.3"
+        app:lwvMarkRatio="0.2"
+        app:lwvMarkTextColor="@color/textTitleColor" />
 </LinearLayout>

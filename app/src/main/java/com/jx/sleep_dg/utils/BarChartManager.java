@@ -110,7 +110,7 @@ public class BarChartManager {
         barDataSet.setValueFormatter(new IValueFormatter() {//设置文字格式
             @Override
             public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
-                return String.format(Locale.getDefault(), "%d%%", (int)value);
+                return String.format(Locale.getDefault(), "%d%%", (int) value);
             }
         });
         barDataSet.setDrawValues(true);//是否显示顶部的值
@@ -153,8 +153,11 @@ public class BarChartManager {
 
         @Override
         public String getFormattedValue(float value, AxisBase axis) {
-            Log.e("TAG", "============" + value);
-            return xValues[(int) value];
+            Log.i("TAG", "============" + value);
+            if ((int) value < xValues.length)
+                return xValues[(int) value];
+            else
+                return "";
         }
 
     }

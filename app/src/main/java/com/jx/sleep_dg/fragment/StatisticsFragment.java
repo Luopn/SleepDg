@@ -69,11 +69,11 @@ public class StatisticsFragment extends BaseFragment {
                 R.color.textTitleColor,
                 R.color.textTitleColorLight
         };
-        yVals.add(new BarEntry(0f, Float.valueOf(yValues[0])));
-        yVals.add(new BarEntry(1f, Float.valueOf(yValues[1])));
-        yVals.add(new BarEntry(2f, Float.valueOf(yValues[2])));
-        yVals.add(new BarEntry(3f, Float.valueOf(yValues[3])));
-        yVals.add(new BarEntry(4f, Float.valueOf(yValues[4])));
+        yVals.add(new BarEntry(1f, Float.valueOf(yValues[0])));
+        yVals.add(new BarEntry(2f, Float.valueOf(yValues[1])));
+        yVals.add(new BarEntry(3f, Float.valueOf(yValues[2])));
+        yVals.add(new BarEntry(4f, Float.valueOf(yValues[3])));
+        yVals.add(new BarEntry(5f, Float.valueOf(yValues[4])));
         String label = "";
         barChartManager.showBarChart(yVals, xValues, yValues, colors);
 
