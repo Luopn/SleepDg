@@ -94,6 +94,11 @@
             android:name=".ui.GaugeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.ShareActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/dialog" />
     </application>
 
 </manifest>

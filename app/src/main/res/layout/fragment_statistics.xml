@@ -50,7 +50,8 @@
                             android:textColor="@color/textTitleColor"
                             android:textSize="@dimen/textSize_10" />
 
-                        <TextView
+                        <com.jx.sleep_dg.view.NumberRollingView
+                            android:id="@+id/tv_sleep_score"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="90"
@@ -230,10 +231,10 @@
             <!--柱状图-->
             <com.jx.sleep_dg.view.barchart.RoundBarChart
                 android:id="@+id/bar_chat"
-                android:background="@android:color/transparent"
                 android:layout_width="match_parent"
+                android:layout_height="230dp"
                 android:layout_marginTop="10dp"
-                android:layout_height="230dp" />
+                android:background="@android:color/transparent" />
 
             <!--具体数字-->
             <RelativeLayout
@@ -433,5 +434,13 @@
             android:text="@string/statistics_title"
             android:textColor="@color/textTitleColor"
             android:textSize="@dimen/textSize_18" />
+
+        <ImageView
+            android:id="@+id/iv_share"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:scaleType="centerInside"
+            android:layout_gravity="center_vertical|right"
+            android:src="@mipmap/ic_share"/>
     </FrameLayout>
 </FrameLayout>

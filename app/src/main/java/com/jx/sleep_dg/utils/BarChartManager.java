@@ -153,7 +153,6 @@ public class BarChartManager {
 
         @Override
         public String getFormattedValue(float value, AxisBase axis) {
-            Log.i("TAG", "============" + value);
             if ((int) value < xValues.length)
                 return xValues[(int) value];
             else

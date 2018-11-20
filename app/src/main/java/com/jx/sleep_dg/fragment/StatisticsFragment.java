@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -11,8 +12,10 @@ import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarEntry;
 import com.jx.sleep_dg.R;
 import com.jx.sleep_dg.protocol.MSPProtocol;
+import com.jx.sleep_dg.ui.ShareActivity;
 import com.jx.sleep_dg.utils.BarChartManager;
 import com.jx.sleep_dg.utils.CommonUtil;
+import com.jx.sleep_dg.view.NumberRollingView;
 import com.jx.sleep_dg.view.barchart.RoundBarChart;
 
 import java.util.ArrayList;
@@ -27,6 +30,8 @@ import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 
 public class StatisticsFragment extends BaseFragment {
 
+    private ImageView ivShare;
+    private NumberRollingView tvSleepScore;
     private RoundBarChart barChart;
     private TextView tvLeftHeartbeat, tvRightHeartbeat;//心率
     private TextView tvLeftBreath, tvRightBreath;//呼吸率
@@ -42,6 +47,9 @@ public class StatisticsFragment extends BaseFragment {
     @Override
     public void onBindView(View view) {
         ScrollView scrollView = view.findViewById(R.id.scrollView);
+        ivShare = view.findViewById(R.id.iv_share);
+        ivShare.setOnClickListener(this);
+        tvSleepScore = view.findViewById(R.id.tv_sleep_score);
         barChart = view.findViewById(R.id.bar_chat);
         tvLeftHeartbeat = view.findViewById(R.id.tv_xinlv_left);
         tvRightHeartbeat = view.findViewById(R.id.tv_xinlv_right);
@@ -49,6 +57,8 @@ public class StatisticsFragment extends BaseFragment {
         tvRightBreath = view.findViewById(R.id.tv_huxi_right);
         tvLeftBodyMove = view.findViewById(R.id.tv_fanshen_left);
         tvRightBodyMove = view.findViewById(R.id.tv_fanshen_right);
+
+        tvSleepScore.startNumAnim("90");
 
         //柱状图
         BarChartManager barChartManager = new BarChartManager(barChart);
@@ -107,5 +117,18 @@ public class StatisticsFragment extends BaseFragment {
     protected void notifyBleDataChanged(Intent intent) {
         super.notifyBleDataChanged(intent);
         bindViewData();
+    }
+
+    @Override
+    public void onClick(View v) {
+        super.onClick(v);
+        switch (v.getId()) {
+            case R.id.iv_share:
+                Intent intent = new Intent(getActivity(), ShareActivity.class);
+                intent.putExtra(ShareActivity.KEY_SLEEP_SCORE, tvSleepScore.getText().toString());
+                getActivity().startActivity(intent);
+                getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                break;
+        }
     }
 }

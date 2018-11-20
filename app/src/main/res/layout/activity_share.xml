@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minWidth="350dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/hor_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="45dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_share_rectangle_bg"
+        app:layout_constraintTop_toBottomOf="@id/hor_guideline">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:background="@drawable/shape_share_rectangle_bg"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="45dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <com.jx.sleep_dg.view.NumberRollingView
+                    android:id="@+id/tv_sleep_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="90"
+                    android:textColor="@color/textAccentColor"
+                    android:textSize="35sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="分"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/sp_12" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_rank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="您打败了91%的智慧云用户"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/sp_14" />
+
+            <!--详情数据-->
+            <include layout="@layout/layout_share_datas" />
+
+            <!--二维码-->
+            <ImageView
+                android:id="@+id/iv_share_qrcode"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/ic_qrcode" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我也要试，扫码下载二维码"
+                android:textColor="@android:color/white"
+                android:textSize="10sp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <FrameLayout
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/shape_share_circle_bg"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <com.jx.sleep_dg.view.imageview.RoundedImageView
+            android:id="@+id/iv_user_head"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="centerInside"
+            android:src="@mipmap/ic_launcher_login"
+            app:riv_corner_radius="45dp" />
+    </FrameLayout>
+</android.support.constraint.ConstraintLayout>
