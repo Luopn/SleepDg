@@ -127,7 +127,6 @@ public class StatisticsFragment extends BaseFragment {
                 Intent intent = new Intent(getActivity(), ShareActivity.class);
                 intent.putExtra(ShareActivity.KEY_SLEEP_SCORE, tvSleepScore.getText().toString());
                 getActivity().startActivity(intent);
-                getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 break;
         }
     }

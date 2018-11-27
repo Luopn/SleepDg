@@ -6,205 +6,174 @@
     android:background="@color/colorPrimary"
     android:orientation="vertical">
 
-    <!--床位显示-->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <ImageView
-            android:id="@+id/iv_zuo_chuang"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@mipmap/head0_foot1" />
+            android:orientation="vertical"
+            android:layout_gravity="center">
 
-        <ImageView
-            android:id="@+id/iv_you_chuang"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@mipmap/head0_foot1"
-            android:visibility="gone" />
+            <ImageView
+                android:id="@+id/iv_zuo_chuang"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:adjustViewBounds="true"
+                android:layout_gravity="center_horizontal"
+                android:background="@mipmap/head0_foot1" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+                <View
+                    android:id="@+id/centerView"
+                    android:layout_width="1dp"
+                    android:layout_height="1dp"
+                    android:layout_centerInParent="true" />
+
+                <ImageView
+                    android:id="@+id/iv_tou"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="50dp"
+                    android:layout_toLeftOf="@id/centerView"
+                    android:background="@mipmap/ic_head" />
+
+                <ImageView
+                    android:id="@+id/iv_jiao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:layout_toRightOf="@id/centerView"
+                    android:background="@mipmap/ic_foot" />
+            </RelativeLayout>
+        </LinearLayout>
+
     </FrameLayout>
 
     <LinearLayout
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical">
-
-            <ImageView
-                android:id="@+id/iv_tou"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@mipmap/ic_head" />
-
-            <TextView
-                android:id="@+id/tv_zuo_tou"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/left_value"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/textSize_13" />
-
-            <TextView
-                android:id="@+id/tv_you_tou"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/right_value"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/textSize_13" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:gravity="center">
-
-            <ImageView
-                android:id="@+id/iv_jiao"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@mipmap/ic_foot" />
-
-            <TextView
-                android:id="@+id/tv_zuo_jiao"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/left_value"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/textSize_13" />
-
-            <TextView
-                android:id="@+id/tv_you_jiao"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/right_value"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/textSize_13" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <com.jx.sleep_dg.view.SegmentControl
-        android:id="@+id/togglebutton"
-        android:layout_width="80dp"
-        android:layout_height="24dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="20dp"
-        app:scv_BackgroundNormalColor="@android:color/transparent"
-        app:scv_BackgroundSelectedColor="@color/colorAccent"
-        app:scv_FrameColor="@color/textTitleColor"
-        app:scv_FrameCornerRadius="12dp"
-        app:scv_TextArray="@array/left_right"
-        app:scv_TextNormalColor="@android:color/white"
-        app:scv_TextSelectedColor="@color/colorAccent"
-        app:scv_TextSize="@dimen/textSize_12" />
-
-    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="43dp"
-        android:layout_marginRight="43dp"
-        android:orientation="vertical">
+        android:layout_margin="16dp"
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/iv_tou_jia"
-                android:layout_width="33dp"
-                android:layout_height="33dp"
-                android:src="@mipmap/ic_add_big" />
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@mipmap/ic_add_big" />
 
-            <SeekBar
-                android:id="@+id/seeb_left_tou"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:max="17" />
+            <LinearLayout
+                android:layout_width="120dp"
+                android:layout_height="250dp">
 
-            <SeekBar
-                android:id="@+id/seeb_right_tou"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:max="17"
-                android:visibility="gone" />
+                <com.jx.sleep_dg.view.Ruler
+                    android:id="@+id/ruler_tou"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    app:currentValue="0"
+                    app:fromValue="0"
+                    app:intervalsBetweenValues="5"
+                    app:linesColor="@color/textTitleColor"
+                    app:linesWidth="1dp"
+                    app:toValue="45"
+                    app:valuesInterval="5"
+                    app:valuesTextColor="@android:color/white"
+                    app:valuesTextSize="12sp" />
+
+                <com.jx.sleep_dg.view.bar.VerticalSeekBar
+                    android:id="@+id/seeb_left_tou"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
 
             <ImageView
                 android:id="@+id/iv_tou_jian"
-                android:layout_width="33dp"
-                android:layout_height="33dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:background="@mipmap/ic_reduce_big" />
         </LinearLayout>
 
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:text="升"
+                android:textColor="@color/textAccentColor"
+                android:textSize="@dimen/textSize_25" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_marginBottom="10dp"
+                android:text="降"
+                android:textColor="@color/textAccentColor"
+                android:textSize="@dimen/textSize_25" />
+        </FrameLayout>
+
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/iv_jiao_jia"
-                android:layout_width="33dp"
-                android:layout_height="33dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:background="@mipmap/ic_add_big" />
 
-            <SeekBar
-                android:id="@+id/seeb_left_jiao"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:max="17" />
+            <LinearLayout
+                android:layout_width="120dp"
+                android:layout_height="250dp">
 
-            <SeekBar
-                android:id="@+id/seeb_right_jiao"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:max="17"
-                android:visibility="gone" />
+                <com.jx.sleep_dg.view.Ruler
+                    android:id="@+id/ruler_jiao"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    app:currentValue="0"
+                    app:fromValue="0"
+                    app:intervalsBetweenValues="5"
+                    app:linesColor="@color/textTitleColor"
+                    app:linesWidth="1dp"
+                    app:toValue="45"
+                    app:valuesInterval="5"
+                    app:valuesTextColor="@android:color/white"
+                    app:valuesTextSize="12sp" />
+
+                <com.jx.sleep_dg.view.bar.VerticalSeekBar
+                    android:id="@+id/seeb_left_jiao"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
 
             <ImageView
                 android:id="@+id/iv_jiao_jian"
-                android:layout_width="33dp"
-                android:layout_height="33dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="5dp"
                 android:background="@mipmap/ic_reduce_big" />
         </LinearLayout>
     </LinearLayout>
-
-    <com.jx.sleep_dg.view.WheelView
-        android:id="@+id/wheelview3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@color/color_bg"
-        app:lwvHighlightColor="@color/textTitleColor"
-        app:lwvIntervalFactor="1.3"
-        app:lwvMarkRatio="0.2"
-        app:lwvMarkTextColor="@color/textTitleColor" />
 </LinearLayout>

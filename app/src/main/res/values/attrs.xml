@@ -222,15 +222,16 @@
         <attr name="scv_Gradient" format="reference|boolean" />
     </declare-styleable>
 
-    <declare-styleable name="lwvWheelView">
-        <attr name="lwvHighlightColor" format="color|reference" />
-        <attr name="lwvMarkColor" format="color|reference" />
-        <attr name="lwvMarkTextColor" format="color|reference" />
-        <attr name="lwvIntervalFactor" format="float" />
-        <attr name="lwvMarkRatio" format="float" />
-        <attr name="lwvCursorSize" format="dimension" />
-        <attr name="lwvMarkTextSize" format="dimension" />
-        <attr name="lwvCenterMarkTextSize" format="dimension" />
-        <attr name="lwvAdditionalCenterMark" format="string|reference" />
+    <declare-styleable name="Ruler">
+        <attr name="fromValue" format="integer"/>
+        <attr name="toValue" format="integer"/>
+        <attr name="currentValue" format="integer"/>
+        <attr name="intervalsBetweenValues" format="integer"/>
+        <attr name="valuesInterval" format="integer"/>
+        <attr name="valuesTextSize" format="dimension"/>
+        <attr name="valuesTextColor" format="color"/>
+        <attr name="linesWidth" format="dimension"/>
+        <attr name="linesColor" format="color"/>
+        <attr name="isShowPointer" format="boolean"/>
     </declare-styleable>
 </resources>

@@ -35,11 +35,11 @@ public class VerticalSeekBar extends View {
     private int locationX;
     private int locationY = -1;
 
-    private int mInnerProgressWidth = 4;
+    private int mInnerProgressWidth = 15;
     private int mInnerProgressWidthPx;
 
-    private int unSelectColor = 0xcc888888;
-    private RectF mDestRect;
+    private int unSelectColor = 0xff6d70ff;
+    private RectF mDestRect, mRoundRect;
 
     /**
      * 设置未选中的颜色
@@ -50,7 +50,7 @@ public class VerticalSeekBar extends View {
         this.unSelectColor = uNSelectColor;
     }
 
-    private int selectColor = 0xaa0980ED;
+    private int selectColor = 0xff6d70ff;
 
     /**
      * 设置选中线条的颜色
@@ -186,6 +186,7 @@ public class VerticalSeekBar extends View {
         intrinsicHeight = mThumb.getHeight();
         intrinsicWidth = mThumb.getWidth();
         mDestRect = new RectF(0, 0, intrinsicWidth, intrinsicHeight);
+        mRoundRect = new RectF();
         mInnerProgressWidthPx = DisplayUtils.dip2px(context, mInnerProgressWidth);
     }
 
@@ -268,12 +269,29 @@ public class VerticalSeekBar extends View {
     protected void onDraw(Canvas canvas) {
         locationY = (int) (intrinsicHeight * 0.5f + (maxProgress - progress) * (height - intrinsicHeight) / maxProgress);
         paint.setColor(unSelectColor);
-        canvas.drawRect(width / 2 - mInnerProgressWidthPx / 2, mDestRect.height() / 2, width / 2 + mInnerProgressWidthPx / 2, locationY, paint);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(2.0f);
+        float left = width / 2 - mInnerProgressWidthPx / 2;
+        float top = mDestRect.height() / 2;
+        float right = width / 2 + mInnerProgressWidthPx / 2;
+        float bottom = locationY;
+        float radius = (right - left) / 2;
+        mRoundRect.set(left, top, right, bottom);
+        canvas.drawRoundRect(mRoundRect, radius, radius, paint);
+        //canvas.drawRect(left, top, right,bottom , paint);
+
+        paint.setStyle(Paint.Style.FILL);
         paint.setColor(selectColor);
-        canvas.drawRect(width / 2 - mInnerProgressWidthPx / 2, locationY, width / 2 + mInnerProgressWidthPx / 2, height - mDestRect.height() / 2, paint);
+        left = width / 2 - mInnerProgressWidthPx / 2;
+        top = locationY;
+        right = width / 2 + mInnerProgressWidthPx / 2;
+        bottom = height - mDestRect.height() / 2;
+        mRoundRect.set(left, top, right, bottom);
+        canvas.drawRoundRect(mRoundRect, radius, radius, paint);
+        //canvas.drawRect(left, top, right, bottom, paint);
         canvas.save();
         canvas.translate(width / 2 - mDestRect.width() / 2, locationY - mDestRect.height() / 2);
-//        canvas.drawBitmap(mThumb, width / 2 - intrinsicWidth / 2, locationY - intrinsicHeight / 2, new Paint());
+        //canvas.drawBitmap(mThumb, width / 2 - intrinsicWidth / 2, locationY - intrinsicHeight / 2, new Paint());
         canvas.drawBitmap(mThumb, null, mDestRect, new Paint());
         canvas.restore();
         super.onDraw(canvas);

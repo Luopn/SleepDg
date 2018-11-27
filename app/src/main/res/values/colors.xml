@@ -5,6 +5,7 @@
     <color name="colorAccent">#00a1e9</color>
     <color name="colorPrimaryLight">#212546</color>
     <color name="colorAccentLight">#8800a1e9</color>
+    <color name="colorWindowBackgroud">#77000000</color>
 
     <!--文字的颜色-->
     <color name="textTitleColor">#6d70ff</color>
