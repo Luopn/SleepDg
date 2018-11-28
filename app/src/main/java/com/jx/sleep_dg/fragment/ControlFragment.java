@@ -32,11 +32,10 @@ public class ControlFragment extends BaseFragment {
     private MSPProtocol mspProtocol;
     private Vibrator vibrator;
 
-    private int mLHeadHigh, mLTailHigh, mRHeadHigh, mRTailHigh, mLHardness, mRHardness;
+    private int mLHeadHigh, mLTailHigh, mLHardness, mRHardness;
     private TextView tvHeadHigh, tvTailHigh;//床头，床尾高度
     private TextView tvLHardness, tvRHardness;//左，右床位硬度
 
-    private boolean isHighR;//切换显示床位高度的左右
     private boolean isNeedRefreshHigh, isNeedRefreshHard;//是否更新床位升降数据，床位软硬的数据
 
     @Override
@@ -49,8 +48,6 @@ public class ControlFragment extends BaseFragment {
         isNeedRefreshHigh = isNeedRefreshHard = true;
 
         ScrollView scrollView = view.findViewById(R.id.scrollView);
-        SegmentControl scHigh = view.findViewById(R.id.sc_high);
-        SegmentControl scHard = view.findViewById(R.id.sc_hard);
         tvHeadHigh = view.findViewById(R.id.tv_head_high);
         tvTailHigh = view.findViewById(R.id.tv_tail_high);
         tvLHardness = view.findViewById(R.id.tv_l_hardness);
@@ -61,19 +58,6 @@ public class ControlFragment extends BaseFragment {
         view.findViewById(R.id.ll_temp).setOnClickListener(this);
         view.findViewById(R.id.tv_right).setOnClickListener(this);
 
-        scHigh.setOnSegmentChangedListener(new SegmentControl.OnSegmentChangedListener() {
-            @Override
-            public void onSegmentChanged(int newSelectedIndex) {
-                isHighR = newSelectedIndex == 1;
-                if (isHighR) {
-                    tvHeadHigh.setText(String.format("%s", mRHeadHigh));
-                    tvTailHigh.setText(String.format("%s", mRTailHigh));
-                } else {
-                    tvHeadHigh.setText(String.format("%s", mLHeadHigh));
-                    tvTailHigh.setText(String.format("%s", mLTailHigh));
-                }
-            }
-        });
         //控制
         ImageView iv_height_head_up = view.findViewById(R.id.iv_height_head_up);
         ImageView iv_height_head_down = view.findViewById(R.id.iv_height_head_down);
@@ -109,23 +93,18 @@ public class ControlFragment extends BaseFragment {
     private void bindViewData() {
         if (mspProtocol != null) {
             mLHeadHigh = mspProtocol.getHigh1();
-            mRHeadHigh = mspProtocol.getHigh3();
             mLTailHigh = mspProtocol.getHigh2();
-            mRTailHigh = mspProtocol.getHigh4();
             if (isNeedRefreshHigh) {
-                if (isHighR) {
-                    tvHeadHigh.setText(String.format("%s", mRHeadHigh));
-                    tvTailHigh.setText(String.format("%s", mRTailHigh));
-                } else {
-                    tvHeadHigh.setText(String.format("%s", mLHeadHigh));
-                    tvTailHigh.setText(String.format("%s", mLTailHigh));
-                }
+                tvHeadHigh.setText(String.format(getResources().getString(R.string.head_value),
+                        (int)Math.ceil(mLHeadHigh / 17.0f * 45.0f)));
+                tvTailHigh.setText(String.format(getResources().getString(R.string.feet_value),
+                        (int)Math.ceil(mLTailHigh / 17.0f * 45.0f)));
             }
             mLHardness = mspProtocol.getlPresureCurVal();
             mRHardness = mspProtocol.getrPresureCurVal();
             if (isNeedRefreshHard) {
-                tvLHardness.setText(String.format("%s", mLHardness));
-                tvRHardness.setText(String.format("%s", mRHardness));
+                tvLHardness.setText(String.format(getResources().getString(R.string.left_value), mLHardness));
+                tvRHardness.setText(String.format(getResources().getString(R.string.right_value), mRHardness));
             }
         }
     }
@@ -133,93 +112,77 @@ public class ControlFragment extends BaseFragment {
     @Override
     public void onClick(View v) {
         super.onClick(v);
+        Intent intent = new Intent();
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         switch (v.getId()) {
             case R.id.tv_right:
-                startActivity(new Intent(getActivity(), DeviceNetConfigAcyivity.class));
+                intent.setClass(getActivity(), DeviceNetConfigAcyivity.class);
+                startActivity(intent);
                 break;
             case R.id.ll_lift:
                 //床位升降
-                startActivity(new Intent(getActivity(), DeviceLiftAcyivity.class));
+                intent.setClass(getActivity(), DeviceLiftAcyivity.class);
+                startActivity(intent);
                 break;
             case R.id.ll_hardness:
                 //床位硬度
-                startActivity(new Intent(getActivity(), DeviseHardnessActivity.class));
+                intent.setClass(getActivity(), DeviseHardnessActivity.class);
+                startActivity(intent);
                 break;
             case R.id.ll_temp:
                 //床位温度
-                startActivity(new Intent(getActivity(), DeviceTempActivity.class));
+                intent.setClass(getActivity(), DeviceTempActivity.class);
+                startActivity(intent);
                 break;
             case R.id.iv_height_head_up://头部升
                 vibrator.vibrate(VIBRATE_TIME);
                 isNeedRefreshHigh = false;//停止数据更新，防止设置的值被刷新
 
-                if (isHighR) {
-                    mRHeadHigh += 1;
-                    if (mRHeadHigh >= 17) mRHeadHigh = 17;
-                    tvHeadHigh.setText(String.format("%s", mRHeadHigh));
-                } else {
-                    mLHeadHigh += 1;
-                    if (mLHeadHigh >= 17) mLHeadHigh = 17;
-                    tvHeadHigh.setText(String.format("%s", mLHeadHigh));
-                }
+                mLHeadHigh += 1;
+                if (mLHeadHigh >= 17) mLHeadHigh = 17;
+                tvHeadHigh.setText(String.format(getResources().getString(R.string.head_value), (int)Math.ceil(mLHeadHigh / 17.0f * 45.0f)));
+
                 BleComUtils.senddianji(BleUtils.convertDecimalToBinary(mLHeadHigh + "")
                         + BleUtils.convertDecimalToBinary(mLTailHigh + "")
-                        + BleUtils.convertDecimalToBinary(mRHeadHigh + "")
-                        + BleUtils.convertDecimalToBinary(mRTailHigh + ""));
+                        + BleUtils.convertDecimalToBinary(mLHeadHigh + "")
+                        + BleUtils.convertDecimalToBinary(mLTailHigh + ""));
                 break;
             case R.id.iv_height_head_down://头部降
                 vibrator.vibrate(VIBRATE_TIME);
                 isNeedRefreshHigh = false;//停止数据更新，防止设置的值被刷新
 
-                if (isHighR) {
-                    mRHeadHigh -= 1;
-                    if (mRHeadHigh <= 0) mRHeadHigh = 0;
-                    tvHeadHigh.setText(String.format("%s", mRHeadHigh));
-                } else {
-                    mLHeadHigh -= 1;
-                    if (mLHeadHigh <= 0) mLHeadHigh = 0;
-                    tvHeadHigh.setText(String.format("%s", mLHeadHigh));
-                }
+                mLHeadHigh -= 1;
+                if (mLHeadHigh <= 0) mLHeadHigh = 0;
+                tvHeadHigh.setText(String.format(getResources().getString(R.string.head_value), (int)Math.ceil(mLHeadHigh / 17.0f * 45.0f)));
                 BleComUtils.senddianji(BleUtils.convertDecimalToBinary(mLHeadHigh + "")
                         + BleUtils.convertDecimalToBinary(mLTailHigh + "")
-                        + BleUtils.convertDecimalToBinary(mRHeadHigh + "")
-                        + BleUtils.convertDecimalToBinary(mRTailHigh + ""));
+                        + BleUtils.convertDecimalToBinary(mLHeadHigh + "")
+                        + BleUtils.convertDecimalToBinary(mLTailHigh + ""));
                 break;
             case R.id.iv_foot_height_up://脚部升
                 vibrator.vibrate(VIBRATE_TIME);
                 isNeedRefreshHigh = false;//停止数据更新，防止设置的值被刷新
 
-                if (isHighR) {
-                    mRTailHigh += 1;
-                    if (mRTailHigh >= 17) mRTailHigh = 17;
-                    tvTailHigh.setText(String.format("%s", mRTailHigh));
-                } else {
-                    mLTailHigh += 1;
-                    if (mLTailHigh >= 17) mLTailHigh = 17;
-                    tvTailHigh.setText(String.format("%s", mLTailHigh));
-                }
+                mLTailHigh += 1;
+                if (mLTailHigh >= 17) mLTailHigh = 17;
+                tvTailHigh.setText(String.format(getResources().getString(R.string.feet_value), (int)Math.ceil(mLTailHigh / 17.0f * 45.0f)));
+
                 BleComUtils.senddianji(BleUtils.convertDecimalToBinary(mLHeadHigh + "")
                         + BleUtils.convertDecimalToBinary(mLTailHigh + "")
-                        + BleUtils.convertDecimalToBinary(mRHeadHigh + "")
-                        + BleUtils.convertDecimalToBinary(mRTailHigh + ""));
+                        + BleUtils.convertDecimalToBinary(mLHeadHigh + "")
+                        + BleUtils.convertDecimalToBinary(mLTailHigh + ""));
                 break;
             case R.id.iv_foot_height_down://脚部降
                 vibrator.vibrate(VIBRATE_TIME);
                 isNeedRefreshHigh = false;//停止数据更新，防止设置的值被刷新
 
-                if (isHighR) {
-                    mRTailHigh -= 1;
-                    if (mRTailHigh <= 0) mRTailHigh = 0;
-                    tvTailHigh.setText(String.format("%s", mRTailHigh));
-                } else {
-                    mLTailHigh -= 1;
-                    if (mLTailHigh <= 0) mLTailHigh = 0;
-                    tvTailHigh.setText(String.format("%s", mLTailHigh));
-                }
+                mLTailHigh -= 1;
+                if (mLTailHigh <= 0) mLTailHigh = 0;
+                tvTailHigh.setText(String.format(getResources().getString(R.string.feet_value), (int)Math.ceil(mLTailHigh / 17.0f * 45.0f)));
                 BleComUtils.senddianji(BleUtils.convertDecimalToBinary(mLHeadHigh + "")
                         + BleUtils.convertDecimalToBinary(mLTailHigh + "")
-                        + BleUtils.convertDecimalToBinary(mRHeadHigh + "")
-                        + BleUtils.convertDecimalToBinary(mRTailHigh + ""));
+                        + BleUtils.convertDecimalToBinary(mLHeadHigh + "")
+                        + BleUtils.convertDecimalToBinary(mLTailHigh + ""));
                 break;
             case R.id.iv_hard_l_add://左边硬
                 vibrator.vibrate(VIBRATE_TIME);
@@ -227,7 +190,7 @@ public class ControlFragment extends BaseFragment {
 
                 mLHardness += 5;
                 if (mLHardness >= 100) mLHardness = 100;
-                tvLHardness.setText(String.format("%s", mLHardness));
+                tvLHardness.setText(String.format(getResources().getString(R.string.left_value), mLHardness));
 
                 BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary(mLHardness + "")
                         + BleUtils.convertDecimalToBinary(mRHardness + ""));
@@ -238,7 +201,7 @@ public class ControlFragment extends BaseFragment {
 
                 mLHardness -= 5;
                 if (mLHardness <= 0) mLHardness = 0;
-                tvLHardness.setText(String.format("%s", mLHardness));
+                tvLHardness.setText(String.format(getResources().getString(R.string.left_value), mLHardness));
 
                 BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary(mLHardness + "")
                         + BleUtils.convertDecimalToBinary(mRHardness + ""));
@@ -249,7 +212,7 @@ public class ControlFragment extends BaseFragment {
 
                 mRHardness += 5;
                 if (mRHardness >= 100) mRHardness = 100;
-                tvRHardness.setText(String.format("%s", mRHardness));
+                tvRHardness.setText(String.format(getResources().getString(R.string.right_value), mRHardness));
 
                 BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary(mLHardness + "")
                         + BleUtils.convertDecimalToBinary(mRHardness + ""));
@@ -260,7 +223,7 @@ public class ControlFragment extends BaseFragment {
 
                 mRHardness -= 5;
                 if (mRHardness <= 0) mRHardness = 0;
-                tvRHardness.setText(String.format("%s", mRHardness));
+                tvRHardness.setText(String.format(getResources().getString(R.string.right_value), mRHardness));
 
                 BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary(mLHardness + "")
                         + BleUtils.convertDecimalToBinary(mRHardness + ""));

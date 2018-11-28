@@ -80,9 +80,9 @@
     <string name="custom_mode">自定義模式</string>
     <string name="save_mode">保存當前設定</string>
     <string name="head">頭部</string>
-    <string name="head_value">頭部&#160;%d</string>
+    <string name="head_value">頭&#160;%d</string>
     <string name="feet">腳部</string>
-    <string name="feet_value">腳部&#160;%d</string>
+    <string name="feet_value">腳&#160;%d</string>
     <string name="left_value">左&#160;%d</string>
     <string name="right_value">右&#160;%d</string>
     <string name="left_mem_hardness">左床記憶強度&#160;%d</string>

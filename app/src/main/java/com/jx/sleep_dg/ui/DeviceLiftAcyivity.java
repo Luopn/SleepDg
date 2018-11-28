@@ -66,8 +66,8 @@ public class DeviceLiftAcyivity extends BaseActivity implements View.OnClickList
 
     private void bindViewData() {
         if (mspProtocol != null) {
-            tvTou.setValue((int) Math.ceil((mspProtocol.getHigh2() & 0xff) / 18 * 45.0f));
-            tvJiao.setValue((int) Math.ceil((mspProtocol.getHigh1() & 0xff) / 18 * 45.0f));
+            tvTou.setValue((int) Math.ceil((mspProtocol.getHigh2() & 0xff) / 17.0f * 45.0f));
+            tvJiao.setValue((int) Math.ceil((mspProtocol.getHigh1() & 0xff) / 17.0f * 30.0f));
         }
     }
 

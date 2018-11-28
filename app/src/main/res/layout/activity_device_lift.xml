@@ -157,7 +157,7 @@
                     app:intervalsBetweenValues="5"
                     app:linesColor="@color/textTitleColor"
                     app:linesWidth="1dp"
-                    app:toValue="45"
+                    app:toValue="30"
                     app:valuesInterval="5"
                     app:valuesTextColor="@android:color/white"
                     app:valuesTextSize="12sp" />
