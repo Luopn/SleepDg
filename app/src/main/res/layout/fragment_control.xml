@@ -16,24 +16,24 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:divider="@drawable/shape_divider_horizontal"
+            android:showDividers="middle"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
             android:orientation="vertical">
 
             <!--升降控制部分-->
             <LinearLayout
                 android:id="@+id/ll_lift"
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/shape_control_item"
+                android:layout_height="140dp"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:orientation="horizontal">
 
@@ -136,18 +136,14 @@
             <LinearLayout
                 android:id="@+id/ll_hardness"
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/shape_control_item"
+                android:layout_height="140dp"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
                     android:gravity="center_horizontal"
                     android:orientation="horizontal">
 
@@ -243,18 +239,14 @@
             <LinearLayout
                 android:id="@+id/ll_temp"
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/shape_control_item"
+                android:layout_height="140dp"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
                     android:gravity="center_horizontal"
                     android:orientation="vertical">
 
@@ -271,7 +263,7 @@
                             android:background="@android:color/transparent"
                             android:drawableTop="@mipmap/ic_reduce"
                             android:text="@string/off"
-                            android:layout_marginLeft="20dp"
+                            android:layout_marginLeft="35dp"
                             android:textColor="@color/colorAccent" />
 
                         <LinearLayout
@@ -302,7 +294,7 @@
                             android:background="@android:color/transparent"
                             android:drawableTop="@mipmap/ic_add"
                             android:text="@string/on"
-                            android:layout_marginRight="20dp"
+                            android:layout_marginRight="35dp"
                             android:textColor="@color/colorAccent" />
                     </LinearLayout>
 

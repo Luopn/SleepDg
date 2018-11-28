@@ -221,7 +221,16 @@ public class VerticalSeekBar extends View {
                 }
                 downX = event.getX();
                 downY = event.getY();
-
+                //以下到break我新加的
+                locationY = (int) event.getY();//int) (locationY + event.getY() - downY);
+                fixLocationY();
+                progress = (int) (maxProgress - (locationY - intrinsicHeight * 0.5) / (height - intrinsicHeight) * maxProgress);
+                downY = event.getY();
+                downX = event.getX();
+                if (listener != null) {
+                    listener.onProgress(this, progress);
+                }
+                invalidate();
                 break;
             case MotionEvent.ACTION_MOVE:
                 if (isInnerClick) {
@@ -237,11 +246,10 @@ public class VerticalSeekBar extends View {
                 }
                 break;
             case MotionEvent.ACTION_UP:
-                if (isInnerClick) {
-                    if (listener != null) {
-                        listener.onStop(this, progress);
-                    }
+                if (listener != null) {
+                    listener.onStop(this, progress);
                 }
+
                 break;
         }
         return true;
