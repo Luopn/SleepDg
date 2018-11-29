@@ -73,6 +73,8 @@ public abstract class BaseFragment extends SupportFragment implements View.OnCli
                 }
             }
         };
+        if (getActivity() != null)
+            getActivity().registerReceiver(receiver, makeGattUpdateIntentFilter());
     }
 
     //更新UI数据
@@ -96,24 +98,16 @@ public abstract class BaseFragment extends SupportFragment implements View.OnCli
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        if (getActivity() != null)
-            getActivity().registerReceiver(receiver, makeGattUpdateIntentFilter());
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (getActivity() != null)
-            getActivity().unregisterReceiver(receiver);
-    }
-
-
-    @Override
     public void onDestroyView() {
         super.onDestroyView();
         if (mUnBinder != null) mUnBinder.unbind();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (getActivity() != null)
+            getActivity().unregisterReceiver(receiver);
     }
 
     @Override
