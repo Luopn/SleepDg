@@ -1,19 +1,9 @@
 package com.jx.sleep_dg.fragment;
 
 import android.graphics.Color;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.SeekBar;
-import android.widget.Toast;
 
-import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.LimitLine;
@@ -22,21 +12,18 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.github.mikephil.charting.listener.ChartTouchListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
-import com.github.mikephil.charting.utils.Utils;
 import com.jx.sleep_dg.R;
+import com.jx.sleep_dg.base.BaseMainFragment;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by dingt on 2018/7/25.
  */
 
-public class TodayDataFragment extends BaseFragment {
+public class TodayDataFragment extends BaseMainFragment {
 
     private LineChart mChart1;
     private LineChart mChart2;

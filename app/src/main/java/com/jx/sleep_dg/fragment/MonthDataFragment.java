@@ -15,18 +15,18 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.utils.EntryXComparator;
 import com.jx.sleep_dg.R;
+import com.jx.sleep_dg.base.BaseMainFragment;
 import com.jx.sleep_dg.utils.LogUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.Random;
 
 /**
  * Created by dingt on 2018/7/25.
  */
 
-public class MonthDataFragment extends BaseFragment {
+public class MonthDataFragment extends BaseMainFragment {
     private LineChart mChart;
 
     private MyCountDownTimer mTimer;

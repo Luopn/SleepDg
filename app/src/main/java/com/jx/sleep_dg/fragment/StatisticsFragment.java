@@ -1,16 +1,15 @@
 package com.jx.sleep_dg.fragment;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarEntry;
 import com.jx.sleep_dg.R;
+import com.jx.sleep_dg.base.BaseMainFragment;
 import com.jx.sleep_dg.protocol.MSPProtocol;
 import com.jx.sleep_dg.ui.ShareActivity;
 import com.jx.sleep_dg.utils.BarChartManager;
@@ -28,7 +27,7 @@ import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
  * Created by Administrator on 2018/7/20.
  */
 
-public class StatisticsFragment extends BaseFragment {
+public class StatisticsFragment extends BaseMainFragment {
 
     private ImageView ivShare;
     private NumberRollingView tvSleepScore;

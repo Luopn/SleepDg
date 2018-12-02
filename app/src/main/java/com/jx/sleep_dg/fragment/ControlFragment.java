@@ -9,14 +9,14 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.jx.sleep_dg.R;
+import com.jx.sleep_dg.base.BaseMainFragment;
 import com.jx.sleep_dg.ble.BleUtils;
 import com.jx.sleep_dg.protocol.BleComUtils;
 import com.jx.sleep_dg.protocol.MSPProtocol;
-import com.jx.sleep_dg.ui.DeviceLiftAcyivity;
+import com.jx.sleep_dg.ui.DeviceLiftFragment;
 import com.jx.sleep_dg.ui.DeviceNetConfigAcyivity;
-import com.jx.sleep_dg.ui.DeviceTempActivity;
-import com.jx.sleep_dg.ui.DeviseHardnessActivity;
-import com.jx.sleep_dg.view.SegmentControl;
+import com.jx.sleep_dg.ui.DeviceTempFragment;
+import com.jx.sleep_dg.ui.DeviseHardnessFragment;
 
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 
@@ -25,7 +25,7 @@ import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
  * Created by Administrator on 2018/7/20.
  */
 
-public class ControlFragment extends BaseFragment {
+public class ControlFragment extends BaseMainFragment {
 
     private static final long VIBRATE_TIME = 20;
 
@@ -79,7 +79,7 @@ public class ControlFragment extends BaseFragment {
         mspProtocol = MSPProtocol.getInstance();
 
         OverScrollDecoratorHelper.setUpOverScroll(scrollView);
-        vibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+        vibrator = (Vibrator) _mActivity.getSystemService(Context.VIBRATOR_SERVICE);
         bindViewData();
     }
 
@@ -116,22 +116,22 @@ public class ControlFragment extends BaseFragment {
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         switch (v.getId()) {
             case R.id.tv_right:
-                intent.setClass(getActivity(), DeviceNetConfigAcyivity.class);
+                intent.setClass(_mActivity, DeviceNetConfigAcyivity.class);
                 startActivity(intent);
                 break;
             case R.id.ll_lift:
                 //床位升降
-                intent.setClass(getActivity(), DeviceLiftAcyivity.class);
+                intent.setClass(_mActivity, DeviceLiftFragment.class);
                 startActivity(intent);
                 break;
             case R.id.ll_hardness:
                 //床位硬度
-                intent.setClass(getActivity(), DeviseHardnessActivity.class);
+                intent.setClass(_mActivity, DeviseHardnessFragment.class);
                 startActivity(intent);
                 break;
             case R.id.ll_temp:
                 //床位温度
-                intent.setClass(getActivity(), DeviceTempActivity.class);
+                intent.setClass(_mActivity, DeviceTempFragment.class);
                 startActivity(intent);
                 break;
             case R.id.iv_height_head_up://头部升

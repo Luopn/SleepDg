@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.jx.sleep_dg.R;
+import com.jx.sleep_dg.base.BaseActivity;
 
 /**
  * 设备信息

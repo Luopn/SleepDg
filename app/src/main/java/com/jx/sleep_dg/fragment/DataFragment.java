@@ -3,6 +3,7 @@ package com.jx.sleep_dg.fragment;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jx.sleep_dg.R;
+import com.jx.sleep_dg.base.BaseMainFragment;
 import com.jx.sleep_dg.protocol.MSPProtocol;
 import com.jx.sleep_dg.ui.MainActivity;
 import com.jx.sleep_dg.ui.SearchActivity;
@@ -26,7 +28,7 @@ import java.util.Locale;
  * Created by Administrator on 2018/7/20.
  */
 
-public class DataFragment extends BaseFragment {
+public class DataFragment extends BaseMainFragment {
 
     private static final int SEARCH_DURATION = 1000;
     private static final int SEARCH_REACPEAT_COUNT = 5;
@@ -44,6 +46,13 @@ public class DataFragment extends BaseFragment {
 
     private boolean isrXinlv;
     private boolean islXinlv;
+
+    public static DataFragment newInstance() {
+        Bundle args = new Bundle();
+        DataFragment fragment = new DataFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     protected int getLayoutId() {

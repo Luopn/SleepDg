@@ -3,6 +3,8 @@ package com.jx.sleep_dg.ui;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -12,51 +14,43 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jx.sleep_dg.R;
+import com.jx.sleep_dg.base.BaseActivity;
 import com.jx.sleep_dg.fragment.ControlFragment;
 import com.jx.sleep_dg.fragment.DataFragment;
 import com.jx.sleep_dg.fragment.SettingFragment;
 import com.jx.sleep_dg.fragment.ShopFragment;
 import com.jx.sleep_dg.fragment.StatisticsFragment;
 import com.jx.sleep_dg.MyApplication;
+import com.jx.sleep_dg.utils.QMUIStatusBarHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends NewBaseActivity {
+import me.yokeyword.fragmentation.SupportFragment;
+
+public class MainActivity extends BaseActivity {
+
+    // 再点一次退出程序时间设置
+    private static final long WAIT_TIME = 2000L;
+    private long TOUCH_TIME = 0;
 
     public static final String KEY_FRAGMENT = "key_fragment";
     public static DrawerLayout mDrawerLayout;
-    private FragmentTabHost mTabHost;
-    private ViewPager mViewPager;
 
-    private List<Fragment> mFragmentList;
-    private Class mClass[] = {DataFragment.class, ControlFragment.class, StatisticsFragment.class, ShopFragment.class, SettingFragment.class};
-    private Fragment mFragment[] = {new DataFragment(), new ControlFragment(), new StatisticsFragment(), new ShopFragment(), new SettingFragment()};
-    private String[] mTitles;
-    private int mImages[] = {
-            R.drawable.tab_data,
-            R.drawable.tab_control,
-            R.drawable.tab_home,
-            R.drawable.tab_shop, R.drawable.tab_set
-    };
+    private SupportFragment mFragment[] = new SupportFragment[5];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mTitles = new String[]{
-                getResources().getString(R.string.data),
-                getResources().getString(R.string.control),
-                getResources().getString(R.string.statistics),
-                getResources().getString(R.string.mall),
-                getResources().getString(R.string.set)
-        };
         bindView();
     }
 
@@ -68,83 +62,59 @@ public class MainActivity extends NewBaseActivity {
         }
     }
 
-    private void initView() {
-
+    @Override
+    public void bindView() {
         mDrawerLayout = findViewById(R.id.id_menu);
         NavigationView mNavigationView = findViewById(R.id.nav_view);
         mNavigationView.getHeaderView(0).findViewById(R.id.tv_user).setOnClickListener(this);
 
-        mTabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
-        mViewPager = (ViewPager) findViewById(R.id.view_pager);
+        BottomNavigationView mBottomNavigation = (BottomNavigationView) findViewById(R.id.navigation);
+        mBottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()){
+                    case R.id.action_data:
+                        showHideFragment(mFragment[0]);
+                        break;
+                    case R.id.action_lift:
+                        showHideFragment(mFragment[1]);
+                        break;
+                    case R.id.action_hardness:
+                        showHideFragment(mFragment[2]);
+                        break;
+                    case R.id.action_temp:
+                        showHideFragment(mFragment[3]);
+                        break;
+                    case R.id.action_setting:
+                        showHideFragment(mFragment[4]);
+                        break;
+                }
+                return true;
+            }
+        });
 
-        mFragmentList = new ArrayList<Fragment>();
+        SupportFragment firstFragment = findFragment(DataFragment.class);
+        if (firstFragment == null) {
 
-        mTabHost.setBackgroundColor(ContextCompat.getColor(this,R.color.color_bg));
-        mTabHost.setup(this, getSupportFragmentManager(), android.R.id.tabcontent);
-        mTabHost.getTabWidget().setDividerDrawable(null);
+            mFragment[0] = DataFragment.newInstance();
+            mFragment[1] = DeviceLiftFragment.newInstance();
+            mFragment[2] = DeviseHardnessFragment.newInstance();
+            mFragment[3] = DeviceTempFragment.newInstance();
+            mFragment[4] = SettingFragment.newInstance();
 
-        for (int i = 0; i < mFragment.length; i++) {
-            TabHost.TabSpec tabSpec = mTabHost.newTabSpec(mTitles[i]).setIndicator(getTabView(i));
-            mTabHost.addTab(tabSpec, mClass[i], null);
-            mFragmentList.add(mFragment[i]);
+            loadMultipleRootFragment(R.id.content, 0,
+                    mFragment[0],
+                    mFragment[1],
+                    mFragment[2],
+                    mFragment[3],
+                    mFragment[4]);
+        } else {
+            mFragment[0] = firstFragment;
+            mFragment[1] = findFragment(DeviceLiftFragment.class);
+            mFragment[2] = findFragment(DeviseHardnessFragment.class);
+            mFragment[3] = findFragment(DeviceTempFragment.class);
+            mFragment[4] = findFragment(SettingFragment.class);
         }
-
-        mViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
-            @Override
-            public Fragment getItem(int position) {
-                return mFragmentList.get(position);
-            }
-
-            @Override
-            public int getCount() {
-                return mFragmentList.size();
-            }
-        });
-    }
-
-    @Override
-    public void bindView() {
-        initView();
-        initEvent();
-    }
-
-    private View getTabView(int index) {
-        View view = LayoutInflater.from(this).inflate(R.layout.tab_item, null);
-
-        ImageView image = (ImageView) view.findViewById(R.id.image);
-        TextView title = (TextView) view.findViewById(R.id.title);
-
-        image.setImageResource(mImages[index]);
-        title.setText(mTitles[index]);
-
-        return view;
-    }
-
-    private void initEvent() {
-
-        mTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
-            @Override
-            public void onTabChanged(String tabId) {
-                mViewPager.setCurrentItem(mTabHost.getCurrentTab());
-            }
-        });
-
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                mTabHost.setCurrentTab(position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
     }
 
     @Override
@@ -163,8 +133,17 @@ public class MainActivity extends NewBaseActivity {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
+           exitConfiem();
+        }
+    }
+
+    private  void exitConfiem(){
+        if (System.currentTimeMillis() - TOUCH_TIME < WAIT_TIME) {
             super.onBackPressedSupport();
             MyApplication.getInstance().extiApp();
+        } else {
+            TOUCH_TIME = System.currentTimeMillis();
+            Toast.makeText(this, R.string.press_again_exit, Toast.LENGTH_SHORT).show();
         }
     }
 }

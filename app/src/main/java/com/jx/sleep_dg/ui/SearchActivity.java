@@ -1,14 +1,11 @@
 package com.jx.sleep_dg.ui;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
@@ -16,7 +13,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
-import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,25 +21,15 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.jx.sleep_dg.MyApplication;
 import com.jx.sleep_dg.R;
+import com.jx.sleep_dg.base.BaseActivity;
 import com.jx.sleep_dg.ble.BluetoothLeClass;
 import com.jx.sleep_dg.ble.BluetoothLeService;
 import com.jx.sleep_dg.ble.LeDeviceListAdapter;
-import com.jx.sleep_dg.http.InterfaceMethod;
 import com.jx.sleep_dg.utils.Constance;
-import com.jx.sleep_dg.MyApplication;
 import com.jx.sleep_dg.utils.PreferenceUtils;
 import com.jx.sleep_dg.utils.ToastUtil;
-import com.tbruyelle.rxpermissions2.RxPermissions;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import io.reactivex.functions.Consumer;
 
 /**
  * Created by 覃微 on 2018/7/3.
@@ -57,8 +43,6 @@ public class SearchActivity extends BaseActivity {
 
     protected ListView deviceList;
     private LeDeviceListAdapter mLeDeviceListAdapter;
-
-    private RxPermissions permissions;
 
     private static final int FRAGMENT_CITY_MANAGE = 1;
 
@@ -137,8 +121,6 @@ public class SearchActivity extends BaseActivity {
     @Override
     public void bindView() {
         //deviceBeans = new ArrayList<>();
-        permissions = new RxPermissions(this);
-        Permission();
         activityFlag = getIntent().getStringExtra("flag");//用来区分是从登陆页面跳转过来还是从设备管理页面跳转过来.
 
         setToolbarTitle(R.string.devie_scan);
@@ -218,27 +200,6 @@ public class SearchActivity extends BaseActivity {
     };
 
     @Override
-    public void onNetJSONObject(JSONObject jsonObject, String trxcode) {
-        super.onNetJSONObject(jsonObject, trxcode);
-        if (InterfaceMethod.BINDDEVICE.equals(trxcode)) {
-            ToastUtil.showMessage(R.string.bind_success);
-            if (activityFlag.equals("Login")) {
-                // PreferenceUtils.putString(Constance.ADDRESS, macAddress);
-                // PreferenceUtils.putString(Constance.BLE_NAME, name);
-                getNetData();
-                //PreferenceUtils.putString(Constance.BLE_ID,js.getString("id"));
-                //Intent intent = new Intent();
-                //intent.setClass(SearchDeviceActivity.this, MainActivity.class);
-                //startActivity(intent);
-                //finish();
-            } else {
-                setResult(200);
-                finish();
-            }
-        }
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_toolbar, menu);
         menu.findItem(R.id.action_do).setTitle(R.string.scan);
@@ -253,52 +214,6 @@ public class SearchActivity extends BaseActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * 提交到服务器
-     */
-    private void getNetData() {
-        Map<String, String> map = new HashMap<>();
-        String token = PreferenceUtils.getString(Constance.TOKEN);
-        if (!TextUtils.isEmpty(token)) {
-            doHeadPost(InterfaceMethod.GETALLDEVICE, map, token);
-        }
-    }
-
-    @Override
-    public void onNetJSONArray(JSONArray jsonArray, String trxcode) {
-        super.onNetJSONArray(jsonArray, trxcode);
-        if (InterfaceMethod.GETALLDEVICE.equals(trxcode)) {
-            // if (deviceBeans != null) {
-            //     deviceBeans.clear();
-            // }
-            for (int k = 0; k < jsonArray.length(); k++) {
-                try {
-                    JSONObject js = jsonArray.getJSONObject(k);
-                    //  DeviceBean deviceBean = new DeviceBean();
-                    //  deviceBean.setDevicename(js.getString("name"));
-                    //  deviceBean.setIsUse(js.getInt("isUse"));
-                    //  deviceBean.setId(js.getInt("id"));
-                    //  deviceBean.setUserid(js.getInt("user_id"));
-                    //  deviceBean.setMacaddress(js.getString("url"));
-                    if (macAddress.equals(js.getString("url"))) {
-                        PreferenceUtils.putString(Constance.ADDRESS, js.getString("url"));
-                        PreferenceUtils.putString(Constance.BLE_NAME, js.getString("name"));
-                        PreferenceUtils.putString(Constance.BLE_ID, js.getInt("id") + "");
-                        Intent intent = new Intent();
-                        intent.setClass(SearchActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                        break;
-                    }
-                    //  deviceBeans.add(deviceBean);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    ToastUtil.showMessage(R.string.add_error);
-                }
-            }
-        }
     }
 
     //断开蓝牙连接
@@ -325,38 +240,6 @@ public class SearchActivity extends BaseActivity {
         }
     }
 
-    @SuppressLint("CheckResult")
-    public void Permission() {
-        permissions.request(Manifest.permission.ACCESS_COARSE_LOCATION).subscribe(new Consumer<Boolean>() {
-            @Override
-            public void accept(Boolean aBoolean) throws Exception {
-                if (!aBoolean)
-                    showDialogTipUserGoToAppSettting();
-            }
-        });
-    }
-
-    // 提示用户去应用设置界面手动开启权限
-    private void showDialogTipUserGoToAppSettting() {
-
-        new AlertDialog.Builder(this)
-                .setTitle(R.string.help)
-                .setMessage(R.string.string_help_text)
-                .setPositiveButton(R.string.settings, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // 跳转到应用设置界面
-                        goToAppSetting();
-                    }
-                })
-                .setNegativeButton(R.string.quit, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                    }
-                }).setCancelable(false).show();
-    }
-
     // 跳转到当前应用的设置界面
     private void goToAppSetting() {
         Intent intent = new Intent();
@@ -364,13 +247,5 @@ public class SearchActivity extends BaseActivity {
         Uri uri = Uri.fromParts("package", getPackageName(), null);
         intent.setData(uri);
         startActivityForResult(intent, FRAGMENT_CITY_MANAGE);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == FRAGMENT_CITY_MANAGE) {
-            Permission();
-        }
     }
 }

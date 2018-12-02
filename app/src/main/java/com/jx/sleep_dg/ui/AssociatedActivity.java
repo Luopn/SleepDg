@@ -15,7 +15,8 @@ import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.jx.sleep_dg.Bean.TabEntity;
 import com.jx.sleep_dg.R;
-import com.jx.sleep_dg.fragment.BaseFragment;
+import com.jx.sleep_dg.base.BaseActivity;
+import com.jx.sleep_dg.base.BaseMainFragment;
 import com.jx.sleep_dg.fragment.GuanZhuWoDeFragment;
 import com.jx.sleep_dg.fragment.WoDeGuanZhuFragment;
 
@@ -31,7 +32,7 @@ public class AssociatedActivity extends BaseActivity {
     private ViewPager viewpager;
 
     private String[] mTitles;
-    private List<BaseFragment> mFragments;
+    private List<BaseMainFragment> mFragments;
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
 
     @Override

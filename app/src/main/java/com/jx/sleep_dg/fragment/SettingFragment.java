@@ -1,6 +1,7 @@
 package com.jx.sleep_dg.fragment;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
@@ -8,12 +9,12 @@ import android.widget.ScrollView;
 import android.widget.Switch;
 
 import com.jx.sleep_dg.R;
+import com.jx.sleep_dg.base.BaseMainFragment;
 import com.jx.sleep_dg.protocol.BleComUtils;
 import com.jx.sleep_dg.ui.AssociatedActivity;
 import com.jx.sleep_dg.ui.DeviceDetailActivity;
+import com.jx.sleep_dg.ui.DeviseHardnessFragment;
 import com.jx.sleep_dg.ui.GaugeActivity;
-import com.jx.sleep_dg.ui.LauncherActivity;
-import com.jx.sleep_dg.ui.LoginActivity;
 import com.jx.sleep_dg.ui.MainActivity;
 import com.jx.sleep_dg.utils.LanguageUtil;
 import com.jx.sleep_dg.utils.PreferenceUtils;
@@ -27,11 +28,18 @@ import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
  * Created by Administrator on 2018/7/20.
  */
 
-public class SettingFragment extends BaseFragment implements CompoundButton.OnCheckedChangeListener {
+public class SettingFragment extends BaseMainFragment implements CompoundButton.OnCheckedChangeListener {
 
     private Switch swYunfu, swErTong, swSiRen, swZhiHan;
     private RadioButton rbZhSimple, rbZhTradion, rbEn;
     private ScrollView scrollView;
+
+    public static SettingFragment newInstance() {
+        Bundle args = new Bundle();
+        SettingFragment fragment = new SettingFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     protected int getLayoutId() {

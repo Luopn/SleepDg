@@ -6,7 +6,7 @@
     <string name="help">help</string>
     <string name="string_help_text">當前應用缺少必要權限。\n\n請點擊\"設置\"-\"權限\"-打開所需權限。\n\n最後點擊兩次後退按鈕，即可返回。</string>
     <string name="quit">exit</string>
-
+    <string name="press_again_exit">再按一次退出</string>
     <!--主页-->
     <string name="data">數據</string>
     <string name="device">設備</string>
@@ -78,6 +78,9 @@
     <string name="hardness">軟硬智控</string>
     <string name="temperature">床體溫度</string>
     <string name="custom_mode">自定義模式</string>
+    <string name="lift_ctrl_title">升降</string>
+    <string name="hardness_title">軟硬</string>
+    <string name="temperature_title">加熱</string>
     <string name="save_mode">保存當前設定</string>
     <string name="head">頭部</string>
     <string name="head_value">頭&#160;%d</string>

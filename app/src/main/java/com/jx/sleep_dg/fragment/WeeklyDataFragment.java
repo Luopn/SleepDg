@@ -4,12 +4,13 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.jx.sleep_dg.R;
+import com.jx.sleep_dg.base.BaseMainFragment;
 
 /**
  * Created by dingt on 2018/7/25.
  */
 
-public class WeeklyDataFragment extends BaseFragment{
+public class WeeklyDataFragment extends BaseMainFragment {
     public WeeklyDataFragment() {
     }
 

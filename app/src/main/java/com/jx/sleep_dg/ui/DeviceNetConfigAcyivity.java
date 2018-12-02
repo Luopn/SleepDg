@@ -10,6 +10,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 
 import com.jx.sleep_dg.R;
+import com.jx.sleep_dg.base.BaseActivity;
 import com.jx.sleep_dg.ble.BluetoothLeService;
 import com.jx.sleep_dg.event.ConfigureResEvent;
 import com.jx.sleep_dg.protocol.BleComUtils;
@@ -26,8 +27,6 @@ import org.greenrobot.eventbus.ThreadMode;
  */
 
 public class DeviceNetConfigAcyivity extends BaseActivity implements View.OnClickListener {
-
-    private static final String TAG = "DeviceNetConfigAcyivity";
 
     private WifiManager mWifiManager;
 

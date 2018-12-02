@@ -7,27 +7,16 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
-import android.widget.TextView;
 
+import com.jx.sleep_dg.MyApplication;
 import com.jx.sleep_dg.R;
-import com.jx.sleep_dg.http.InterfaceMethod;
+import com.jx.sleep_dg.base.BaseActivity;
 import com.jx.sleep_dg.utils.Constance;
 import com.jx.sleep_dg.utils.LanguageUtil;
-import com.jx.sleep_dg.MyApplication;
 import com.jx.sleep_dg.utils.PreferenceUtils;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
-
-import butterknife.BindView;
 
 /**
  * Created by 覃微 on 2018/5/17.
@@ -39,16 +28,8 @@ public class LoginActivity extends BaseActivity {
     private RadioButton rbChTradition;
     private RadioButton rbEn;
 
-    @BindView(R.id.et_phone)
     EditText et_phone;
-    @BindView(R.id.et_password)
     EditText et_password;
-    @BindView(R.id.iv_user_view)
-    ImageView iv_user_view;
-    @BindView(R.id.iv_password_view)
-    ImageView iv_password_view;
-    @BindView(R.id.ll_login)
-    LinearLayout ll_login;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -92,21 +73,24 @@ public class LoginActivity extends BaseActivity {
         String isauto = PreferenceUtils.getString(Constance.ISAUTO);
         if (!TextUtils.isEmpty(password) && "1".equals(isauto)) {
             et_password.setText(password);
-            doLogin();
         }
     }
 
     @Override
     public void onClick(View view) {
         super.onClick(view);
+        Intent intent = new Intent();
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         switch (view.getId()) {
             case R.id.tv_register:
                 //注册
-                startActivity(new Intent(this, RegistActivity.class));
+                intent.setClass(this,RegistActivity.class);
+                startActivity(intent);
                 break;
             case R.id.btn_login:
                 //登录
-                startActivity(new Intent(this, MainActivity.class));
+                intent.setClass(this, MainActivity.class);
+                startActivity(intent);
                 finish();
                 break;
             case R.id.rb_ch_simple:
@@ -121,80 +105,6 @@ public class LoginActivity extends BaseActivity {
                 LanguageUtil.changeAppLanguage(this, Locale.US, true);
                 restartApplication();
                 break;
-        }
-    }
-
-    private void doLogin() {
-        String phone = et_phone.getText().toString();
-        String pwd = et_password.getText().toString();
-
-        if (TextUtils.isEmpty(phone)) {
-            et_phone.requestFocus();
-            et_phone.setError(getResources().getString(R.string.normal_input_null));
-            return;
-        }
-        if (TextUtils.isEmpty(pwd)) {
-            et_password.requestFocus();
-            et_password.setError(getResources().getString(R.string.normal_input_null));
-            return;
-        }
-        // showLoadingDialog(getString(R.string.please_wait));
-        Map<String, String> map = new HashMap<>();
-        map.put("phone_number", phone);
-        map.put("password", pwd);
-        doPost(InterfaceMethod.LOGIN, map);
-    }
-
-    @Override
-    public void onNetJSONObject(JSONObject jsonObject, String trxcode) {
-        super.onNetJSONObject(jsonObject, trxcode);
-        try {
-            if (InterfaceMethod.LOGIN.equals(trxcode)) {
-                hideLoadingDialog();
-
-                String phone = et_phone.getText().toString();
-                String pwd = et_password.getText().toString();
-                PreferenceUtils.putString(Constance.USERNAME, phone);
-                PreferenceUtils.putString(Constance.PASSWORD, pwd);
-
-                String token = jsonObject.getInt("user_id") + "";
-                PreferenceUtils.putString(Constance.TOKEN, token);
-                PreferenceUtils.putString(Constance.ISAUTO, "1");
-                JSONArray jsonArray = jsonObject.getJSONArray("bluetoothInfo");
-                if (jsonArray.length() > 0) {
-                    //有设备
-                    for (int k = 0; k < jsonArray.length(); k++) {
-                        JSONObject js = jsonArray.getJSONObject(k);
-                        String url = js.getString("url");
-                        int isUse = js.getInt("isUse");
-//                        if (isUse == 1) {
-//                            PreferenceUtils.putString(Constance.ADDRESS, js.getString("url"));
-//                            PreferenceUtils.putString(Constance.BLE_NAME, js.getString("name"));
-//                            PreferenceUtils.putString(Constance.BLE_ID, js.getString("id"));
-////                            LauncherActivity.mBLE.connect(url);
-//                            LauncherActivity.C(url);
-//
-//                        }
-                        if (isUse == 1) {
-                            PreferenceUtils.putString(Constance.ADDRESS, js.getString("url"));
-                            PreferenceUtils.putString(Constance.BLE_NAME, js.getString("name"));
-                            PreferenceUtils.putString(Constance.BLE_ID, js.getString("id"));
-                            LauncherActivity.mBLE.connect(js.getString("url"));
-                        }
-                    }
-                    Intent intent = new Intent();
-                    intent.setClass(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
-                } else {
-                    //没有设备
-//                    Intent intent = new Intent(LoginActivity.this, SearchActivity.class);
-//                    intent.putExtra("flag", "Login");
-//                    startActivity(intent);
-                }
-                finish();
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
     }
 

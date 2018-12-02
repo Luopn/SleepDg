@@ -6,6 +6,7 @@
     <string name="help">help</string>
     <string name="string_help_text">当前应用缺少必要权限。\n\n请点击\"设置\"-\"权限\"-打开所需权限。\n\n最后点击两次后退按钮，即可返回。</string>
     <string name="quit">exit</string>
+    <string name="press_again_exit">再按一次退出</string>
 
     <!--主页-->
     <string name="data">数据</string>
@@ -78,6 +79,9 @@
     <string name="hardness">软硬智控</string>
     <string name="temperature">温度智控</string>
     <string name="custom_mode">自定义模式</string>
+    <string name="lift_ctrl_title">升降</string>
+    <string name="hardness_title">软硬</string>
+    <string name="temperature_title">加热</string>
     <string name="save_mode">保存当前设定</string>
     <string name="head">头部</string>
     <string name="head_value">头&#160;%d°</string>

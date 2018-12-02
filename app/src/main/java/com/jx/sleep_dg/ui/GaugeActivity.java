@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jx.sleep_dg.R;
+import com.jx.sleep_dg.base.BaseActivity;
 import com.jx.sleep_dg.ble.BleUtils;
 import com.jx.sleep_dg.protocol.BleComUtils;
 import com.jx.sleep_dg.view.bar.AnimatedProgressBar;

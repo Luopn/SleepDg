@@ -20,8 +20,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.jx.sleep_dg.R;
-import com.jx.sleep_dg.ui.BaseActivity;
-import com.jx.sleep_dg.ui.LauncherActivity;
+import com.jx.sleep_dg.base.BaseActivity;
 
 import java.io.IOException;
 import java.io.OutputStream;

@@ -8,6 +8,7 @@ import android.view.View;
 import com.jx.sleep_dg.Bean.GuanzhuWodeBean;
 import com.jx.sleep_dg.R;
 import com.jx.sleep_dg.adapter.GuanzhuWoDeAdapter;
+import com.jx.sleep_dg.base.BaseMainFragment;
 import com.jx.sleep_dg.ui.RecycleViewDivider;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ import java.util.List;
  * 关注我的
  */
 
-public class GuanZhuWoDeFragment extends BaseFragment {
+public class GuanZhuWoDeFragment extends BaseMainFragment {
     private RecyclerView recyclerView;
 
     private List<GuanzhuWodeBean> guanzhuWodeList = new ArrayList<>();

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <dimen name="title_height">56dp</dimen>
     <dimen name="activity_view">0.5dp</dimen>
     <dimen name="view_height">1dp</dimen>

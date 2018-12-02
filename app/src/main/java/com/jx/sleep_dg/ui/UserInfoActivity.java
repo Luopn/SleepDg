@@ -4,12 +4,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.jx.sleep_dg.R;
+import com.jx.sleep_dg.base.BaseActivity;
 
 /**
  * 个人信息
  */
 
-public class UserInfoActivity extends BaseActivity{
+public class UserInfoActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -7,7 +7,7 @@
     <string name="help">help</string>
     <string name="string_help_text">No Permission</string>
     <string name="quit">exit</string>
-
+    <string name="press_again_exit">Press again to exit</string>
     <!--主页-->
     <string name="data">Data</string>
     <string name="device">Device</string>
@@ -79,6 +79,9 @@
     <string name="hardness">Bed Hardness</string>
     <string name="temperature">Bed Temperature</string>
     <string name="custom_mode">Custom Mode</string>
+    <string name="lift_ctrl_title">Elevating</string>
+    <string name="hardness_title">Hardness</string>
+    <string name="temperature_title">Temperature</string>
     <string name="save_mode">Save</string>
     <string name="head">Head</string>
     <string name="head_value">Head&#160;%d</string>

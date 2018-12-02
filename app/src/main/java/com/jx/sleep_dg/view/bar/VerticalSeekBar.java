@@ -205,11 +205,17 @@ public class VerticalSeekBar extends View {
             locationY = height / 2;
 
         }
+    }
 
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        getParent().requestDisallowInterceptTouchEvent(true);
+        return super.dispatchTouchEvent(event);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 //判断点击点是否在圈圈上

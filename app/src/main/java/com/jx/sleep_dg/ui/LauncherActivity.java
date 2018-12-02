@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.jx.sleep_dg.R;
+import com.jx.sleep_dg.base.BaseActivity;
 import com.jx.sleep_dg.ble.BluetoothLeClass;
 import com.jx.sleep_dg.ble.BluetoothLeService;
 import com.jx.sleep_dg.utils.LanguageUtil;
