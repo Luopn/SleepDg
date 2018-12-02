@@ -33,7 +33,7 @@
         android:src="@mipmap/warmbed_0" />
 
     <!--温度控制部分-->
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/ll_temp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -44,81 +44,73 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:layout_gravity="center"
+            android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+            <Button
+                android:id="@+id/btn_jian"
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="25dp"
+                android:background="@android:color/transparent"
+                android:drawableTop="@mipmap/ic_reduce"
+                android:text="@string/off"
+                android:textColor="@color/colorAccent" />
 
-                <Button
-                    android:id="@+id/btn_jian"
-                    android:layout_width="40dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="35dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@android:color/transparent"
-                    android:drawableTop="@mipmap/ic_reduce"
-                    android:text="@string/off"
-                    android:textColor="@color/colorAccent" />
+            <com.jx.sleep_dg.view.BorderButton
+                android:id="@+id/level_1"
+                android:layout_width="40dp"
+                android:layout_height="28dp"
+                app:lb_corner="14dp"
+                app:lt_corner="14dp"
+                app:normal_color="#6e6fff" />
 
-                <com.jx.sleep_dg.view.BorderButton
-                    android:id="@+id/level_1"
-                    android:layout_width="40dp"
-                    android:layout_height="28dp"
-                    app:lb_corner="14dp"
-                    app:lt_corner="14dp"
-                    app:normal_color="#6e6fff" />
+            <com.jx.sleep_dg.view.BorderButton
+                android:id="@+id/level_2"
+                android:layout_width="40dp"
+                android:layout_height="28dp"
+                android:layout_marginLeft="3dp"
+                app:corner="0dp"
+                app:normal_color="#8d52be" />
 
-                <com.jx.sleep_dg.view.BorderButton
-                    android:id="@+id/level_2"
-                    android:layout_width="40dp"
-                    android:layout_height="28dp"
-                    android:layout_marginLeft="3dp"
-                    app:corner="0dp"
-                    app:normal_color="#8d52be" />
+            <com.jx.sleep_dg.view.BorderButton
+                android:id="@+id/level_3"
+                android:layout_width="40dp"
+                android:layout_height="28dp"
+                android:layout_marginLeft="3dp"
+                app:corner="0dp"
+                app:normal_color="#b1347e" />
 
-                <com.jx.sleep_dg.view.BorderButton
-                    android:id="@+id/level_3"
-                    android:layout_width="40dp"
-                    android:layout_height="28dp"
-                    android:layout_marginLeft="3dp"
-                    app:corner="0dp"
-                    app:normal_color="#b1347e" />
+            <com.jx.sleep_dg.view.BorderButton
+                android:id="@+id/level_4"
+                android:layout_width="40dp"
+                android:layout_height="28dp"
+                android:layout_marginLeft="3dp"
+                app:corner="0dp"
+                app:normal_color="#c31f52" />
 
-                <com.jx.sleep_dg.view.BorderButton
-                    android:id="@+id/level_4"
-                    android:layout_width="40dp"
-                    android:layout_height="28dp"
-                    android:layout_marginLeft="3dp"
-                    app:corner="0dp"
-                    app:normal_color="#c31f52" />
+            <com.jx.sleep_dg.view.BorderButton
+                android:id="@+id/level_5"
+                android:layout_width="40dp"
+                android:layout_height="28dp"
+                android:layout_marginLeft="3dp"
+                app:normal_color="#d90d28"
+                app:rb_corner="14dp"
+                app:rt_corner="14dp" />
 
-                <com.jx.sleep_dg.view.BorderButton
-                    android:id="@+id/level_5"
-                    android:layout_width="40dp"
-                    android:layout_height="28dp"
-                    android:layout_marginLeft="3dp"
-                    app:normal_color="#d90d28"
-                    app:rb_corner="14dp"
-                    app:rt_corner="14dp" />
-
-                <Button
-                    android:id="@+id/btn_add"
-                    android:layout_width="40dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@android:color/transparent"
-                    android:drawableTop="@mipmap/ic_add"
-                    android:text="@string/on"
-                    android:textColor="@color/colorAccent" />
-            </LinearLayout>
+            <Button
+                android:id="@+id/btn_add"
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="25dp"
+                android:background="@android:color/transparent"
+                android:drawableTop="@mipmap/ic_add"
+                android:text="@string/on"
+                android:textColor="@color/colorAccent" />
         </LinearLayout>
-    </LinearLayout>
+    </FrameLayout>
 </LinearLayout>
