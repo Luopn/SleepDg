@@ -73,9 +73,9 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
 
         ivZuoChuang = view.findViewById(R.id.iv_zuo_chuang);
 
-        seebLeftTou.setThumbSizePx(56, 56);
+        seebLeftTou.setThumbSize(25, 25);
         seebLeftTou.setOnSlideChangeListener(this);
-        seebLeftJiao.setThumbSizePx(56, 56);
+        seebLeftJiao.setThumbSize(25, 25);
         seebLeftJiao.setOnSlideChangeListener(this);
 
         BorderButton mBtnTvMode = (BorderButton) view.findViewById(R.id.btn_tv_mode);

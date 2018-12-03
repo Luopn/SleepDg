@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.support.annotation.ColorInt;
 import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -176,8 +177,8 @@ public class BorderButton extends AppCompatButton {
     /**
      * @param normalColor 设置默认颜色
      */
-    public void setNormalColor(int normalColor) {
-        this.normalColor = getResources().getColor(normalColor);
+    public void setNormalColor(@ColorInt int normalColor) {
+        this.normalColor = normalColor;
         if (gradientDrawable != null)
             gradientDrawable.setColor(this.normalColor);
     }

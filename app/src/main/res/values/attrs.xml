@@ -206,15 +206,16 @@
     </declare-styleable>
 
     <declare-styleable name="Ruler">
-        <attr name="fromValue" format="integer"/>
-        <attr name="toValue" format="integer"/>
-        <attr name="currentValue" format="integer"/>
-        <attr name="intervalsBetweenValues" format="integer"/>
-        <attr name="valuesInterval" format="integer"/>
-        <attr name="valuesTextSize" format="dimension"/>
-        <attr name="valuesTextColor" format="color"/>
-        <attr name="linesWidth" format="dimension"/>
-        <attr name="linesColor" format="color"/>
-        <attr name="isShowPointer" format="boolean"/>
+        <attr name="isLEFT" format="boolean" />
+        <attr name="fromValue" format="integer" />
+        <attr name="toValue" format="integer" />
+        <attr name="currentValue" format="integer" />
+        <attr name="intervalsBetweenValues" format="integer" />
+        <attr name="valuesInterval" format="integer" />
+        <attr name="valuesTextSize" format="dimension" />
+        <attr name="valuesTextColor" format="color" />
+        <attr name="linesWidth" format="dimension" />
+        <attr name="linesColor" format="color" />
+        <attr name="isShowPointer" format="boolean" />
     </declare-styleable>
 </resources>

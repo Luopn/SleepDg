@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SLEEP.DG</string>
+    <string name="app_name">Wisdom Cloud</string>
 
     <string name="loading">Loading..</string>
 
@@ -81,6 +81,7 @@
     <string name="custom_mode">Custom Mode</string>
     <string name="lift_ctrl_title">Elevating</string>
     <string name="hardness_title">Hardness</string>
+    <string name="hardness_cur_title">Cur Hardness</string>
     <string name="temperature_title">Temperature</string>
     <string name="save_mode">Save</string>
     <string name="head">Head</string>

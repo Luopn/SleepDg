@@ -25,39 +25,36 @@
 
     <ImageView
         android:id="@+id/iv_chuang"
-        android:layout_width="270dp"
-        android:layout_height="200dp"
+        android:layout_width="200dp"
+        android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
+        android:layout_weight="1"
         android:scaleType="centerInside"
         android:src="@mipmap/warmbed_0" />
 
     <!--温度控制部分-->
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/ll_temp"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal"
+        android:layout_height="100dp"
+        android:orientation="vertical"
         android:paddingBottom="20dp"
         android:paddingTop="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
             android:layout_gravity="center"
+            android:gravity="center"
             android:orientation="horizontal">
 
-            <Button
+            <ImageButton
                 android:id="@+id/btn_jian"
                 android:layout_width="40dp"
-                android:layout_height="50dp"
+                android:layout_height="28dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="25dp"
                 android:background="@android:color/transparent"
-                android:drawableTop="@mipmap/ic_reduce"
-                android:text="@string/off"
+                android:src="@mipmap/ic_reduce"
                 android:textColor="@color/colorAccent" />
 
             <com.jx.sleep_dg.view.BorderButton
@@ -66,7 +63,9 @@
                 android:layout_height="28dp"
                 app:lb_corner="14dp"
                 app:lt_corner="14dp"
-                app:normal_color="#6e6fff" />
+                app:normal_color="#6e6fff"
+                app:stroke_color="#6e6fff"
+                app:stroke_width="1dp" />
 
             <com.jx.sleep_dg.view.BorderButton
                 android:id="@+id/level_2"
@@ -74,7 +73,9 @@
                 android:layout_height="28dp"
                 android:layout_marginLeft="3dp"
                 app:corner="0dp"
-                app:normal_color="#8d52be" />
+                app:normal_color="#8d52be"
+                app:stroke_color="#8d52be"
+                app:stroke_width="1dp" />
 
             <com.jx.sleep_dg.view.BorderButton
                 android:id="@+id/level_3"
@@ -82,7 +83,9 @@
                 android:layout_height="28dp"
                 android:layout_marginLeft="3dp"
                 app:corner="0dp"
-                app:normal_color="#b1347e" />
+                app:normal_color="#b1347e"
+                app:stroke_color="#b1347e"
+                app:stroke_width="1dp" />
 
             <com.jx.sleep_dg.view.BorderButton
                 android:id="@+id/level_4"
@@ -90,7 +93,9 @@
                 android:layout_height="28dp"
                 android:layout_marginLeft="3dp"
                 app:corner="0dp"
-                app:normal_color="#c31f52" />
+                app:normal_color="#c31f52"
+                app:stroke_color="#c31f52"
+                app:stroke_width="1dp" />
 
             <com.jx.sleep_dg.view.BorderButton
                 android:id="@+id/level_5"
@@ -99,18 +104,82 @@
                 android:layout_marginLeft="3dp"
                 app:normal_color="#d90d28"
                 app:rb_corner="14dp"
-                app:rt_corner="14dp" />
+                app:rt_corner="14dp"
+                app:stroke_color="#d90d28"
+                app:stroke_width="1dp" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btn_add"
                 android:layout_width="40dp"
-                android:layout_height="50dp"
+                android:layout_height="28dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="25dp"
                 android:background="@android:color/transparent"
-                android:drawableTop="@mipmap/ic_add"
+                android:src="@mipmap/ic_add"
+                android:textColor="@color/colorAccent" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                android:text="@string/off"
+                android:textColor="@color/colorAccent" />
+
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:gravity="center"
+                android:text="2"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:gravity="center"
+                android:text="3"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:gravity="center"
+                android:text="4"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:gravity="center"
+                android:text="5"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
                 android:text="@string/on"
                 android:textColor="@color/colorAccent" />
         </LinearLayout>
-    </FrameLayout>
+    </LinearLayout>
 </LinearLayout>

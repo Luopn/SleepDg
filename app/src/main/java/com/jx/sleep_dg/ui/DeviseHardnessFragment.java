@@ -20,6 +20,7 @@ import com.jx.sleep_dg.ble.BleUtils;
 import com.jx.sleep_dg.protocol.BleComUtils;
 import com.jx.sleep_dg.protocol.MSPProtocol;
 import com.jx.sleep_dg.utils.LogUtil;
+import com.jx.sleep_dg.view.BorderButton;
 import com.jx.sleep_dg.view.bar.MySeekBar;
 
 import java.util.Locale;
@@ -38,8 +39,8 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
 
     private ImageView ivAdd, ivDecrease;
 
-    private TextView tvMemHardless;
-    private TextView tvCurHardness;
+    private BorderButton tvLCurHardless;
+    private BorderButton tvRCurHardness;
     private TextView tvGear;
     private LinearLayout llChongqi;
 
@@ -73,8 +74,8 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
 
     @SuppressLint("ClickableViewAccessibility")
     public void bindView(View view) {
-        tvMemHardless = view.findViewById(R.id.tv_mem_hardless);
-        tvCurHardness = view.findViewById(R.id.tv_cur_hardness);
+        tvLCurHardless = view.findViewById(R.id.tv_lcur_hardless);
+        tvRCurHardness = view.findViewById(R.id.tv_rcur_hardness);
         tvGear = view.findViewById(R.id.tv_gear);
         llChongqi = view.findViewById(R.id.ll_chongqi);
         ivAdd = view.findViewById(R.id.iv_jia);
@@ -124,11 +125,12 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
     //绑定数据
     private void bindViewData() {
         if (mspProtocol == null) return;
-        if (isSwitch) {
-            int lPresureCurVal = mspProtocol.getlPresureCurVal() & 0xff;
-            tvMemHardless.setText(String.format(getResources().getString(R.string.left_mem_hardness), mspProtocol.getlPresureMemVal() & 0xff));
-            tvCurHardness.setText(String.format(getResources().getString(R.string.left_cur_hardness), lPresureCurVal));
+        int lPresureCurVal = mspProtocol.getlPresureCurVal() & 0xff;
+        int rPresureCurVal = mspProtocol.getrPresureCurVal() & 0xff;
+        tvLCurHardless.setText(String.format(Locale.getDefault(), "%d", lPresureCurVal));
+        tvRCurHardness.setText(String.format(Locale.getDefault(), "%d", rPresureCurVal));
 
+        if (isSwitch) {
             leftIndex = (int) Math.ceil((double) lPresureCurVal / 5);
             leftIndex = leftIndex < 1 ? 1 : leftIndex > 20 ? 20 : leftIndex;
             if (isNeedRefreshLevel) {
@@ -136,10 +138,6 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
                 tvGear.setText(String.format(Locale.getDefault(), getResources().getString(R.string.gear_val), leftIndex * 5));
             }
         } else {
-            int rPresureCurVal = mspProtocol.getrPresureCurVal() & 0xff;
-            tvMemHardless.setText(String.format(getResources().getString(R.string.right_mem_hardness), mspProtocol.getrPresureMemVal() & 0xff));
-            tvCurHardness.setText(String.format(getResources().getString(R.string.right_cur_hardness), rPresureCurVal));
-
             rightIndex = (int) Math.ceil((double) rPresureCurVal / 5);
             rightIndex = rightIndex < 1 ? 1 : rightIndex > 20 ? 20 : rightIndex;
             if (isNeedRefreshLevel) {

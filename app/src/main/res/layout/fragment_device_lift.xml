@@ -27,7 +27,7 @@
                 <ImageView
                     android:id="@+id/iv_zuo_chuang"
                     android:layout_width="200dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="16dp"
                     android:adjustViewBounds="true"
@@ -62,16 +62,21 @@
                 </RelativeLayout>
             </LinearLayout>
 
+            <!--垂直Seekbar-->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_height="250dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
                 android:baselineAligned="false"
+                android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
+                <!--左边-->
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="250dp">
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="20dp">
 
                     <FrameLayout
                         android:layout_width="wrap_content"
@@ -79,16 +84,16 @@
 
                         <ImageView
                             android:id="@+id/iv_tou_jia"
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:layout_gravity="center_horizontal"
                             android:scaleType="fitXY"
                             android:src="@mipmap/ic_add_big" />
 
                         <ImageView
                             android:id="@+id/iv_tou_jian"
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:layout_gravity="center_horizontal|bottom"
                             android:scaleType="fitXY"
                             android:src="@mipmap/ic_reduce_big" />
@@ -96,7 +101,7 @@
 
                     <com.jx.sleep_dg.view.Ruler
                         android:id="@+id/ruler_tou"
-                        android:layout_width="50dp"
+                        android:layout_width="40dp"
                         android:layout_height="match_parent"
                         android:background="@android:color/transparent"
                         app:currentValue="0"
@@ -115,10 +120,10 @@
                         android:layout_height="match_parent" />
                 </LinearLayout>
 
+                <!--中间-->
                 <FrameLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -139,18 +144,26 @@
                         android:textSize="@dimen/textSize_25" />
                 </FrameLayout>
 
+                <!--右边-->
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="250dp">
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp">
+
+                    <com.jx.sleep_dg.view.bar.VerticalSeekBar
+                        android:id="@+id/seeb_left_jiao"
+                        android:layout_width="30dp"
+                        android:layout_height="match_parent" />
 
                     <com.jx.sleep_dg.view.Ruler
                         android:id="@+id/ruler_jiao"
-                        android:layout_width="50dp"
+                        android:layout_width="40dp"
                         android:layout_height="match_parent"
                         android:background="@android:color/transparent"
                         app:currentValue="0"
                         app:fromValue="0"
                         app:intervalsBetweenValues="5"
+                        app:isLEFT="false"
                         app:linesColor="@color/textTitleColor"
                         app:linesWidth="1dp"
                         app:toValue="30"
@@ -158,27 +171,22 @@
                         app:valuesTextColor="@android:color/white"
                         app:valuesTextSize="12sp" />
 
-                    <com.jx.sleep_dg.view.bar.VerticalSeekBar
-                        android:id="@+id/seeb_left_jiao"
-                        android:layout_width="30dp"
-                        android:layout_height="match_parent" />
-
                     <FrameLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent">
 
                         <ImageView
                             android:id="@+id/iv_jiao_jia"
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:layout_gravity="center_horizontal"
                             android:scaleType="fitXY"
                             android:src="@mipmap/ic_add_big" />
 
                         <ImageView
                             android:id="@+id/iv_jiao_jian"
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:layout_gravity="center_horizontal|bottom"
                             android:background="@mipmap/ic_reduce_big"
                             android:scaleType="fitXY" />
@@ -186,6 +194,7 @@
                 </LinearLayout>
             </LinearLayout>
 
+            <!--一键部分-->
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">

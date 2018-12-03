@@ -1,5 +1,6 @@
 package com.jx.sleep_dg.ui;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,7 @@ public class DeviceTempFragment extends BaseMainFragment implements View.OnClick
     private BorderButton mLevel5;
 
     private int index = 0;
+    private View view;
 
     public static DeviceTempFragment newInstance() {
         Bundle args = new Bundle();
@@ -47,9 +49,16 @@ public class DeviceTempFragment extends BaseMainFragment implements View.OnClick
         mLevel4 = (BorderButton) view.findViewById(R.id.level_4);
         mLevel5 = (BorderButton) view.findViewById(R.id.level_5);
 
+        mLevel1.setOnClickListener(this);
+        mLevel2.setOnClickListener(this);
+        mLevel3.setOnClickListener(this);
+        mLevel4.setOnClickListener(this);
+        mLevel5.setOnClickListener(this);
+
         view.findViewById(R.id.btn_jian).setOnClickListener(this);
         view.findViewById(R.id.btn_add).setOnClickListener(this);
-        switchByLevel(index+1);
+
+        onIndexChange(index);
     }
 
     @Override
@@ -57,105 +66,82 @@ public class DeviceTempFragment extends BaseMainFragment implements View.OnClick
         super.onClick(view);
         switch (view.getId()) {
             case R.id.btn_jian:
-                //if (index == 0) {
-                //    ToastUtil.showMessage("请先打开开关");
-                //    return;
-                //}
                 if (index > 0) {
                     index--;
-                    switch (index) {
-                        case 0:
-                            ivChuang.setImageResource(R.mipmap.warmbed_0);
-                            switchByLevel(1);
-                            break;
-                        case 1:
-                            ivChuang.setImageResource(R.mipmap.warmbed_1);
-                            switchByLevel(2);
-                            break;
-                        case 2:
-                            ivChuang.setImageResource(R.mipmap.warmbed_2);
-                            switchByLevel(3);
-                            break;
-                        case 3:
-                            ivChuang.setImageResource(R.mipmap.warmbed_3);
-                            switchByLevel(4);
-                            break;
-                        case 4:
-                            ivChuang.setImageResource(R.mipmap.warmbed_4);
-                            switchByLevel(5);
-                            break;
-                    }
-                    BleComUtils.sendJiare(index + "");
                 }
                 break;
             case R.id.btn_add:
-//                if (index == 0) {
-//                    ToastUtil.showMessage("请先打开开关");
-//                    return;
-//                }
-                if (index < 4) {
+                if (index < 5) {
                     index++;
-                    switch (index) {
-                        case 0:
-                            ivChuang.setImageResource(R.mipmap.warmbed_1);
-                            switchByLevel(1);
-                        case 1:
-                            ivChuang.setImageResource(R.mipmap.warmbed_2);
-                            switchByLevel(2);
-                            break;
-                        case 2:
-                            ivChuang.setImageResource(R.mipmap.warmbed_3);
-                            switchByLevel(3);
-                            break;
-                        case 3:
-                            ivChuang.setImageResource(R.mipmap.warmbed_4);
-                            switchByLevel(4);
-                            break;
-                        case 4:
-                            ivChuang.setImageResource(R.mipmap.warmbed_5);
-                            switchByLevel(5);
-                            break;
-                    }
-                    LogUtil.e("index:" + index);
-                    BleComUtils.sendJiare(index + "");
                 }
                 break;
+            case R.id.level_1:
+                index = 1;
+                BleComUtils.sendJiare("1");
+                break;
+            case R.id.level_2:
+                index = 2;
+                BleComUtils.sendJiare("2");
+                break;
+            case R.id.level_3:
+                index = 3;
+                BleComUtils.sendJiare("3");
+                break;
+            case R.id.level_4:
+                index = 4;
+                BleComUtils.sendJiare("4");
+                break;
+            case R.id.level_5:
+                index = 5;
+                BleComUtils.sendJiare("5");
+                break;
         }
+        LogUtil.e("index:" + index);
+        onIndexChange(index);
+        BleComUtils.sendJiare(index + "");
     }
 
-    private void switchByLevel(int level) {
-        mLevel1.setVisibility(View.INVISIBLE);
-        mLevel2.setVisibility(View.INVISIBLE);
-        mLevel3.setVisibility(View.INVISIBLE);
-        mLevel4.setVisibility(View.INVISIBLE);
-        mLevel5.setVisibility(View.INVISIBLE);
-        switch (level){
+    //床的变化和按钮变化
+    private void onIndexChange(int index) {
+        mLevel1.setNormalColor(Color.TRANSPARENT);
+        mLevel2.setNormalColor(Color.TRANSPARENT);
+        mLevel3.setNormalColor(Color.TRANSPARENT);
+        mLevel4.setNormalColor(Color.TRANSPARENT);
+        mLevel5.setNormalColor(Color.TRANSPARENT);
+        switch (index) {
+            case 0:
+                ivChuang.setImageResource(R.mipmap.warmbed_0);
+                break;
             case 1:
-                mLevel1.setVisibility(View.VISIBLE);
+                ivChuang.setImageResource(R.mipmap.warmbed_1);
+                mLevel1.setNormalColor(Color.parseColor("#6e6fff"));
                 break;
             case 2:
-                mLevel1.setVisibility(View.VISIBLE);
-                mLevel2.setVisibility(View.VISIBLE);
+                ivChuang.setImageResource(R.mipmap.warmbed_2);
+                mLevel1.setNormalColor(Color.parseColor("#6e6fff"));
+                mLevel2.setNormalColor(Color.parseColor("#8d52be"));
                 break;
             case 3:
-                mLevel1.setVisibility(View.VISIBLE);
-                mLevel2.setVisibility(View.VISIBLE);
-                mLevel3.setVisibility(View.VISIBLE);
+                ivChuang.setImageResource(R.mipmap.warmbed_3);
+                mLevel1.setNormalColor(Color.parseColor("#6e6fff"));
+                mLevel2.setNormalColor(Color.parseColor("#8d52be"));
+                mLevel3.setNormalColor(Color.parseColor("#b1347e"));
                 break;
             case 4:
-                mLevel1.setVisibility(View.VISIBLE);
-                mLevel2.setVisibility(View.VISIBLE);
-                mLevel3.setVisibility(View.VISIBLE);
-                mLevel4.setVisibility(View.VISIBLE);
+                ivChuang.setImageResource(R.mipmap.warmbed_4);
+                mLevel1.setNormalColor(Color.parseColor("#6e6fff"));
+                mLevel2.setNormalColor(Color.parseColor("#8d52be"));
+                mLevel3.setNormalColor(Color.parseColor("#b1347e"));
+                mLevel4.setNormalColor(Color.parseColor("#c31f52"));
                 break;
             case 5:
-                mLevel1.setVisibility(View.VISIBLE);
-                mLevel2.setVisibility(View.VISIBLE);
-                mLevel3.setVisibility(View.VISIBLE);
-                mLevel4.setVisibility(View.VISIBLE);
-                mLevel5.setVisibility(View.VISIBLE);
+                ivChuang.setImageResource(R.mipmap.warmbed_5);
+                mLevel1.setNormalColor(Color.parseColor("#6e6fff"));
+                mLevel2.setNormalColor(Color.parseColor("#8d52be"));
+                mLevel3.setNormalColor(Color.parseColor("#b1347e"));
+                mLevel4.setNormalColor(Color.parseColor("#c31f52"));
+                mLevel5.setNormalColor(Color.parseColor("#d90d28"));
                 break;
         }
-
     }
 }

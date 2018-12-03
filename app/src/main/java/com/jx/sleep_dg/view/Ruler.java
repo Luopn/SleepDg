@@ -14,6 +14,7 @@ import android.view.View;
 import com.jx.sleep_dg.R;
 
 public class Ruler extends View {
+    private boolean isLeft;
     //间隔，即两条刻度之间的距离
     private int interval;
     //起始值
@@ -51,6 +52,7 @@ public class Ruler extends View {
         // TODO Auto-generated constructor stub
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.Ruler);
 
+        isLeft = array.getBoolean(R.styleable.Ruler_isLEFT, true);
         fromValue = array.getInt(R.styleable.Ruler_fromValue, 0);
         toValue = array.getInt(R.styleable.Ruler_toValue, intervalsBetweenValues);
         currentValue = array.getInt(R.styleable.Ruler_currentValue, (fromValue + toValue) / 2);
@@ -85,43 +87,77 @@ public class Ruler extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        //画中间的指针,就在中间画，很简单
         paint.setColor(Color.parseColor("#9f64ae"));
         paint.setStrokeWidth(dp2px(4));
         int height = getHeight() - textHeight / 2;
-        interval = (height-textHeight/2) / (toValue - fromValue);
+        interval = (height - textHeight / 2) / (toValue - fromValue);
 
-        canvas.drawLine(getWidth(), height-currentValue*interval - textHeight / 4,
-                getWidth() * 2 / 5, height-currentValue*interval - textHeight / 4, paint);
-        paint.setColor(linesColor);
-        paint.setStrokeWidth(linesWidth);
+        if (isLeft) {
+            canvas.drawLine(getWidth(), height - currentValue * interval - textHeight / 4,
+                    getWidth() * 2 / 5, height - currentValue * interval - textHeight / 4, paint);
+            paint.setColor(linesColor);
+            paint.setStrokeWidth(linesWidth);
 
-        int position = 0;
+            int position = 0;
 
-        //循环画刻度，当画到上边界或起始值时则退出循环，去画下半部分刻度
-        while (true) {
-            //intervalsBetweenValues/2是指两个相邻值之间距离的中间那条稍微长一点的刻度的位置
-            if (position % intervalsBetweenValues == 0) {
-                //当刻度值的位置为刻度值旁边的时候则画长一点，并在旁边画上数字，否则就按普通刻度长度画
+            //循环画刻度，当画到上边界或起始值时则退出循环，去画下半部分刻度
+            while (true) {
+                //intervalsBetweenValues/2是指两个相邻值之间距离的中间那条稍微长一点的刻度的位置
                 if (position % intervalsBetweenValues == 0) {
-                    canvas.drawLine(getWidth(), height - textHeight / 4, getWidth() / 2, height - textHeight / 4, paint);
+                    //当刻度值的位置为刻度值旁边的时候则画长一点，并在旁边画上数字，否则就按普通刻度长度画
+                    if (position % intervalsBetweenValues == 0) {
+                        canvas.drawLine(getWidth(), height - textHeight / 4, getWidth() / 2, height - textHeight / 4, paint);
 
-                    String valueString = Integer.toString(position / intervalsBetweenValues * valuesInterval);
-                    paint.setColor(valuesTextColor);
-                    canvas.drawText(valueString, getWidth() / 2 - paint.measureText(valueString) - dp2px(5), height, paint);
-                    paint.setColor(linesColor);
+                        String valueString = Integer.toString(position / intervalsBetweenValues * valuesInterval);
+                        paint.setColor(valuesTextColor);
+                        canvas.drawText(valueString, getWidth() / 2 - paint.measureText(valueString) - dp2px(5), height, paint);
+                        paint.setColor(linesColor);
+                    } else {
+                        canvas.drawLine(getWidth(), height - textHeight / 4, getWidth() * 3 / 5, height - textHeight / 4, paint);
+                    }
                 } else {
-                    canvas.drawLine(getWidth(), height - textHeight / 4, getWidth() * 3 / 5, height - textHeight / 4, paint);
+                    canvas.drawLine(getWidth(), height - textHeight / 4, getWidth() * 4 / 5, height - textHeight / 4, paint);
                 }
-            } else {
-                canvas.drawLine(getWidth(), height - textHeight / 4, getWidth() * 4 / 5, height - textHeight / 4, paint);
-            }
 
-            //每画完一条刻度则递减position和height,当position=起始值，或height低于0，即超出边界时，退出循环
-            position++;
-            if (position > toValue / valuesInterval * intervalsBetweenValues) break;
-            height -= interval;
-            if (height < 0 - 2 * textHeight) break;
+                //每画完一条刻度则递减position和height,当position=起始值，或height低于0，即超出边界时，退出循环
+                position++;
+                if (position > toValue / valuesInterval * intervalsBetweenValues) break;
+                height -= interval;
+                if (height < 0 - 2 * textHeight) break;
+            }
+        }else{
+            canvas.drawLine(0, height - currentValue * interval - textHeight / 4,
+                    getWidth() * 3 / 5, height - currentValue * interval - textHeight / 4, paint);
+            paint.setColor(linesColor);
+            paint.setStrokeWidth(linesWidth);
+
+            int position = 0;
+
+            //循环画刻度，当画到上边界或起始值时则退出循环，去画下半部分刻度
+            while (true) {
+                //intervalsBetweenValues/2是指两个相邻值之间距离的中间那条稍微长一点的刻度的位置
+                if (position % intervalsBetweenValues == 0) {
+                    //当刻度值的位置为刻度值旁边的时候则画长一点，并在旁边画上数字，否则就按普通刻度长度画
+                    if (position % intervalsBetweenValues == 0) {
+                        canvas.drawLine(0, height - textHeight / 4, getWidth() / 2, height - textHeight / 4, paint);
+
+                        String valueString = Integer.toString(position / intervalsBetweenValues * valuesInterval);
+                        paint.setColor(valuesTextColor);
+                        canvas.drawText(valueString, getWidth() / 2  + dp2px(5), height, paint);
+                        paint.setColor(linesColor);
+                    } else {
+                        canvas.drawLine(0, height - textHeight / 4, getWidth() * 2 / 5, height - textHeight / 4, paint);
+                    }
+                } else {
+                    canvas.drawLine(0, height - textHeight / 4, getWidth() / 5, height - textHeight / 4, paint);
+                }
+
+                //每画完一条刻度则递减position和height,当position=起始值，或height低于0，即超出边界时，退出循环
+                position++;
+                if (position > toValue / valuesInterval * intervalsBetweenValues) break;
+                height -= interval;
+                if (height < 0 - 2 * textHeight) break;
+            }
         }
     }
 

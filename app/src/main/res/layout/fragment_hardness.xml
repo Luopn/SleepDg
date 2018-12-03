@@ -32,8 +32,8 @@
         android:layout_marginTop="30dp">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_height="120dp"
             android:background="@mipmap/pic_bed" />
 
         <LinearLayout
@@ -78,23 +78,42 @@
         android:gravity="center_horizontal"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tv_mem_hardless"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/left_mem_hardness"
+        <com.jx.sleep_dg.view.BorderButton
+            android:id="@+id/tv_lcur_hardless"
+            android:layout_width="70dp"
+            android:layout_height="24dp"
+            android:text="56"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/textSize_12" />
+            android:textSize="@dimen/textSize_12"
+            app:lb_corner="12dp"
+            app:lt_corner="12dp"
+            app:normal_color="@android:color/transparent"
+            app:stroke_color="@color/textTitleColor"
+            app:stroke_width="1dp" />
 
-        <TextView
-            android:id="@+id/tv_cur_hardness"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="10dp"
-            android:text="@string/left_cur_hardness"
+        <com.jx.sleep_dg.view.BorderButton
+            android:layout_width="80dp"
+            android:layout_height="24dp"
+            android:text="@string/hardness_cur_title"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/textSize_12" />
+            android:textSize="@dimen/textSize_12"
+            app:corner="0dp"
+            app:normal_color="@color/textTitleColor"
+            app:stroke_color="@color/textTitleColor"
+            app:stroke_width="1dp" />
+
+        <com.jx.sleep_dg.view.BorderButton
+            android:id="@+id/tv_rcur_hardness"
+            android:layout_width="70dp"
+            android:layout_height="24dp"
+            android:text="80"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/textSize_12"
+            app:normal_color="@android:color/transparent"
+            app:rb_corner="12dp"
+            app:rt_corner="12dp"
+            app:stroke_color="@color/textTitleColor"
+            app:stroke_width="1dp" />
     </LinearLayout>
 
     <ToggleButton
