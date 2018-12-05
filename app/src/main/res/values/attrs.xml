@@ -18,7 +18,6 @@
         </attr>
     </declare-styleable>
 
-
     <!-- 圆形进度条 -->
     <declare-styleable name="CircleProgressBar">
         <attr name="antiAlias" />

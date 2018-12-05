@@ -169,7 +169,7 @@ public class MySeekBar extends View {
         minProgress = array.getInt(R.styleable.MySeekBar_minProgress, 0);
         progress = array.getInt(R.styleable.MySeekBar_progress, 0);
         //因为这是个半弧，所以我们直接写死了，从左侧开始
-        beginLocation = 180;
+        beginLocation = 90;
         //下面是刻度线的属性
 //        scaleLineCount = array.getInt(R.styleable.MyHalfCircularSildeView_scaleLineCount, 100);
 //        scaleLineLength = array.getInt(R.styleable.MyHalfCircularSildeView_scaleLineLength, CommonUtil.dip2px(context, 10));

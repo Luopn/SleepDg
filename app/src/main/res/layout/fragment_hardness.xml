@@ -193,16 +193,16 @@
 
             <ImageView
                 android:id="@+id/iv_jian"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="60dp"
                 android:background="@mipmap/ic_reduce_big" />
 
             <ImageView
                 android:id="@+id/iv_jia"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="60dp"
                 android:background="@mipmap/ic_add_big" />

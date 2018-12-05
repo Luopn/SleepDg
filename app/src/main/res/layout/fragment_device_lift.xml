@@ -108,7 +108,7 @@
                         app:fromValue="0"
                         app:intervalsBetweenValues="5"
                         app:linesColor="@color/textTitleColor"
-                        app:linesWidth="1dp"
+                        app:linesWidth="0.5dp"
                         app:toValue="45"
                         app:valuesInterval="5"
                         app:valuesTextColor="@android:color/white"
@@ -132,7 +132,7 @@
                         android:layout_marginTop="10dp"
                         android:text="升"
                         android:textColor="@color/textAccentColor"
-                        android:textSize="@dimen/textSize_25" />
+                        android:textSize="@dimen/textSize_20" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -141,7 +141,7 @@
                         android:layout_marginBottom="10dp"
                         android:text="降"
                         android:textColor="@color/textAccentColor"
-                        android:textSize="@dimen/textSize_25" />
+                        android:textSize="@dimen/textSize_20" />
                 </FrameLayout>
 
                 <!--右边-->
@@ -165,7 +165,7 @@
                         app:intervalsBetweenValues="5"
                         app:isLEFT="false"
                         app:linesColor="@color/textTitleColor"
-                        app:linesWidth="1dp"
+                        app:linesWidth="0.5dp"
                         app:toValue="30"
                         app:valuesInterval="5"
                         app:valuesTextColor="@android:color/white"
@@ -226,84 +226,203 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <com.jx.sleep_dg.view.BorderButton
-                        android:id="@+id/btn_tv_mode"
+                    <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="30dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="电视模式"
-                        android:textColor="@android:color/white"
-                        android:textSize="12sp"
-                        app:corner="20dp"
-                        app:type="ok" />
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                    <com.jx.sleep_dg.view.BorderButton
-                        android:id="@+id/btn_yaolan_mode"
+                        <com.jx.sleep_dg.view.BorderButton
+                            android:id="@+id/btn_tv_mode"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:text="电视模式"
+                            android:textColor="@android:color/white"
+                            android:textSize="12sp"
+                            app:corner="20dp"
+                            app:type="ok" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="床头50°"
+                            android:textColor="@color/textTitleColorLight"
+                            android:textSize="@dimen/textSize_10" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="床尾15°"
+                            android:textColor="@color/textTitleColorLight"
+                            android:textSize="@dimen/textSize_10" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="30dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_weight="1"
-                        android:text="摇篮模式"
-                        android:textColor="@android:color/white"
-                        android:textSize="12sp"
-                        app:corner="20dp"
-                        app:type="ok" />
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                    <com.jx.sleep_dg.view.BorderButton
-                        android:id="@+id/btn_sleep_mode"
+                        <com.jx.sleep_dg.view.BorderButton
+                            android:id="@+id/btn_yaolan_mode"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:text="摇篮模式"
+                            android:textColor="@android:color/white"
+                            android:textSize="12sp"
+                            app:corner="20dp"
+                            app:type="ok" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:maxWidth="70dp"
+                            android:text="床头床尾自动升降5分钟后关闭"
+                            android:textColor="@color/textTitleColorLight"
+                            android:textSize="@dimen/textSize_10" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="30dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_weight="1"
-                        android:text="睡眠模式"
-                        android:textColor="@android:color/white"
-                        android:textSize="12sp"
-                        app:corner="20dp"
-                        app:type="ok" />
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <com.jx.sleep_dg.view.BorderButton
+                            android:id="@+id/btn_sleep_mode"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:text="睡眠模式"
+                            android:textColor="@android:color/white"
+                            android:textSize="12sp"
+                            app:corner="20dp"
+                            app:type="ok" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:maxWidth="70dp"
+                            android:text="一键放平"
+                            android:textColor="@color/textTitleColorLight"
+                            android:textSize="@dimen/textSize_10" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginTop="16dp">
 
-                    <com.jx.sleep_dg.view.BorderButton
-                        android:id="@+id/btn_read_mode"
+                    <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="30dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="阅读模式"
-                        android:textColor="@android:color/white"
-                        android:textSize="12sp"
-                        app:corner="20dp"
-                        app:type="ok" />
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                    <com.jx.sleep_dg.view.BorderButton
-                        android:id="@+id/btn_yujia_mode"
+                        <com.jx.sleep_dg.view.BorderButton
+                            android:id="@+id/btn_read_mode"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:text="阅读模式"
+                            android:textColor="@android:color/white"
+                            android:textSize="12sp"
+                            app:corner="20dp"
+                            app:type="ok" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="床头40°"
+                            android:textColor="@color/textTitleColorLight"
+                            android:textSize="@dimen/textSize_10" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="床尾25°"
+                            android:textColor="@color/textTitleColorLight"
+                            android:textSize="@dimen/textSize_10" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="30dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_weight="1"
-                        android:text="瑜伽模式"
-                        android:textColor="@android:color/white"
-                        android:textSize="12sp"
-                        app:corner="20dp"
-                        app:type="ok" />
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                    <com.jx.sleep_dg.view.BorderButton
-                        android:id="@+id/btn_relax_mode"
+                        <com.jx.sleep_dg.view.BorderButton
+                            android:id="@+id/btn_yujia_mode"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:text="瑜伽模式"
+                            android:textColor="@android:color/white"
+                            android:textSize="12sp"
+                            app:corner="20dp"
+                            app:type="ok" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="床头50°"
+                            android:textColor="@color/textTitleColorLight"
+                            android:textSize="@dimen/textSize_10" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="床尾30°"
+                            android:textColor="@color/textTitleColorLight"
+                            android:textSize="@dimen/textSize_10" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="30dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_weight="1"
-                        android:text="休闲模式"
-                        android:textColor="@android:color/white"
-                        android:textSize="12sp"
-                        app:corner="20dp"
-                        app:type="ok" />
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <com.jx.sleep_dg.view.BorderButton
+                            android:id="@+id/btn_relax_mode"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:text="休闲模式"
+                            android:textColor="@android:color/white"
+                            android:textSize="12sp"
+                            app:corner="20dp"
+                            app:type="ok" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="床头30°"
+                            android:textColor="@color/textTitleColorLight"
+                            android:textSize="@dimen/textSize_10" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="床尾10°"
+                            android:textColor="@color/textTitleColorLight"
+                            android:textSize="@dimen/textSize_10" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
 
