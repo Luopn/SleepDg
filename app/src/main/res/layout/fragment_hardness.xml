@@ -126,27 +126,52 @@
         android:textOff="@null"
         android:textOn="@null" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
     <!--硬度控制部分-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="10dp"
-        android:layout_weight="1"
-        android:gravity="bottom|center_horizontal"
-        android:orientation="vertical">
+        android:layout_height="180dp"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:paddingBottom="10dp">
+
+        <RelativeLayout
+            android:layout_width="35dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_jian"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_centerHorizontal="true"
+                android:background="@mipmap/ic_add" />
+
+            <ImageView
+                android:id="@+id/iv_jia"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="@mipmap/ic_reduce" />
+        </RelativeLayout>
 
         <FrameLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center_horizontal">
 
             <com.jx.sleep_dg.view.bar.MySeekBar
                 android:id="@+id/left_seekbar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:paddingLeft="10dp"
                 app:maxProgress="20"
-                app:minProgress="1" />
+                app:minProgress="1"
+                app:radius="80dp" />
 
             <com.jx.sleep_dg.view.bar.MySeekBar
                 android:id="@+id/right_seekbar"
@@ -165,48 +190,8 @@
                 android:layout_gravity="bottom|center_horizontal"
                 android:layout_marginBottom="35dp"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/textSize_15" />
+                android:textSize="@dimen/textSize_15"
+                android:visibility="gone" />
         </FrameLayout>
-
-        <com.jx.sleep_dg.view.bar.SeekArc
-            android:id="@+id/seekArc"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_gravity="center"
-            android:padding="30dp"
-            android:visibility="gone"
-            app:arcColor="#1f272f"
-            app:arcWidth="15dp"
-            app:clockwise="true"
-            app:maxSeekProgress="20"
-            app:progressColor="#635d96"
-            app:progressWidth="15dp"
-            app:rotation="180"
-            app:startAngleSeekArc="60"
-            app:sweepAngleSeekArc="240"
-            app:thumb="@drawable/custom_seek_arc_control_selector"
-            app:touchInside="true" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/iv_jian"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="60dp"
-                android:background="@mipmap/ic_reduce_big" />
-
-            <ImageView
-                android:id="@+id/iv_jia"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="60dp"
-                android:background="@mipmap/ic_add_big" />
-
-        </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

@@ -60,7 +60,7 @@
         <!--当前文字的大小-->
         <attr name="wordSize" format="integer" />
         <!--同心圆外圆的半径-->
-        <attr name="radius" format="integer" />
+        <attr name="radius" format="dimension" />
         <!--最大显示进度-->
         <attr name="maxProgress" format="integer" />
         <!--最小显示进度-->
@@ -73,8 +73,6 @@
         <attr name="scaleLineCount" format="integer" />
         <!--普通刻度线的长度-->
         <attr name="scaleLineLength" format="integer" />
-        <!--特殊刻度线的长度-->
-        <attr name="specialScaleLineLength" format="integer" />
         <!--线条的宽度-->
         <attr name="scaleLineWidth" format="integer" />
         <!--刻度线距离圆环的宽度-->
