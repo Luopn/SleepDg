@@ -11,6 +11,8 @@ import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.OverScroller;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -24,6 +26,8 @@ import com.jx.sleep_dg.view.BorderButton;
 import com.jx.sleep_dg.view.bar.MySeekBar;
 
 import java.util.Locale;
+
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 
 /**
  * 设备硬度
@@ -74,6 +78,8 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
 
     @SuppressLint("ClickableViewAccessibility")
     public void bindView(View view) {
+        ScrollView mScrollView = view.findViewById(R.id.scrollView);
+        OverScrollDecoratorHelper.setUpOverScroll(mScrollView);
         tvLCurHardless = view.findViewById(R.id.tv_lcur_hardless);
         tvRCurHardness = view.findViewById(R.id.tv_rcur_hardness);
         tvGear = view.findViewById(R.id.tv_gear);

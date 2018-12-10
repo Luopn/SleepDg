@@ -13,6 +13,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -23,72 +24,73 @@ import java.text.DecimalFormat;
 
 public class MySeekBar extends View {
 
+    private static final String TAG = "MySeekBar";
+
+    private boolean isLeft;
     //圆环的宽度
-    float ringWidth;
+    private float ringWidth;
     //底部的圆弧颜色
-    int ringBgCorlor;
+    private int ringBgCorlor;
     //滑动的圆弧颜色
-    int slideRingCorlor;
+    private int slideRingCorlor;
     //同心圆的外圆半径
-    float radius;
+    private float radius;
     //中间字的颜色
-//    int wordCorlor;
+    //int wordCorlor;
     //中间字的大小
-//    int wordSize;
+    //int wordSize;
 
     //最大进度范围
-    int maxProgress;
+    private int maxProgress;
     //最小进度范围
-    int minProgress;
+    private int minProgress;
     //当前进度(总是将起始位置等分为100份)，通过进度的百分比求出实际显示数值
-    int progress;
+    private int progress;
     //实际显示的数值
-    double realShowProgress;
+    private double realShowProgress;
     //每次要增加减少的数值
-    double addOrReduce = 1;
+    private double addOrReduce = 1;
     //开始滑动的起始位置度数，顶部270 右侧0 底部90 左侧180,因为这是半圆直接写死从左侧180开始滑动
-    int beginLocation;
-    int sweepLocation;
+    private int beginLocation;
+    private int sweepLocation;
     //当前可滑动区域的范围
-    int slideAbleLocation;
+    private int slideAbleLocation;
 
     //圆环上的圆圈
-    Bitmap mDragBitmap;
+    private Bitmap mDragBitmap;
     //圆环的宽
-    int bitmapWidth;
+    private int bitmapWidth;
     //圆环的高度
-    int bitmapHight;
+    private int bitmapHight;
 
     //外侧刻度线的数量
-//    int scaleLineCount;
+    //int scaleLineCount;
     //外侧正常刻度线的长度
-//    int scaleLineLength;
+    //int scaleLineLength;
     //线条的宽度
-    int scaleLineWidth;
-    //刻度结束的角度
-    float sweepAngle = 180;//因为是半圆，这里就写死了
+    private int scaleLineWidth;
     //未选择的刻度线颜色
-    int scaleLineNormalCorlor;
+    private int scaleLineNormalCorlor;
     //滑动后的刻度线颜色
-    int specialScaleCorlor;
+    private int specialScaleCorlor;
     //画底部背景环的画笔
-    Paint ringBgPaint;
+    private Paint ringBgPaint;
     //画上面圆弧的画笔
-    Paint slideRingPaint;
+    private Paint slideRingPaint;
     //圆环上的小圆圈
-    Paint mBitmapPaint;
+    private Paint mBitmapPaint;
     //写当前progress的画笔
-    Paint wordPaint;
+    private Paint wordPaint;
     //画普通背景刻度线的画笔
-//    Paint scalePaint;
+    //Paint scalePaint;
     //这是画滑动后的刻度颜色画笔
-    Paint specialScalePaint;
+    private Paint specialScalePaint;
 
     //显示中间显示文字(当前为progress)所占的区域
-    Rect rect;
+    private Rect rect;
 
     //这是保留小数的使用类
-    DecimalFormat df;
+    private DecimalFormat df;
 
     public MySeekBar(Context context) {
         this(context, null);
@@ -155,6 +157,7 @@ public class MySeekBar extends View {
         TypedArray array = context.getTheme().obtainStyledAttributes(attrs
                 , R.styleable.MySeekBar
                 , defStyleAttr, 0);
+        isLeft = array.getBoolean(R.styleable.MySeekBar_seek_left, true);
         ringWidth = array.getInt(R.styleable.MySeekBar_ringWidth, CommonUtil.dip2px(context, 10));
         slideRingCorlor = array.getInt(R.styleable.MySeekBar_slideRingCorlor, 0xFF6a6aff);
         ringBgCorlor = array.getInt(R.styleable.MySeekBar_ringBgCorlor, 0xFFbebebe);
@@ -165,7 +168,12 @@ public class MySeekBar extends View {
         minProgress = array.getInt(R.styleable.MySeekBar_minProgress, 0);
         progress = array.getInt(R.styleable.MySeekBar_progress, 0);
         //因为这是个半弧，所以我们直接写死了，从左侧开始
-        beginLocation = 110;
+
+        if (isLeft) {
+            beginLocation = 110;
+        } else {
+            beginLocation = 290;
+        }
         sweepLocation = 140;
         scaleLineNormalCorlor = array.getInt(R.styleable.MySeekBar_scaleLineNormalCorlor, 0xFFbebebe);
         specialScaleCorlor = array.getInt(R.styleable.MySeekBar_specialScaleCorlor, 0xFF6a6aff);
@@ -249,27 +257,54 @@ public class MySeekBar extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        //画背景圆环
-        canvas.drawArc(new RectF(ringWidth / 2 + getPaddingLeft()
-                        , ringWidth / 2 + getPaddingTop()
-                        , 2 * radius - ringWidth / 2 + getPaddingLeft()
-                        , 2 * radius - ringWidth / 2 + getPaddingTop())
-                , beginLocation, 140, false, ringBgPaint);
-        //画滑动圆弧
-        canvas.drawArc(new RectF(ringWidth / 2 + getPaddingLeft()
-                        , ringWidth / 2 + getPaddingTop()
-                        , 2 * radius - ringWidth / 2 + getPaddingLeft()
-                        , 2 * radius - ringWidth / 2 + getPaddingTop())
-                , beginLocation, progress * 180 / 100, false, slideRingPaint);
-        //画上滑动图标
-        PointF progressPoint = CommonUtil.calcArcEndPointXY(radius + getPaddingLeft()
-                , radius + getPaddingTop()
-                , radius - ringWidth / 2
-                , progress * (sweepLocation - beginLocation) / 100, beginLocation);
-        int left = (int) progressPoint.x - mDragBitmap.getWidth() / 2;
-        int top = (int) progressPoint.y - mDragBitmap.getHeight() / 2;
-        canvas.drawBitmap(mDragBitmap, left, top, mBitmapPaint);
+        if (isLeft) {
+            //画背景圆环
+            canvas.drawArc(new RectF(ringWidth / 2 + getPaddingLeft()
+                            , ringWidth / 2 + getPaddingTop()
+                            , 2 * radius - ringWidth / 2 + getPaddingLeft()
+                            , 2 * radius - ringWidth / 2 + getPaddingTop())
+                    , beginLocation, sweepLocation, false, ringBgPaint);
+            //画滑动圆弧
+            canvas.drawArc(new RectF(ringWidth / 2 + getPaddingLeft()
+                            , ringWidth / 2 + getPaddingTop()
+                            , 2 * radius - ringWidth / 2 + getPaddingLeft()
+                            , 2 * radius - ringWidth / 2 + getPaddingTop())
+                    , beginLocation, progress * sweepLocation / 100, false, slideRingPaint);
+            //画上滑动图标
+            PointF progressPoint = CommonUtil.calcArcEndPointXY(radius + getPaddingLeft()
+                    , radius + getPaddingTop()
+                    , radius - ringWidth / 2
+                    , progress * sweepLocation / 100, beginLocation);
+            int left = (int) progressPoint.x - mDragBitmap.getWidth() / 2;
+            int top = (int) progressPoint.y - mDragBitmap.getHeight() / 2;
+            canvas.drawBitmap(mDragBitmap, left, top, mBitmapPaint);
+        } else {
+            canvas.save();
+            //坐标系左移
+            canvas.translate(-radius, 0);
+            //画背景圆环
+            canvas.drawArc(new RectF(ringWidth / 2 + getPaddingLeft()
+                            , ringWidth / 2 + getPaddingTop()
+                            , 2 * radius - ringWidth / 2 + getPaddingLeft()
+                            , 2 * radius - ringWidth / 2 + getPaddingTop())
+                    , beginLocation, sweepLocation, false, slideRingPaint);
+            //画滑动圆弧
+            canvas.drawArc(new RectF(ringWidth / 2 + getPaddingLeft()
+                            , ringWidth / 2 + getPaddingTop()
+                            , 2 * radius - ringWidth / 2 + getPaddingLeft()
+                            , 2 * radius - ringWidth / 2 + getPaddingTop())
+                    , beginLocation, (100 - progress) * sweepLocation / 100, false, ringBgPaint);
+            //画上滑动图标
+            PointF progressPoint = CommonUtil.calcArcEndPointXY(radius + getPaddingLeft()
+                    , radius + getPaddingTop()
+                    , radius - ringWidth / 2
+                    , (-progress) * sweepLocation / 100, beginLocation + sweepLocation);
+            int left = (int) progressPoint.x - mDragBitmap.getWidth() / 2;
+            int top = (int) progressPoint.y - mDragBitmap.getHeight() / 2;
+            canvas.drawBitmap(mDragBitmap, left, top, mBitmapPaint);
 
+            canvas.restore();
+        }
         // onSeekBarItemClick(realShowProgress);
         onSeekBar.onSeekBarClick((int) realShowProgress);
         //展示进度
@@ -278,22 +313,12 @@ public class MySeekBar extends View {
         // wordPaint.getTextBounds(str, 0, str.length(),rect);
         // canvas.drawText(str, radius+getPaddingLeft() + specialScaleLineLength -rect.width()/2
         //         , radius + getPaddingTop() + specialScaleLineLength , wordPaint);
-        //画背景刻度
-        paintScale(canvas);
     }
 
-    /**
-     * 画背景刻度
-     */
-    private void paintScale(Canvas canvas) {
-        canvas.save();
-        //将坐标系移到圆中心
-        canvas.translate(radius + getPaddingLeft()
-                , radius + getPaddingTop());
-        //旋转坐标系
-        canvas.rotate(90);
-        //操作完成后恢复状态
-        canvas.restore();
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        getParent().requestDisallowInterceptTouchEvent(true);
+        return super.dispatchTouchEvent(event);
     }
 
     @Override
@@ -303,15 +328,13 @@ public class MySeekBar extends View {
         int y = (int) event.getY();
         switch (action) {
             case MotionEvent.ACTION_DOWN:
-                if (isOnRing(x, y) && y <= radius + getPaddingTop()) {
+                if (isOnRing(x, y)) {
                     updateProgress(x, y);
                     return true;
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
-                if (y <= radius + getPaddingTop()) {
-                    updateProgress(x, y);
-                }
+                updateProgress(x, y);
                 return true;
             case MotionEvent.ACTION_UP:
                 invalidate();
@@ -324,12 +347,23 @@ public class MySeekBar extends View {
      * 根据当前点的位置求角度，再转换成当前进度
      */
     private void updateProgress(int eventX, int eventY) {
-        double angle = Math.atan2(eventY - (radius + getPaddingLeft())
+        double angle = Math.atan2(eventY - (radius + getPaddingTop())
                 , eventX - (radius + getPaddingLeft())) / Math.PI;
-        angle = ((2 + angle) % 2 + (-beginLocation / 180f)) % 2;
-        if ((int) Math.round(angle * 100) >= 0) {
-            progress = (int) Math.round(angle * 100);
-            realShowProgress = getShowProgress(progress);
+        if (isLeft) {
+            angle = ((2 + angle) % 2 + (-beginLocation / 180.0f)) % 2;
+            if ((int) Math.round(angle * 100) >= 0 && (int) Math.round(angle * 100) <= 100) {
+                progress = (int) Math.round(angle * 100);
+                realShowProgress = getShowProgress(progress);
+            }
+        } else {
+
+            angle = ((2 + angle) % 2 + (-beginLocation / 180.0f)) % 2;
+            if ((int) Math.round(angle * 100) >= 0 && (int) Math.round(angle * 100) <= 100) {
+                progress = (int) Math.round(angle * 100);
+                progress = 100 - progress;
+                Log.i(TAG, "updateProgress: " + progress);
+                realShowProgress = getShowProgress(progress);
+            }
         }
         invalidate();
     }
@@ -338,12 +372,22 @@ public class MySeekBar extends View {
      * 判断当前触摸屏幕的位置是否位于咱们定的可滑动区域内
      */
     private boolean isOnRing(float eventX, float eventY) {
+        Log.i(TAG, "isOnRing: eventX=" + eventX + ";eventY=" + eventY);
         boolean result = false;
-        double distance = Math.sqrt(Math.pow(eventX - (radius + getPaddingLeft()), 2)
-                + Math.pow(eventY - (radius + getPaddingLeft()), 2));
-        if (distance < (2 * radius + getPaddingLeft() + getPaddingRight())
-                && distance > radius - slideAbleLocation) {
-            result = true;
+        if (isLeft) {
+            double distance = Math.sqrt(Math.pow(eventX - (radius + getPaddingLeft()), 2)
+                    + Math.pow(eventY - (radius + getPaddingLeft()), 2));
+            if (distance < (2 * radius + getPaddingLeft() + getPaddingRight())
+                    && distance > radius - slideAbleLocation) {
+                result = true;
+            }
+        } else {
+            double distance = Math.sqrt(Math.pow(eventX - radius - getPaddingLeft(), 2)
+                    + Math.pow(eventY - radius - getPaddingLeft(), 2));
+            if (distance < (radius + getPaddingLeft() + getPaddingRight() + ringWidth)
+                    && distance > radius - slideAbleLocation) {
+                result = true;
+            }
         }
         return result;
     }

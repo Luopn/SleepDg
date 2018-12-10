@@ -24,7 +24,7 @@ public class GaugeActivity extends BaseActivity {
 
     private static final String TAG = "GaugeActivity";
     private static final int SEARCH_DURATION = 2000;
-    private static final int SEARCH_REACPEAT_COUNT = 5;
+    private static final int SEARCH_REACPEAT_COUNT = 30;
 
     private Button btn_start_gauge;
     private TextView tv_gauge_val;
@@ -84,50 +84,14 @@ public class GaugeActivity extends BaseActivity {
             public void onAnimationStart(Animator animation) {
                 btn_start_gauge.setAlpha(0.5f);
                 btn_start_gauge.setEnabled(false);
-                new CountDownTimer(SEARCH_DURATION * SEARCH_REACPEAT_COUNT, 100) {
+                new CountDownTimer(SEARCH_DURATION * SEARCH_REACPEAT_COUNT, 600) {
 
                     @Override
                     public void onTick(long millisUntilFinished) {
-                        int progress = (int) ((SEARCH_DURATION * SEARCH_REACPEAT_COUNT - millisUntilFinished) / 100);
+                        int progress = (int) ((SEARCH_DURATION * SEARCH_REACPEAT_COUNT - millisUntilFinished) / 600);
                         tv_gauge_val.setText(String.format(Locale.getDefault(), "%d", progress));
 
-                        if (progress == 5) {
-                            tv_weight.setText("62kg");
-                            pb_weight.setProgress(100);
-                            tv_weight_per.startPercentAnim("100%");
-                            tv_height.setText("172cm");
-                            pb_height.setProgress(100);
-                            tv_height_per.startPercentAnim("100%");
-                            BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary("40")
-                                    + BleUtils.convertDecimalToBinary("40"));
-
-                        } else if(progress == 30){
-
-                            BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary("20")
-                                    + BleUtils.convertDecimalToBinary("20"));
-
-                        } else if (progress == 50) {
-                            tv_heartbeat.setText("68次/分钟");
-                            tv_heartbeat_per.startPercentAnim("100%");
-                            pb_heartbeat.setProgress(100);
-                            tv_breath.setText("72次/分钟");
-                            tv_breath_per.startPercentAnim("100%");
-                            pb_breath.setProgress(100);
-
-                            BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary("100")
-                                    + BleUtils.convertDecimalToBinary("100"));
-
-                        } else if (progress == 70) {
-                            tv_bodyTem.setText("36°");
-                            tv_bodyTem_per.startPercentAnim("100%");
-                            pb_bodyTem.setProgress(100);
-                            tv_roomTem.setText("28°");
-                            tv_roomTem_per.startPercentAnim("100%");
-                            pb_roomTem.setProgress(100);
-
-                            BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary("65")
-                                    + BleUtils.convertDecimalToBinary("65"));
-                        }
+                        updateUI(progress);
                     }
 
                     @Override
@@ -158,6 +122,46 @@ public class GaugeActivity extends BaseActivity {
 
             }
         });
+    }
+
+    private void updateUI(int progress) {
+        if (progress == 5) {
+            tv_weight.setText("62kg");
+            pb_weight.setProgress(100);
+            tv_weight_per.startPercentAnim("100%");
+            tv_height.setText("172cm");
+            pb_height.setProgress(100);
+            tv_height_per.startPercentAnim("100%");
+            BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary("40")
+                    + BleUtils.convertDecimalToBinary("40"));
+
+        } else if (progress == 30) {
+
+            BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary("20")
+                    + BleUtils.convertDecimalToBinary("20"));
+
+        } else if (progress == 50) {
+            tv_heartbeat.setText("68次/分钟");
+            tv_heartbeat_per.startPercentAnim("100%");
+            pb_heartbeat.setProgress(100);
+            tv_breath.setText("72次/分钟");
+            tv_breath_per.startPercentAnim("100%");
+            pb_breath.setProgress(100);
+
+            BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary("100")
+                    + BleUtils.convertDecimalToBinary("100"));
+
+        } else if (progress == 70) {
+            tv_bodyTem.setText("36°");
+            tv_bodyTem_per.startPercentAnim("100%");
+            pb_bodyTem.setProgress(100);
+            tv_roomTem.setText("28°");
+            tv_roomTem_per.startPercentAnim("100%");
+            pb_roomTem.setProgress(100);
+
+            BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary("65")
+                    + BleUtils.convertDecimalToBinary("65"));
+        }
     }
 
     @Override

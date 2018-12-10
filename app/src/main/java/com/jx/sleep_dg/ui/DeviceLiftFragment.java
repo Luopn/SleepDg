@@ -5,6 +5,7 @@ import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,8 +41,32 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
     private Ruler tvTou, tvJiao;
     private ImageView ivZuoChuang;
 
+    private BorderButton mBtnTvMode;
+    private BorderButton mBtnYaolanMode;
+    private BorderButton mBtnSleepMode;
+    private BorderButton mBtnReadMode;
+    private BorderButton mBtnYujiaMode;
+    private BorderButton mBtnRelaxMode;
     private int touIndex = 0;
     private int jiaoIndex = 0;
+
+
+    //各种模式切换
+    private static final int MODE_NOME = 100;
+    private static final int MODE_TV = 101;
+    private static final int MODE_YAOLAN = 102;
+    private static final int MODE_SLEEP = 103;
+    private static final int MODE_READ = 104;
+    private static final int MODE_YUJIA = 105;
+    private static final int MODE_RELAX = 106;
+
+    @IntDef({MODE_NOME, MODE_TV, MODE_YAOLAN, MODE_SLEEP, MODE_READ, MODE_YUJIA, MODE_RELAX})
+    private @interface MODE_LIFT {
+    }
+
+    @MODE_LIFT
+    private int curModeLift;//当前的升降模式
+
 
     public static DeviceLiftFragment newInstance() {
         Bundle args = new Bundle();
@@ -69,7 +94,9 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
         tvJiao = view.findViewById(R.id.ruler_jiao);
 
         seebLeftTou = view.findViewById(R.id.seeb_left_tou);
+        seebLeftTou.setMaxProgress(30);
         seebLeftJiao = view.findViewById(R.id.seeb_left_jiao);
+        seebLeftJiao.setMaxProgress(25);
 
         ivZuoChuang = view.findViewById(R.id.iv_zuo_chuang);
 
@@ -78,17 +105,17 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
         seebLeftJiao.setThumbSize(25, 25);
         seebLeftJiao.setOnSlideChangeListener(this);
 
-        BorderButton mBtnTvMode = (BorderButton) view.findViewById(R.id.btn_tv_mode);
+        mBtnTvMode = (BorderButton) view.findViewById(R.id.btn_tv_mode);
         mBtnTvMode.setOnClickListener(this);
-        BorderButton mBtnYaolanMode = (BorderButton) view.findViewById(R.id.btn_yaolan_mode);
+        mBtnYaolanMode = (BorderButton) view.findViewById(R.id.btn_yaolan_mode);
         mBtnYaolanMode.setOnClickListener(this);
-        BorderButton mBtnSleepMode = (BorderButton) view.findViewById(R.id.btn_sleep_mode);
+        mBtnSleepMode = (BorderButton) view.findViewById(R.id.btn_sleep_mode);
         mBtnSleepMode.setOnClickListener(this);
-        BorderButton mBtnReadMode = (BorderButton) view.findViewById(R.id.btn_read_mode);
+        mBtnReadMode = (BorderButton) view.findViewById(R.id.btn_read_mode);
         mBtnReadMode.setOnClickListener(this);
-        BorderButton mBtnYujiaMode = (BorderButton) view.findViewById(R.id.btn_yujia_mode);
+        mBtnYujiaMode = (BorderButton) view.findViewById(R.id.btn_yujia_mode);
         mBtnYujiaMode.setOnClickListener(this);
-        BorderButton mBtnRelaxMode = (BorderButton) view.findViewById(R.id.btn_relax_mode);
+        mBtnRelaxMode = (BorderButton) view.findViewById(R.id.btn_relax_mode);
         mBtnRelaxMode.setOnClickListener(this);
 
         bindViewData();
@@ -100,14 +127,18 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
         mspProtocol = MSPProtocol.getInstance();
         soundPool = new SoundPool(10, AudioManager.STREAM_SYSTEM, 5);
         soundPool.load(_mActivity, R.raw.ding, 1);
-
+        curModeLift = MODE_NOME;
     }
 
+    //蓝牙数据
     private void bindViewData() {
+        int touDevIndex = mspProtocol.getHigh2() & 0xff;
+        int jiaoDevIndex = mspProtocol.getHigh1() & 0xff;
         if (mspProtocol != null) {
-            tvTou.setValue((int) Math.ceil((mspProtocol.getHigh2() & 0xff) / 17.0f * 45.0f));
-            tvJiao.setValue((int) Math.ceil((mspProtocol.getHigh1() & 0xff) / 17.0f * 30.0f));
+            tvTou.setValue((int) Math.ceil(touDevIndex / 30.0f * 45.0f));
+            tvJiao.setValue((int) Math.ceil(jiaoDevIndex / 25.0f * 30.0f));
         }
+        //升降模式动作
     }
 
     @Override
@@ -121,16 +152,16 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
         super.onClick(view);
         switch (view.getId()) {
             case R.id.iv_tou_jia:
-                if (touIndex < 17) {
+                if (touIndex < 30) {
                     touIndex++;
                     seebLeftTou.setProgress(touIndex);
                     LogUtil.e("左  leftTouIndex:" + touIndex);
                 }
                 chang();
-                BleComUtils.senddianji(BleUtils.convertDecimalToBinary((touIndex + 1) + "")
-                        + BleUtils.convertDecimalToBinary((jiaoIndex + 1) + "")
-                        + BleUtils.convertDecimalToBinary((touIndex + 1) + "")
-                        + BleUtils.convertDecimalToBinary((jiaoIndex + 1) + ""));
+                BleComUtils.senddianji(BleUtils.convertDecimalToBinary(touIndex + "")
+                        + BleUtils.convertDecimalToBinary(jiaoIndex + "")
+                        + BleUtils.convertDecimalToBinary(touIndex + "")
+                        + BleUtils.convertDecimalToBinary(jiaoIndex + ""));
 
                 break;
             case R.id.iv_tou_jian:
@@ -140,24 +171,24 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
                     LogUtil.e("左  leftJiaoIndex:" + touIndex);
                 }
                 chang();
-                BleComUtils.senddianji(BleUtils.convertDecimalToBinary((touIndex + 1) + "")
-                        + BleUtils.convertDecimalToBinary((jiaoIndex + 1) + "")
-                        + BleUtils.convertDecimalToBinary((touIndex + 1) + "")
-                        + BleUtils.convertDecimalToBinary((jiaoIndex + 1) + ""));
+                BleComUtils.senddianji(BleUtils.convertDecimalToBinary(touIndex + "")
+                        + BleUtils.convertDecimalToBinary(jiaoIndex + "")
+                        + BleUtils.convertDecimalToBinary(touIndex + "")
+                        + BleUtils.convertDecimalToBinary(jiaoIndex + ""));
 
                 break;
             case R.id.iv_jiao_jia:
                 //左
-                if (jiaoIndex < 17) {
+                if (jiaoIndex < 25) {
                     jiaoIndex++;
                     seebLeftJiao.setProgress(jiaoIndex);
                     LogUtil.e("左  leftJiaoIndex:" + jiaoIndex);
                 }
                 chang();
-                BleComUtils.senddianji(BleUtils.convertDecimalToBinary((touIndex + 1) + "")
-                        + BleUtils.convertDecimalToBinary((jiaoIndex + 1) + "")
-                        + BleUtils.convertDecimalToBinary((touIndex + 1) + "")
-                        + BleUtils.convertDecimalToBinary((jiaoIndex + 1) + ""));
+                BleComUtils.senddianji(BleUtils.convertDecimalToBinary(touIndex + "")
+                        + BleUtils.convertDecimalToBinary(jiaoIndex + "")
+                        + BleUtils.convertDecimalToBinary(touIndex + "")
+                        + BleUtils.convertDecimalToBinary(jiaoIndex + ""));
 
                 break;
             case R.id.iv_jiao_jian:
@@ -168,20 +199,20 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
                     LogUtil.e("左  leftJiaoIndex:" + jiaoIndex);
                 }
                 chang();
-                BleComUtils.senddianji(BleUtils.convertDecimalToBinary((touIndex + 1) + "")
-                        + BleUtils.convertDecimalToBinary((jiaoIndex + 1) + "")
-                        + BleUtils.convertDecimalToBinary((touIndex + 1) + "")
-                        + BleUtils.convertDecimalToBinary((jiaoIndex + 1) + ""));
+                BleComUtils.senddianji(BleUtils.convertDecimalToBinary(touIndex + "")
+                        + BleUtils.convertDecimalToBinary(jiaoIndex + "")
+                        + BleUtils.convertDecimalToBinary(touIndex + "")
+                        + BleUtils.convertDecimalToBinary(jiaoIndex + ""));
 
                 break;
             case R.id.btn_tv_mode:
-                if(countDownTimer != null){
+                if (countDownTimer != null) {
                     countDownTimer.cancel();
                 }
                 soundPool.play(1, 1, 1, 0, 0, 1);
-                BleComUtils.senddianji(BleUtils.convertDecimalToBinary(17 + "")
+                BleComUtils.senddianji(BleUtils.convertDecimalToBinary(18 + "")
                         + BleUtils.convertDecimalToBinary(9 + "")
-                        + BleUtils.convertDecimalToBinary(17 + "")
+                        + BleUtils.convertDecimalToBinary(18 + "")
                         + BleUtils.convertDecimalToBinary(9 + ""));
                 break;
             case R.id.btn_yaolan_mode:
@@ -205,7 +236,7 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
                 }.start();
                 break;
             case R.id.btn_sleep_mode:
-                if(countDownTimer != null){
+                if (countDownTimer != null) {
                     countDownTimer.cancel();
                 }
                 soundPool.play(1, 1, 1, 0, 0, 1);
@@ -215,7 +246,7 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
                         + BleUtils.convertDecimalToBinary(1 + ""));
                 break;
             case R.id.btn_read_mode:
-                if(countDownTimer != null){
+                if (countDownTimer != null) {
                     countDownTimer.cancel();
                 }
                 soundPool.play(1, 1, 1, 0, 0, 1);
@@ -225,7 +256,7 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
                         + BleUtils.convertDecimalToBinary(9 + ""));
                 break;
             case R.id.btn_yujia_mode:
-                if(countDownTimer != null){
+                if (countDownTimer != null) {
                     countDownTimer.cancel();
                 }
                 soundPool.play(1, 1, 1, 0, 0, 1);
@@ -235,7 +266,7 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
                         + BleUtils.convertDecimalToBinary(10 + ""));
                 break;
             case R.id.btn_relax_mode:
-                if(countDownTimer != null){
+                if (countDownTimer != null) {
                     countDownTimer.cancel();
                 }
                 soundPool.play(1, 1, 1, 0, 0, 1);
@@ -247,36 +278,53 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
         }
     }
 
-    public void chang() {
+    //升降模式切换
+    private void swiftLiftMode(@MODE_LIFT int modeLift) {
+        curModeLift = modeLift;
+        switch (modeLift) {
+            case MODE_YAOLAN:
+                BleComUtils.senddianji(BleUtils.convertDecimalToBinary(10 + "")
+                        + BleUtils.convertDecimalToBinary(mspProtocol.getHigh1() + "")
+                        + BleUtils.convertDecimalToBinary(10 + "")
+                        + BleUtils.convertDecimalToBinary(mspProtocol.getHigh1() + ""));
+                if (mspProtocol.getHigh1() >= 12) {
+
+                }
+                break;
+        }
+    }
+
+    //UI变化
+    private void chang() {
         //左
-        if (touIndex < 6) {
-            if (jiaoIndex < 6) {
+        if (touIndex < 10) {
+            if (jiaoIndex < 8) {
                 ivZuoChuang.setBackgroundResource(R.mipmap.head1_foot1);
-            } else if (jiaoIndex < 12) {
+            } else if (jiaoIndex < 16) {
                 ivZuoChuang.setBackgroundResource(R.mipmap.head1_foot3);
 
-            } else if (jiaoIndex <= 17) {
+            } else if (jiaoIndex <= 25) {
                 ivZuoChuang.setBackgroundResource(R.mipmap.head1_foot4);
 
             }
         }
-        if (6 <= touIndex && touIndex < 12) {
-            if (jiaoIndex < 6) {
+        if (10 <= touIndex && touIndex < 20) {
+            if (jiaoIndex < 8) {
                 ivZuoChuang.setBackgroundResource(R.mipmap.head3_foot1);
-            } else if (6 <= jiaoIndex && jiaoIndex < 12) {
+            } else if (8 <= jiaoIndex && jiaoIndex < 16) {
                 ivZuoChuang.setBackgroundResource(R.mipmap.head3_foot3);
 
-            } else if (12 <= jiaoIndex && jiaoIndex <= 17) {
+            } else if (16 <= jiaoIndex && jiaoIndex <= 25) {
                 ivZuoChuang.setBackgroundResource(R.mipmap.head3_foot4);
 
             }
-        } else if (12 <= touIndex && touIndex <= 17) {
-            if (jiaoIndex < 6) {
+        } else if (20 <= touIndex && touIndex <= 30) {
+            if (jiaoIndex < 8) {
                 ivZuoChuang.setBackgroundResource(R.mipmap.head4_foot1);
-            } else if (6 <= jiaoIndex && jiaoIndex < 12) {
+            } else if (8 <= jiaoIndex && jiaoIndex < 16) {
                 ivZuoChuang.setBackgroundResource(R.mipmap.head4_foot3);
 
-            } else if (12 <= jiaoIndex && jiaoIndex <= 17) {
+            } else if (16 <= jiaoIndex && jiaoIndex <= 25) {
                 ivZuoChuang.setBackgroundResource(R.mipmap.head4_foot4);
             }
         }
@@ -303,10 +351,10 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
 
         }
         chang();
-        BleComUtils.senddianji(BleUtils.convertDecimalToBinary((touIndex + 1) + "")
-                + BleUtils.convertDecimalToBinary((jiaoIndex + 1) + "")
-                + BleUtils.convertDecimalToBinary((touIndex + 1) + "")
-                + BleUtils.convertDecimalToBinary((jiaoIndex + 1) + ""));
+        BleComUtils.senddianji(BleUtils.convertDecimalToBinary(touIndex + "")
+                + BleUtils.convertDecimalToBinary(jiaoIndex + "")
+                + BleUtils.convertDecimalToBinary(touIndex + "")
+                + BleUtils.convertDecimalToBinary(jiaoIndex + ""));
 
     }
 

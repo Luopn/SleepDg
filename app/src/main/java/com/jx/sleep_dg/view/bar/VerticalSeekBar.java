@@ -22,7 +22,7 @@ public class VerticalSeekBar extends View {
     private int height;
     private int width;
     private Paint paint;
-    private int maxProgress = 17;
+    private int maxProgress = 30;
     private int progress = 0;
 
     protected Bitmap mThumb;

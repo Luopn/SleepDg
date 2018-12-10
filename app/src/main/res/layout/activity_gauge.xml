@@ -48,7 +48,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="invisible">
 
         <!--体重-->
         <LinearLayout
@@ -147,7 +148,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="invisible">
 
         <!--心率-->
         <LinearLayout
@@ -245,7 +247,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="invisible">
 
         <!--体温-->
         <LinearLayout
@@ -360,8 +363,8 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="8dp"
-            android:progress="0"
             android:background="@color/colorPrimaryLight"
+            android:progress="0"
             app:barColor="@color/white"
             app:bidirectionalAnimate="true" />
     </LinearLayout>

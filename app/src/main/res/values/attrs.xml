@@ -49,6 +49,8 @@
 
     <!--自定义的半圆环带刻度可拖动SeekBar进度条效果-->
     <declare-styleable name="MySeekBar">
+        <!--圆环左右-->
+        <attr name="seek_left" format="boolean" />
         <!--圆环的宽度-->
         <attr name="ringWidth" format="float" />
         <!--滑动圆弧的背景-->

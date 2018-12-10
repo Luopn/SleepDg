@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
@@ -172,12 +173,12 @@ public class DataFragment extends BaseMainFragment {
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                final int res = 90;
                 tvSleepScore.startNumAnim(90 + "");
             }
 
             @Override
             public void onAnimationCancel(Animator animation) {
+                ivSleepProgress.setRotation(0);
             }
 
             @Override
