@@ -172,7 +172,7 @@ public class MySeekBar extends View {
         if (isLeft) {
             beginLocation = 110;
         } else {
-            beginLocation = 290;
+            beginLocation = -70;
         }
         sweepLocation = 140;
         scaleLineNormalCorlor = array.getInt(R.styleable.MySeekBar_scaleLineNormalCorlor, 0xFFbebebe);
@@ -349,20 +349,21 @@ public class MySeekBar extends View {
     private void updateProgress(int eventX, int eventY) {
         double angle = Math.atan2(eventY - (radius + getPaddingTop())
                 , eventX - (radius + getPaddingLeft())) / Math.PI;
+        Log.i(TAG, "updateProgress: angle="+angle);
         if (isLeft) {
-            angle = ((2 + angle) % 2 + (-beginLocation / 180.0f)) % 2;
+            angle = (((2+1/9.0f) + angle) % 2 + (-beginLocation / 180.0f)) % 2;
             if ((int) Math.round(angle * 100) >= 0 && (int) Math.round(angle * 100) <= 100) {
                 progress = (int) Math.round(angle * 100);
                 realShowProgress = getShowProgress(progress);
+                Log.i(TAG, "updateProgress: " + progress);
             }
         } else {
-
-            angle = ((2 + angle) % 2 + (-beginLocation / 180.0f)) % 2;
+            angle = (((2+1/9.0f) + angle) % 2 + (-beginLocation / 180.0f)) % 2;
             if ((int) Math.round(angle * 100) >= 0 && (int) Math.round(angle * 100) <= 100) {
                 progress = (int) Math.round(angle * 100);
                 progress = 100 - progress;
-                Log.i(TAG, "updateProgress: " + progress);
                 realShowProgress = getShowProgress(progress);
+                Log.i(TAG, "updateProgress: " + progress);
             }
         }
         invalidate();
@@ -372,7 +373,6 @@ public class MySeekBar extends View {
      * 判断当前触摸屏幕的位置是否位于咱们定的可滑动区域内
      */
     private boolean isOnRing(float eventX, float eventY) {
-        Log.i(TAG, "isOnRing: eventX=" + eventX + ";eventY=" + eventY);
         boolean result = false;
         if (isLeft) {
             double distance = Math.sqrt(Math.pow(eventX - (radius + getPaddingLeft()), 2)
@@ -382,10 +382,11 @@ public class MySeekBar extends View {
                 result = true;
             }
         } else {
-            double distance = Math.sqrt(Math.pow(eventX - radius - getPaddingLeft(), 2)
+            //坐标系左移
+            double distance = Math.sqrt(Math.pow(eventX - getPaddingLeft(), 2)
                     + Math.pow(eventY - radius - getPaddingLeft(), 2));
             if (distance < (radius + getPaddingLeft() + getPaddingRight() + ringWidth)
-                    && distance > radius - slideAbleLocation) {
+                    && distance > radius - slideAbleLocation/2) {
                 result = true;
             }
         }
