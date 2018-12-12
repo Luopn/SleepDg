@@ -7,9 +7,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 
@@ -31,14 +29,15 @@ import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 
 public class DeviceLiftFragment extends BaseMainFragment implements View.OnClickListener, VerticalSeekBar.SlideChangeListener {
 
-
+    private boolean isInitSeekbarVal;
+    private boolean isYaolanExect;
     private MSPProtocol mspProtocol;
     private SoundPool soundPool;
     private CountDownTimer countDownTimer;
 
     private VerticalSeekBar seebLeftTou;
     private VerticalSeekBar seebLeftJiao;
-    private Ruler tvTou, tvJiao;
+    private Ruler rulerTou, rulerJiao;
     private ImageView ivZuoChuang;
 
     private BorderButton mBtnTvMode;
@@ -90,8 +89,8 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
         view.findViewById(R.id.iv_jiao_jia).setOnClickListener(this);
         view.findViewById(R.id.iv_jiao_jian).setOnClickListener(this);
 
-        tvTou = view.findViewById(R.id.ruler_tou);
-        tvJiao = view.findViewById(R.id.ruler_jiao);
+        rulerTou = view.findViewById(R.id.ruler_tou);
+        rulerJiao = view.findViewById(R.id.ruler_jiao);
 
         seebLeftTou = view.findViewById(R.id.seeb_left_tou);
         seebLeftTou.setMaxProgress(30);
@@ -130,13 +129,24 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
         curModeLift = MODE_NOME;
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        isInitSeekbarVal = false;
+    }
+
     //蓝牙数据
     private void bindViewData() {
         int touDevIndex = mspProtocol.getHigh2() & 0xff;
         int jiaoDevIndex = mspProtocol.getHigh1() & 0xff;
         if (mspProtocol != null) {
-            tvTou.setValue((int) Math.ceil(touDevIndex / 30.0f * 45.0f));
-            tvJiao.setValue((int) Math.ceil(jiaoDevIndex / 25.0f * 30.0f));
+            rulerTou.setValue((int) Math.ceil(touDevIndex / 30.0f * 45.0f));
+            rulerJiao.setValue((int) Math.ceil(jiaoDevIndex / 25.0f * 30.0f));
+        }
+        if(!isInitSeekbarVal){
+            isInitSeekbarVal = true;
+            seebLeftTou.setProgress(touDevIndex);
+            seebLeftJiao.setProgress(jiaoDevIndex);
         }
         //升降模式动作
     }
@@ -206,6 +216,7 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
 
                 break;
             case R.id.btn_tv_mode:
+                isYaolanExect = false;
                 if (countDownTimer != null) {
                     countDownTimer.cancel();
                 }
@@ -216,10 +227,12 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
                         + BleUtils.convertDecimalToBinary(9 + ""));
                 break;
             case R.id.btn_yaolan_mode:
+                isYaolanExect = true;
                 soundPool.play(1, 1, 1, 0, 0, 1);
                 countDownTimer = new CountDownTimer(5 * 60 * 1000, 10 * 1000) {
                     @Override
                     public void onTick(long l) {
+                        if(!isYaolanExect)return;
                         int index = (int) (Math.random() * 17);
                         if (index < 8) index = 1;
                         if (index >= 8) index = 17;
@@ -236,6 +249,7 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
                 }.start();
                 break;
             case R.id.btn_sleep_mode:
+                isYaolanExect = false;
                 if (countDownTimer != null) {
                     countDownTimer.cancel();
                 }
@@ -246,6 +260,7 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
                         + BleUtils.convertDecimalToBinary(1 + ""));
                 break;
             case R.id.btn_read_mode:
+                isYaolanExect = false;
                 if (countDownTimer != null) {
                     countDownTimer.cancel();
                 }
@@ -256,6 +271,7 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
                         + BleUtils.convertDecimalToBinary(9 + ""));
                 break;
             case R.id.btn_yujia_mode:
+                isYaolanExect = false;
                 if (countDownTimer != null) {
                     countDownTimer.cancel();
                 }
@@ -266,6 +282,7 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
                         + BleUtils.convertDecimalToBinary(10 + ""));
                 break;
             case R.id.btn_relax_mode:
+                isYaolanExect = false;
                 if (countDownTimer != null) {
                     countDownTimer.cancel();
                 }

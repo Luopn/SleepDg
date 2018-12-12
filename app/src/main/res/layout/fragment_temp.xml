@@ -26,20 +26,50 @@
     <ImageView
         android:id="@+id/iv_chuang"
         android:layout_width="200dp"
-        android:layout_height="0dp"
+        android:layout_height="300dp"
         android:layout_gravity="center"
-        android:layout_weight="1"
         android:scaleType="centerInside"
         android:src="@mipmap/warmbed_0" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center_horizontal">
+
+        <com.jx.sleep_dg.view.BorderButton
+            android:layout_width="90dp"
+            android:layout_height="24dp"
+            android:enabled="false"
+            android:text="已启用"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/textSize_12"
+            app:lb_corner="12dp"
+            app:lt_corner="12dp"
+            app:normal_color="@color/textTitleColor"
+            app:stroke_color="@color/textTitleColor"
+            app:stroke_width="1dp" />
+
+        <com.jx.sleep_dg.view.BorderButton
+            android:layout_width="90dp"
+            android:layout_height="24dp"
+            android:text="2小时"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/textSize_12"
+            app:normal_color="@android:color/transparent"
+            app:rb_corner="12dp"
+            app:rt_corner="12dp"
+            app:stroke_color="@color/textTitleColor"
+            app:stroke_width="1dp" />
+    </LinearLayout>
     <!--温度控制部分-->
     <LinearLayout
         android:id="@+id/ll_temp"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:orientation="vertical"
-        android:paddingBottom="20dp"
-        android:paddingTop="20dp">
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -122,8 +152,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:gravity="center"
             android:layout_marginTop="5dp"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <TextView

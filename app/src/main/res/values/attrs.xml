@@ -54,9 +54,10 @@
         <!--圆环的宽度-->
         <attr name="ringWidth" format="float" />
         <!--滑动圆弧的背景-->
-        <attr name="slideRingCorlor" format="integer" />
+        <attr name="slideRingCorlor" format="color" />
         <!--底部圆弧的背景-->
-        <attr name="ringBgCorlor" format="integer" />
+        <attr name="ringBgCorlor" format="color" />
+        <attr name="ringExtraBgCorlor" format="color" />
         <!--当前文字的背景-->
         <attr name="wordCorlor" format="integer" />
         <!--当前文字的大小-->
@@ -79,10 +80,6 @@
         <attr name="scaleLineWidth" format="integer" />
         <!--刻度线距离圆环的宽度-->
         <attr name="scaleToRingSpace" format="integer" />
-        <!--普通线的颜色-->
-        <attr name="scaleLineNormalCorlor" format="integer" />
-        <!--特殊线的颜色-->
-        <attr name="specialScaleCorlor" format="integer" />
     </declare-styleable>
 
     <declare-styleable name="SeekArc">

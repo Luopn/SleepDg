@@ -4,17 +4,14 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.OverScroller;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.ToggleButton;
 
 import com.jx.sleep_dg.R;
 import com.jx.sleep_dg.base.BaseMainFragment;
@@ -32,21 +29,21 @@ import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 /**
  * 设备硬度
  */
-public class DeviseHardnessFragment extends BaseMainFragment implements View.OnClickListener, View.OnTouchListener {
-    private boolean isSwitch = true;
+public class DeviseHardnessFragment extends BaseMainFragment implements View.OnClickListener {
 
-    private boolean isNeedRefreshLevel = true;//更新档位数据，防止不停刷新
+    private boolean isInitSeekbarVal;
 
     private MySeekBar leftSeekbar;
     private MySeekBar rightSeekbar;
-    private ToggleButton togglebutton;
 
-    private ImageView ivAdd, ivDecrease;
+    private TextView tvCurL, tvCurR;
+
+    private ImageView ivLAdd, ivLDecrease;
+    private ImageView ivRAdd, ivRDecrease;
 
     private BorderButton tvLCurHardless;
     private BorderButton tvRCurHardness;
-    private TextView tvGear;
-    private LinearLayout llChongqi;
+    private LinearLayout llChongqiL,llChongqiR;
 
     private int rightIndex = 1;
     private int leftIndex = 1;
@@ -76,34 +73,41 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
         mspProtocol = MSPProtocol.getInstance();
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        isInitSeekbarVal = false;
+    }
+
     @SuppressLint("ClickableViewAccessibility")
     public void bindView(View view) {
         ScrollView mScrollView = view.findViewById(R.id.scrollView);
         OverScrollDecoratorHelper.setUpOverScroll(mScrollView);
         tvLCurHardless = view.findViewById(R.id.tv_lcur_hardless);
         tvRCurHardness = view.findViewById(R.id.tv_rcur_hardness);
-        tvGear = view.findViewById(R.id.tv_gear);
-        llChongqi = view.findViewById(R.id.ll_chongqi);
-        ivAdd = view.findViewById(R.id.iv_jia);
-        ivDecrease = view.findViewById(R.id.iv_jian);
-        togglebutton = view.findViewById(R.id.togglebutton);
+
+        tvCurL = view.findViewById(R.id.tv_cur_l);
+        tvCurR = view.findViewById(R.id.tv_cur_r);
+
+        llChongqiL = view.findViewById(R.id.ll_chongqi_l);
+        llChongqiR = view.findViewById(R.id.ll_chongqi_r);
+        ivLAdd = view.findViewById(R.id.iv_jia_l);
+        ivLDecrease = view.findViewById(R.id.iv_jian_l);
+        ivRAdd = view.findViewById(R.id.iv_jia_r);
+        ivRDecrease = view.findViewById(R.id.iv_jian_r);
         leftSeekbar = view.findViewById(R.id.left_seekbar);
         rightSeekbar = view.findViewById(R.id.right_seekbar);
 
-        ivAdd.setOnClickListener(this);
-        ivDecrease.setOnClickListener(this);
-        togglebutton.setOnClickListener(this);
-        //监听触摸，已停止档位更新
-        ivAdd.setOnTouchListener(this);
-        ivDecrease.setOnTouchListener(this);
+        ivLAdd.setOnClickListener(this);
+        ivLDecrease.setOnClickListener(this);
+        ivRAdd.setOnClickListener(this);
+        ivRDecrease.setOnClickListener(this);
 
         leftSeekbar.setSeekBarClickListener(new MySeekBar.onSeekBarClickListener() {
             @Override
             public void onSeekBarClick(int position) {
-                isNeedRefreshLevel = false;//停止档位数据更新
                 leftIndex = position;
-                tvGear.setText(String.format(Locale.getDefault(), getResources().getString(R.string.gear_val), position * 5));
-                shanshuo();
+                shanshuo(true);
                 BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary(leftIndex * 5 + "")
                         + BleUtils.convertDecimalToBinary(rightIndex * 5 + ""));
             }
@@ -111,10 +115,8 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
         rightSeekbar.setSeekBarClickListener(new MySeekBar.onSeekBarClickListener() {
             @Override
             public void onSeekBarClick(int position) {
-                isNeedRefreshLevel = false;//停止档位数据更新
                 rightIndex = position;
-                tvGear.setText(String.format(Locale.getDefault(), getResources().getString(R.string.gear_val), position * 5));
-                shanshuo();
+                shanshuo(false);
                 BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary(leftIndex * 5 + "")
                         + BleUtils.convertDecimalToBinary(rightIndex * 5 + ""));
             }
@@ -135,99 +137,72 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
         int rPresureCurVal = mspProtocol.getrPresureCurVal() & 0xff;
         tvLCurHardless.setText(String.format(Locale.getDefault(), "%d", lPresureCurVal));
         tvRCurHardness.setText(String.format(Locale.getDefault(), "%d", rPresureCurVal));
+        tvCurL.setText(String.format(Locale.getDefault(), "%d", lPresureCurVal));
+        tvCurR.setText(String.format(Locale.getDefault(), "%d", rPresureCurVal));
 
-        if (isSwitch) {
-            leftIndex = (int) Math.ceil((double) lPresureCurVal / 5);
-            leftIndex = leftIndex < 1 ? 1 : leftIndex > 20 ? 20 : leftIndex;
-            if (isNeedRefreshLevel) {
-                leftSeekbar.setProgress(Double.valueOf(leftIndex + ""));
-                tvGear.setText(String.format(Locale.getDefault(), getResources().getString(R.string.gear_val), leftIndex * 5));
-            }
-        } else {
-            rightIndex = (int) Math.ceil((double) rPresureCurVal / 5);
-            rightIndex = rightIndex < 1 ? 1 : rightIndex > 20 ? 20 : rightIndex;
-            if (isNeedRefreshLevel) {
-                rightSeekbar.setProgress(Double.valueOf(rightIndex + ""));
-                tvGear.setText(String.format(Locale.getDefault(), getResources().getString(R.string.gear_val), rightIndex * 5));
-            }
-        }
-    }
+        leftIndex = (int) Math.ceil((double) lPresureCurVal / 5);
+        leftIndex = leftIndex < 1 ? 1 : leftIndex > 20 ? 20 : leftIndex;
 
-    @SuppressLint("ClickableViewAccessibility")
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        switch (v.getId()) {
-            case R.id.iv_jia:
-            case R.id.iv_jian:
-                isNeedRefreshLevel = false;//停止档位数据更新
-                break;
+        rightIndex = (int) Math.ceil((double) rPresureCurVal / 5);
+        rightIndex = rightIndex < 1 ? 1 : rightIndex > 20 ? 20 : rightIndex;
+
+        if (!isInitSeekbarVal) {
+            isInitSeekbarVal = true;
+            leftSeekbar.setProgress(Double.valueOf(leftIndex + ""));
+            rightSeekbar.setProgress(Double.valueOf(rightIndex + ""));
         }
-        return false;
     }
 
     @Override
     public void onClick(View view) {
         super.onClick(view);
         switch (view.getId()) {
-            case R.id.togglebutton:
-                isNeedRefreshLevel = true;//档位数据更新
-                if (isSwitch) {
-                    isSwitch = false;
-                    togglebutton.setChecked(true);
-                    leftSeekbar.setVisibility(View.GONE);
-                    rightSeekbar.setVisibility(View.VISIBLE);
-                } else {
-                    isSwitch = true;
-                    leftSeekbar.setVisibility(View.VISIBLE);
-                    rightSeekbar.setVisibility(View.GONE);
-                    togglebutton.setChecked(false);
+            case R.id.iv_jian_l:
+                if (leftIndex > 1) {
+                    leftIndex--;
+                    leftSeekbar.setProgress(Double.valueOf(leftIndex + ""));
                 }
-                bindViewData();
-                break;
-            case R.id.iv_jian:
-                if (isSwitch) {
-                    if (leftIndex > 1) {
-                        leftIndex--;
-                        leftSeekbar.setProgress(Double.valueOf(leftIndex + ""));
-                        tvGear.setText(String.format(Locale.getDefault(), getResources().getString(R.string.gear_val), leftIndex * 5));
-                    }
-                } else {
-                    if (rightIndex > 1) {
-                        rightIndex--;
-                        rightSeekbar.setProgress(Double.valueOf(rightIndex + ""));
-                        tvGear.setText(String.format(Locale.getDefault(), getResources().getString(R.string.gear_val), rightIndex * 5));
-                    }
-                }
-                LogUtil.e("rightIndex:" + rightIndex + "leftIndex:" + leftIndex);
-                shanshuo();
+                shanshuo(true);
                 BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary(leftIndex * 5 + "") + BleUtils.convertDecimalToBinary(rightIndex * 5 + ""));
                 break;
-            case R.id.iv_jia:
-                if (isSwitch) {
-                    if (leftIndex < 20) {
-                        leftIndex++;
-                        leftSeekbar.setProgress(Double.valueOf(leftIndex + ""));
-                        tvGear.setText(String.format(Locale.getDefault(), getResources().getString(R.string.gear_val), leftIndex * 5));
-                    }
-                } else {
-                    if (rightIndex < 20) {
-                        rightIndex++;
-                        rightSeekbar.setProgress(Double.valueOf(rightIndex + ""));
-                        tvGear.setText(String.format(Locale.getDefault(), getResources().getString(R.string.gear_val), rightIndex * 5));
-                    }
+            case R.id.iv_jia_l:
+                if (leftIndex < 20) {
+                    leftIndex++;
+                    leftSeekbar.setProgress(Double.valueOf(leftIndex + ""));
                 }
-                shanshuo();
+                shanshuo(true);
+                BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary(leftIndex * 5 + "") + BleUtils.convertDecimalToBinary(rightIndex * 5 + ""));
+                break;
+            case R.id.iv_jian_r:
+                if (rightIndex > 1) {
+                    rightIndex--;
+                    rightSeekbar.setProgress(Double.valueOf(rightIndex + ""));
+                }
+                shanshuo(false);
+                BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary(leftIndex * 5 + "") + BleUtils.convertDecimalToBinary(rightIndex * 5 + ""));
+                break;
+            case R.id.iv_jia_r:
+                if (rightIndex < 20) {
+                    rightIndex++;
+                    rightSeekbar.setProgress(Double.valueOf(rightIndex + ""));
+                }
+                shanshuo(false);
                 BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary(leftIndex * 5 + "") + BleUtils.convertDecimalToBinary(rightIndex * 5 + ""));
                 break;
         }
+        LogUtil.e("rightIndex:" + rightIndex + "leftIndex:" + leftIndex);
     }
 
-    public void shanshuo() {
-        Animation alphaAnimation = new AlphaAnimation(1, 0.4f);
+    private void shanshuo(boolean isLeft) {
+        Animation alphaAnimation = new AlphaAnimation(1, 0.1f);
         alphaAnimation.setDuration(1000);
         alphaAnimation.setInterpolator(new LinearInterpolator());
-        alphaAnimation.setRepeatCount(1);
+        alphaAnimation.setRepeatCount(2);
         alphaAnimation.setRepeatMode(Animation.REVERSE);
-        llChongqi.startAnimation(alphaAnimation);
+        if(isLeft) {
+            llChongqiL.startAnimation(alphaAnimation);
+        }else{
+            llChongqiR.startAnimation(alphaAnimation);
+        }
     }
 }

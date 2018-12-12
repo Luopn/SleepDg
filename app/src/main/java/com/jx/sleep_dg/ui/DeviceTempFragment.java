@@ -26,7 +26,6 @@ public class DeviceTempFragment extends BaseMainFragment implements View.OnClick
     private BorderButton mLevel5;
 
     private int index = 0;
-    private View view;
 
     public static DeviceTempFragment newInstance() {
         Bundle args = new Bundle();
