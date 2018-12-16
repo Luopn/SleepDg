@@ -247,23 +247,17 @@ public class MySeekBar extends View {
                             , 2 * radius - ringWidth / 2 + getPaddingLeft()
                             , 2 * radius - ringWidth / 2 + getPaddingTop())
                     , beginLocation, sweepLocation, false, ringBgPaint);
-            //画背景圆环
-            canvas.drawArc(new RectF(ringWidth / 2+ 5  + getPaddingLeft()
-                            , ringWidth / 2 + getPaddingTop()
-                            , 2 * radius - ringWidth / 2 + getPaddingLeft()
-                            , 2 * radius - ringWidth / 2 + getPaddingTop())
-                    , beginLocation, sweepLocation, false, ringBgPaint);
             //画滑动圆弧
             canvas.drawArc(new RectF(ringWidth / 2 + getPaddingLeft()
                             , ringWidth / 2 + getPaddingTop()
                             , 2 * radius - ringWidth / 2 + getPaddingLeft()
                             , 2 * radius - ringWidth / 2 + getPaddingTop())
-                    , beginLocation, progress * sweepLocation / 100, false, slideRingPaint);
+                    , beginLocation, progress * sweepLocation / 100.0f+0.01f, false, slideRingPaint);
             //画上滑动图标
             PointF progressPoint = CommonUtil.calcArcEndPointXY(radius + getPaddingLeft()
                     , radius + getPaddingTop()
                     , radius - ringWidth / 2
-                    , progress * sweepLocation / 100, beginLocation);
+                    , progress * sweepLocation / 100.0f, beginLocation);
             int left = (int) progressPoint.x - mDragBitmap.getWidth() / 2;
             int top = (int) progressPoint.y - mDragBitmap.getHeight() / 2;
             canvas.drawBitmap(mDragBitmap, left, top, mBitmapPaint);
@@ -282,7 +276,7 @@ public class MySeekBar extends View {
                             , ringWidth / 2 + getPaddingTop()
                             , 2 * radius - ringWidth / 2 + getPaddingLeft()
                             , 2 * radius - ringWidth / 2 + getPaddingTop())
-                    , beginLocation, (100 - progress) * sweepLocation / 100, false, ringBgPaint);
+                    , beginLocation, (100 - progress) * sweepLocation / 100+0.01f, false, ringBgPaint);
             //画上滑动图标
             PointF progressPoint = CommonUtil.calcArcEndPointXY(radius + getPaddingLeft()
                     , radius + getPaddingTop()
@@ -354,6 +348,7 @@ public class MySeekBar extends View {
                 realShowProgress = getShowProgress(progress);
             }
         }
+        Log.i(TAG, "updateProgress: "+progress);
         invalidate();
     }
 

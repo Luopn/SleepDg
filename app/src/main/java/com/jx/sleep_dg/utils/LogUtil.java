@@ -12,7 +12,7 @@ public class LogUtil {
     public static final String ZBKCTAG = "Sleep";
 
     static final boolean ERROR = true;
-    static final boolean INFO = false;
+    static final boolean INFO = true;
     static final boolean DEBUG = false;
 
     public static void i(String msg) {

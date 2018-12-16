@@ -1,13 +1,18 @@
 package com.jx.sleep_dg.ui;
 
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewTreeObserver;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.ScrollView;
 
 import com.jx.sleep_dg.MyApplication;
 import com.jx.sleep_dg.R;
@@ -24,12 +29,14 @@ import java.util.Locale;
 
 public class LoginActivity extends BaseActivity {
 
+    private static final String TAG = "LoginActivity";
+    private ScrollView mScrollView;
     private RadioButton rbChSimple;
     private RadioButton rbChTradition;
     private RadioButton rbEn;
-
-    EditText et_phone;
-    EditText et_password;
+    private Button btnLogin;
+    private EditText et_phone;
+    private EditText et_password;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,12 +49,16 @@ public class LoginActivity extends BaseActivity {
     public void bindView() {
         setTitleLayoutVisiable(false);
 
+        mScrollView = findViewById(R.id.scrollView);
         rbChSimple = findViewById(R.id.rb_ch_simple);
         rbChTradition = findViewById(R.id.rb_ch_tradition);
         rbEn = findViewById(R.id.rb_en);
+        et_phone = findViewById(R.id.et_phone);
+        et_password = findViewById(R.id.et_password);
+        btnLogin = findViewById(R.id.btn_login);
 
         findViewById(R.id.tv_register).setOnClickListener(this);
-        findViewById(R.id.btn_login).setOnClickListener(this);
+        btnLogin.setOnClickListener(this);
         rbChSimple.setOnClickListener(this);
         rbChTradition.setOnClickListener(this);
         rbEn.setOnClickListener(this);
@@ -84,7 +95,7 @@ public class LoginActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.tv_register:
                 //注册
-                intent.setClass(this,RegistActivity.class);
+                intent.setClass(this, RegistActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_login:

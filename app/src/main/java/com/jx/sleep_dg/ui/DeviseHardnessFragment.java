@@ -110,6 +110,7 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
                 shanshuo(true);
                 BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary(leftIndex * 5 + "")
                         + BleUtils.convertDecimalToBinary(rightIndex * 5 + ""));
+                LogUtil.i("rightIndex:" + rightIndex + "leftIndex:" + leftIndex);
             }
         });
         rightSeekbar.setSeekBarClickListener(new MySeekBar.onSeekBarClickListener() {
@@ -119,6 +120,7 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
                 shanshuo(false);
                 BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary(leftIndex * 5 + "")
                         + BleUtils.convertDecimalToBinary(rightIndex * 5 + ""));
+                LogUtil.i("rightIndex:" + rightIndex + "leftIndex:" + leftIndex);
             }
         });
         bindViewData();
@@ -190,7 +192,7 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
                 BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary(leftIndex * 5 + "") + BleUtils.convertDecimalToBinary(rightIndex * 5 + ""));
                 break;
         }
-        LogUtil.e("rightIndex:" + rightIndex + "leftIndex:" + leftIndex);
+        LogUtil.i("rightIndex:" + rightIndex + "leftIndex:" + leftIndex);
     }
 
     private void shanshuo(boolean isLeft) {

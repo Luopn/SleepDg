@@ -19,6 +19,7 @@
     <string name="set">设置</string>
 
     <!--登录注册-->
+    <string name="login_welcome">欢迎进入智慧云人工智慧床垫</string>
     <string name="account_name">用户名</string>
     <string name="user_info">个人信息</string>
     <string name="user_associated">我关联的人</string>
