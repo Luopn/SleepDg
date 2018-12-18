@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <!--Toolbar-->
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimaryDark"
@@ -17,13 +17,14 @@
             android:id="@+id/iv_user_image"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_gravity="center_vertical|left"
-            android:background="@mipmap/tx_min" />
+            android:layout_centerVertical="true"
+            android:padding="5dp"
+            android:src="@mipmap/tx_min" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_centerInParent="true"
             android:text="@string/app_name"
             android:textColor="@color/textTitleColor"
             android:textSize="@dimen/textSize_18" />
@@ -32,9 +33,19 @@
             android:id="@+id/iv_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|right"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:layout_toLeftOf="@+id/iv_more"
             android:background="@mipmap/ic_hardware" />
-    </FrameLayout>
+
+        <ImageView
+            android:id="@+id/iv_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/ic_more" />
+    </RelativeLayout>
 
     <!--主要布局-->
     <android.support.design.widget.CoordinatorLayout
@@ -67,8 +78,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
                         android:layout_gravity="center_horizontal"
-                        android:paddingBottom="16dp"
-                        android:paddingTop="16dp">
+                        android:paddingTop="16dp"
+                        android:paddingBottom="16dp">
 
                         <ImageView
                             android:id="@+id/iv_circle_progress"
@@ -249,8 +260,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="15dp"
                     android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
                     android:text="@string/real_time"
                     android:textColor="@color/textTitleColorLight"
                     android:textSize="@dimen/textSize_15" />

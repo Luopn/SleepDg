@@ -6,17 +6,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
-import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.jx.sleep_dg.R;
 import com.jx.sleep_dg.base.BaseMainFragment;
 import com.jx.sleep_dg.protocol.MSPProtocol;
+import com.jx.sleep_dg.ui.DeviceNetConfigAcyivity;
 import com.jx.sleep_dg.ui.MainActivity;
 import com.jx.sleep_dg.ui.SearchActivity;
+import com.jx.sleep_dg.ui.StatisticsActivity;
 import com.jx.sleep_dg.utils.CommonUtil;
 import com.jx.sleep_dg.view.EcgView;
 import com.jx.sleep_dg.view.HuxiEcgView;
@@ -34,6 +37,7 @@ public class DataFragment extends BaseMainFragment {
     private static final int SEARCH_DURATION = 1000;
     private static final int SEARCH_REACPEAT_COUNT = 5;
 
+    private ImageView ivMore;
     private NumberRollingView tvSleepScore;
     private TextView tvXinlvRight, tvXinlvLeft, tvHuxiLeft, tvHuxiRight;
 
@@ -64,6 +68,8 @@ public class DataFragment extends BaseMainFragment {
     public void onBindView(View view) {
 
         view.findViewById(R.id.iv_right).setOnClickListener(this);
+        ivMore = view.findViewById(R.id.iv_more);
+        ivMore.setOnClickListener(this);
         ivUserImage = view.findViewById(R.id.iv_user_image);
         ivUserImage.setOnClickListener(this);
         ivSleepProgress = view.findViewById(R.id.iv_circle_progress);
@@ -83,10 +89,10 @@ public class DataFragment extends BaseMainFragment {
         TextView tvTitleClearSleep = view.findViewById(R.id.tv_title_clear_sleep);
         TextView tvTitleTimeSleep = view.findViewById(R.id.tv_title_time_sleep);
         //染色,兼容Android23以下版本
-        CommonUtil.drawableTint(getActivity(), tvTitleDeepSleep, ContextCompat.getColor(getActivity(), R.color.mediumblue));
-        CommonUtil.drawableTint(getActivity(), tvTitleShallowSleep, ContextCompat.getColor(getActivity(), R.color.textAccentColor));
-        CommonUtil.drawableTint(getActivity(), tvTitleClearSleep, ContextCompat.getColor(getActivity(), R.color.default_blue_light));
-        CommonUtil.drawableTint(getActivity(), tvTitleTimeSleep, ContextCompat.getColor(getActivity(), R.color.textTitleColor));
+        CommonUtil.drawableTint(_mActivity, tvTitleDeepSleep, ContextCompat.getColor(_mActivity, R.color.mediumblue));
+        CommonUtil.drawableTint(_mActivity, tvTitleShallowSleep, ContextCompat.getColor(_mActivity, R.color.textAccentColor));
+        CommonUtil.drawableTint(_mActivity, tvTitleClearSleep, ContextCompat.getColor(_mActivity, R.color.default_blue_light));
+        CommonUtil.drawableTint(_mActivity, tvTitleTimeSleep, ContextCompat.getColor(_mActivity, R.color.textTitleColor));
 
         dummyProgress();
 
@@ -148,11 +154,36 @@ public class DataFragment extends BaseMainFragment {
     public void onClick(View v) {
         super.onClick(v);
         switch (v.getId()) {
-            case R.id.iv_right:
+            case R.id.iv_right: {
                 Intent intent = new Intent();
-                intent.setClass(getActivity(), SearchActivity.class);
-                getActivity().startActivity(intent);
-                break;
+                intent.setClass(_mActivity, SearchActivity.class);
+                _mActivity.startActivity(intent);
+            }
+            break;
+            case R.id.iv_more: {
+                PopupMenu menu = new PopupMenu(_mActivity, ivMore);
+                menu.getMenuInflater().inflate(R.menu.menu_more, menu.getMenu());
+                menu.show();
+                menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        Intent intent = new Intent();
+                        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        switch (item.getItemId()) {
+                            case R.id.action_sleep_statistic:
+                                intent.setClass(_mActivity, StatisticsActivity.class);
+                                _mActivity.startActivity(intent);
+                                break;
+                            case R.id.action_config_net:
+                                intent.setClass(_mActivity, DeviceNetConfigAcyivity.class);
+                                _mActivity.startActivity(intent);
+                                break;
+                        }
+                        return true;
+                    }
+                });
+            }
+            break;
             case R.id.iv_user_image:
                 MainActivity.mDrawerLayout.openDrawer(GravityCompat.START);
                 break;

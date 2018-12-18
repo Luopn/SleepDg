@@ -6,33 +6,17 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTabHost;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TabHost;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jx.sleep_dg.R;
 import com.jx.sleep_dg.base.BaseActivity;
-import com.jx.sleep_dg.fragment.ControlFragment;
 import com.jx.sleep_dg.fragment.DataFragment;
 import com.jx.sleep_dg.fragment.SettingFragment;
-import com.jx.sleep_dg.fragment.ShopFragment;
-import com.jx.sleep_dg.fragment.StatisticsFragment;
 import com.jx.sleep_dg.MyApplication;
-import com.jx.sleep_dg.utils.QMUIStatusBarHelper;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import me.yokeyword.fragmentation.SupportFragment;
 

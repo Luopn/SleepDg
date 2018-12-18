@@ -1,7 +1,11 @@
-package com.jx.sleep_dg.fragment;
+package com.jx.sleep_dg.ui;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ScrollView;
@@ -9,9 +13,8 @@ import android.widget.TextView;
 
 import com.github.mikephil.charting.data.BarEntry;
 import com.jx.sleep_dg.R;
-import com.jx.sleep_dg.base.BaseMainFragment;
+import com.jx.sleep_dg.base.BaseActivity;
 import com.jx.sleep_dg.protocol.MSPProtocol;
-import com.jx.sleep_dg.ui.ShareActivity;
 import com.jx.sleep_dg.utils.BarChartManager;
 import com.jx.sleep_dg.utils.CommonUtil;
 import com.jx.sleep_dg.view.NumberRollingView;
@@ -27,9 +30,8 @@ import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
  * Created by Administrator on 2018/7/20.
  */
 
-public class StatisticsFragment extends BaseMainFragment {
+public class StatisticsActivity extends BaseActivity {
 
-    private ImageView ivShare;
     private NumberRollingView tvSleepScore;
     private RoundBarChart barChart;
     private TextView tvLeftHeartbeat, tvRightHeartbeat;//心率
@@ -39,36 +41,37 @@ public class StatisticsFragment extends BaseMainFragment {
     private MSPProtocol mspProtocol;
 
     @Override
-    protected int getLayoutId() {
-        return R.layout.fragment_statistics;
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setLayout(R.layout.activity_statistics);
+        setToolbarTitle(R.string.statistics_title);
+        bindView();
     }
 
     @Override
-    public void onBindView(View view) {
-        ScrollView scrollView = view.findViewById(R.id.scrollView);
-        ivShare = view.findViewById(R.id.iv_share);
-        ivShare.setOnClickListener(this);
-        tvSleepScore = view.findViewById(R.id.tv_sleep_score);
-        barChart = view.findViewById(R.id.bar_chat);
-        tvLeftHeartbeat = view.findViewById(R.id.tv_xinlv_left);
-        tvRightHeartbeat = view.findViewById(R.id.tv_xinlv_right);
-        tvLeftBreath = view.findViewById(R.id.tv_huxi_left);
-        tvRightBreath = view.findViewById(R.id.tv_huxi_right);
-        tvLeftBodyMove = view.findViewById(R.id.tv_fanshen_left);
-        tvRightBodyMove = view.findViewById(R.id.tv_fanshen_right);
+    public void bindView() {
+        ScrollView scrollView = findViewById(R.id.scrollView);
+        tvSleepScore = findViewById(R.id.tv_sleep_score);
+        barChart = findViewById(R.id.bar_chat);
+        tvLeftHeartbeat = findViewById(R.id.tv_xinlv_left);
+        tvRightHeartbeat = findViewById(R.id.tv_xinlv_right);
+        tvLeftBreath = findViewById(R.id.tv_huxi_left);
+        tvRightBreath = findViewById(R.id.tv_huxi_right);
+        tvLeftBodyMove = findViewById(R.id.tv_fanshen_left);
+        tvRightBodyMove = findViewById(R.id.tv_fanshen_right);
 
         tvSleepScore.startNumAnim("90");
 
         //柱状图
         BarChartManager barChartManager = new BarChartManager(barChart);
-        barChartManager.setContext(getActivity());
+        barChartManager.setContext(this);
         List<BarEntry> yVals = new ArrayList<>();
         String[] xValues = new String[]{
-                getActivity().getResources().getString(R.string.sleep_deep),
-                getActivity().getResources().getString(R.string.sleep_shallow),
-                getActivity().getResources().getString(R.string.sleep_clear),
-                getActivity().getResources().getString(R.string.sleep_time),
-                getActivity().getResources().getString(R.string.sleep_not_bed),
+                getResources().getString(R.string.sleep_deep),
+                getResources().getString(R.string.sleep_shallow),
+                getResources().getString(R.string.sleep_clear),
+                getResources().getString(R.string.sleep_time),
+                getResources().getString(R.string.sleep_not_bed),
         };
         String[] yValues = new String[]{"20", "30", "10", "25", "15"};
         int[] colors = new int[]{
@@ -86,15 +89,15 @@ public class StatisticsFragment extends BaseMainFragment {
         String label = "";
         barChartManager.showBarChart(yVals, xValues, yValues, colors);
 
-        TextView tvTitleDeepSleep = view.findViewById(R.id.tv_title_deep_sleep);
-        TextView tvTitleShallowSleep = view.findViewById(R.id.tv_title_shallow_sleep);
-        TextView tvTitleClearSleep = view.findViewById(R.id.tv_title_clear_sleep);
-        TextView tvTitleTimeSleep = view.findViewById(R.id.tv_title_time_sleep);
+        TextView tvTitleDeepSleep = findViewById(R.id.tv_title_deep_sleep);
+        TextView tvTitleShallowSleep = findViewById(R.id.tv_title_shallow_sleep);
+        TextView tvTitleClearSleep = findViewById(R.id.tv_title_clear_sleep);
+        TextView tvTitleTimeSleep = findViewById(R.id.tv_title_time_sleep);
         //染色,兼容Android23以下版本
-        CommonUtil.drawableTint(getActivity(), tvTitleDeepSleep, ContextCompat.getColor(getActivity(), R.color.mediumblue));
-        CommonUtil.drawableTint(getActivity(), tvTitleShallowSleep, ContextCompat.getColor(getActivity(), R.color.textAccentColor));
-        CommonUtil.drawableTint(getActivity(), tvTitleClearSleep, ContextCompat.getColor(getActivity(), R.color.default_blue_light));
-        CommonUtil.drawableTint(getActivity(), tvTitleTimeSleep, ContextCompat.getColor(getActivity(), R.color.textTitleColor));
+        CommonUtil.drawableTint(this, tvTitleDeepSleep, ContextCompat.getColor(this, R.color.mediumblue));
+        CommonUtil.drawableTint(this, tvTitleShallowSleep, ContextCompat.getColor(this, R.color.textAccentColor));
+        CommonUtil.drawableTint(this, tvTitleClearSleep, ContextCompat.getColor(this, R.color.default_blue_light));
+        CommonUtil.drawableTint(this, tvTitleTimeSleep, ContextCompat.getColor(this, R.color.textTitleColor));
 
         OverScrollDecoratorHelper.setUpOverScroll(scrollView);
 
@@ -119,14 +122,21 @@ public class StatisticsFragment extends BaseMainFragment {
     }
 
     @Override
-    public void onClick(View v) {
-        super.onClick(v);
-        switch (v.getId()) {
-            case R.id.iv_share:
-                Intent intent = new Intent(getActivity(), ShareActivity.class);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
+        menu.findItem(R.id.action_do).setIcon(R.mipmap.ic_share);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_do:
+                Intent intent = new Intent(this, ShareActivity.class);
                 intent.putExtra(ShareActivity.KEY_SLEEP_SCORE, tvSleepScore.getText().toString());
-                getActivity().startActivity(intent);
+                startActivity(intent);
                 break;
         }
+        return super.onOptionsItemSelected(item);
     }
 }

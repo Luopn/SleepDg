@@ -54,8 +54,8 @@
     <string name="sleep_tim">Sleep Time</string>
     <string name="real_time">Real Time</string>
     <string name="sleep_record_time">Record Time 12:00~12:00</string>
-    <string name="left">Left</string>
-    <string name="right">Right</string>
+    <string name="left">L</string>
+    <string name="right">R</string>
     <string name="heart_rate">Heart Rate</string>
     <string name="heart_rate_value">Heart Rate%d/m</string>
     <string name="breath_rate">Respiratory Rate</string>

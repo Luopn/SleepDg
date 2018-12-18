@@ -29,7 +29,7 @@
                 android:paddingRight="10dp"
                 android:text="当前WiFi"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/textSize_13" />
+                android:textSize="@dimen/textSize_15" />
 
             <com.jx.sleep_dg.view.ClearableEditText
                 android:id="@+id/wifi_name"
@@ -44,7 +44,8 @@
                 android:singleLine="true"
                 android:text=""
                 android:textColor="@android:color/white"
-                android:textColorHint="#ddd" />
+                android:textColorHint="#90dddddd"
+                android:textSize="15sp" />
 
             <ImageButton
                 android:id="@+id/wifi_list"
@@ -69,7 +70,7 @@
                 android:paddingRight="10dp"
                 android:text="WiFi密码"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/textSize_14" />
+                android:textSize="@dimen/textSize_15" />
 
             <com.jx.sleep_dg.view.ClearableEditText
                 android:id="@+id/wifi_pwd"
@@ -83,7 +84,8 @@
                 android:inputType="textPassword"
                 android:singleLine="true"
                 android:textColor="@android:color/white"
-                android:textColorHint="#ddd" />
+                android:textColorHint="#90dddddd"
+                android:textSize="15sp" />
 
             <ImageButton
                 android:id="@+id/wifi_pwd_hidden"
