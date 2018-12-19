@@ -24,19 +24,34 @@
                 android:layout_gravity="center"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/iv_zuo_chuang"
-                    android:layout_width="200dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="16dp"
-                    android:adjustViewBounds="true"
-                    android:background="@mipmap/head0_foot1" />
+                <LinearLayout
+                    android:id="@+id/ll_bed_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+
+                    <ImageView
+                        android:id="@+id/iv_tou_chuang"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|bottom"
+                        android:adjustViewBounds="true"
+                        android:background="@mipmap/ic_head0" />
+
+                    <ImageView
+                        android:id="@+id/iv_wei_chuang"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|bottom"
+                        android:adjustViewBounds="true"
+                        android:background="@mipmap/ic_foot0" />
+                </LinearLayout>
+
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp">
+                    android:layout_marginTop="5dp">
 
                     <View
                         android:id="@+id/centerView"
@@ -66,8 +81,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:layout_marginBottom="20dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
                 android:baselineAligned="false"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
@@ -219,16 +234,19 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:padding="20dp">
 
+                <!--第一列-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical">
@@ -260,70 +278,9 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <com.jx.sleep_dg.view.BorderButton
-                            android:id="@+id/btn_yaolan_mode"
-                            android:layout_width="match_parent"
-                            android:layout_height="30dp"
-                            android:text="摇篮模式"
-                            android:textColor="@android:color/white"
-                            android:textSize="12sp"
-                            app:corner="20dp"
-                            app:type="ok" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:maxWidth="70dp"
-                            android:text="床头床尾自动升降5分钟后关闭"
-                            android:textColor="@color/textTitleColorLight"
-                            android:textSize="@dimen/textSize_10" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <com.jx.sleep_dg.view.BorderButton
-                            android:id="@+id/btn_sleep_mode"
-                            android:layout_width="match_parent"
-                            android:layout_height="30dp"
-                            android:text="睡眠模式"
-                            android:textColor="@android:color/white"
-                            android:textSize="12sp"
-                            app:corner="20dp"
-                            app:type="ok" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:maxWidth="70dp"
-                            android:text="一键放平"
-                            android:textColor="@color/textTitleColorLight"
-                            android:textSize="@dimen/textSize_10" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="20dp"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical">
@@ -353,20 +310,28 @@
                             android:textColor="@color/textTitleColorLight"
                             android:textSize="@dimen/textSize_10" />
                     </LinearLayout>
+                </LinearLayout>
+
+                <!--第二列-->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1">
 
                     <LinearLayout
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_weight="1"
+                        android:layout_gravity="center"
                         android:gravity="center"
                         android:orientation="vertical">
 
                         <com.jx.sleep_dg.view.BorderButton
-                            android:id="@+id/btn_yujia_mode"
+                            android:id="@+id/btn_sleep_mode"
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
-                            android:text="瑜伽模式"
+                            android:text="睡眠模式"
                             android:textColor="@android:color/white"
                             android:textSize="12sp"
                             app:corner="20dp"
@@ -376,22 +341,24 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="床头50°"
-                            android:textColor="@color/textTitleColorLight"
-                            android:textSize="@dimen/textSize_10" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="床尾30°"
+                            android:maxWidth="70dp"
+                            android:text="一键放平"
                             android:textColor="@color/textTitleColorLight"
                             android:textSize="@dimen/textSize_10" />
                     </LinearLayout>
+                </LinearLayout>
+
+
+                <!--第三列-->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical">
@@ -418,6 +385,40 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="床尾10°"
+                            android:textColor="@color/textTitleColorLight"
+                            android:textSize="@dimen/textSize_10" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <com.jx.sleep_dg.view.BorderButton
+                            android:id="@+id/btn_yujia_mode"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:text="瑜伽模式"
+                            android:textColor="@android:color/white"
+                            android:textSize="12sp"
+                            app:corner="20dp"
+                            app:type="ok" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="床头50°"
+                            android:textColor="@color/textTitleColorLight"
+                            android:textSize="@dimen/textSize_10" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="床尾30°"
                             android:textColor="@color/textTitleColorLight"
                             android:textSize="@dimen/textSize_10" />
                     </LinearLayout>

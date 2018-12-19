@@ -1,14 +1,18 @@
 package com.jx.sleep_dg.ui;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.jx.sleep_dg.R;
@@ -30,42 +34,22 @@ import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 public class DeviceLiftFragment extends BaseMainFragment implements View.OnClickListener, VerticalSeekBar.SlideChangeListener {
 
     private boolean isInitSeekbarVal;
-    private boolean isYaolanExect;
     private MSPProtocol mspProtocol;
     private SoundPool soundPool;
-    private CountDownTimer countDownTimer;
 
+    private LinearLayout llBedContainer;
     private VerticalSeekBar seebLeftTou;
     private VerticalSeekBar seebLeftJiao;
     private Ruler rulerTou, rulerJiao;
-    private ImageView ivZuoChuang;
+    private ImageView ivTouChuang, icWeiChuang;
 
     private BorderButton mBtnTvMode;
-    private BorderButton mBtnYaolanMode;
     private BorderButton mBtnSleepMode;
     private BorderButton mBtnReadMode;
     private BorderButton mBtnYujiaMode;
     private BorderButton mBtnRelaxMode;
     private int touIndex = 0;
     private int jiaoIndex = 0;
-
-
-    //各种模式切换
-    private static final int MODE_NOME = 100;
-    private static final int MODE_TV = 101;
-    private static final int MODE_YAOLAN = 102;
-    private static final int MODE_SLEEP = 103;
-    private static final int MODE_READ = 104;
-    private static final int MODE_YUJIA = 105;
-    private static final int MODE_RELAX = 106;
-
-    @IntDef({MODE_NOME, MODE_TV, MODE_YAOLAN, MODE_SLEEP, MODE_READ, MODE_YUJIA, MODE_RELAX})
-    private @interface MODE_LIFT {
-    }
-
-    @MODE_LIFT
-    private int curModeLift;//当前的升降模式
-
 
     public static DeviceLiftFragment newInstance() {
         Bundle args = new Bundle();
@@ -89,6 +73,7 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
         view.findViewById(R.id.iv_jiao_jia).setOnClickListener(this);
         view.findViewById(R.id.iv_jiao_jian).setOnClickListener(this);
 
+        llBedContainer = view.findViewById(R.id.ll_bed_container);
         rulerTou = view.findViewById(R.id.ruler_tou);
         rulerJiao = view.findViewById(R.id.ruler_jiao);
 
@@ -97,25 +82,32 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
         seebLeftJiao = view.findViewById(R.id.seeb_left_jiao);
         seebLeftJiao.setMaxProgress(25);
 
-        ivZuoChuang = view.findViewById(R.id.iv_zuo_chuang);
+        ivTouChuang = view.findViewById(R.id.iv_tou_chuang);
+        icWeiChuang = view.findViewById(R.id.iv_wei_chuang);
+        ivTouChuang.setBackgroundResource(R.mipmap.ic_head0);
+        icWeiChuang.setBackgroundResource(R.mipmap.ic_foot0);
 
         seebLeftTou.setThumbSize(25, 25);
         seebLeftTou.setOnSlideChangeListener(this);
         seebLeftJiao.setThumbSize(25, 25);
         seebLeftJiao.setOnSlideChangeListener(this);
 
-        mBtnTvMode = (BorderButton) view.findViewById(R.id.btn_tv_mode);
+        mBtnTvMode = view.findViewById(R.id.btn_tv_mode);
         mBtnTvMode.setOnClickListener(this);
-        mBtnYaolanMode = (BorderButton) view.findViewById(R.id.btn_yaolan_mode);
-        mBtnYaolanMode.setOnClickListener(this);
-        mBtnSleepMode = (BorderButton) view.findViewById(R.id.btn_sleep_mode);
+        mBtnSleepMode = view.findViewById(R.id.btn_sleep_mode);
         mBtnSleepMode.setOnClickListener(this);
-        mBtnReadMode = (BorderButton) view.findViewById(R.id.btn_read_mode);
+        mBtnReadMode = view.findViewById(R.id.btn_read_mode);
         mBtnReadMode.setOnClickListener(this);
-        mBtnYujiaMode = (BorderButton) view.findViewById(R.id.btn_yujia_mode);
+        mBtnYujiaMode = view.findViewById(R.id.btn_yujia_mode);
         mBtnYujiaMode.setOnClickListener(this);
-        mBtnRelaxMode = (BorderButton) view.findViewById(R.id.btn_relax_mode);
+        mBtnRelaxMode = view.findViewById(R.id.btn_relax_mode);
         mBtnRelaxMode.setOnClickListener(this);
+
+        //根据高度最高的床图，设置高度
+        Bitmap maxHeightBed = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_head5);
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) llBedContainer.getLayoutParams();
+        params.height = maxHeightBed.getHeight();
+        llBedContainer.setLayoutParams(params);
 
         bindViewData();
     }
@@ -126,7 +118,6 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
         mspProtocol = MSPProtocol.getInstance();
         soundPool = new SoundPool(10, AudioManager.STREAM_SYSTEM, 5);
         soundPool.load(_mActivity, R.raw.ding, 1);
-        curModeLift = MODE_NOME;
     }
 
     @Override
@@ -143,7 +134,7 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
             rulerTou.setValue((int) Math.ceil(touDevIndex / 30.0f * 45.0f));
             rulerJiao.setValue((int) Math.ceil(jiaoDevIndex / 25.0f * 30.0f));
         }
-        if(!isInitSeekbarVal){
+        if (!isInitSeekbarVal) {
             isInitSeekbarVal = true;
             seebLeftTou.setProgress(touDevIndex);
             seebLeftJiao.setProgress(jiaoDevIndex);
@@ -216,43 +207,13 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
 
                 break;
             case R.id.btn_tv_mode:
-                isYaolanExect = false;
-                if (countDownTimer != null) {
-                    countDownTimer.cancel();
-                }
                 soundPool.play(1, 1, 1, 0, 0, 1);
                 BleComUtils.senddianji(BleUtils.convertDecimalToBinary(18 + "")
                         + BleUtils.convertDecimalToBinary(9 + "")
                         + BleUtils.convertDecimalToBinary(18 + "")
                         + BleUtils.convertDecimalToBinary(9 + ""));
                 break;
-            case R.id.btn_yaolan_mode:
-                isYaolanExect = true;
-                soundPool.play(1, 1, 1, 0, 0, 1);
-                countDownTimer = new CountDownTimer(5 * 60 * 1000, 10 * 1000) {
-                    @Override
-                    public void onTick(long l) {
-                        if(!isYaolanExect)return;
-                        int index = (int) (Math.random() * 17);
-                        if (index < 8) index = 1;
-                        if (index >= 8) index = 17;
-                        BleComUtils.senddianji(BleUtils.convertDecimalToBinary(index + "")
-                                + BleUtils.convertDecimalToBinary(index + "")
-                                + BleUtils.convertDecimalToBinary(index + "")
-                                + BleUtils.convertDecimalToBinary(index + ""));
-                    }
-
-                    @Override
-                    public void onFinish() {
-                        cancel();
-                    }
-                }.start();
-                break;
             case R.id.btn_sleep_mode:
-                isYaolanExect = false;
-                if (countDownTimer != null) {
-                    countDownTimer.cancel();
-                }
                 soundPool.play(1, 1, 1, 0, 0, 1);
                 BleComUtils.senddianji(BleUtils.convertDecimalToBinary(1 + "")
                         + BleUtils.convertDecimalToBinary(1 + "")
@@ -260,10 +221,6 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
                         + BleUtils.convertDecimalToBinary(1 + ""));
                 break;
             case R.id.btn_read_mode:
-                isYaolanExect = false;
-                if (countDownTimer != null) {
-                    countDownTimer.cancel();
-                }
                 soundPool.play(1, 1, 1, 0, 0, 1);
                 BleComUtils.senddianji(BleUtils.convertDecimalToBinary(16 + "")
                         + BleUtils.convertDecimalToBinary(9 + "")
@@ -271,10 +228,6 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
                         + BleUtils.convertDecimalToBinary(9 + ""));
                 break;
             case R.id.btn_yujia_mode:
-                isYaolanExect = false;
-                if (countDownTimer != null) {
-                    countDownTimer.cancel();
-                }
                 soundPool.play(1, 1, 1, 0, 0, 1);
                 BleComUtils.senddianji(BleUtils.convertDecimalToBinary(17 + "")
                         + BleUtils.convertDecimalToBinary(10 + "")
@@ -282,10 +235,6 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
                         + BleUtils.convertDecimalToBinary(10 + ""));
                 break;
             case R.id.btn_relax_mode:
-                isYaolanExect = false;
-                if (countDownTimer != null) {
-                    countDownTimer.cancel();
-                }
                 soundPool.play(1, 1, 1, 0, 0, 1);
                 BleComUtils.senddianji(BleUtils.convertDecimalToBinary(15 + "")
                         + BleUtils.convertDecimalToBinary(5 + "")
@@ -295,55 +244,33 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
         }
     }
 
-    //升降模式切换
-    private void swiftLiftMode(@MODE_LIFT int modeLift) {
-        curModeLift = modeLift;
-        switch (modeLift) {
-            case MODE_YAOLAN:
-                BleComUtils.senddianji(BleUtils.convertDecimalToBinary(10 + "")
-                        + BleUtils.convertDecimalToBinary(mspProtocol.getHigh1() + "")
-                        + BleUtils.convertDecimalToBinary(10 + "")
-                        + BleUtils.convertDecimalToBinary(mspProtocol.getHigh1() + ""));
-                if (mspProtocol.getHigh1() >= 12) {
-
-                }
-                break;
-        }
-    }
-
     //UI变化
     private void chang() {
-        //左
-        if (touIndex < 10) {
-            if (jiaoIndex < 8) {
-                ivZuoChuang.setBackgroundResource(R.mipmap.head1_foot1);
-            } else if (jiaoIndex < 16) {
-                ivZuoChuang.setBackgroundResource(R.mipmap.head1_foot3);
-
-            } else if (jiaoIndex <= 25) {
-                ivZuoChuang.setBackgroundResource(R.mipmap.head1_foot4);
-
-            }
+        if (touIndex == 0) {
+            ivTouChuang.setBackgroundResource(R.mipmap.ic_head0);
+        } else if (touIndex > 0 && touIndex <= 6) {
+            ivTouChuang.setBackgroundResource(R.mipmap.ic_head1);
+        } else if (touIndex > 6 && touIndex <= 12) {
+            ivTouChuang.setBackgroundResource(R.mipmap.ic_head2);
+        } else if (touIndex > 12 && touIndex <= 18) {
+            ivTouChuang.setBackgroundResource(R.mipmap.ic_head3);
+        } else if (touIndex > 18 && touIndex <= 24) {
+            ivTouChuang.setBackgroundResource(R.mipmap.ic_head4);
+        } else if (touIndex > 24 && touIndex <= 30) {
+            ivTouChuang.setBackgroundResource(R.mipmap.ic_head5);
         }
-        if (10 <= touIndex && touIndex < 20) {
-            if (jiaoIndex < 8) {
-                ivZuoChuang.setBackgroundResource(R.mipmap.head3_foot1);
-            } else if (8 <= jiaoIndex && jiaoIndex < 16) {
-                ivZuoChuang.setBackgroundResource(R.mipmap.head3_foot3);
-
-            } else if (16 <= jiaoIndex && jiaoIndex <= 25) {
-                ivZuoChuang.setBackgroundResource(R.mipmap.head3_foot4);
-
-            }
-        } else if (20 <= touIndex && touIndex <= 30) {
-            if (jiaoIndex < 8) {
-                ivZuoChuang.setBackgroundResource(R.mipmap.head4_foot1);
-            } else if (8 <= jiaoIndex && jiaoIndex < 16) {
-                ivZuoChuang.setBackgroundResource(R.mipmap.head4_foot3);
-
-            } else if (16 <= jiaoIndex && jiaoIndex <= 25) {
-                ivZuoChuang.setBackgroundResource(R.mipmap.head4_foot4);
-            }
+        if (jiaoIndex == 0) {
+            icWeiChuang.setBackgroundResource(R.mipmap.ic_foot0);
+        } else if (jiaoIndex > 0 && jiaoIndex <= 5) {
+            icWeiChuang.setBackgroundResource(R.mipmap.ic_foot1);
+        } else if (jiaoIndex > 5 && jiaoIndex <= 10) {
+            icWeiChuang.setBackgroundResource(R.mipmap.ic_foot2);
+        } else if (jiaoIndex > 10 && jiaoIndex <= 15) {
+            icWeiChuang.setBackgroundResource(R.mipmap.ic_foot3);
+        } else if (jiaoIndex > 15 && jiaoIndex <= 20) {
+            icWeiChuang.setBackgroundResource(R.mipmap.ic_foot4);
+        } else if (jiaoIndex > 20 && jiaoIndex <= 25) {
+            icWeiChuang.setBackgroundResource(R.mipmap.ic_foot5);
         }
     }
 
