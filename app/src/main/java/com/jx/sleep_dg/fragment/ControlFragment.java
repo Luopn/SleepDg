@@ -13,10 +13,7 @@ import com.jx.sleep_dg.base.BaseMainFragment;
 import com.jx.sleep_dg.ble.BleUtils;
 import com.jx.sleep_dg.protocol.BleComUtils;
 import com.jx.sleep_dg.protocol.MSPProtocol;
-import com.jx.sleep_dg.ui.DeviceLiftFragment;
 import com.jx.sleep_dg.ui.DeviceNetConfigAcyivity;
-import com.jx.sleep_dg.ui.DeviceTempFragment;
-import com.jx.sleep_dg.ui.DeviseHardnessFragment;
 
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 

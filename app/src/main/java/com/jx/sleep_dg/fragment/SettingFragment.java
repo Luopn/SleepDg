@@ -13,7 +13,6 @@ import com.jx.sleep_dg.base.BaseMainFragment;
 import com.jx.sleep_dg.protocol.BleComUtils;
 import com.jx.sleep_dg.ui.AssociatedActivity;
 import com.jx.sleep_dg.ui.DeviceDetailActivity;
-import com.jx.sleep_dg.ui.DeviseHardnessFragment;
 import com.jx.sleep_dg.ui.GaugeActivity;
 import com.jx.sleep_dg.ui.MainActivity;
 import com.jx.sleep_dg.utils.LanguageUtil;

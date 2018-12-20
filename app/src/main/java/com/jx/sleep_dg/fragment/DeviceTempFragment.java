@@ -1,14 +1,13 @@
-package com.jx.sleep_dg.ui;
+package com.jx.sleep_dg.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.jx.sleep_dg.R;
 import com.jx.sleep_dg.base.BaseMainFragment;
+import com.jx.sleep_dg.ble.BleUtils;
 import com.jx.sleep_dg.protocol.BleComUtils;
 import com.jx.sleep_dg.utils.LogUtil;
 import com.jx.sleep_dg.view.BorderButton;
@@ -76,28 +75,23 @@ public class DeviceTempFragment extends BaseMainFragment implements View.OnClick
                 break;
             case R.id.level_1:
                 index = 1;
-                BleComUtils.sendJiare("1");
                 break;
             case R.id.level_2:
                 index = 2;
-                BleComUtils.sendJiare("2");
                 break;
             case R.id.level_3:
                 index = 3;
-                BleComUtils.sendJiare("3");
                 break;
             case R.id.level_4:
                 index = 4;
-                BleComUtils.sendJiare("4");
                 break;
             case R.id.level_5:
                 index = 5;
-                BleComUtils.sendJiare("5");
                 break;
         }
-        LogUtil.e("index:" + index);
+        LogUtil.i("index:" + index);
         onIndexChange(index);
-        BleComUtils.sendJiare(index + "");
+        BleComUtils.sendJiare(BleUtils.convertDecimalToBinary("" + index));
     }
 
     //床的变化和按钮变化

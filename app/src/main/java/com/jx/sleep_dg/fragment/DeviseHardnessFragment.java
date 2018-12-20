@@ -1,4 +1,4 @@
-package com.jx.sleep_dg.ui;
+package com.jx.sleep_dg.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;

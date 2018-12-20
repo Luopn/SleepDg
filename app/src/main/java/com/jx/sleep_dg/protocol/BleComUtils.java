@@ -111,7 +111,7 @@ public class BleComUtils {
 
 
     /**
-     * 发送数据
+     * 发送加热数据
      */
     public static void sendJiare(String data) {
         LogUtil.e("data:" + data);
@@ -126,6 +126,9 @@ public class BleComUtils {
         BluetoothLeService.mThis.writeCMD(toByteArray("aa05c4" + data));
     }
 
+    /**
+     * 发送软硬数据
+     */
     public static void sendChongqi(String data) {
         // String yihuo = BleUtils.XORAnd("06C50A0A");
         // String data = "aa06a50a0a";

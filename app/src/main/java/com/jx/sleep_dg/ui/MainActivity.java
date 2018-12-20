@@ -15,6 +15,9 @@ import android.widget.Toast;
 import com.jx.sleep_dg.R;
 import com.jx.sleep_dg.base.BaseActivity;
 import com.jx.sleep_dg.fragment.DataFragment;
+import com.jx.sleep_dg.fragment.DeviceLiftFragment;
+import com.jx.sleep_dg.fragment.DeviceTempFragment;
+import com.jx.sleep_dg.fragment.DeviseHardnessFragment;
 import com.jx.sleep_dg.fragment.SettingFragment;
 import com.jx.sleep_dg.MyApplication;
 

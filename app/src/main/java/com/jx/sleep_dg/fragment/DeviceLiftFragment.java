@@ -1,4 +1,4 @@
-package com.jx.sleep_dg.ui;
+package com.jx.sleep_dg.fragment;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -6,10 +6,7 @@ import android.graphics.BitmapFactory;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
