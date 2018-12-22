@@ -27,7 +27,6 @@ import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 /**
  * 设备升降
  */
-
 public class DeviceLiftFragment extends BaseMainFragment implements View.OnClickListener, VerticalSeekBar.SlideChangeListener {
 
     private boolean isInitSeekbarVal;

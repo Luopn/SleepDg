@@ -20,6 +20,7 @@ import com.jx.sleep_dg.fragment.DeviceTempFragment;
 import com.jx.sleep_dg.fragment.DeviseHardnessFragment;
 import com.jx.sleep_dg.fragment.SettingFragment;
 import com.jx.sleep_dg.MyApplication;
+import com.jx.sleep_dg.protocol.BleComUtils;
 
 import me.yokeyword.fragmentation.SupportFragment;
 
@@ -39,6 +40,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         bindView();
+        BleComUtils.sendTime("F10100000001");
     }
 
     @Override

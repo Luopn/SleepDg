@@ -38,6 +38,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.jx.sleep_dg.R;
+import com.jx.sleep_dg.protocol.BleComUtils;
 import com.jx.sleep_dg.protocol.MSPProtocol;
 import com.jx.sleep_dg.utils.Constance;
 import com.jx.sleep_dg.utils.PreferenceUtils;
@@ -121,7 +122,10 @@ public class BluetoothLeService extends Service {
                 ToastUtil.showMessage("蓝牙已连接");
                 intentAction = ACTION_GATT_CONNECTED;
                 broadcastUpdate(intentAction, gatt.getDevice().getAddress());
-                Log.i(TAG, "Connected to GATT server.");
+
+                //发送用户数据到设备
+                BleComUtils.sendTime("F10100000001");
+
                 // Attempts to discover services after successful connection.
                 Log.i(TAG, "Attempting to start service discovery:(" + gatt.getDevice().getAddress() + ")"
                         + gatt.discoverServices());
@@ -430,7 +434,7 @@ public class BluetoothLeService extends Service {
         final StringBuilder stringBuilder = new StringBuilder(cmd.length);
         for (byte byteChar : cmd)
             stringBuilder.append(String.format("%02X ", byteChar));
-        Log.i(TAG, "Write CMD:" + stringBuilder.toString());
+        //Log.i(TAG, "Write CMD:" + stringBuilder.toString());
 
         BluetoothGatt mBluetoothGatt = null;
         for (BluetoothGatt bg : mBluetoothGatts) {

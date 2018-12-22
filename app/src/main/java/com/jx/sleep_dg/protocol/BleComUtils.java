@@ -2,6 +2,7 @@ package com.jx.sleep_dg.protocol;
 
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.jx.sleep_dg.ble.BleCommunication;
 import com.jx.sleep_dg.ble.BleUtils;
@@ -214,58 +215,33 @@ public class BleComUtils {
     /**
      * 发送时间
      */
-    public static void sendTime() {
+    public static void sendTime(String userID) {
 
         Calendar now = Calendar.getInstance();
-        System.out.println("年: " + now.get(Calendar.YEAR));
-        System.out.println("月: " + (now.get(Calendar.MONTH) + 1) + "");
-        System.out.println("日: " + now.get(Calendar.DAY_OF_MONTH));
-        System.out.println("时: " + now.get(Calendar.HOUR_OF_DAY));
-        System.out.println("分: " + now.get(Calendar.MINUTE));
-        System.out.println("秒: " + now.get(Calendar.SECOND));
 
-        // SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");//设置日期格式
-        // String zone = TimeZone.getDefault().getDisplayName(false, TimeZone.SHORT);
-        // Calendar c = Calendar.getInstance();
-        // c.setTimeZone(TimeZone.getTimeZone(zone));
-        // String mWay = String.valueOf(c.get(Calendar.DAY_OF_WEEK));
-        // if ("1".equals(mWay)) {
-        //     mWay = "7";
-        // } else if ("2".equals(mWay)) {
-        //     mWay = "1";
-        // } else if ("3".equals(mWay)) {
-        //     mWay = "2";
-        // } else if ("4".equals(mWay)) {
-        //     mWay = "3";
-        // } else if ("5".equals(mWay)) {
-        //     mWay = "4";
-        // } else if ("6".equals(mWay)) {
-        //     mWay = "5";
-        // } else if ("7".equals(mWay)) {
-        //     mWay = "6";
-        // }
-        // String data = "AT+TIME=" + df.format(new Date()) + "," + zone.substring(3, 6) + "," + mWay;
-        // + BleUtils.XORAnd("0AC3100101010101")
-        // String data = "AA0AC3100101010101";
-
-        byte[] data = new byte[8];
-        data[0] = (byte) 0xaa;
-        data[1] = (byte) 0x0a;
+        byte[] data = new byte[16];
+        data[0] = (byte) 0xAA;
+        data[1] = (byte) 0x10;
         data[2] = (byte) 0xC3;
-        data[3] = (byte) 0x10;
-        data[4] = (byte) 0x01;
-        data[5] = (byte) 0x01;
-        data[6] = (byte) 0x01;
-        data[7] = (byte) 0x01;
-        BleCommunication.sendData2(LauncherActivity.mBLE, LauncherActivity.bcWrite, data);
+        data[3] = (byte) (now.get(Calendar.YEAR)-2000);//从2000年开始算
+        data[4] = (byte) (now.get(Calendar.MONTH)+1);
+        data[5] = (byte) now.get(Calendar.DAY_OF_MONTH);
+        data[6] = (byte) now.get(Calendar.HOUR_OF_DAY);
+        data[7] = (byte) now.get(Calendar.MINUTE);
+        data[8] = (byte) now.get(Calendar.SECOND);
+        System.arraycopy(toByteArray(userID), 0, data, 9, 6);
+        byte checkSum = 0;
+        for (int i = 0; i < 14 ; i++) {
+            checkSum ^= data[i+1];
+        }
+        data[15] = checkSum;
+
+        BluetoothLeService.mThis.writeCMD(data);
     }
 
-    public static byte[] toByteArray(String hexString) {
+    private static byte[] toByteArray(String hexString) {
         if (TextUtils.isEmpty(hexString)) {
             throw new IllegalArgumentException("this hexString must not be empty");
-            //byte[] byteArray = new byte[1];
-            //byteArray[0]= (byte) 0xaa;
-            //return byteArray;
         }
         hexString = hexString.toLowerCase();
         final byte[] byteArray = new byte[hexString.length() / 2];
