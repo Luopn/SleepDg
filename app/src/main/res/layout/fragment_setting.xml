@@ -43,7 +43,7 @@
                 android:gravity="center_vertical"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:text="一键检测"
+                android:text="@string/one_key_check"
                 android:textColor="@color/white"
                 android:textSize="@dimen/textSize_14" />
 
@@ -200,6 +200,20 @@
                     android:thumb="@android:color/transparent"
                     android:track="@drawable/switch_track" />
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_auto_chongqi"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/sel_set_item"
+                android:drawableRight="@mipmap/ic_data_right"
+                android:gravity="center_vertical"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:text="@string/auto_inflation"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize_14" />
 
             <RadioGroup
                 android:layout_width="match_parent"

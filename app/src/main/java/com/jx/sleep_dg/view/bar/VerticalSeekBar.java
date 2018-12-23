@@ -35,7 +35,7 @@ public class VerticalSeekBar extends View {
     private int locationX;
     private int locationY = -1;
 
-    private int mInnerProgressWidth = 15;
+    private int mInnerProgressWidth = 4;
     private int mInnerProgressWidthPx;
 
     private int unSelectColor = 0xff6d70ff;
@@ -50,7 +50,7 @@ public class VerticalSeekBar extends View {
         this.unSelectColor = uNSelectColor;
     }
 
-    private int selectColor = 0xff6d70ff;
+    private int selectColor = 0xff9f64ae;
 
     /**
      * 设置选中线条的颜色
@@ -185,7 +185,10 @@ public class VerticalSeekBar extends View {
         mThumb = BitmapFactory.decodeResource(getResources(), R.mipmap.color_seekbar_thum);
         intrinsicHeight = mThumb.getHeight();
         intrinsicWidth = mThumb.getWidth();
+
         mDestRect = new RectF(0, 0, intrinsicWidth, intrinsicHeight);
+        mDestRect.set(0, 0, DisplayUtils.dip2px(getContext(), 25),
+                DisplayUtils.dip2px(getContext(), 25));
         mRoundRect = new RectF();
         mInnerProgressWidthPx = DisplayUtils.dip2px(context, mInnerProgressWidth);
     }
@@ -283,7 +286,7 @@ public class VerticalSeekBar extends View {
     protected void onDraw(Canvas canvas) {
         locationY = (int) (intrinsicHeight * 0.5f + (maxProgress - progress) * (height - intrinsicHeight) / maxProgress);
         paint.setColor(unSelectColor);
-        paint.setStyle(Paint.Style.STROKE);
+        paint.setStyle(Paint.Style.FILL);
         paint.setStrokeWidth(2.0f);
         float left = width / 2 - mInnerProgressWidthPx / 2;
         float top = mDestRect.height() / 2;

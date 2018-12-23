@@ -14,6 +14,7 @@ import com.jx.sleep_dg.protocol.BleComUtils;
 import com.jx.sleep_dg.ui.AssociatedActivity;
 import com.jx.sleep_dg.ui.DeviceDetailActivity;
 import com.jx.sleep_dg.ui.GaugeActivity;
+import com.jx.sleep_dg.ui.InflationActivity;
 import com.jx.sleep_dg.ui.MainActivity;
 import com.jx.sleep_dg.utils.LanguageUtil;
 import com.jx.sleep_dg.utils.PreferenceUtils;
@@ -50,6 +51,7 @@ public class SettingFragment extends BaseMainFragment implements CompoundButton.
         view.findViewById(R.id.ll_detail).setOnClickListener(this);
         view.findViewById(R.id.ll_guanzhu).setOnClickListener(this);
         view.findViewById(R.id.tv_gauge).setOnClickListener(this);
+        view.findViewById(R.id.tv_auto_chongqi).setOnClickListener(this);
         swYunfu = view.findViewById(R.id.sw_yunfu);
         swYunfu.setOnCheckedChangeListener(this);
         swErTong = view.findViewById(R.id.sw_ertong);
@@ -89,25 +91,28 @@ public class SettingFragment extends BaseMainFragment implements CompoundButton.
         switch (v.getId()) {
             case R.id.ll_detail:
                 Intent intent = new Intent();
-                intent.setClass(getActivity(), DeviceDetailActivity.class);
-                getActivity().startActivity(intent);
+                intent.setClass(_mActivity, DeviceDetailActivity.class);
+                _mActivity.startActivity(intent);
                 break;
             case R.id.ll_guanzhu:
-                startActivity(new Intent(getActivity(), AssociatedActivity.class));
+                startActivity(new Intent(_mActivity, AssociatedActivity.class));
                 break;
             case R.id.tv_gauge:
-                startActivity(new Intent(getActivity(), GaugeActivity.class));
+                startActivity(new Intent(_mActivity, GaugeActivity.class));
+                break;
+            case R.id.tv_auto_chongqi:
+                startActivity(new Intent(_mActivity, InflationActivity.class));
                 break;
             case R.id.rb_ch_simple:
-                LanguageUtil.changeAppLanguage(getActivity(), Locale.SIMPLIFIED_CHINESE, true);
+                LanguageUtil.changeAppLanguage(_mActivity, Locale.SIMPLIFIED_CHINESE, true);
                 restartApplication();
                 break;
             case R.id.rb_ch_tradition:
-                LanguageUtil.changeAppLanguage(getActivity(), Locale.TRADITIONAL_CHINESE, true);
+                LanguageUtil.changeAppLanguage(_mActivity, Locale.TRADITIONAL_CHINESE, true);
                 restartApplication();
                 break;
             case R.id.rb_en:
-                LanguageUtil.changeAppLanguage(getActivity(), Locale.US, true);
+                LanguageUtil.changeAppLanguage(_mActivity, Locale.US, true);
                 restartApplication();
                 break;
         }
@@ -149,7 +154,7 @@ public class SettingFragment extends BaseMainFragment implements CompoundButton.
 
     private void restartApplication() {
         //切换语言信息，需要重启 Activity 才能实现
-        Intent intent = new Intent(getActivity(), MainActivity.class);
+        Intent intent = new Intent(_mActivity, MainActivity.class);
         intent.putExtra(MainActivity.KEY_FRAGMENT, 4);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);

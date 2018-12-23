@@ -103,6 +103,7 @@
     <string name="high">HIGH</string>
 
     <!--设置页面-->
+    <string name="one_key_check">Detection</string>
     <string name="mattress_info">Mattress Information</string>
     <string name="mattress_inter">Mattress Interconnection</string>
     <string name="snore_mode">Snoring Pattern</string>
@@ -112,6 +113,7 @@
     <string name="child_mode_hint">If turned on, the bed can not be lifted.</string>
     <string name="pregnant_mode">Pregnant Pattern</string>
     <string name="pregnant_mode_hint">If turned on,the amplitude of bed movements is limited to 35 degree adjustment.</string>
+    <string name="auto_inflation">Automatic Inflation</string>
     <string name="me_associated">Me Associated</string>
     <string name="associated_me">Associated Me</string>
     <string name="associated">Associated</string>

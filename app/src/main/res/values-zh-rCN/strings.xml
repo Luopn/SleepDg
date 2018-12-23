@@ -103,6 +103,7 @@
     <string name="high">高</string>
 
     <!--设置页面-->
+    <string name="one_key_check">一键检测</string>
     <string name="mattress_info">床垫信息</string>
     <string name="mattress_inter">床垫互联</string>
     <string name="snore_mode">止鼾模式</string>
@@ -112,6 +113,7 @@
     <string name="child_mode_hint">启用后无法对床头、床位进行升降处理.</string>
     <string name="pregnant_mode">孕妇模式</string>
     <string name="pregnant_mode_hint">启用后床位升降幅度只限于小于35°能调整.</string>
+    <string name="auto_inflation">自动补气</string>
     <string name="me_associated">我关联的</string>
     <string name="associated_me">关联我的</string>
     <string name="associated">已关联</string>

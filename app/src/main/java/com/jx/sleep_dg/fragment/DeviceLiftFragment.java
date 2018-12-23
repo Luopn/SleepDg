@@ -132,8 +132,9 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
         }
         if (!isInitSeekbarVal) {
             isInitSeekbarVal = true;
-            seebLeftTou.setProgress(touDevIndex);
-            seebLeftJiao.setProgress(jiaoDevIndex);
+            seebLeftTou.setProgress(touIndex = touDevIndex);
+            seebLeftJiao.setProgress(jiaoIndex = jiaoDevIndex);
+            chang();
         }
         //升降模式动作
     }
@@ -277,25 +278,26 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
 
     @Override
     public void onProgress(VerticalSeekBar slideView, int progress) {
-
+        if (slideView.getId() == R.id.seeb_left_tou) {
+            touIndex = progress;
+        } else if (slideView.getId() == R.id.seeb_left_jiao) {
+            jiaoIndex = progress;
+        }
+        chang();
     }
 
     @Override
     public void onStop(VerticalSeekBar slideView, int progress) {
         if (slideView.getId() == R.id.seeb_left_tou) {
             touIndex = progress;
-            LogUtil.e("leftTouIndex:" + touIndex);
         } else if (slideView.getId() == R.id.seeb_left_jiao) {
             jiaoIndex = progress;
-            LogUtil.e("leftJiaoIndex:" + jiaoIndex);
 
         }
-        chang();
         BleComUtils.senddianji(BleUtils.convertDecimalToBinary(touIndex + "")
                 + BleUtils.convertDecimalToBinary(jiaoIndex + "")
                 + BleUtils.convertDecimalToBinary(touIndex + "")
                 + BleUtils.convertDecimalToBinary(jiaoIndex + ""));
-
     }
 
     @Override
