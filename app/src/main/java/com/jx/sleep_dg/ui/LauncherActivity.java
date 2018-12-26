@@ -19,6 +19,7 @@ import java.util.Locale;
  */
 public class LauncherActivity extends BaseActivity {
 
+    private boolean isOpened;
     private ImageView ivMain;
     private Runnable mOpenRunnable;
     /**
@@ -32,6 +33,7 @@ public class LauncherActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setTitleLayoutVisiable(false);
         bindView();
+        isOpened = false;
         //设置语言
         Locale locale = (Locale) PreferenceUtils.deSerialization(PreferenceUtils.getString(LanguageUtil.LANGUAGE));
         if (locale != null) {
@@ -64,9 +66,11 @@ public class LauncherActivity extends BaseActivity {
 
     //打开下一个页面
     private void openNextPage() {
+        if (isOpened) return;
         Intent intent = new Intent(LauncherActivity.this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        isOpened = true;
     }
 }

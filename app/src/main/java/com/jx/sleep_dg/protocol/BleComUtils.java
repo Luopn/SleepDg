@@ -190,8 +190,6 @@ public class BleComUtils {
 
     public static void sendShengji() {
         String yihuo = BleUtils.XORAnd("06ca0100");
-        //String data = "aa06ac0100";
-
         byte[] data = new byte[5];
         data[0] = (byte) 0xaa;
         data[1] = (byte) 0x06;
@@ -199,6 +197,25 @@ public class BleComUtils {
         data[3] = (byte) 0x01;
         data[4] = (byte) 0x00;
         BleCommunication.sendData2(LauncherActivity.mBLE, LauncherActivity.bcWrite, data);
+    }
+
+    /**
+     * 发送自动补气时间数据
+     */
+    public static void sendInflation(int hour, int minute) {
+        byte[] data = new byte[7];
+        data[0] = (byte) 0xAA;
+        data[1] = (byte) 0x07;
+        data[2] = (byte) 0xC8;
+        data[3] = (byte) hour;
+        data[4] = (byte) minute;
+        data[5] = (byte) 0x00;
+        byte checkSum = 0;
+        for (int i = 0; i < 5; i++) {
+            checkSum ^= data[i + 1];
+        }
+        data[6] = checkSum;
+        BluetoothLeService.mThis.writeCMD(data);
     }
 
     /**
@@ -223,16 +240,16 @@ public class BleComUtils {
         data[0] = (byte) 0xAA;
         data[1] = (byte) 0x10;
         data[2] = (byte) 0xC3;
-        data[3] = (byte) (now.get(Calendar.YEAR)-2000);//从2000年开始算
-        data[4] = (byte) (now.get(Calendar.MONTH)+1);
+        data[3] = (byte) (now.get(Calendar.YEAR) - 2000);//从2000年开始算
+        data[4] = (byte) (now.get(Calendar.MONTH) + 1);
         data[5] = (byte) now.get(Calendar.DAY_OF_MONTH);
         data[6] = (byte) now.get(Calendar.HOUR_OF_DAY);
         data[7] = (byte) now.get(Calendar.MINUTE);
         data[8] = (byte) now.get(Calendar.SECOND);
         System.arraycopy(toByteArray(userID), 0, data, 9, 6);
         byte checkSum = 0;
-        for (int i = 0; i < 14 ; i++) {
-            checkSum ^= data[i+1];
+        for (int i = 0; i < 14; i++) {
+            checkSum ^= data[i + 1];
         }
         data[15] = checkSum;
 
