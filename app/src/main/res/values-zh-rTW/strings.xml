@@ -18,6 +18,7 @@
     <string name="set">設定</string>
 
     <!--登录注册-->
+    <string name="login_welcome">歡迎進入智慧雲人工智慧床墊</string>
     <string name="account_name">用戶名</string>
     <string name="user_info">個人信息</string>
     <string name="user_associated">我關聯的人</string>

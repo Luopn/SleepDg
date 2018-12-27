@@ -19,7 +19,7 @@
     <string name="set">Settings</string>
 
     <!--登录注册-->
-    <string name="login_welcome"></string>
+    <string name="login_welcome">Welcome!</string>
     <string name="account_name">User Name</string>
     <string name="user_info">User Information</string>
     <string name="user_associated">My Association</string>
