@@ -81,6 +81,7 @@ public class BluetoothLeService extends Service {
 
     private MSPProtocol mspProtocol = MSPProtocol.getInstance();
 
+    public boolean isBeep = true;//是否发送心跳包数据
     private String lastConnectAddress = "";
     private BluetoothGatt gatts;
     private BluetoothManager mBluetoothManager;
@@ -91,13 +92,19 @@ public class BluetoothLeService extends Service {
         return lastConnectAddress;
     }
 
-    Timer connectTimer = new Timer(true);//获取信号强度
+    Timer connectTimer = new Timer(true);//定时连接
 
     TimerTask connectTimerTask = new TimerTask() {
         public void run() {
             lastConnectAddress = PreferenceUtils.getString(Constance.MAC);
             if (!TextUtils.isEmpty(lastConnectAddress))
                 connect(lastConnectAddress);
+            //心跳包发送逻辑：APP打开，没发送控制命令时，每5秒发一次这命令。发送控制命令后，过5秒再发送
+            if (isBeep) {
+                BleComUtils.sendBeepData();
+            } else {
+                isBeep = true;
+            }
         }
     };
 
@@ -435,7 +442,9 @@ public class BluetoothLeService extends Service {
         for (byte byteChar : cmd)
             stringBuilder.append(String.format("%02X ", byteChar));
         //Log.i(TAG, "Write CMD:" + stringBuilder.toString());
-
+        if (cmd.length >= 3 && cmd[2] != (byte) 0xC9) {
+            isBeep = false;
+        }
         BluetoothGatt mBluetoothGatt = null;
         for (BluetoothGatt bg : mBluetoothGatts) {
             if (bg.getDevice().getAddress().equalsIgnoreCase(lastConnectAddress)) {
