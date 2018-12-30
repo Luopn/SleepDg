@@ -123,14 +123,16 @@ public class BleComUtils {
         // data[2] = (byte) 0xC4;
         // data[3] = (byte) 0x01;
         // BleCommunication.sendData2(LauncherActivity.mBLE, LauncherActivity.bcWrite, data);
-        BluetoothLeService.mThis.writeCMD(toByteArray("aa05c4" + data));
+        if (BluetoothLeService.mThis != null)
+            BluetoothLeService.mThis.writeCMD(toByteArray("aa05c4" + data));
     }
 
     /**
      * 发送软硬数据
      */
     public static void sendChongqi(String data) {
-        BluetoothLeService.mThis.writeCMD(toByteArray("aa06c5" + data));
+        if (BluetoothLeService.mThis != null)
+            BluetoothLeService.mThis.writeCMD(toByteArray("aa06c5" + data));
     }
 
     public static void sendMoShi(String data) {
@@ -145,7 +147,8 @@ public class BleComUtils {
         //a[2] = (byte) 0xC6;
         //a[3] = (byte) 0x01;
         //a[4] = (byte) 0x01;
-        BluetoothLeService.mThis.writeCMD(toByteArray("aa0ac8" + data + "0000000000"));
+        if (BluetoothLeService.mThis != null)
+            BluetoothLeService.mThis.writeCMD(toByteArray("aa0ac8" + data + "0000000000"));
         //BleCommunication.sendData2(LauncherActivity.mBLE, LauncherActivity.bcWrite, toByteArray("aa0ac8" + data + "0000000000"));
     }
 
@@ -158,14 +161,16 @@ public class BleComUtils {
         data[2] = (byte) 0xc6;
         data[3] = (byte) 0x01;
         data[4] = (byte) 0x01;
-        BluetoothLeService.mThis.writeCMD(data);
+        if (BluetoothLeService.mThis != null)
+            BluetoothLeService.mThis.writeCMD(data);
     }
 
     public static void senddianji(String data) {
 
         String yihuo = BleUtils.XORAnd("06C702040608");
         LogUtil.i("data:" + data);
-        BluetoothLeService.mThis.writeCMD(toByteArray("aa08c7" + data));
+        if (BluetoothLeService.mThis != null)
+            BluetoothLeService.mThis.writeCMD(toByteArray("aa08c7" + data));
     }
 
     public static void sendShengji() {
@@ -195,7 +200,8 @@ public class BleComUtils {
             checkSum ^= data[i + 1];
         }
         data[6] = checkSum;
-        BluetoothLeService.mThis.writeCMD(data);
+        if (BluetoothLeService.mThis != null)
+            BluetoothLeService.mThis.writeCMD(data);
     }
 
     /**
@@ -215,7 +221,8 @@ public class BleComUtils {
         }
         LogUtil.i("发送心跳包数据");
         data[6] = checkSum;
-        BluetoothLeService.mThis.writeCMD(data);
+        if (BluetoothLeService.mThis != null)
+            BluetoothLeService.mThis.writeCMD(data);
     }
 
     /**
@@ -253,7 +260,8 @@ public class BleComUtils {
         }
         data[15] = checkSum;
 
-        BluetoothLeService.mThis.writeCMD(data);
+        if (BluetoothLeService.mThis != null)
+            BluetoothLeService.mThis.writeCMD(data);
     }
 
     private static byte[] toByteArray(String hexString) {

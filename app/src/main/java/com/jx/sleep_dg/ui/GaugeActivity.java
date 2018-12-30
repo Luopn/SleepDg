@@ -2,9 +2,13 @@ package com.jx.sleep_dg.ui;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
+import android.content.Intent;
 import android.os.CountDownTimer;
 import android.os.Bundle;
+import android.support.annotation.IntDef;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
@@ -19,18 +23,22 @@ import com.jx.sleep_dg.R;
 import com.jx.sleep_dg.base.BaseActivity;
 import com.jx.sleep_dg.ble.BleUtils;
 import com.jx.sleep_dg.protocol.BleComUtils;
+import com.jx.sleep_dg.protocol.MSPProtocol;
 import com.jx.sleep_dg.view.bar.AnimatedProgressBar;
 import com.jx.sleep_dg.view.NumberRollingView;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GaugeActivity extends BaseActivity {
 
     private static final String TAG = "GaugeActivity";
-    private static final int SEARCH_DURATION = 2000;
-    private static final int SEARCH_REACPEAT_COUNT = 30;
 
     private int gauge_res = 65;
+    private int time;
 
     private Button btn_start_gauge;
     private TextView tvHint, tv_gauge_val;
@@ -39,12 +47,32 @@ public class GaugeActivity extends BaseActivity {
     private EditText etHeight, etWeight, etYear, etMonth, etDay, etGender;
 
     private ObjectAnimator rotate;
+    private Timer sendTimer;
+    //蓝牙协议
+    private MSPProtocol mspProtocol;
+
+    //定义软硬命令发送步骤
+    private static final int STEP1 = 1;
+    private static final int STEP2 = 2;
+    private static final int STEP3 = 3;
+    private static final int STEP4 = 4;
+    private static final int STEP5 = 5;
+
+    @IntDef({STEP1, STEP2, STEP3, STEP4, STEP5})
+    @Retention(RetentionPolicy.SOURCE)
+    @interface CmdStep {
+    }
+
+    @CmdStep
+    private int cmdStep = STEP1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setLayout(R.layout.activity_gauge);
         setToolbarTitle("一键检测");
+        mspProtocol = MSPProtocol.getInstance();
         bindView();
     }
 
@@ -80,8 +108,8 @@ public class GaugeActivity extends BaseActivity {
         btn_start_gauge.setOnClickListener(this);
 
         rotate = ObjectAnimator.ofFloat(iv_gauge, "rotation", 0, 359).
-                setDuration(SEARCH_DURATION);
-        rotate.setRepeatCount(SEARCH_REACPEAT_COUNT);
+                setDuration(1500);
+        rotate.setRepeatCount(ValueAnimator.INFINITE);
         rotate.setInterpolator(new LinearInterpolator());
         rotate.setRepeatMode(ObjectAnimator.RESTART);
         rotate.addListener(new Animator.AnimatorListener() {
@@ -95,24 +123,72 @@ public class GaugeActivity extends BaseActivity {
 
                 btn_start_gauge.setAlpha(0.5f);
                 btn_start_gauge.setEnabled(false);
-                new CountDownTimer(SEARCH_DURATION * SEARCH_REACPEAT_COUNT, 600) {
 
+                //执行一键检测，首先硬度加到100
+                BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary("100")
+                        + BleUtils.convertDecimalToBinary("100"));
+                time = 0;
+                sendTimer = new Timer();
+                sendTimer.schedule(new TimerTask() {
                     @Override
-                    public void onTick(long millisUntilFinished) {
-                        int progress = (int) ((SEARCH_DURATION * SEARCH_REACPEAT_COUNT - millisUntilFinished) / 600);
-                        tv_gauge_val.setText(String.format(Locale.getDefault(), "%d", progress));
+                    public void run() {
+                        time += 1;
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                tv_gauge_val.setText(String.format(Locale.getDefault(), "%ds", time));
+                            }
+                        });
+                        int curLP = mspProtocol.getlPresureCurVal();
+                        int curRP = mspProtocol.getrPresureCurVal();
+                        Log.i(TAG, "run: curlP=" + curLP + "curRP=" + curRP + ";cmdStep=" + cmdStep);
+                        //硬度加到100则设为40
+                        switch (cmdStep) {
+                            case STEP1:
+                                if (curRP >= 98) {
+                                    BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary("20")
+                                            + BleUtils.convertDecimalToBinary("20"));
+                                    cmdStep = STEP2;
+                                }
 
-                        updateUI(progress);
+                                break;
+                            case STEP2:
+                                if (curRP >= 20 & curRP <= 25) {
+                                    BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary("80")
+                                            + BleUtils.convertDecimalToBinary("80"));
+                                    cmdStep = STEP3;
+                                }
+                                break;
+                            case STEP3:
+                                if (curRP >= 80 & curRP <= 85) {
+                                    BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary("30")
+                                            + BleUtils.convertDecimalToBinary("30"));
+                                    cmdStep = STEP4;
+                                }
+                                break;
+                            case STEP4:
+                                if (curRP >= 30 & curRP <= 35) {
+                                    BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary(String.valueOf(gauge_res))
+                                            + BleUtils.convertDecimalToBinary(String.valueOf(gauge_res)));
+                                    cmdStep = STEP5;
+                                }
+                                break;
+                            case STEP5://最后显示结果
+                                if (curRP == gauge_res) {
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            rotate.end();
+                                            gaugeRes.startNumAnim(String.valueOf(gauge_res));
+                                            pb_result.setProgress(gauge_res);
+                                            cmdStep = STEP1;
+                                        }
+                                    });
+                                }
+                                break;
+                        }
                     }
-
-                    @Override
-                    public void onFinish() {
-                        rotate.end();
-                        gaugeRes.startNumAnim(String.valueOf(gauge_res));
-                        pb_result.setProgress(gauge_res);
-                        cancel();
-                    }
-                }.start();
+                }, 0, 1000);
             }
 
             @Override
@@ -122,7 +198,11 @@ public class GaugeActivity extends BaseActivity {
 
                 btn_start_gauge.setAlpha(1.0f);
                 btn_start_gauge.setEnabled(true);
-                tv_gauge_val.setText(String.format(Locale.getDefault(), "%d", 100));
+
+                if (sendTimer != null) {
+                    sendTimer.cancel();
+                    sendTimer = null;
+                }
             }
 
             @Override
@@ -132,6 +212,11 @@ public class GaugeActivity extends BaseActivity {
 
                 btn_start_gauge.setAlpha(1.0f);
                 btn_start_gauge.setEnabled(true);
+
+                if (sendTimer != null) {
+                    sendTimer.cancel();
+                    sendTimer = null;
+                }
             }
 
             @Override
@@ -141,27 +226,6 @@ public class GaugeActivity extends BaseActivity {
         });
     }
 
-    private void updateUI(int progress) {
-        if (progress == 5) {
-            BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary("100")
-                    + BleUtils.convertDecimalToBinary("100"));
-
-        } else if (progress == 30) {
-
-            BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary("40")
-                    + BleUtils.convertDecimalToBinary("40"));
-
-        } else if (progress == 50) {
-
-            BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary("80")
-                    + BleUtils.convertDecimalToBinary("80"));
-
-        } else if (progress == 70) {
-
-            BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary(String.valueOf(gauge_res))
-                    + BleUtils.convertDecimalToBinary(String.valueOf(gauge_res)));
-        }
-    }
 
     @Override
     public void onClick(View v) {
@@ -176,7 +240,7 @@ public class GaugeActivity extends BaseActivity {
     }
 
     private boolean caculateLevel(String gender, String weightStr) {
-        if (TextUtils.isEmpty(gender)) {
+        if (TextUtils.isEmpty(weightStr)) {
             etWeight.requestFocus();
             etWeight.setError("请填写您的体重");
             return false;
@@ -222,5 +286,14 @@ public class GaugeActivity extends BaseActivity {
         etMonth.setEnabled(enable);
         etDay.setEnabled(enable);
         etGender.setEnabled(enable);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (sendTimer != null) {
+            sendTimer.cancel();
+            sendTimer = null;
+        }
     }
 }
