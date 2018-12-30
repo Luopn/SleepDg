@@ -121,5 +121,10 @@
     <string name="unused">Unused</string>
     <string name="using">Using</string>
 
+    <!--一键检测-->
+    <string name="gauge_hint">While gauging, please lie down with your eyes closed&#8230; &#8230;</string>
+    <string name="gauge_result">Your best suited hardness:</string>
+    <string name="gauge_write">Fill in information</string>
+
 </resources>
 

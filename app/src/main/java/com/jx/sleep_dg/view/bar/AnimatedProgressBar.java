@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.ColorInt;
@@ -121,14 +122,16 @@ public class AnimatedProgressBar extends View {
     }
 
     private final Paint mPaint = new Paint();
-    private final Rect mRect = new Rect();
+    private final RectF mRect = new RectF();
 
     @Override
     protected void onDraw(Canvas canvas) {
         mPaint.setColor(mProgressColor);
         mPaint.setStrokeWidth(10);
         mRect.right = mRect.left + mDrawWidth;
-        canvas.drawRect(mRect, mPaint);
+        float radius = (mRect.bottom-mRect.top)/2.0f;
+        //canvas.drawRect(mRect, mPaint);
+        canvas.drawRoundRect(mRect, radius, radius, mPaint);
     }
 
     @Override

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
@@ -16,8 +17,8 @@
 
         <ImageView
             android:id="@+id/iv_gauge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_gravity="center"
             android:src="@mipmap/ic_gauging" />
 
@@ -28,344 +29,259 @@
             android:layout_gravity="center"
             android:text="0"
             android:textColor="@android:color/white"
-            android:textSize="30dp" />
+            android:textSize="25dp" />
     </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_gauge_hint"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:visibility="visible"
+        android:text="@string/gauge_hint"
+        android:textColor="@android:color/white"
+        android:textSize="12sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:gravity="center"
+            android:text="@string/gauge_result"
+            android:textColor="@color/textTitleColor" />
+
+        <com.jx.sleep_dg.view.NumberRollingView
+            android:id="@+id/nrv_gauge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="@color/textTitleColor" />
+    </LinearLayout>
+
+    <com.jx.sleep_dg.view.bar.AnimatedProgressBar
+        android:id="@+id/pb_result"
+        android:layout_width="250dp"
+        android:layout_height="8dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/shape_control"
+        android:progress="10"
+        app:barColor="@color/textTitleColor"
+        app:bidirectionalAnimate="true" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:id="@+id/ll_res"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/gauge_write"
+                android:textColor="@color/textAccentColor"
+                android:textSize="13sp" />
+
+            <!--身高-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="35dp">
+
+                <TextView
+                    android:layout_width="45dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|end"
+                    android:text="@string/user_height"
+                    android:textColor="@color/textTitleColor"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/et_height"
+                    style="@style/EditText"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:singleLine="true"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="45dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|start"
+                    android:text="cm"
+                    android:textColor="@color/textTitleColor"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <!--体重-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:layout_width="45dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|end"
+                    android:text="@string/user_weight"
+                    android:textColor="@color/textTitleColor"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/et_weight"
+                    style="@style/EditText"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:singleLine="true"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="45dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|start"
+                    android:text="kg"
+                    android:textColor="@color/textTitleColor"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!--生日-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:layout_width="45dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|end"
+                    android:text="出生"
+                    android:textColor="@color/textTitleColor"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/et_year"
+                    style="@style/EditText"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLength="4"
+                    android:singleLine="true"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|end"
+                    android:text="年"
+                    android:textColor="@color/textTitleColor"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/et_month"
+                    style="@style/EditText"
+                    android:layout_width="35dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:singleLine="true"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|end"
+                    android:text="月"
+                    android:textColor="@color/textTitleColor"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/et_day"
+                    style="@style/EditText"
+                    android:layout_width="35dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:singleLine="true"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="45dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|start"
+                    android:text="日"
+                    android:textColor="@color/textTitleColor"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!--性别-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:layout_width="45dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|end"
+                    android:text="@string/user_gender"
+                    android:textColor="@color/textTitleColor"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/et_gender"
+                    style="@style/EditText"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:imeOptions="actionSend"
+                    android:maxLength="1"
+                    android:singleLine="true"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
 
     <Button
         android:id="@+id/btn_start_gauge"
-        android:layout_width="120dp"
-        android:layout_height="30dp"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/sel_purple_bg_btn"
         android:text="一键检测"
         android:textColor="@android:color/white"
         android:textSize="@dimen/textSize_12" />
-
-    <!--第一部分-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        android:visibility="invisible">
-
-        <!--体重-->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="体重"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/textSize_12" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.jx.sleep_dg.view.NumberRollingView
-                    android:id="@+id/tv_weight"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="0kg"
-                    android:textColor="@android:color/white" />
-
-                <com.jx.sleep_dg.view.NumberRollingView
-                    android:id="@+id/tv_weight_per"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0%"
-                    android:textColor="@android:color/white" />
-            </LinearLayout>
-
-            <com.jx.sleep_dg.view.bar.AnimatedProgressBar
-                android:id="@+id/pb_weight"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:progress="0"
-                app:barColor="#9f64ae"
-                app:bidirectionalAnimate="true" />
-        </LinearLayout>
-
-        <!--身高-->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="身高"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/textSize_12" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.jx.sleep_dg.view.NumberRollingView
-                    android:id="@+id/tv_height"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="0cm"
-                    android:textColor="@android:color/white" />
-
-                <com.jx.sleep_dg.view.NumberRollingView
-                    android:id="@+id/tv_height_per"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0%"
-                    android:textColor="@android:color/white" />
-            </LinearLayout>
-
-            <com.jx.sleep_dg.view.bar.AnimatedProgressBar
-                android:id="@+id/pb_height"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:progress="0"
-                app:barColor="#9ebbcb"
-                app:bidirectionalAnimate="true" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <!--第二部分-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        android:visibility="invisible">
-
-        <!--心率-->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="心率"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/textSize_12" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.jx.sleep_dg.view.NumberRollingView
-                    android:id="@+id/tv_heartbeat"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="0次/分钟"
-                    android:textColor="@android:color/white" />
-
-                <com.jx.sleep_dg.view.NumberRollingView
-                    android:id="@+id/tv_heartbeat_per"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0%"
-                    android:textColor="@android:color/white" />
-            </LinearLayout>
-
-            <com.jx.sleep_dg.view.bar.AnimatedProgressBar
-                android:id="@+id/pb_heartbeat"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:progress="0"
-                app:barColor="#5d73b1"
-                app:bidirectionalAnimate="true" />
-        </LinearLayout>
-
-        <!--呼吸-->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="呼吸"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/textSize_12" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.jx.sleep_dg.view.NumberRollingView
-                    android:id="@+id/tv_breath"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="0次/分钟"
-                    android:textColor="@android:color/white" />
-
-                <com.jx.sleep_dg.view.NumberRollingView
-                    android:id="@+id/tv_breath_per"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0%"
-                    android:textColor="@android:color/white" />
-            </LinearLayout>
-
-            <com.jx.sleep_dg.view.bar.AnimatedProgressBar
-                android:id="@+id/pb_breath"
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:progress="0"
-                app:barColor="#00a1e9"
-                app:bidirectionalAnimate="true" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <!--第三部分-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        android:visibility="invisible">
-
-        <!--体温-->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="体温"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/textSize_12" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.jx.sleep_dg.view.NumberRollingView
-                    android:id="@+id/tv_bodyTem"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="0°"
-                    android:textColor="@android:color/white" />
-
-                <com.jx.sleep_dg.view.NumberRollingView
-                    android:id="@+id/tv_bodyTem_per"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0%"
-                    android:textColor="@android:color/white" />
-            </LinearLayout>
-
-            <com.jx.sleep_dg.view.bar.AnimatedProgressBar
-                android:id="@+id/pb_bodyTem"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:progress="0"
-                app:barColor="#f08200"
-                app:bidirectionalAnimate="true" />
-        </LinearLayout>
-
-        <!--室内温度-->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="室内温度"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/textSize_12" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.jx.sleep_dg.view.NumberRollingView
-                    android:id="@+id/tv_roomTem"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="0°"
-                    android:textColor="@android:color/white" />
-
-                <com.jx.sleep_dg.view.NumberRollingView
-                    android:id="@+id/tv_roomTem_per"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0%"
-                    android:textColor="@android:color/white"
-                    app:runWhenChange="true" />
-            </LinearLayout>
-
-            <com.jx.sleep_dg.view.bar.AnimatedProgressBar
-                android:id="@+id/pb_roomTem"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:progress="0"
-                app:barColor="#17b7d1"
-                app:bidirectionalAnimate="true" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ll_res"
-        android:layout_width="250dp"
-        android:layout_height="0dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/tv_result"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textColor="@android:color/white" />
-
-        <com.jx.sleep_dg.view.bar.AnimatedProgressBar
-            android:id="@+id/pb_result"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:background="@color/colorPrimaryLight"
-            android:progress="0"
-            app:barColor="@color/white"
-            app:bidirectionalAnimate="true" />
-    </LinearLayout>
 </LinearLayout>

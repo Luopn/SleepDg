@@ -120,4 +120,9 @@
     <string name="associated_together">互相关联</string>
     <string name="unused">未使用</string>
     <string name="using">正在使用</string>
+
+    <!--一键检测-->
+    <string name="gauge_hint">正在检测，请您闭眼静躺&#8230; &#8230;</string>
+    <string name="gauge_result">您最适合硬度:</string>
+    <string name="gauge_write">填入信息</string>
 </resources>
