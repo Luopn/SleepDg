@@ -110,7 +110,6 @@ public class BleComUtils {
         return list;
     }
 
-
     /**
      * 发送加热数据
      */
@@ -131,15 +130,6 @@ public class BleComUtils {
      * 发送软硬数据
      */
     public static void sendChongqi(String data) {
-        // String yihuo = BleUtils.XORAnd("06C50A0A");
-        // String data = "aa06a50a0a";
-        // BleCommunication.sendData(LauncherActivity.mBLE, LauncherActivity.bcWrite, data);
-        // byte[] a = new byte[5];
-        // a[0] = (byte) 0xaa;
-        // a[1] = (byte) 0x06;
-        // a[2] = (byte) 0xC6;
-        // a[3] = (byte) 0x01;
-        // a[4] = (byte) 0x01;
         BluetoothLeService.mThis.writeCMD(toByteArray("aa06c5" + data));
     }
 
@@ -174,17 +164,7 @@ public class BleComUtils {
     public static void senddianji(String data) {
 
         String yihuo = BleUtils.XORAnd("06C702040608");
-        // String data = "AA06C702040608";
-        LogUtil.e("data:" + data);
-        //byte[] data = new byte[7];
-        //data[0] = (byte) 0xaa;
-        //data[1] = (byte) 0x06;
-        //data[2] = (byte) 0xc7;
-        //data[3] = (byte) 0x02;
-        //data[4] = (byte) 0x04;
-        //data[5] = (byte) 0x06;
-        //data[6] = (byte) 0x08;
-        //BleCommunication.sendData2(LauncherActivity.mBLE, LauncherActivity.bcWrite, toByteArray("aa08c7" + data));
+        LogUtil.i("data:" + data);
         BluetoothLeService.mThis.writeCMD(toByteArray("aa08c7" + data));
     }
 
@@ -214,6 +194,26 @@ public class BleComUtils {
         for (int i = 0; i < 5; i++) {
             checkSum ^= data[i + 1];
         }
+        data[6] = checkSum;
+        BluetoothLeService.mThis.writeCMD(data);
+    }
+
+    /**
+     * 发送心跳数据
+     */
+    public static void sendBeepData() {
+        byte[] data = new byte[7];
+        data[0] = (byte) 0xAA;
+        data[1] = (byte) 0x07;
+        data[2] = (byte) 0xC9;
+        data[3] = (byte) 0x00;
+        data[4] = (byte) 0x00;
+        data[5] = (byte) 0x00;
+        byte checkSum = 0;
+        for (int i = 0; i < 5; i++) {
+            checkSum ^= data[i + 1];
+        }
+        LogUtil.i("发送心跳包数据");
         data[6] = checkSum;
         BluetoothLeService.mThis.writeCMD(data);
     }

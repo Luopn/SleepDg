@@ -26,10 +26,7 @@ public class SampleGattAttributes {
     public static final String SMART_TAG_WRITE_UUID = "00003001-0606-0505-0404-030302020101";
     public static final String SMART_TAG_READ_UUID = "00003002-0606-0505-0404-030302020101";
 
-    private static final HashMap<String, String> attributes = new HashMap();
     public static final String CLIENT_CHARACTERISTIC_CONFIG = "00002902-0000-1000-8000-00805f9b34fb";
 
     public static final String SMART_TAG_SERVICE_UUID = "0000fff0-0000-1000-8000-00805f9b34fb";
-
-
 }
