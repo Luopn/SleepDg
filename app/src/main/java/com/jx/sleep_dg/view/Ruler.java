@@ -183,6 +183,11 @@ public class Ruler extends View {
         invalidate();
     }
 
+    public void setCurrentValue(int toValue) {
+        this.currentValue = toValue;
+        invalidate();
+    }
+
     public void setToValue(int toValue) {
         this.toValue = toValue;
         invalidate();

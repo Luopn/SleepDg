@@ -5,15 +5,18 @@ import android.content.Intent;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.jx.sleep_dg.R;
 import com.jx.sleep_dg.base.BaseActivity;
 import com.jx.sleep_dg.ble.BluetoothLeService;
 import com.jx.sleep_dg.event.ConfigureResEvent;
 import com.jx.sleep_dg.protocol.BleComUtils;
+import com.jx.sleep_dg.protocol.MSPProtocol;
 import com.jx.sleep_dg.utils.PrintLog;
 import com.jx.sleep_dg.utils.ToastUtil;
 import com.jx.sleep_dg.view.RippleBackground;
@@ -28,6 +31,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 public class DeviceNetConfigAcyivity extends BaseActivity implements View.OnClickListener {
 
+    private static final String TAG = "DeviceNetConfigAcyivity";
     private WifiManager mWifiManager;
 
     private RippleBackground rippleBackground;
@@ -60,7 +64,9 @@ public class DeviceNetConfigAcyivity extends BaseActivity implements View.OnClic
     @Override
     protected void notifyBleDataChanged(Intent intent) {
         super.notifyBleDataChanged(intent);
-
+        if(MSPProtocol.getInstance().getIsWiFiConnSign()==1){
+            Toast.makeText(DeviceNetConfigAcyivity.this,"设备联网成功",Toast.LENGTH_LONG).show();
+        }
     }
 
     //开始配网

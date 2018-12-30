@@ -17,6 +17,7 @@ import com.jx.sleep_dg.base.BaseActivity;
 import com.jx.sleep_dg.fragment.DataFragment;
 import com.jx.sleep_dg.fragment.DeviceLiftFragment;
 import com.jx.sleep_dg.fragment.DeviceTempFragment;
+import com.jx.sleep_dg.fragment.DeviceTrippleLiftFragment;
 import com.jx.sleep_dg.fragment.DeviseHardnessFragment;
 import com.jx.sleep_dg.fragment.SettingFragment;
 import com.jx.sleep_dg.MyApplication;
@@ -86,7 +87,7 @@ public class MainActivity extends BaseActivity {
         if (firstFragment == null) {
 
             mFragment[0] = DataFragment.newInstance();
-            mFragment[1] = DeviceLiftFragment.newInstance();
+            mFragment[1] = DeviceTrippleLiftFragment.newInstance();
             mFragment[2] = DeviseHardnessFragment.newInstance();
             mFragment[3] = DeviceTempFragment.newInstance();
             mFragment[4] = SettingFragment.newInstance();
