@@ -61,31 +61,19 @@
                     android:textColor="#ababab" />
             </RadioGroup>
 
-            <com.jx.sleep_dg.view.imageview.RoundedImageView
+            <ImageView
                 android:id="@+id/iv_login"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="80dp"
+                android:layout_height="60dp"
                 android:layout_centerInParent="true"
-                android:src="@mipmap/ic_launcher_login"
-                app:riv_corner_radius="60dp" />
+                android:background="@android:color/transparent"
+                android:src="@mipmap/ic_launcher_login" />
 
             <TextView
-                android:id="@+id/tv_appname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/iv_login"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="16dp"
-                android:gravity="center"
-                android:text="@string/app_name"
-                android:textColor="@android:color/white" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_appname"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp"
                 android:gravity="center"
                 android:text="@string/login_welcome"
                 android:textColor="@color/colorAccent" />
@@ -96,7 +84,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="20dp"
             android:orientation="vertical">
 
