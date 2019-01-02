@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Wisdom Cloud</string>
     <string name="app_name_sf">Wisdom Cloud</string>
+    <string name="app_name_qm">Wisdom Cloud</string>
 
     <string name="loading">Loading..</string>
 
@@ -22,6 +23,7 @@
     <!--登录注册-->
     <string name="login_welcome">Welcome!</string>
     <string name="login_welcome_sf">Welcome!</string>
+    <string name="login_welcome_qm">Welcome</string>
     <string name="account_name">User Name</string>
     <string name="user_info">User Information</string>
     <string name="user_associated">My Association</string>
