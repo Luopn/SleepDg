@@ -25,7 +25,7 @@
     <string name="login_welcome_sf">欢迎进入舒是人工智慧床垫</string>
     <string name="login_welcome_qm">欢迎进入曲美人工智慧床垫</string>
     <string name="account_name">用户名</string>
-    <string name="user_info">个人信息</string>
+    <string name="user_info">个人中心</string>
     <string name="user_associated">我关联的人</string>
     <string name="user_avater">头像</string>
     <string name="user_nickname">昵称</string>

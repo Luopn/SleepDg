@@ -184,6 +184,15 @@ public abstract class BaseActivity extends SupportActivity implements View.OnCli
         tvTitle.setText(getResources().getString(stringRes));
     }
 
+    /**
+     * 设置标题栏背景
+     *
+     * @param color
+     */
+    public void setToolbarBackColor(@ColorInt int color) {
+        toolbar.setBackgroundColor(color);
+    }
+
 
     /**
      * 设置标题栏颜色
