@@ -7,15 +7,18 @@ import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.ScrollView;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.jx.sleep_dg.R;
 import com.jx.sleep_dg.base.BaseMainFragment;
 import com.jx.sleep_dg.protocol.BleComUtils;
+import com.jx.sleep_dg.protocol.MSPProtocol;
 import com.jx.sleep_dg.ui.AssociatedActivity;
 import com.jx.sleep_dg.ui.DeviceDetailActivity;
 import com.jx.sleep_dg.ui.GaugeActivity;
 import com.jx.sleep_dg.ui.InflationActivity;
 import com.jx.sleep_dg.ui.MainActivity;
+import com.jx.sleep_dg.utils.Constance;
 import com.jx.sleep_dg.utils.LanguageUtil;
 import com.jx.sleep_dg.utils.PreferenceUtils;
 
@@ -30,9 +33,13 @@ import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 
 public class SettingFragment extends BaseMainFragment implements CompoundButton.OnCheckedChangeListener {
 
+    private boolean isInitialDatas;
+    private MSPProtocol mspProtocol;
+
     private Switch swYunfu, swErTong, swSiRen, swZhiHan;
     private RadioButton rbZhSimple, rbZhTradion, rbEn;
     private ScrollView scrollView;
+    private TextView tvChongqi;
 
     public static SettingFragment newInstance() {
         Bundle args = new Bundle();
@@ -48,10 +55,15 @@ public class SettingFragment extends BaseMainFragment implements CompoundButton.
 
     @Override
     public void onBindView(View view) {
+        isInitialDatas = false;
+        mspProtocol = MSPProtocol.getInstance();
+
         view.findViewById(R.id.ll_detail).setOnClickListener(this);
         view.findViewById(R.id.ll_guanzhu).setOnClickListener(this);
         view.findViewById(R.id.tv_gauge).setOnClickListener(this);
-        view.findViewById(R.id.tv_auto_chongqi).setOnClickListener(this);
+        view.findViewById(R.id.ll_auto_chongqi).setOnClickListener(this);
+
+        tvChongqi = view.findViewById(R.id.tv_auto_chongqi);
         swYunfu = view.findViewById(R.id.sw_yunfu);
         swYunfu.setOnCheckedChangeListener(this);
         swErTong = view.findViewById(R.id.sw_ertong);
@@ -86,6 +98,56 @@ public class SettingFragment extends BaseMainFragment implements CompoundButton.
     }
 
     @Override
+    protected void notifyBleDataChanged(Intent intent) {
+        super.notifyBleDataChanged(intent);
+
+        if (tvChongqi != null) {
+            tvChongqi.setText(String.format("%s %s:%s",
+                    _mActivity.getResources().getString(R.string.auto_inflation),
+                    String.format(Locale.getDefault(), "%02d", mspProtocol.getTire_hour() & 0xff),
+                    String.format(Locale.getDefault(), "%02d", mspProtocol.getTire_minute() & 0xff))
+            );
+        }
+
+        if (mspProtocol != null && !isInitialDatas) {
+            if (swZhiHan == null || swSiRen == null || swErTong == null || swYunfu == null) {
+                return;
+            }
+            swZhiHan.setChecked(false);
+            swSiRen.setChecked(false);
+            swErTong.setChecked(false);
+            swYunfu.setChecked(false);
+            switch (mspProtocol.getMode() & 0xff) {
+                case 1:
+                    swZhiHan.setChecked(true);
+                    break;
+                case 2:
+                    swSiRen.setChecked(true);
+                    break;
+                case 3:
+                    swErTong.setChecked(true);
+                    break;
+                case 4:
+                    swYunfu.setChecked(true);
+                    break;
+            }
+            isInitialDatas = true;
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        int hour = PreferenceUtils.getInt(Constance.KEY_INFLATION_HOUR, 0);
+        int minute = PreferenceUtils.getInt(Constance.KEY_INFLATION_MINUTE, 0);
+        tvChongqi.setText(String.format("%s %s:%s",
+                _mActivity.getResources().getString(R.string.auto_inflation),
+                String.format(Locale.getDefault(), "%02d", hour),
+                String.format(Locale.getDefault(), "%02d", minute))
+        );
+    }
+
+    @Override
     public void onClick(View v) {
         super.onClick(v);
         switch (v.getId()) {
@@ -100,7 +162,7 @@ public class SettingFragment extends BaseMainFragment implements CompoundButton.
             case R.id.tv_gauge:
                 startActivity(new Intent(_mActivity, GaugeActivity.class));
                 break;
-            case R.id.tv_auto_chongqi:
+            case R.id.ll_auto_chongqi:
                 startActivity(new Intent(_mActivity, InflationActivity.class));
                 break;
             case R.id.rb_ch_simple:
@@ -120,6 +182,7 @@ public class SettingFragment extends BaseMainFragment implements CompoundButton.
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        isInitialDatas = false;
         switch (buttonView.getId()) {
             case R.id.sw_zhihan:
                 if (isChecked) {

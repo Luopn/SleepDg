@@ -58,4 +58,9 @@ public class Constance {
      *Mac
      */
     public static final String MAC = "Mac";
+
+    //自动补气的时
+    public static final String KEY_INFLATION_HOUR = "com.yunzhimian.inflation_hour";
+    //自动补气的分
+    public static final String KEY_INFLATION_MINUTE = "com.yunzhimian.inflation_minute";
 }

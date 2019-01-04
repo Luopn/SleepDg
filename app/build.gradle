@@ -4,11 +4,11 @@ android {
     compileSdkVersion 28
     buildToolsVersion "28.0.3"
     defaultConfig {
-        applicationId "com.jx.sleep_dg"
+        applicationId "com.jx.sleep_qm"
         minSdkVersion 18
         targetSdkVersion 22
         versionCode 16
-        versionName "1.0.75"
+        versionName "1.0.77"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

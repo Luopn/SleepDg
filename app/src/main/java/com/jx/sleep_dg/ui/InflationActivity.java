@@ -1,5 +1,6 @@
 package com.jx.sleep_dg.ui;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,9 @@ import android.widget.TextView;
 import com.jx.sleep_dg.R;
 import com.jx.sleep_dg.base.BaseActivity;
 import com.jx.sleep_dg.protocol.BleComUtils;
+import com.jx.sleep_dg.protocol.MSPProtocol;
+import com.jx.sleep_dg.utils.Constance;
+import com.jx.sleep_dg.utils.PreferenceUtils;
 import com.jx.sleep_dg.utils.ToastUtil;
 import com.wx.wheelview.adapter.BaseWheelAdapter;
 import com.wx.wheelview.widget.WheelView;
@@ -24,11 +28,13 @@ import java.util.Locale;
 
 public class InflationActivity extends BaseActivity {
 
-    private Button okButton;
     private WheelView<String> hourWv, minuteWv;
 
+    private boolean isInitialDatas;
     private String hour, minute;
     private ArrayList<String> hourList, minuteList;
+
+    private MSPProtocol mspProtocol;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +47,9 @@ public class InflationActivity extends BaseActivity {
     }
 
     private void initDatas() {
+        isInitialDatas = false;
+        mspProtocol = MSPProtocol.getInstance();
+
         hourList = new ArrayList<>();
         minuteList = new ArrayList<>();
 
@@ -53,8 +62,23 @@ public class InflationActivity extends BaseActivity {
     }
 
     @Override
+    protected void notifyBleDataChanged(Intent intent) {
+        super.notifyBleDataChanged(intent);
+        if (mspProtocol != null && hourWv != null) {
+            if (!isInitialDatas) {
+                int hour = (mspProtocol.getTire_hour() & 0xff);
+                int minute = (mspProtocol.getTire_minute() & 0xff);
+                hourWv.setSelection(hour);
+                minuteWv.setSelection(minute);
+
+                isInitialDatas = true;
+            }
+        }
+    }
+
+    @Override
     public void bindView() {
-        okButton = findViewById(R.id.ok);
+        Button okButton = findViewById(R.id.ok);
         hourWv = findViewById(R.id.wv_hour);
         minuteWv = findViewById(R.id.wv_minute);
 
@@ -126,11 +150,22 @@ public class InflationActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 if (!TextUtils.isEmpty(hour) && !TextUtils.isEmpty(minute)) {
-                    BleComUtils.sendInflation(Integer.valueOf(hour), Integer.valueOf(minute));
+                    int hourInt = Integer.valueOf(hour);
+                    int minuteInt = Integer.valueOf(minute);
+                    BleComUtils.sendInflation(hourInt, minuteInt);
+
+                    PreferenceUtils.putInt(Constance.KEY_INFLATION_HOUR,hourInt);
+                    PreferenceUtils.putInt(Constance.KEY_INFLATION_MINUTE,minuteInt);
+
                     ToastUtil.showMessage("设置成功");
                 }
             }
         });
+
+        int hour = PreferenceUtils.getInt(Constance.KEY_INFLATION_HOUR,0);
+        int minute = PreferenceUtils.getInt(Constance.KEY_INFLATION_MINUTE,0);
+        hourWv.setSelection(hour);
+        minuteWv.setSelection(minute);
     }
 
     static class ViewHolder {

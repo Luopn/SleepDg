@@ -58,6 +58,9 @@ public class MSPProtocol {
 
     private byte mode;//模式
 
+    private byte tire_hour;//自动补气时
+    private byte tire_minute;//自动补气分
+
     public static MSPProtocol getInstance() {
         return mSPProtocol;
     }
@@ -186,6 +189,8 @@ public class MSPProtocol {
                 high3 = dataList.get(6);
                 high4 = dataList.get(7);
                 mode = dataList.get(8);
+                tire_hour = dataList.get(9);
+                tire_minute = dataList.get(10);
                 break;
         }
     }
@@ -318,4 +323,13 @@ public class MSPProtocol {
     public byte getMode() {
         return mode;
     }
+
+    public byte getTire_hour() {
+        return tire_hour;
+    }
+
+    public byte getTire_minute() {
+        return tire_minute;
+    }
+
 }

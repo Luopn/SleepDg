@@ -124,11 +124,11 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
 
     //蓝牙数据
     private void bindViewData() {
-        int touDevIndex = mspProtocol.getHigh2() & 0xff;
-        int jiaoDevIndex = mspProtocol.getHigh1() & 0xff;
+        int touDevIndex = mspProtocol.getHigh1() & 0xff;
+        int jiaoDevIndex = mspProtocol.getHigh4() & 0xff;
         if (mspProtocol != null) {
-            rulerTou.setValue((int) Math.ceil(touDevIndex / 30.0f * 45.0f));
-            rulerJiao.setValue((int) Math.ceil(jiaoDevIndex / 25.0f * 30.0f));
+            rulerTou.setCurrentValue((int) Math.ceil(touDevIndex / 30.0f * 45.0f));
+            rulerJiao.setCurrentValue((int) Math.ceil(jiaoDevIndex / 25.0f * 30.0f));
         }
         if (!isInitSeekbarVal) {
             isInitSeekbarVal = true;

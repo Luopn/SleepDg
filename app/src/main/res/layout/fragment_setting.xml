@@ -201,19 +201,41 @@
                     android:track="@drawable/switch_track" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/tv_auto_chongqi"
+            <LinearLayout
+                android:id="@+id/ll_auto_chongqi"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/sel_set_item"
-                android:drawableRight="@mipmap/ic_data_right"
                 android:gravity="center_vertical"
+                android:orientation="horizontal"
                 android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:text="@string/auto_inflation"
-                android:textColor="@color/white"
-                android:textSize="@dimen/textSize_14" />
+                android:paddingRight="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="@string/auto_inflation"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize_14" />
+
+                <TextView
+                    android:id="@+id/tv_auto_chongqi"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:text="@string/auto_inflation"
+                    android:textColor="#808f8f8f"
+                    android:textSize="@dimen/textSize_10" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_data_right" />
+            </LinearLayout>
 
             <RadioGroup
                 android:layout_width="match_parent"

@@ -136,20 +136,8 @@ public class BleComUtils {
     }
 
     public static void sendMoShi(String data) {
-        LogUtil.e("数据：" + data);
-        //String yihuo = BleUtils.XORAnd("06C50A0A");
-        //String data = "aa06a50a0a";
-        //BleCommunication.sendData(LauncherActivity.mBLE, LauncherActivity.bcWrite, data);
-
-        //byte[] a = new byte[5];
-        //a[0] = (byte) 0xaa;
-        //a[1] = (byte) 0x06;
-        //a[2] = (byte) 0xC6;
-        //a[3] = (byte) 0x01;
-        //a[4] = (byte) 0x01;
         if (BluetoothLeService.mThis != null)
             BluetoothLeService.mThis.writeCMD(toByteArray("aa0ac8" + data + "0000000000"));
-        //BleCommunication.sendData2(LauncherActivity.mBLE, LauncherActivity.bcWrite, toByteArray("aa0ac8" + data + "0000000000"));
     }
 
     public static void sendJiyi() {

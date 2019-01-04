@@ -132,6 +132,11 @@ public class BluetoothLeService extends Service {
 
                 //发送用户数据到设备
                 BleComUtils.sendTime("F10100000001");
+                //发送自动补气时间
+                int hour = PreferenceUtils.getInt(Constance.KEY_INFLATION_HOUR, -1);
+                int minute = PreferenceUtils.getInt(Constance.KEY_INFLATION_MINUTE, -1);
+                if (hour >= 0 && minute >= 0)
+                    BleComUtils.sendInflation(hour, minute);
 
                 // Attempts to discover services after successful connection.
                 Log.i(TAG, "Attempting to start service discovery:(" + gatt.getDevice().getAddress() + ")"
