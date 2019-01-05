@@ -20,6 +20,7 @@ import com.jx.sleep_dg.ui.DeviceNetConfigAcyivity;
 import com.jx.sleep_dg.ui.MainActivity;
 import com.jx.sleep_dg.ui.SearchActivity;
 import com.jx.sleep_dg.ui.StatisticsActivity;
+import com.jx.sleep_dg.ui.UserInfoActivity;
 import com.jx.sleep_dg.utils.CommonUtil;
 import com.jx.sleep_dg.view.EcgView;
 import com.jx.sleep_dg.view.HuxiEcgView;
@@ -185,7 +186,8 @@ public class DataFragment extends BaseMainFragment {
             }
             break;
             case R.id.iv_user_image:
-                MainActivity.mDrawerLayout.openDrawer(GravityCompat.START);
+                startActivity(new Intent(_mActivity, UserInfoActivity.class));
+                //MainActivity.mDrawerLayout.openDrawer(GravityCompat.START);
                 break;
         }
     }

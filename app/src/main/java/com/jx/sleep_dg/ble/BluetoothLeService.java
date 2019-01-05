@@ -446,7 +446,7 @@ public class BluetoothLeService extends Service {
         final StringBuilder stringBuilder = new StringBuilder(cmd.length);
         for (byte byteChar : cmd)
             stringBuilder.append(String.format("%02X ", byteChar));
-        //Log.i(TAG, "Write CMD:" + stringBuilder.toString());
+        Log.i(TAG, "Write CMD:" + stringBuilder.toString());
         if (cmd.length >= 3 && cmd[2] != (byte) 0xC9) {
             isBeep = false;
         }

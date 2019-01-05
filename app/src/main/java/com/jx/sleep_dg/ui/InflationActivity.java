@@ -29,6 +29,7 @@ import java.util.Locale;
 public class InflationActivity extends BaseActivity {
 
     private WheelView<String> hourWv, minuteWv;
+    private TextView tvCurTime;
 
     private boolean isInitialDatas;
     private String hour, minute;
@@ -64,8 +65,8 @@ public class InflationActivity extends BaseActivity {
     @Override
     protected void notifyBleDataChanged(Intent intent) {
         super.notifyBleDataChanged(intent);
-        if (mspProtocol != null && hourWv != null) {
-            if (!isInitialDatas) {
+        if (mspProtocol != null) {
+            if (!isInitialDatas && hourWv != null) {
                 int hour = (mspProtocol.getTire_hour() & 0xff);
                 int minute = (mspProtocol.getTire_minute() & 0xff);
                 hourWv.setSelection(hour);
@@ -73,11 +74,17 @@ public class InflationActivity extends BaseActivity {
 
                 isInitialDatas = true;
             }
+            if (tvCurTime != null) {
+                tvCurTime.setText(String.format("当前设置时间 %s:%s",
+                        String.format(Locale.getDefault(), "%02d", mspProtocol.getTire_hour() & 0xff),
+                        String.format(Locale.getDefault(), "%02d", mspProtocol.getTire_minute() & 0xff)));
+            }
         }
     }
 
     @Override
     public void bindView() {
+        tvCurTime = findViewById(R.id.tv_cur_time);
         Button okButton = findViewById(R.id.ok);
         hourWv = findViewById(R.id.wv_hour);
         minuteWv = findViewById(R.id.wv_minute);
@@ -154,16 +161,16 @@ public class InflationActivity extends BaseActivity {
                     int minuteInt = Integer.valueOf(minute);
                     BleComUtils.sendInflation(hourInt, minuteInt);
 
-                    PreferenceUtils.putInt(Constance.KEY_INFLATION_HOUR,hourInt);
-                    PreferenceUtils.putInt(Constance.KEY_INFLATION_MINUTE,minuteInt);
+                    PreferenceUtils.putInt(Constance.KEY_INFLATION_HOUR, hourInt);
+                    PreferenceUtils.putInt(Constance.KEY_INFLATION_MINUTE, minuteInt);
 
                     ToastUtil.showMessage("设置成功");
                 }
             }
         });
 
-        int hour = PreferenceUtils.getInt(Constance.KEY_INFLATION_HOUR,0);
-        int minute = PreferenceUtils.getInt(Constance.KEY_INFLATION_MINUTE,0);
+        int hour = PreferenceUtils.getInt(Constance.KEY_INFLATION_HOUR, 0);
+        int minute = PreferenceUtils.getInt(Constance.KEY_INFLATION_MINUTE, 0);
         hourWv.setSelection(hour);
         minuteWv.setSelection(minute);
     }
