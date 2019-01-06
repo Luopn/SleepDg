@@ -50,6 +50,7 @@ public class InflationActivity extends BaseActivity {
     private void initDatas() {
         isInitialDatas = false;
         mspProtocol = MSPProtocol.getInstance();
+        BleComUtils.sendTime("F10100000001");
 
         hourList = new ArrayList<>();
         minuteList = new ArrayList<>();

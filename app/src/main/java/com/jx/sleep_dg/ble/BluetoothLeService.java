@@ -33,6 +33,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Binder;
+import android.os.Handler;
 import android.os.IBinder;
 import android.text.TextUtils;
 import android.util.Log;
@@ -78,6 +79,7 @@ public class BluetoothLeService extends Service {
 
     public static BluetoothLeService mThis = null;
     private final IBinder mBinder = new LocalBinder();
+    private Handler handler = new Handler();
 
     private MSPProtocol mspProtocol = MSPProtocol.getInstance();
 
@@ -131,12 +133,17 @@ public class BluetoothLeService extends Service {
                 broadcastUpdate(intentAction, gatt.getDevice().getAddress());
 
                 //发送用户数据到设备
-                BleComUtils.sendTime("F10100000001");
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        BleComUtils.sendTime("F10100000001");
+                    }
+                },1000);
                 //发送自动补气时间
                 int hour = PreferenceUtils.getInt(Constance.KEY_INFLATION_HOUR, -1);
                 int minute = PreferenceUtils.getInt(Constance.KEY_INFLATION_MINUTE, -1);
-                if (hour >= 0 && minute >= 0)
-                    BleComUtils.sendInflation(hour, minute);
+                //if (hour >= 0 && minute >= 0)
+                //    BleComUtils.sendInflation(hour, minute);
 
                 // Attempts to discover services after successful connection.
                 Log.i(TAG, "Attempting to start service discovery:(" + gatt.getDevice().getAddress() + ")"
