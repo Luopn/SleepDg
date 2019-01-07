@@ -130,5 +130,12 @@
     <string name="gauge_result">Your best suited hardness:</string>
     <string name="gauge_write">Fill in information</string>
 
+    <!--个人中心-->
+    <string name="user_def_username_sf">舒是1</string>
+    <string name="user_coin_sf">舒是coin：100</string>
+    <string name="user_coin_mgr_sf">舒是coin Management</string>
+    <string name="user_def_username_qm">曲美1</string>
+    <string name="user_coin_qm">曲美coin：100</string>
+    <string name="user_coin_mgr_qm">曲美coin Management</string>
 </resources>
 
