@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     buildToolsVersion "28.0.3"
     defaultConfig {
-        applicationId "com.jx.sleep_sf"
+        applicationId "com.jx.sleep_dg"
         minSdkVersion 18
         targetSdkVersion 22
         versionCode 16

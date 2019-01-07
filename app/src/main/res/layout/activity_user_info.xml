@@ -56,11 +56,11 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:id="@+id/tv_title_deep_sleep"
+                                android:id="@+id/tv_username"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center_vertical"
-                                android:text="@string/user_def_username_sf"
+                                android:text="昵称：小小智"
                                 android:textColor="@android:color/white"
                                 android:textSize="10sp" />
 
@@ -82,17 +82,18 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:id="@+id/tv_title_shallow_sleep"
+                                android:id="@+id/tv_user_coins_count"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
                                 android:drawableTint="@color/textAccentColor"
                                 android:gravity="center_vertical"
-                                android:text="@string/user_coin_sf"
+                                android:text="睡眠积分：100"
                                 android:textColor="@android:color/white"
                                 android:textSize="10sp" />
 
                             <TextView
+                                android:id="@+id/tv_coins_trans"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
@@ -158,13 +159,14 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/tv_coin_mgr"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
                     android:background="@color/textTitleColorLight"
                     android:gravity="center"
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
-                    android:text="@string/user_coin_mgr_sf"
+                    android:text="积分管理"
                     android:textColor="@android:color/white"
                     android:textSize="14sp" />
 
@@ -264,8 +266,9 @@
                     android:textSize="12sp" />
 
                 <Button
+                    android:id="@+id/btn_exit"
                     android:layout_width="200dp"
-                    android:layout_height="50dp"
+                    android:layout_height="35dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/sel_blue_bg_btn"

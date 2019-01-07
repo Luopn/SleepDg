@@ -88,7 +88,7 @@ public class MainActivity extends BaseActivity {
         if (firstFragment == null) {
 
             mFragment[0] = DataFragment.newInstance();
-            mFragment[1] = DeviceTrippleLiftFragment.newInstance();
+            mFragment[1] = DeviceLiftFragment.newInstance();
             mFragment[2] = DeviseHardnessFragment.newInstance();
             mFragment[3] = DeviceTempFragment.newInstance();
             mFragment[4] = SettingFragment.newInstance();
@@ -101,7 +101,7 @@ public class MainActivity extends BaseActivity {
                     mFragment[4]);
         } else {
             mFragment[0] = firstFragment;
-            mFragment[1] = findFragment(DeviceTrippleLiftFragment.class);
+            mFragment[1] = findFragment(DeviceLiftFragment.class);
             mFragment[2] = findFragment(DeviseHardnessFragment.class);
             mFragment[3] = findFragment(DeviceTempFragment.class);
             mFragment[4] = findFragment(SettingFragment.class);
