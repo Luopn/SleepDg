@@ -22,6 +22,7 @@ import com.jx.sleep_dg.fragment.DeviseHardnessFragment;
 import com.jx.sleep_dg.fragment.SettingFragment;
 import com.jx.sleep_dg.MyApplication;
 import com.jx.sleep_dg.protocol.BleComUtils;
+import com.jx.sleep_dg.utils.StatusBarUtil;
 
 import me.yokeyword.fragmentation.SupportFragment;
 
@@ -32,7 +33,7 @@ public class MainActivity extends BaseActivity {
     private long TOUCH_TIME = 0;
 
     public static final String KEY_FRAGMENT = "key_fragment";
-    public static DrawerLayout mDrawerLayout;
+    private DrawerLayout mDrawerLayout;
 
     private SupportFragment mFragment[] = new SupportFragment[5];
 
@@ -115,6 +116,10 @@ public class MainActivity extends BaseActivity {
                 startActivity(new Intent(this, UserInfoActivity.class));
                 break;
         }
+    }
+
+    public DrawerLayout getmDrawerLayout() {
+        return mDrawerLayout;
     }
 
     @Override
