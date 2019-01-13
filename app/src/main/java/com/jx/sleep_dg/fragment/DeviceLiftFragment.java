@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
+import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
@@ -22,6 +23,10 @@ import com.jx.sleep_dg.view.BorderButton;
 import com.jx.sleep_dg.view.Ruler;
 import com.jx.sleep_dg.view.bar.VerticalSeekBar;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.util.ArrayList;
+
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 
 /**
@@ -32,6 +37,9 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
     private boolean isInitSeekbarVal;
     private MSPProtocol mspProtocol;
     private SoundPool soundPool;
+
+    private static final int MAX_TOU = 20;
+    private static final int MAX_JIAO = 25;
 
     private LinearLayout llBedContainer;
     private VerticalSeekBar seebLeftTou;
@@ -44,8 +52,26 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
     private BorderButton mBtnReadMode;
     private BorderButton mBtnYujiaMode;
     private BorderButton mBtnRelaxMode;
-    private int touIndex = 0;
-    private int jiaoIndex = 0;
+    private ArrayList<BorderButton> smartBtns = new ArrayList<>();
+    private Runnable mExceedRunnable;
+
+    private int touDevIndex, touIndex = 0;
+    private int jiaoDevIndex, jiaoIndex = 0;
+
+    private static final int MODE_NONE = 1000;
+    private static final int MODE_TV = 1001;
+    private static final int MODE_READ = 1002;
+    private static final int MODE_SLEEP = 1003;
+    private static final int MODE_RELAX = 1004;
+    private static final int MODE_YOGA = 1005;
+
+    @IntDef({MODE_NONE, MODE_TV, MODE_READ, MODE_SLEEP, MODE_RELAX, MODE_YOGA})
+    @Retention(RetentionPolicy.SOURCE)
+    @interface MODES {
+    }
+
+    @MODES
+    private int curMode = MODE_NONE;
 
     public static DeviceLiftFragment newInstance() {
         Bundle args = new Bundle();
@@ -74,9 +100,9 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
         rulerJiao = view.findViewById(R.id.ruler_jiao);
 
         seebLeftTou = view.findViewById(R.id.seeb_left_tou);
-        seebLeftTou.setMaxProgress(30);
+        seebLeftTou.setMaxProgress(MAX_TOU);
         seebLeftJiao = view.findViewById(R.id.seeb_left_jiao);
-        seebLeftJiao.setMaxProgress(25);
+        seebLeftJiao.setMaxProgress(MAX_JIAO);
 
         ivTouChuang = view.findViewById(R.id.iv_tou_chuang);
         icWeiChuang = view.findViewById(R.id.iv_wei_chuang);
@@ -98,6 +124,12 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
         mBtnYujiaMode.setOnClickListener(this);
         mBtnRelaxMode = view.findViewById(R.id.btn_relax_mode);
         mBtnRelaxMode.setOnClickListener(this);
+
+        smartBtns.add(mBtnTvMode);
+        smartBtns.add(mBtnSleepMode);
+        smartBtns.add(mBtnReadMode);
+        smartBtns.add(mBtnYujiaMode);
+        smartBtns.add(mBtnRelaxMode);
 
         //根据高度最高的床图，设置高度
         Bitmap maxHeightBed = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_head5);
@@ -124,11 +156,11 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
 
     //蓝牙数据
     private void bindViewData() {
-        int touDevIndex = mspProtocol.getHigh1() & 0xff;
-        int jiaoDevIndex = mspProtocol.getHigh4() & 0xff;
+        touDevIndex = mspProtocol.getHigh2() & 0xff;
+        jiaoDevIndex = mspProtocol.getHigh4() & 0xff;
         if (mspProtocol != null) {
-            rulerTou.setCurrentValue((int) Math.ceil(touDevIndex / 30.0f * 45.0f));
-            rulerJiao.setCurrentValue((int) Math.ceil(jiaoDevIndex / 25.0f * 30.0f));
+            rulerTou.setCurrentValue((int) Math.ceil((float) touDevIndex / MAX_TOU * 45.0f));
+            rulerJiao.setCurrentValue((int) Math.ceil((float) jiaoDevIndex / MAX_JIAO * 30.0f));
         }
         if (!isInitSeekbarVal) {
             isInitSeekbarVal = true;
@@ -137,6 +169,56 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
             chang();
         }
         //升降模式动作
+        switch (curMode) {
+            case MODE_TV:
+                //继续发送脚部升降
+                if (touDevIndex == (MAX_TOU * 15 / 20)) {
+                    BleComUtils.senddianji(BleUtils.convertDecimalToBinary(touDevIndex + "")
+                            + BleUtils.convertDecimalToBinary(MAX_JIAO * 8 / 20 + "")
+                            + BleUtils.convertDecimalToBinary(touDevIndex + "")
+                            + BleUtils.convertDecimalToBinary(MAX_JIAO * 8 / 20 + ""));
+                    curMode = MODE_NONE;
+                }
+                break;
+            case MODE_READ:
+                if (touDevIndex == (MAX_TOU * 13 / 20)) {
+                    BleComUtils.senddianji(BleUtils.convertDecimalToBinary(touDevIndex + "")
+                            + BleUtils.convertDecimalToBinary(MAX_JIAO * 8 / 20 + "")
+                            + BleUtils.convertDecimalToBinary(touDevIndex + "")
+                            + BleUtils.convertDecimalToBinary(MAX_JIAO * 8 / 20 + ""));
+                    curMode = MODE_NONE;
+                }
+                break;
+            case MODE_SLEEP:
+                if (touDevIndex == 0) {
+                    BleComUtils.senddianji(BleUtils.convertDecimalToBinary(touDevIndex + "")
+                            + BleUtils.convertDecimalToBinary(0 + "")
+                            + BleUtils.convertDecimalToBinary(touDevIndex + "")
+                            + BleUtils.convertDecimalToBinary(0 + ""));
+                    curMode = MODE_NONE;
+                }
+                break;
+            case MODE_RELAX:
+                if (touDevIndex == (MAX_TOU * 10 / 20)) {
+                    BleComUtils.senddianji(BleUtils.convertDecimalToBinary(touDevIndex + "")
+                            + BleUtils.convertDecimalToBinary(MAX_JIAO * 10 / 20 + "")
+                            + BleUtils.convertDecimalToBinary(touDevIndex + "")
+                            + BleUtils.convertDecimalToBinary(MAX_JIAO * 10 / 20 + ""));
+                    curMode = MODE_NONE;
+                }
+                break;
+            case MODE_YOGA:
+                if (touDevIndex == MAX_TOU) {
+                    BleComUtils.senddianji(BleUtils.convertDecimalToBinary(touDevIndex + "")
+                            + BleUtils.convertDecimalToBinary(MAX_JIAO + "")
+                            + BleUtils.convertDecimalToBinary(touDevIndex + "")
+                            + BleUtils.convertDecimalToBinary(MAX_JIAO + ""));
+                    curMode = MODE_NONE;
+                }
+                break;
+            case MODE_NONE:
+                break;
+        }
     }
 
     @Override
@@ -148,12 +230,12 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
     @Override
     public void onClick(View view) {
         super.onClick(view);
+        curMode = MODE_NONE;
         switch (view.getId()) {
             case R.id.iv_tou_jia:
                 if (touIndex < 30) {
                     touIndex++;
                     seebLeftTou.setProgress(touIndex);
-                    LogUtil.e("左  leftTouIndex:" + touIndex);
                 }
                 chang();
                 BleComUtils.senddianji(BleUtils.convertDecimalToBinary(touIndex + "")
@@ -166,7 +248,6 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
                 if (touIndex > 0) {
                     touIndex--;
                     seebLeftTou.setProgress(touIndex);
-                    LogUtil.e("左  leftJiaoIndex:" + touIndex);
                 }
                 chang();
                 BleComUtils.senddianji(BleUtils.convertDecimalToBinary(touIndex + "")
@@ -180,7 +261,6 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
                 if (jiaoIndex < 25) {
                     jiaoIndex++;
                     seebLeftJiao.setProgress(jiaoIndex);
-                    LogUtil.e("左  leftJiaoIndex:" + jiaoIndex);
                 }
                 chang();
                 BleComUtils.senddianji(BleUtils.convertDecimalToBinary(touIndex + "")
@@ -194,7 +274,6 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
                 if (jiaoIndex > 0) {
                     jiaoIndex--;
                     seebLeftJiao.setProgress(jiaoIndex);
-                    LogUtil.e("左  leftJiaoIndex:" + jiaoIndex);
                 }
                 chang();
                 BleComUtils.senddianji(BleUtils.convertDecimalToBinary(touIndex + "")
@@ -203,42 +282,59 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
                         + BleUtils.convertDecimalToBinary(jiaoIndex + ""));
 
                 break;
+
+            //=========一键智能==================================================================
             case R.id.btn_tv_mode:
-                soundPool.play(1, 1, 1, 0, 0, 1);
-                BleComUtils.senddianji(BleUtils.convertDecimalToBinary(18 + "")
-                        + BleUtils.convertDecimalToBinary(9 + "")
-                        + BleUtils.convertDecimalToBinary(18 + "")
-                        + BleUtils.convertDecimalToBinary(9 + ""));
+                playSound();
+                curMode = MODE_TV;
+                selectModeBtns(mBtnTvMode);
+                BleComUtils.senddianji(BleUtils.convertDecimalToBinary(MAX_TOU * 15 / 20 + "")
+                        + BleUtils.convertDecimalToBinary(jiaoDevIndex + "")
+                        + BleUtils.convertDecimalToBinary(MAX_TOU * 15 / 20 + "")
+                        + BleUtils.convertDecimalToBinary(jiaoDevIndex + ""));
                 break;
             case R.id.btn_sleep_mode:
-                soundPool.play(1, 1, 1, 0, 0, 1);
-                BleComUtils.senddianji(BleUtils.convertDecimalToBinary(1 + "")
-                        + BleUtils.convertDecimalToBinary(1 + "")
-                        + BleUtils.convertDecimalToBinary(1 + "")
-                        + BleUtils.convertDecimalToBinary(1 + ""));
+                playSound();
+                curMode = MODE_SLEEP;
+                selectModeBtns(mBtnSleepMode);
+                BleComUtils.senddianji(BleUtils.convertDecimalToBinary(0 + "")
+                        + BleUtils.convertDecimalToBinary(jiaoDevIndex + "")
+                        + BleUtils.convertDecimalToBinary(0 + "")
+                        + BleUtils.convertDecimalToBinary(jiaoDevIndex + ""));
                 break;
             case R.id.btn_read_mode:
-                soundPool.play(1, 1, 1, 0, 0, 1);
-                BleComUtils.senddianji(BleUtils.convertDecimalToBinary(16 + "")
-                        + BleUtils.convertDecimalToBinary(9 + "")
-                        + BleUtils.convertDecimalToBinary(16 + "")
-                        + BleUtils.convertDecimalToBinary(9 + ""));
+                playSound();
+                curMode = MODE_READ;
+                selectModeBtns(mBtnReadMode);
+                BleComUtils.senddianji(BleUtils.convertDecimalToBinary(MAX_TOU * 13 / 20 + "")
+                        + BleUtils.convertDecimalToBinary(jiaoDevIndex + "")
+                        + BleUtils.convertDecimalToBinary(MAX_TOU * 13 / 20 + "")
+                        + BleUtils.convertDecimalToBinary(jiaoDevIndex + ""));
                 break;
             case R.id.btn_yujia_mode:
-                soundPool.play(1, 1, 1, 0, 0, 1);
-                BleComUtils.senddianji(BleUtils.convertDecimalToBinary(17 + "")
-                        + BleUtils.convertDecimalToBinary(10 + "")
-                        + BleUtils.convertDecimalToBinary(17 + "")
-                        + BleUtils.convertDecimalToBinary(10 + ""));
+                playSound();
+                curMode = MODE_YOGA;
+                selectModeBtns(mBtnYujiaMode);
+                BleComUtils.senddianji(BleUtils.convertDecimalToBinary(MAX_TOU + "")
+                        + BleUtils.convertDecimalToBinary(jiaoDevIndex + "")
+                        + BleUtils.convertDecimalToBinary(MAX_TOU + "")
+                        + BleUtils.convertDecimalToBinary(jiaoDevIndex + ""));
                 break;
             case R.id.btn_relax_mode:
-                soundPool.play(1, 1, 1, 0, 0, 1);
-                BleComUtils.senddianji(BleUtils.convertDecimalToBinary(15 + "")
-                        + BleUtils.convertDecimalToBinary(5 + "")
-                        + BleUtils.convertDecimalToBinary(15 + "")
-                        + BleUtils.convertDecimalToBinary(5 + ""));
+                playSound();
+                curMode = MODE_RELAX;
+                selectModeBtns(mBtnRelaxMode);
+                BleComUtils.senddianji(BleUtils.convertDecimalToBinary(MAX_TOU * 10 / 20 + "")
+                        + BleUtils.convertDecimalToBinary(jiaoDevIndex + "")
+                        + BleUtils.convertDecimalToBinary(MAX_TOU * 10 / 20 + "")
+                        + BleUtils.convertDecimalToBinary(jiaoDevIndex + ""));
                 break;
         }
+    }
+
+    //播放声音
+    private void playSound() {
+        soundPool.play(1, 1, 1, 0, 0, 1);
     }
 
     //UI变化
@@ -288,6 +384,8 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
 
     @Override
     public void onStop(VerticalSeekBar slideView, int progress) {
+        curMode = MODE_NONE;
+
         if (slideView.getId() == R.id.seeb_left_tou) {
             touIndex = progress;
         } else if (slideView.getId() == R.id.seeb_left_jiao) {
@@ -298,6 +396,25 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
                 + BleUtils.convertDecimalToBinary(jiaoIndex + "")
                 + BleUtils.convertDecimalToBinary(touIndex + "")
                 + BleUtils.convertDecimalToBinary(jiaoIndex + ""));
+    }
+
+    /**
+     * 执行指令时，其他按钮不能执行命令
+     *
+     * @param curBtn 当前按钮
+     */
+    private void selectModeBtns(BorderButton curBtn) {
+        if (curBtn != null) {
+            for (BorderButton btn : smartBtns) {
+                if (btn != curBtn) {
+                    btn.setSelected(false);
+                }
+            }
+        } else {
+            for (BorderButton btn : smartBtns) {
+                btn.setSelected(true);
+            }
+        }
     }
 
     @Override

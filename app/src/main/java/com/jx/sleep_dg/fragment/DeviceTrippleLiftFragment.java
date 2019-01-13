@@ -137,9 +137,6 @@ public class DeviceTrippleLiftFragment extends BaseMainFragment implements View.
         final int touLDevIndex = mspProtocol.getHigh1() & 0xff;
         final int touRDevIndex = mspProtocol.getHigh2() & 0xff;
         final int jiaoDevIndex = mspProtocol.getHigh4() & 0xff;
-        Log.i(TAG, "bindViewData: high1=" + mspProtocol.getHigh1()
-                + ";high2=" + mspProtocol.getHigh2() + ";high3=" + mspProtocol.getHigh3()
-                + ";high4=" + mspProtocol.getHigh4());
         _mActivity.runOnUiThread(new Runnable() {
             @Override
             public void run() {

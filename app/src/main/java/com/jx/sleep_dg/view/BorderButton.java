@@ -89,8 +89,8 @@ public class BorderButton extends AppCompatButton {
         gradientDrawable.setStroke((int) strokeWidth, strokeColor);
 
         if (ltConer != 0 || rtConer != 0 || lbConer != 0 || rbConer != 0)
-            gradientDrawable.setCornerRadii(new float[]{ltConer,ltConer, rtConer,rtConer, rbConer,rbConer
-                    ,lbConer,lbConer});
+            gradientDrawable.setCornerRadii(new float[]{ltConer, ltConer, rtConer, rtConer, rbConer, rbConer
+                    , lbConer, lbConer});
         else
             gradientDrawable.setCornerRadius(currCorner);
 
@@ -128,6 +128,18 @@ public class BorderButton extends AppCompatButton {
     public void setOnClickListener(OnClickListener l) {
         super.setOnClickListener(l);
         isTouchPass = false;
+    }
+
+    @Override
+    public void setSelected(boolean selected) {
+        super.setSelected(selected);
+        if (!selected) {
+            if (gradientDrawable != null)
+                gradientDrawable.setColor(changeAlpha(normalColor, 0.5f));
+        } else {
+            if (gradientDrawable != null)
+                gradientDrawable.setColor(normalColor);
+        }
     }
 
     public boolean setColor(int action) {

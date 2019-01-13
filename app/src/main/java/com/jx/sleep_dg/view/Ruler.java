@@ -110,7 +110,7 @@ public class Ruler extends View {
 
                         String valueString = Integer.toString(position / intervalsBetweenValues * valuesInterval);
                         paint.setColor(valuesTextColor);
-                        canvas.drawText(valueString, getWidth() / 2 - paint.measureText(valueString) - dp2px(5), height, paint);
+                        canvas.drawText(valueString+"°", getWidth() / 2 - paint.measureText(valueString) - dp2px(5), height, paint);
                         paint.setColor(linesColor);
                     } else {
                         canvas.drawLine(getWidth(), height - textHeight / 4, getWidth() * 3 / 5, height - textHeight / 4, paint);
@@ -143,7 +143,7 @@ public class Ruler extends View {
 
                         String valueString = Integer.toString(position / intervalsBetweenValues * valuesInterval);
                         paint.setColor(valuesTextColor);
-                        canvas.drawText(valueString, getWidth() / 2  + dp2px(5), height, paint);
+                        canvas.drawText(valueString+"°", getWidth() / 2 , height, paint);
                         paint.setColor(linesColor);
                     } else {
                         canvas.drawLine(0, height - textHeight / 4, getWidth() * 2 / 5, height - textHeight / 4, paint);
