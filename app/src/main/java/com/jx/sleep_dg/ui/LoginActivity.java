@@ -30,7 +30,6 @@ import java.util.Locale;
 public class LoginActivity extends BaseActivity {
 
     private static final String TAG = "LoginActivity";
-    private ScrollView mScrollView;
     private RadioButton rbChSimple;
     private RadioButton rbChTradition;
     private RadioButton rbEn;
@@ -49,7 +48,7 @@ public class LoginActivity extends BaseActivity {
     public void bindView() {
         setTitleLayoutVisiable(false);
 
-        mScrollView = findViewById(R.id.scrollView);
+        ScrollView mScrollView = findViewById(R.id.scrollView);
         rbChSimple = findViewById(R.id.rb_ch_simple);
         rbChTradition = findViewById(R.id.rb_ch_tradition);
         rbEn = findViewById(R.id.rb_en);
@@ -100,8 +99,15 @@ public class LoginActivity extends BaseActivity {
                 break;
             case R.id.btn_login:
                 //登录
-                intent.setClass(this, MainActivity.class);
-                startActivity(intent);
+                switch (getApplication().getPackageName()) {
+                    case Constance.QM:
+                        intent.setClass(this, MainQmActivity.class);
+                        startActivity(intent);
+                        break;
+                    default:
+                        intent.setClass(this, MainActivity.class);
+                        break;
+                }
                 finish();
                 break;
             case R.id.rb_ch_simple:

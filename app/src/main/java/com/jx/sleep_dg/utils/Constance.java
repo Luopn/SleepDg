@@ -8,6 +8,11 @@ package com.jx.sleep_dg.utils;
 
 public class Constance {
 
+    //曲美applicationID
+    public static final String QM = "com.jx.sleep_qm";
+    //舒是applicationID
+    public static final String SF = "com.jx.sleep_sf";
+
     /**
      * 用户名
      */

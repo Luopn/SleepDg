@@ -8,9 +8,14 @@ import android.media.SoundPool;
 import android.os.Bundle;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
+import android.widget.PopupWindow;
+import android.widget.RadioGroup;
 import android.widget.ScrollView;
 
 import com.jx.sleep_dg.R;
@@ -18,7 +23,14 @@ import com.jx.sleep_dg.base.BaseMainFragment;
 import com.jx.sleep_dg.ble.BleUtils;
 import com.jx.sleep_dg.protocol.BleComUtils;
 import com.jx.sleep_dg.protocol.MSPProtocol;
-import com.jx.sleep_dg.utils.LogUtil;
+import com.jx.sleep_dg.ui.DeviceNetConfigAcyivity;
+import com.jx.sleep_dg.ui.MainQmActivity;
+import com.jx.sleep_dg.ui.SearchActivity;
+import com.jx.sleep_dg.ui.StatisticsActivity;
+import com.jx.sleep_dg.ui.UserInfoActivity;
+import com.jx.sleep_dg.utils.CommonUtil;
+import com.jx.sleep_dg.utils.Constance;
+import com.jx.sleep_dg.utils.QMUIDeviceHelper;
 import com.jx.sleep_dg.view.BorderButton;
 import com.jx.sleep_dg.view.Ruler;
 import com.jx.sleep_dg.view.bar.VerticalSeekBar;
@@ -41,6 +53,9 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
     private static final int MAX_TOU = 20;
     private static final int MAX_JIAO = 25;
 
+    private ImageView ivUserImage, ivRight, ivSwitch;
+    private RadioGroup rb_switch;
+    private PopupWindow switchPOp;
     private LinearLayout llBedContainer;
     private VerticalSeekBar seebLeftTou;
     private VerticalSeekBar seebLeftJiao;
@@ -87,6 +102,18 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
 
     @Override
     public void onBindView(View view) {
+        ivUserImage = view.findViewById(R.id.iv_user_image);
+        ivRight = view.findViewById(R.id.iv_right);
+        ivSwitch = view.findViewById(R.id.iv_switch);
+        ivUserImage.setOnClickListener(this);
+        ivRight.setOnClickListener(this);
+        ivSwitch.setOnClickListener(this);
+        if (!_mActivity.getApplication().getApplicationInfo().packageName.equals(Constance.QM)) {
+            ivUserImage.setVisibility(View.INVISIBLE);
+            ivRight.setVisibility(View.INVISIBLE);
+            ivSwitch.setVisibility(View.INVISIBLE);
+        }
+
         ScrollView mScrollView = view.findViewById(R.id.scrollView);
         OverScrollDecoratorHelper.setUpOverScroll(mScrollView);
 
@@ -232,6 +259,41 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
         super.onClick(view);
         curMode = MODE_NONE;
         switch (view.getId()) {
+            case R.id.iv_user_image:
+                startActivity(new Intent(_mActivity, UserInfoActivity.class));
+                break;
+            case R.id.iv_right:
+                Intent intent = new Intent();
+                intent.setClass(_mActivity, SearchActivity.class);
+                _mActivity.startActivity(intent);
+                break;
+            case R.id.iv_switch: {
+                View contentV = LayoutInflater.from(_mActivity).inflate(R.layout.layout_bed_lift_switch, null);
+                contentV.findViewById(R.id.lift_switch).setOnClickListener(this);
+                rb_switch = contentV.findViewById(R.id.rb_group);
+                if (switchPOp != null) {
+                    switchPOp.dismiss();
+                    switchPOp = null;
+                }
+                switchPOp = new PopupWindow(contentV, -2, -2, true);
+                switchPOp.showAsDropDown(ivSwitch);
+            }
+            break;
+            case R.id.lift_switch:
+                switch (rb_switch.getCheckedRadioButtonId()) {
+                    case R.id.lift_sel1:
+                        break;
+                    case R.id.lift_sel2:
+                        start(DeviceTrippleLiftFragment.newInstance());
+                        break;
+                    case R.id.lift_sel3:
+                        break;
+                }
+                if (switchPOp != null) {
+                    switchPOp.dismiss();
+                    switchPOp = null;
+                }
+                break;
             case R.id.iv_tou_jia:
                 if (touIndex < 30) {
                     touIndex++;
@@ -367,7 +429,6 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
         }
     }
 
-
     @Override
     public void onStart(VerticalSeekBar slideView, int progress) {
     }
@@ -399,7 +460,7 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
     }
 
     /**
-     * 执行指令时，其他按钮不能执行命令
+     * 执行指令时，其他按钮不选
      *
      * @param curBtn 当前按钮
      */

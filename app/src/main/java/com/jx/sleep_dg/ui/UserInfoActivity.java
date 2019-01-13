@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.jx.sleep_dg.R;
 import com.jx.sleep_dg.base.BaseActivity;
+import com.jx.sleep_dg.utils.Constance;
 import com.jx.sleep_dg.utils.QMUIStatusBarHelper;
 import com.jx.sleep_dg.utils.StatusBarUtil;
 
@@ -54,7 +55,17 @@ public class UserInfoActivity extends BaseActivity {
         tvCoinsTrans = findViewById(R.id.tv_coins_trans);
         tvTitleCoinsMgr = findViewById(R.id.tv_coin_mgr);
 
-        selCompany(SEL_NONE);
+        switch (getApplication().getPackageName()) {
+            case Constance.QM:
+                selCompany(SEL_QM);
+                break;
+            case Constance.SF:
+                selCompany(SEL_SF);
+                break;
+            default:
+                selCompany(SEL_NONE);
+                break;
+        }
     }
 
     @Override

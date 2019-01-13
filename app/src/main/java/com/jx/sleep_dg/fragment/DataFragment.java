@@ -22,6 +22,7 @@ import com.jx.sleep_dg.ui.SearchActivity;
 import com.jx.sleep_dg.ui.StatisticsActivity;
 import com.jx.sleep_dg.ui.UserInfoActivity;
 import com.jx.sleep_dg.utils.CommonUtil;
+import com.jx.sleep_dg.utils.Constance;
 import com.jx.sleep_dg.view.EcgView;
 import com.jx.sleep_dg.view.HuxiEcgView;
 import com.jx.sleep_dg.view.NumberRollingView;
@@ -38,11 +39,11 @@ public class DataFragment extends BaseMainFragment {
     private static final int SEARCH_DURATION = 1000;
     private static final int SEARCH_REACPEAT_COUNT = 5;
 
-    private ImageView ivMore;
+    private ImageView ivMore, ivRight, ivUserImage;
     private NumberRollingView tvSleepScore;
     private TextView tvXinlvRight, tvXinlvLeft, tvHuxiLeft, tvHuxiRight;
 
-    private ImageView ivUserImage, ivSleepProgress;
+    private ImageView ivSleepProgress;
 
     private EcgView lecgXinlv;
     private HuxiEcgView recgXinlv;
@@ -68,11 +69,17 @@ public class DataFragment extends BaseMainFragment {
     @Override
     public void onBindView(View view) {
 
-        view.findViewById(R.id.iv_right).setOnClickListener(this);
+        ivRight = view.findViewById(R.id.iv_right);
+        ivRight.setOnClickListener(this);
         ivMore = view.findViewById(R.id.iv_more);
         ivMore.setOnClickListener(this);
         ivUserImage = view.findViewById(R.id.iv_user_image);
         ivUserImage.setOnClickListener(this);
+        if (_mActivity.getApplication().getApplicationInfo().packageName.equals(Constance.QM)) {
+            ivUserImage.setVisibility(View.INVISIBLE);
+            ivRight.setVisibility(View.INVISIBLE);
+        }
+
         ivSleepProgress = view.findViewById(R.id.iv_circle_progress);
         tvSleepScore = view.findViewById(R.id.tv_sleep_score);
 
