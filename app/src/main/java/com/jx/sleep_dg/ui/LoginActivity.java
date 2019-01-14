@@ -11,8 +11,10 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.jx.sleep_dg.MyApplication;
 import com.jx.sleep_dg.R;
@@ -36,6 +38,8 @@ public class LoginActivity extends BaseActivity {
     private Button btnLogin;
     private EditText et_phone;
     private EditText et_password;
+    private ImageView ivLogin;
+    private TextView tvLogin;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,6 +65,8 @@ public class LoginActivity extends BaseActivity {
         rbChSimple.setOnClickListener(this);
         rbChTradition.setOnClickListener(this);
         rbEn.setOnClickListener(this);
+        ivLogin = findViewById(R.id.iv_login);
+        tvLogin = findViewById(R.id.tv_login);
 
         Locale locale = (Locale) PreferenceUtils.deSerialization(PreferenceUtils.getString(LanguageUtil.LANGUAGE));
         if (locale != null) {
@@ -84,6 +90,17 @@ public class LoginActivity extends BaseActivity {
         if (!TextUtils.isEmpty(password) && "1".equals(isauto)) {
             et_password.setText(password);
         }
+
+        switch (getApplication().getPackageName()) {
+            case Constance.QM:
+                ivLogin.setImageResource(R.mipmap.ic_launcher_qm);
+                tvLogin.setText(R.string.login_welcome_qm);
+                break;
+            case Constance.SF:
+                ivLogin.setImageResource(R.mipmap.ic_launcher_sf);
+                tvLogin.setText(R.string.login_welcome_sf);
+                break;
+        }
     }
 
     @Override
@@ -102,12 +119,12 @@ public class LoginActivity extends BaseActivity {
                 switch (getApplication().getPackageName()) {
                     case Constance.QM:
                         intent.setClass(this, MainQmActivity.class);
-                        startActivity(intent);
                         break;
                     default:
                         intent.setClass(this, MainActivity.class);
                         break;
                 }
+                startActivity(intent);
                 finish();
                 break;
             case R.id.rb_ch_simple:

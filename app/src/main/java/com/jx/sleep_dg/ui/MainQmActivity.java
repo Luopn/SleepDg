@@ -66,10 +66,10 @@ public class MainQmActivity extends BaseActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
-                    case R.id.action_lift:
+                    case R.id.action_hardness:
                         showHideFragment(mFragment[0]);
                         break;
-                    case R.id.action_hardness:
+                    case R.id.action_lift:
                         showHideFragment(mFragment[1]);
                         break;
                     case R.id.action_temp:
@@ -86,11 +86,11 @@ public class MainQmActivity extends BaseActivity {
             }
         });
 
-        SupportFragment firstFragment = findFragment(DeviceLiftFragment.class);
+        SupportFragment firstFragment = findFragment(DeviseHardnessFragment.class);
         if (firstFragment == null) {
 
-            mFragment[0] = DeviceLiftFragment.newInstance();
-            mFragment[1] = DeviseHardnessFragment.newInstance();
+            mFragment[0] = DeviseHardnessFragment.newInstance();
+            mFragment[1] = DeviceLiftFragment.newInstance();
             mFragment[2] = DeviceTempFragment.newInstance();
             mFragment[3] = DataFragment.newInstance();
             mFragment[4] = SettingFragment.newInstance();
@@ -103,7 +103,7 @@ public class MainQmActivity extends BaseActivity {
                     mFragment[4]);
         } else {
             mFragment[0] = firstFragment;
-            mFragment[1] = findFragment(DeviseHardnessFragment.class);
+            mFragment[1] = findFragment(DeviceLiftFragment.class);
             mFragment[2] = findFragment(DeviceTempFragment.class);
             mFragment[3] = findFragment(DataFragment.class);
             mFragment[4] = findFragment(SettingFragment.class);

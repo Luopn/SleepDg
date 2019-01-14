@@ -67,16 +67,17 @@
                 android:layout_height="60dp"
                 android:layout_centerInParent="true"
                 android:background="@android:color/transparent"
-                android:src="@mipmap/ic_launcher_qm" />
+                android:src="@mipmap/ic_launcher_login" />
 
             <TextView
+                android:id="@+id/tv_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/iv_login"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="5dp"
                 android:gravity="center"
-                android:text="@string/login_welcome_qm"
+                android:text="@string/login_welcome"
                 android:textColor="@color/colorAccent" />
         </RelativeLayout>
 

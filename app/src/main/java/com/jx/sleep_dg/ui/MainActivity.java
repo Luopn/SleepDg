@@ -24,6 +24,7 @@ import com.jx.sleep_dg.MyApplication;
 import com.jx.sleep_dg.protocol.BleComUtils;
 import com.jx.sleep_dg.utils.StatusBarUtil;
 
+import me.yokeyword.fragmentation.ISupportFragment;
 import me.yokeyword.fragmentation.SupportFragment;
 
 public class MainActivity extends BaseActivity {
@@ -34,6 +35,7 @@ public class MainActivity extends BaseActivity {
 
     public static final String KEY_FRAGMENT = "key_fragment";
     private DrawerLayout mDrawerLayout;
+    private BottomNavigationView mBottomNavigation;
 
     private SupportFragment mFragment[] = new SupportFragment[5];
 
@@ -59,11 +61,11 @@ public class MainActivity extends BaseActivity {
         NavigationView mNavigationView = findViewById(R.id.nav_view);
         mNavigationView.getHeaderView(0).findViewById(R.id.tv_user).setOnClickListener(this);
 
-        BottomNavigationView mBottomNavigation = (BottomNavigationView) findViewById(R.id.navigation);
+        mBottomNavigation = (BottomNavigationView) findViewById(R.id.navigation);
         mBottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId()){
+                switch (menuItem.getItemId()) {
                     case R.id.action_data:
                         showHideFragment(mFragment[0]);
                         break;
@@ -128,11 +130,11 @@ public class MainActivity extends BaseActivity {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-           exitConfiem();
+            exitConfiem();
         }
     }
 
-    private  void exitConfiem(){
+    private void exitConfiem() {
         if (System.currentTimeMillis() - TOUCH_TIME < WAIT_TIME) {
             super.onBackPressedSupport();
             MyApplication.getInstance().extiApp();

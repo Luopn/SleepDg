@@ -2,16 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_lift"
-        android:enabled="true"
-        android:icon="@mipmap/controlmattress"
-        android:title="@string/lift_ctrl_title"
-        app:showAsAction="ifRoom" />
-    <item
         android:id="@+id/action_hardness"
         android:enabled="true"
         android:icon="@mipmap/mattress"
         android:title="@string/hardness_title"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_lift"
+        android:enabled="true"
+        android:icon="@mipmap/controlmattress"
+        android:title="@string/lift_ctrl_title"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_temp"

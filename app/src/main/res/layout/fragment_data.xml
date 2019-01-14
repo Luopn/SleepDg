@@ -63,182 +63,176 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/color_bg"
-                app:contentScrim="@color/colorPrimaryDark"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+                app:contentScrim="@color/colorPrimary"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|enterAlwaysCollapsed">
 
-                <LinearLayout
+                <!--圆环-->
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingTop="16dp"
                     app:layout_collapseMode="parallax"
                     app:layout_collapseParallaxMultiplier="0.7">
 
-                    <!--圆环-->
-                    <FrameLayout
+                    <ImageView
+                        android:id="@+id/iv_circle_progress"
                         android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:layout_gravity="center_horizontal"
-                        android:paddingTop="16dp"
-                        android:paddingBottom="16dp">
+                        android:layout_height="match_parent"
+                        android:src="@mipmap/ic_progress" />
 
-                        <ImageView
-                            android:id="@+id/iv_circle_progress"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:src="@mipmap/ic_progress" />
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/sleep_score"
-                                android:textColor="@color/textTitleColor"
-                                android:textSize="@dimen/textSize_10" />
-
-                            <com.jx.sleep_dg.view.NumberRollingView
-                                android:id="@+id/tv_sleep_score"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="0"
-                                android:textColor="@color/textAccentColor"
-                                android:textSize="44dp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/sleep_total"
-                                android:textColor="@color/textTitleColor"
-                                android:textSize="@dimen/textSize_10" />
-                        </LinearLayout>
-                    </FrameLayout>
-
-                    <!--数据-->
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/sleep_score"
+                            android:textColor="@color/textTitleColor"
+                            android:textSize="@dimen/textSize_10" />
+
+                        <com.jx.sleep_dg.view.NumberRollingView
+                            android:id="@+id/tv_sleep_score"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textColor="@color/textAccentColor"
+                            android:textSize="44dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/sleep_total"
+                            android:textColor="@color/textTitleColor"
+                            android:textSize="@dimen/textSize_10" />
+                    </LinearLayout>
+                </FrameLayout>
+                <!--数据-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="200dp"
+                    android:background="@color/color_bg"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    app:layout_collapseMode="pin">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:gravity="center_horizontal"
-                        android:orientation="horizontal"
-                        android:paddingBottom="16dp">
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                        <LinearLayout
-                            android:layout_width="0dp"
+                        <TextView
+                            android:id="@+id/tv_title_deep_sleep"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
+                            android:drawableLeft="@mipmap/ic_circle_gray"
+                            android:drawablePadding="5dp"
+                            android:drawableTint="@color/mediumblue"
+                            android:gravity="center_vertical"
+                            android:text="@string/sleep_deep"
+                            android:textColor="@color/textTitleColor"
+                            android:textSize="9dp" />
 
-                            <TextView
-                                android:id="@+id/tv_title_deep_sleep"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:drawableLeft="@mipmap/ic_circle_gray"
-                                android:drawablePadding="5dp"
-                                android:drawableTint="@color/mediumblue"
-                                android:gravity="center_vertical"
-                                android:text="@string/sleep_deep"
-                                android:textColor="@color/textTitleColor"
-                                android:textSize="9dp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5dp"
-                                android:text="1小时59分"
-                                android:textColor="@color/textTitleColor"
-                                android:textSize="9dp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
+                            android:layout_marginTop="5dp"
+                            android:text="1小时59分"
+                            android:textColor="@color/textTitleColor"
+                            android:textSize="9dp" />
+                    </LinearLayout>
 
-                            <TextView
-                                android:id="@+id/tv_title_shallow_sleep"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:drawableLeft="@mipmap/ic_circle_gray"
-                                android:drawablePadding="5dp"
-                                android:drawableTint="@color/textAccentColor"
-                                android:gravity="center_vertical"
-                                android:text="@string/sleep_shallow"
-                                android:textColor="@color/textTitleColor"
-                                android:textSize="9dp" />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5dp"
-                                android:text="1小时59分"
-                                android:textColor="@color/textTitleColor"
-                                android:textSize="9dp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
+                        <TextView
+                            android:id="@+id/tv_title_shallow_sleep"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
+                            android:drawableLeft="@mipmap/ic_circle_gray"
+                            android:drawablePadding="5dp"
+                            android:drawableTint="@color/textAccentColor"
+                            android:gravity="center_vertical"
+                            android:text="@string/sleep_shallow"
+                            android:textColor="@color/textTitleColor"
+                            android:textSize="9dp" />
 
-                            <TextView
-                                android:id="@+id/tv_title_clear_sleep"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:drawableLeft="@mipmap/ic_circle_gray"
-                                android:drawablePadding="5dp"
-                                android:drawableTint="@color/default_blue_light"
-                                android:gravity="center_vertical"
-                                android:text="@string/sleep_clear"
-                                android:textColor="@color/textTitleColor"
-                                android:textSize="9dp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5dp"
-                                android:text="1小时59分"
-                                android:textColor="@color/textTitleColor"
-                                android:textSize="9dp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
+                            android:layout_marginTop="5dp"
+                            android:text="1小时59分"
+                            android:textColor="@color/textTitleColor"
+                            android:textSize="9dp" />
+                    </LinearLayout>
 
-                            <TextView
-                                android:id="@+id/tv_title_time_sleep"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:drawableLeft="@mipmap/ic_circle_gray"
-                                android:drawablePadding="5dp"
-                                android:drawableTint="@color/textTitleColor"
-                                android:gravity="center_vertical"
-                                android:text="@string/sleep_time"
-                                android:textColor="@color/textTitleColor"
-                                android:textSize="9dp" />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5dp"
-                                android:text="AM23:59分"
-                                android:textColor="@color/textTitleColor"
-                                android:textSize="9dp" />
-                        </LinearLayout>
+                        <TextView
+                            android:id="@+id/tv_title_clear_sleep"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@mipmap/ic_circle_gray"
+                            android:drawablePadding="5dp"
+                            android:drawableTint="@color/default_blue_light"
+                            android:gravity="center_vertical"
+                            android:text="@string/sleep_clear"
+                            android:textColor="@color/textTitleColor"
+                            android:textSize="9dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="1小时59分"
+                            android:textColor="@color/textTitleColor"
+                            android:textSize="9dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_title_time_sleep"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@mipmap/ic_circle_gray"
+                            android:drawablePadding="5dp"
+                            android:drawableTint="@color/textTitleColor"
+                            android:gravity="center_vertical"
+                            android:text="@string/sleep_time"
+                            android:textColor="@color/textTitleColor"
+                            android:textSize="9dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="AM23:59分"
+                            android:textColor="@color/textTitleColor"
+                            android:textSize="9dp" />
                     </LinearLayout>
                 </LinearLayout>
             </android.support.design.widget.CollapsingToolbarLayout>

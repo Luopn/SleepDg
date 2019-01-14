@@ -98,7 +98,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginTop="5dp"
-                                android:text="1积分=1元"
+                                android:text="1币=1元"
                                 android:textColor="@android:color/white"
                                 android:textSize="10sp" />
                         </LinearLayout>

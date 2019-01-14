@@ -131,11 +131,11 @@
     <string name="gauge_write">填入信息</string>
 
     <!--个人中心-->
-    <string name="user_def_username_sf">舒是1</string>
+    <string name="user_def_username_sf">昵称：舒是1</string>
     <string name="user_coin_sf">舒是币：100</string>
     <string name="user_coin_mgr_sf">舒是币管理</string>
 
-    <string name="user_def_username_qm">曲美1</string>
+    <string name="user_def_username_qm">昵称：曲美1</string>
     <string name="user_coin_qm">曲美币：100</string>
     <string name="user_coin_mgr_qm">曲美币管理</string>
 </resources>

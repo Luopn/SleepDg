@@ -328,13 +328,21 @@ public class VerticalSeekBar extends View {
         return progress;
     }
 
-    @Override
-    protected void onDetachedFromWindow() {
-        if (mThumb != null) {
-            mThumb.recycle();
-        }
-        super.onDetachedFromWindow();
-    }
+//    @Override
+//    protected void onAttachedToWindow() {
+//        super.onAttachedToWindow();
+//        if (mThumb != null && mThumb.isRecycled()) {
+//            mThumb = BitmapFactory.decodeResource(getResources(), id);
+//        }
+//    }
+//
+//    @Override
+//    protected void onDetachedFromWindow() {
+//        if (mThumb != null) {
+//            mThumb.recycle();
+//        }
+//        super.onDetachedFromWindow();
+//    }
 
 
     public void setMaxProgress(int maxProgress) {

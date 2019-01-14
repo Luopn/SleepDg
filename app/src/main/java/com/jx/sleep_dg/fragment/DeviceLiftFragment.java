@@ -111,7 +111,6 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
         if (!_mActivity.getApplication().getApplicationInfo().packageName.equals(Constance.QM)) {
             ivUserImage.setVisibility(View.INVISIBLE);
             ivRight.setVisibility(View.INVISIBLE);
-            ivSwitch.setVisibility(View.INVISIBLE);
         }
 
         ScrollView mScrollView = view.findViewById(R.id.scrollView);
