@@ -286,19 +286,58 @@
     </ScrollView>
 
     <!--Toolbar-->
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimaryDark"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 
+        <ImageView
+            android:id="@+id/iv_user_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:padding="5dp"
+            android:src="@mipmap/tx_min" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:text="@string/hardness"
             android:textColor="@color/textTitleColor"
             android:textSize="@dimen/textSize_18" />
-    </FrameLayout>
+
+        <ImageView
+            android:id="@+id/iv_wifi"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_toLeftOf="@id/iv_ble"
+            android:layout_centerVertical="true"
+            android:padding="5dp"
+            android:scaleType="centerInside"
+            android:src="@mipmap/ic_wifi" />
+
+        <ImageView
+            android:id="@+id/iv_ble"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_toLeftOf="@id/iv_more"
+            android:layout_centerVertical="true"
+            android:padding="8dp"
+            android:scaleType="centerInside"
+            android:src="@mipmap/ic_ble" />
+
+        <ImageView
+            android:id="@+id/iv_more"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="8dp"
+            android:scaleType="centerInside"
+            android:src="@mipmap/ic_more" />
+    </RelativeLayout>
 </FrameLayout>

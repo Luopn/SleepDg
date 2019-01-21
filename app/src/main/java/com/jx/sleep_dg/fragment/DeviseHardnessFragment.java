@@ -4,12 +4,14 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -18,6 +20,11 @@ import com.jx.sleep_dg.base.BaseMainFragment;
 import com.jx.sleep_dg.ble.BleUtils;
 import com.jx.sleep_dg.protocol.BleComUtils;
 import com.jx.sleep_dg.protocol.MSPProtocol;
+import com.jx.sleep_dg.ui.DeviceNetConfigAcyivity;
+import com.jx.sleep_dg.ui.SearchActivity;
+import com.jx.sleep_dg.ui.StatisticsActivity;
+import com.jx.sleep_dg.ui.UserInfoActivity;
+import com.jx.sleep_dg.utils.Constance;
 import com.jx.sleep_dg.utils.LogUtil;
 import com.jx.sleep_dg.view.BorderButton;
 import com.jx.sleep_dg.view.bar.MySeekBar;
@@ -37,13 +44,13 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
     private MySeekBar rightSeekbar;
 
     private TextView tvCurL, tvCurR;
-
+    private ImageView ivUserImage, ivBle, ivWiFi, ivMore;
     private ImageView ivLAdd, ivLDecrease;
     private ImageView ivRAdd, ivRDecrease;
 
     private BorderButton tvLCurHardless;
     private BorderButton tvRCurHardness;
-    private LinearLayout llChongqiL,llChongqiR;
+    private LinearLayout llChongqiL, llChongqiR;
 
     private int rightIndex = 1;
     private int leftIndex = 1;
@@ -83,6 +90,22 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
     public void bindView(View view) {
         ScrollView mScrollView = view.findViewById(R.id.scrollView);
         OverScrollDecoratorHelper.setUpOverScroll(mScrollView);
+
+        ivUserImage = view.findViewById(R.id.iv_user_image);
+        ivBle = view.findViewById(R.id.iv_ble);
+        ivMore = view.findViewById(R.id.iv_more);
+        ivWiFi = view.findViewById(R.id.iv_wifi);
+        if (!_mActivity.getApplication().getApplicationInfo().packageName.equals(Constance.QM)) {
+            ivUserImage.setVisibility(View.INVISIBLE);
+            ivBle.setVisibility(View.INVISIBLE);
+            ivMore.setVisibility(View.INVISIBLE);
+            ivWiFi.setVisibility(View.INVISIBLE);
+        }
+        ivUserImage.setOnClickListener(this);
+        ivBle.setOnClickListener(this);
+        ivMore.setOnClickListener(this);
+        ivWiFi.setOnClickListener(this);
+
         tvLCurHardless = view.findViewById(R.id.tv_lcur_hardless);
         tvRCurHardness = view.findViewById(R.id.tv_rcur_hardness);
 
@@ -159,6 +182,35 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
     public void onClick(View view) {
         super.onClick(view);
         switch (view.getId()) {
+            case R.id.iv_user_image:
+                _mActivity.startActivity(new Intent(_mActivity, UserInfoActivity.class));
+                break;
+            case R.id.iv_more:
+                PopupMenu menu = new PopupMenu(_mActivity, ivMore);
+                menu.getMenuInflater().inflate(R.menu.menu_more, menu.getMenu());
+                menu.getMenu().getItem(1).setVisible(false);
+                menu.show();
+                menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        Intent intent = new Intent();
+                        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        switch (item.getItemId()) {
+                            case R.id.action_sleep_statistic:
+                                intent.setClass(_mActivity, StatisticsActivity.class);
+                                _mActivity.startActivity(intent);
+                                break;
+                        }
+                        return true;
+                    }
+                });
+                break;
+            case R.id.iv_ble:
+                _mActivity.startActivity(new Intent(_mActivity, SearchActivity.class));
+                break;
+            case R.id.iv_wifi:
+                _mActivity.startActivity(new Intent(_mActivity, DeviceNetConfigAcyivity.class));
+                break;
             case R.id.iv_jian_l:
                 if (leftIndex > 1) {
                     leftIndex--;
@@ -201,9 +253,9 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
         alphaAnimation.setInterpolator(new LinearInterpolator());
         alphaAnimation.setRepeatCount(2);
         alphaAnimation.setRepeatMode(Animation.REVERSE);
-        if(isLeft) {
+        if (isLeft) {
             llChongqiL.startAnimation(alphaAnimation);
-        }else{
+        } else {
             llChongqiR.startAnimation(alphaAnimation);
         }
     }

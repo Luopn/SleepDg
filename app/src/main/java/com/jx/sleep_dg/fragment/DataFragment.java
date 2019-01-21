@@ -78,6 +78,7 @@ public class DataFragment extends BaseMainFragment {
         if (_mActivity.getApplication().getApplicationInfo().packageName.equals(Constance.QM)) {
             ivUserImage.setVisibility(View.INVISIBLE);
             ivRight.setVisibility(View.INVISIBLE);
+            ivMore.setVisibility(View.INVISIBLE);
         }
 
         ivSleepProgress = view.findViewById(R.id.iv_circle_progress);

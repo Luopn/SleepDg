@@ -8,7 +8,6 @@
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
         android:fillViewport="true"
         android:overScrollMode="never">
 
@@ -430,46 +429,4 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
-    <!--Toolbar-->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimaryDark"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
-
-        <ImageView
-            android:id="@+id/iv_user_image"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_centerVertical="true"
-            android:padding="5dp"
-            android:src="@mipmap/tx_min" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/lift_ctrl"
-            android:textColor="@color/textTitleColor"
-            android:textSize="@dimen/textSize_18" />
-
-        <ImageView
-            android:id="@+id/iv_right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="16dp"
-            android:layout_toLeftOf="@+id/iv_switch"
-            android:background="@mipmap/ic_hardware" />
-
-        <ImageView
-            android:id="@+id/iv_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:background="@mipmap/ic_swicth" />
-    </RelativeLayout>
 </FrameLayout>

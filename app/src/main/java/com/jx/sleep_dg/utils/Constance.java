@@ -13,59 +13,19 @@ public class Constance {
     //舒是applicationID
     public static final String SF = "com.jx.sleep_sf";
 
-    /**
-     * 用户名
-     */
+   // 用户名
     public static final String USERNAME = "username";
 
     /**
      * 密码
      */
     public static final String PASSWORD = "password";
-
-    /**
-     * address
-     */
-    public static final String ADDRESS = "ADRESS";
-
-    /**
-     * 设备名称
-     */
-    public static final String BLE_NAME = "ble_name";
-
-    /**
-     * 设备ID
-     */
-    public static final String BLE_ID = "ble_id";
-
-    /**
-     * TOKEN
-     */
-    public static final String TOKEN = "ID";
-    /**
-     * 是否
-     */
-    public static final String ISAUTO = "ISAUTO";
-    /**
-     * 主体设置
-     */
-    public static final String THEME = "THEME";
-    /**
-     * 防丢开关
-     */
-    public static final String ISOPENDIU = "ISOPEN";
-
-    /**
-     * 米
-     */
-    public static final String MINITER = "miniter";
-    /**
-     *Mac
-     */
+    //Mac
     public static final String MAC = "Mac";
-
     //自动补气的时
     public static final String KEY_INFLATION_HOUR = "com.yunzhimian.inflation_hour";
     //自动补气的分
     public static final String KEY_INFLATION_MINUTE = "com.yunzhimian.inflation_minute";
+    //
+    public static final String KEY_LIFT_SELECT = "com.yunzhimian.lift_select";
 }

@@ -1,18 +1,14 @@
 package com.jx.sleep_dg.fragment;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -36,7 +32,7 @@ import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 /**
  * 设备升降
  */
-public class DeviceTrippleLiftFragment extends BaseMainFragment implements View.OnClickListener, VerticalSeekBar.SlideChangeListener {
+public class DeviceLiftTrippleFragment extends BaseMainFragment implements View.OnClickListener, VerticalSeekBar.SlideChangeListener {
 
     private static final String TAG = "DeviceTrippleLiftFragme";
 
@@ -49,9 +45,6 @@ public class DeviceTrippleLiftFragment extends BaseMainFragment implements View.
 
     private AnimationDrawable animationDrawableL, animationDrawableR, animationDrawableC;
 
-    private ImageView ivUserImage, ivRight, ivSwitch;
-    private RadioGroup rb_switch;
-    private PopupWindow switchPOp;
     private VerticalSeekBar seebLeftTou;
     private VerticalSeekBar seebJiao;
     private VerticalSeekBar seebRightTou;
@@ -67,9 +60,9 @@ public class DeviceTrippleLiftFragment extends BaseMainFragment implements View.
     private int touRIndex = 0;
     private int jiaoIndex = 0;
 
-    public static DeviceTrippleLiftFragment newInstance() {
+    public static DeviceLiftTrippleFragment newInstance() {
         Bundle args = new Bundle();
-        DeviceTrippleLiftFragment fragment = new DeviceTrippleLiftFragment();
+        DeviceLiftTrippleFragment fragment = new DeviceLiftTrippleFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -81,17 +74,6 @@ public class DeviceTrippleLiftFragment extends BaseMainFragment implements View.
 
     @Override
     public void onBindView(View view) {
-        ivUserImage = view.findViewById(R.id.iv_user_image);
-        ivRight = view.findViewById(R.id.iv_right);
-        ivSwitch = view.findViewById(R.id.iv_switch);
-        ivUserImage.setOnClickListener(this);
-        ivRight.setOnClickListener(this);
-        ivSwitch.setOnClickListener(this);
-        if (!_mActivity.getApplication().getApplicationInfo().packageName.equals(Constance.QM)) {
-            ivUserImage.setVisibility(View.INVISIBLE);
-            ivRight.setVisibility(View.INVISIBLE);
-        }
-
         ScrollView mScrollView = view.findViewById(R.id.scrollView);
         OverScrollDecoratorHelper.setUpOverScroll(mScrollView);
 
@@ -193,34 +175,6 @@ public class DeviceTrippleLiftFragment extends BaseMainFragment implements View.
                 Intent intent = new Intent();
                 intent.setClass(_mActivity, SearchActivity.class);
                 _mActivity.startActivity(intent);
-                break;
-            case R.id.iv_switch: {
-                View contentV = LayoutInflater.from(_mActivity).inflate(R.layout.layout_bed_lift_switch, null);
-                ((RadioButton) contentV.findViewById(R.id.lift_sel2)).setChecked(true);
-                contentV.findViewById(R.id.lift_switch).setOnClickListener(this);
-                rb_switch = contentV.findViewById(R.id.rb_group);
-                if (switchPOp != null) {
-                    switchPOp.dismiss();
-                    switchPOp = null;
-                }
-                switchPOp = new PopupWindow(contentV, -2, -2, true);
-                switchPOp.showAsDropDown(ivSwitch);
-            }
-            break;
-            case R.id.lift_switch:
-                switch (rb_switch.getCheckedRadioButtonId()) {
-                    case R.id.lift_sel1:
-                        pop();
-                        break;
-                    case R.id.lift_sel2:
-                        break;
-                    case R.id.lift_sel3:
-                        break;
-                }
-                if (switchPOp != null) {
-                    switchPOp.dismiss();
-                    switchPOp = null;
-                }
                 break;
             case R.id.iv_tou_jia_l:
                 if (touLIndex < MAX_TOU) {

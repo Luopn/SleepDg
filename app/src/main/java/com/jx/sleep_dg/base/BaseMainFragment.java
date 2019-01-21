@@ -9,7 +9,9 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.jx.sleep_dg.R;
 import com.jx.sleep_dg.ble.BluetoothLeService;
 
 import me.yokeyword.fragmentation.SupportFragment;
@@ -20,6 +22,10 @@ import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
  */
 
 public abstract class BaseMainFragment extends SupportFragment implements View.OnClickListener {
+
+    // 再点一次退出程序时间设置
+    private static final long WAIT_TIME = 2000L;
+    private long TOUCH_TIME = 0;
 
     private BroadcastReceiver receiver;//接收蓝牙广播
 
@@ -96,5 +102,19 @@ public abstract class BaseMainFragment extends SupportFragment implements View.O
         intentFilter.addAction(BluetoothLeService.EXTRA_DATA);
         intentFilter.addAction(BluetoothLeService.ACTION_DATA_AVAILABLE);
         return intentFilter;
+    }
+
+    /**
+     * 处理回退事件
+     */
+    @Override
+    public boolean onBackPressedSupport() {
+        if (System.currentTimeMillis() - TOUCH_TIME < WAIT_TIME) {
+            _mActivity.finish();
+        } else {
+            TOUCH_TIME = System.currentTimeMillis();
+            Toast.makeText(_mActivity, R.string.press_again_exit, Toast.LENGTH_SHORT).show();
+        }
+        return true;
     }
 }

@@ -31,7 +31,6 @@ import java.util.Locale;
 
 public class LoginActivity extends BaseActivity {
 
-    private static final String TAG = "LoginActivity";
     private RadioButton rbChSimple;
     private RadioButton rbChTradition;
     private RadioButton rbEn;
@@ -86,10 +85,6 @@ public class LoginActivity extends BaseActivity {
         if (!TextUtils.isEmpty(username)) {
             et_phone.setText(username);
         }
-        String isauto = PreferenceUtils.getString(Constance.ISAUTO);
-        if (!TextUtils.isEmpty(password) && "1".equals(isauto)) {
-            et_password.setText(password);
-        }
 
         switch (getApplication().getPackageName()) {
             case Constance.QM:
@@ -116,14 +111,7 @@ public class LoginActivity extends BaseActivity {
                 break;
             case R.id.btn_login:
                 //登录
-                switch (getApplication().getPackageName()) {
-                    case Constance.QM:
-                        intent.setClass(this, MainQmActivity.class);
-                        break;
-                    default:
-                        intent.setClass(this, MainActivity.class);
-                        break;
-                }
+                intent.setClass(this, MainActivity.class);
                 startActivity(intent);
                 finish();
                 break;
