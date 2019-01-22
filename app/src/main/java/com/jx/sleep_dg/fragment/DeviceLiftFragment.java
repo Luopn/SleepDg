@@ -55,7 +55,6 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
     private BorderButton mBtnYujiaMode;
     private BorderButton mBtnRelaxMode;
     private ArrayList<BorderButton> smartBtns = new ArrayList<>();
-    private Runnable mExceedRunnable;
 
     private int touDevIndex, touIndex = 0;
     private int jiaoDevIndex, jiaoIndex = 0;

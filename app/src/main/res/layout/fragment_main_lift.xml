@@ -23,13 +23,6 @@
             android:textColor="@color/textTitleColor"
             android:textSize="@dimen/textSize_18" />
 
-        <ImageView
-            android:id="@+id/iv_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:background="@mipmap/ic_swicth" />
     </RelativeLayout>
 
     <LinearLayout
@@ -38,6 +31,13 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/textAccentColor"
+            android:text="床型选择"/>
 
         <RadioGroup
             android:id="@+id/rb_group"
@@ -57,8 +57,8 @@
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:checked="true"
-                android:drawableLeft="@mipmap/ic_switch_lift_twice"
-                android:drawablePadding="10dp"
+                android:button="@null"
+                android:drawableTop="@drawable/sel_bed_lift_twice"
                 android:textColor="@color/textAccentColor" />
 
             <RadioButton
@@ -66,22 +66,22 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:button="@null"
                 android:background="@android:color/transparent"
-                android:drawableLeft="@mipmap/ic_switch_lift_tripple"
-                android:drawablePadding="10dp"
-                android:textColor="@color/textAccentColor" />
-
-            <RadioButton
-                android:id="@+id/lift_sel3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:drawableLeft="@mipmap/ic_switch_lift_fourth"
-                android:drawablePadding="10dp"
-                android:enabled="false"
+                android:drawableTop="@drawable/sel_bed_lift_tripple"
                 android:textColor="@color/textAccentColor" />
         </RadioGroup>
+
+        <com.jx.sleep_dg.view.BorderButton
+            android:id="@+id/btn_ok"
+            android:layout_width="70dp"
+            android:layout_height="24dp"
+            android:layout_marginRight="10dp"
+            android:text="@android:string/ok"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
+            app:corner="12dp"
+            app:normal_color="@color/textAccentColor" />
     </LinearLayout>
 
     <!--内容-->

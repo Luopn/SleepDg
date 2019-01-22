@@ -26,54 +26,10 @@
                 android:layout_marginTop="30dp">
 
                 <ImageView
+                    android:id="@+id/iv_hardness"
                     android:layout_width="200dp"
                     android:layout_height="120dp"
                     android:background="@mipmap/pic_bed" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|center_horizontal"
-                    android:layout_marginBottom="24dp"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:id="@+id/ll_chongqi_l"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@mipmap/up_left" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="15dp"
-                            android:background="@mipmap/uo_right" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/ll_chongqi_r"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:background="@mipmap/up_left" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="15dp"
-                            android:background="@mipmap/uo_right" />
-                    </LinearLayout>
-
-                </LinearLayout>
             </FrameLayout>
 
             <LinearLayout
@@ -314,8 +270,8 @@
             android:id="@+id/iv_wifi"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:layout_toLeftOf="@id/iv_ble"
             android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/iv_ble"
             android:padding="5dp"
             android:scaleType="centerInside"
             android:src="@mipmap/ic_wifi" />
@@ -324,20 +280,10 @@
             android:id="@+id/iv_ble"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:layout_toLeftOf="@id/iv_more"
-            android:layout_centerVertical="true"
-            android:padding="8dp"
-            android:scaleType="centerInside"
-            android:src="@mipmap/ic_ble" />
-
-        <ImageView
-            android:id="@+id/iv_more"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:padding="8dp"
             android:scaleType="centerInside"
-            android:src="@mipmap/ic_more" />
+            android:src="@mipmap/ic_ble" />
     </RelativeLayout>
 </FrameLayout>

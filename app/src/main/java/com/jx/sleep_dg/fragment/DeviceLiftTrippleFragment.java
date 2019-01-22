@@ -5,13 +5,10 @@ import android.graphics.drawable.AnimationDrawable;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.ScrollView;
 
 import com.jx.sleep_dg.R;
@@ -21,7 +18,6 @@ import com.jx.sleep_dg.protocol.BleComUtils;
 import com.jx.sleep_dg.protocol.MSPProtocol;
 import com.jx.sleep_dg.ui.SearchActivity;
 import com.jx.sleep_dg.ui.UserInfoActivity;
-import com.jx.sleep_dg.utils.Constance;
 import com.jx.sleep_dg.utils.LogUtil;
 import com.jx.sleep_dg.view.BorderButton;
 import com.jx.sleep_dg.view.Ruler;
@@ -44,6 +40,7 @@ public class DeviceLiftTrippleFragment extends BaseMainFragment implements View.
     private SoundPool soundPool;
 
     private AnimationDrawable animationDrawableL, animationDrawableR, animationDrawableC;
+    private CountDownTimer countDownTimer;
 
     private VerticalSeekBar seebLeftTou;
     private VerticalSeekBar seebJiao;
@@ -171,7 +168,7 @@ public class DeviceLiftTrippleFragment extends BaseMainFragment implements View.
             case R.id.iv_user_image:
                 startActivity(new Intent(_mActivity, UserInfoActivity.class));
                 break;
-            case R.id.iv_right:
+            case R.id.iv_ble:
                 Intent intent = new Intent();
                 intent.setClass(_mActivity, SearchActivity.class);
                 _mActivity.startActivity(intent);
@@ -299,6 +296,7 @@ public class DeviceLiftTrippleFragment extends BaseMainFragment implements View.
         ivChuang.setImageResource(R.drawable.anim_lift_headl);
         animationDrawableL = (AnimationDrawable) ivChuang.getDrawable();
         animationDrawableL.start();
+        stopShan();
     }
 
     //右边头高度变化
@@ -306,6 +304,7 @@ public class DeviceLiftTrippleFragment extends BaseMainFragment implements View.
         ivChuang.setImageResource(R.drawable.anim_lift_headr);
         animationDrawableR = (AnimationDrawable) ivChuang.getDrawable();
         animationDrawableR.start();
+        stopShan();
     }
 
     //脚高度变化
@@ -313,6 +312,28 @@ public class DeviceLiftTrippleFragment extends BaseMainFragment implements View.
         ivChuang.setImageResource(R.drawable.anim_lift_headc);
         animationDrawableC = (AnimationDrawable) ivChuang.getDrawable();
         animationDrawableC.start();
+        stopShan();
+    }
+
+    //一段时间后停止闪烁
+    private void stopShan() {
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
+            countDownTimer = null;
+        }
+        countDownTimer = new CountDownTimer(2000, 1000) {
+            @Override
+            public void onTick(long l) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                ivChuang.setImageResource(R.mipmap.ic_lift_0);
+                countDownTimer.cancel();
+            }
+        };
+        countDownTimer.start();
     }
 
     @Override

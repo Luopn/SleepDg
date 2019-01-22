@@ -2,7 +2,9 @@ package com.jx.sleep_dg.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.view.MenuItem;
 import android.view.View;
@@ -43,14 +45,17 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
     private MySeekBar leftSeekbar;
     private MySeekBar rightSeekbar;
 
+    private ImageView ivHardness;
     private TextView tvCurL, tvCurR;
-    private ImageView ivUserImage, ivBle, ivWiFi, ivMore;
+    private ImageView ivUserImage, ivBle, ivWiFi;
     private ImageView ivLAdd, ivLDecrease;
     private ImageView ivRAdd, ivRDecrease;
 
     private BorderButton tvLCurHardless;
     private BorderButton tvRCurHardness;
-    private LinearLayout llChongqiL, llChongqiR;
+
+    private AnimationDrawable animationDrawableL, animationDrawableR;
+    private CountDownTimer countDownTimer;
 
     private int rightIndex = 1;
     private int leftIndex = 1;
@@ -91,19 +96,17 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
         ScrollView mScrollView = view.findViewById(R.id.scrollView);
         OverScrollDecoratorHelper.setUpOverScroll(mScrollView);
 
+        ivHardness = view.findViewById(R.id.iv_hardness);
         ivUserImage = view.findViewById(R.id.iv_user_image);
         ivBle = view.findViewById(R.id.iv_ble);
-        ivMore = view.findViewById(R.id.iv_more);
         ivWiFi = view.findViewById(R.id.iv_wifi);
         if (!_mActivity.getApplication().getApplicationInfo().packageName.equals(Constance.QM)) {
             ivUserImage.setVisibility(View.INVISIBLE);
             ivBle.setVisibility(View.INVISIBLE);
-            ivMore.setVisibility(View.INVISIBLE);
             ivWiFi.setVisibility(View.INVISIBLE);
         }
         ivUserImage.setOnClickListener(this);
         ivBle.setOnClickListener(this);
-        ivMore.setOnClickListener(this);
         ivWiFi.setOnClickListener(this);
 
         tvLCurHardless = view.findViewById(R.id.tv_lcur_hardless);
@@ -112,8 +115,6 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
         tvCurL = view.findViewById(R.id.tv_cur_l);
         tvCurR = view.findViewById(R.id.tv_cur_r);
 
-        llChongqiL = view.findViewById(R.id.ll_chongqi_l);
-        llChongqiR = view.findViewById(R.id.ll_chongqi_r);
         ivLAdd = view.findViewById(R.id.iv_jia_l);
         ivLDecrease = view.findViewById(R.id.iv_jian_l);
         ivRAdd = view.findViewById(R.id.iv_jia_r);
@@ -185,26 +186,6 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
             case R.id.iv_user_image:
                 _mActivity.startActivity(new Intent(_mActivity, UserInfoActivity.class));
                 break;
-            case R.id.iv_more:
-                PopupMenu menu = new PopupMenu(_mActivity, ivMore);
-                menu.getMenuInflater().inflate(R.menu.menu_more, menu.getMenu());
-                menu.getMenu().getItem(1).setVisible(false);
-                menu.show();
-                menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        Intent intent = new Intent();
-                        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                        switch (item.getItemId()) {
-                            case R.id.action_sleep_statistic:
-                                intent.setClass(_mActivity, StatisticsActivity.class);
-                                _mActivity.startActivity(intent);
-                                break;
-                        }
-                        return true;
-                    }
-                });
-                break;
             case R.id.iv_ble:
                 _mActivity.startActivity(new Intent(_mActivity, SearchActivity.class));
                 break;
@@ -248,15 +229,46 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
     }
 
     private void shanshuo(boolean isLeft) {
-        Animation alphaAnimation = new AlphaAnimation(1, 0.1f);
-        alphaAnimation.setDuration(1000);
-        alphaAnimation.setInterpolator(new LinearInterpolator());
-        alphaAnimation.setRepeatCount(2);
-        alphaAnimation.setRepeatMode(Animation.REVERSE);
         if (isLeft) {
-            llChongqiL.startAnimation(alphaAnimation);
+            onLHardness();
         } else {
-            llChongqiR.startAnimation(alphaAnimation);
+            onRHardness();
         }
+        stopShan();
+    }
+
+    //左边软硬变化
+    private void onLHardness() {
+        ivHardness.setImageResource(R.drawable.anim_hardness_l);
+        animationDrawableL = (AnimationDrawable) ivHardness.getDrawable();
+        animationDrawableL.start();
+    }
+
+    //右边软硬变化
+    private void onRHardness() {
+        ivHardness.setImageResource(R.drawable.anim_hardness_r);
+        animationDrawableR = (AnimationDrawable) ivHardness.getDrawable();
+        animationDrawableR.start();
+    }
+
+    //一段时间后停止闪烁
+    private void stopShan() {
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
+            countDownTimer = null;
+        }
+        countDownTimer = new CountDownTimer(2000, 1000) {
+            @Override
+            public void onTick(long l) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                ivHardness.setImageResource(R.mipmap.pic_bed);
+                countDownTimer.cancel();
+            }
+        };
+        countDownTimer.start();
     }
 }

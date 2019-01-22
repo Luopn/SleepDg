@@ -14,15 +14,13 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.jx.sleep_dg.R;
+import com.jx.sleep_dg.view.BorderButton;
 
 import me.yokeyword.fragmentation.SupportFragment;
 
 public class DeviceLiftMainFragment extends SupportFragment implements View.OnClickListener {
 
     private SupportFragment mFragment[] = new SupportFragment[2];
-    private LinearLayout llSels;
-    private boolean isShowSels;
-    private ImageView ivSwitch;
     private RadioButton rbLift, rbLiftTripple;
 
     public static DeviceLiftMainFragment newInstance() {
@@ -61,14 +59,13 @@ public class DeviceLiftMainFragment extends SupportFragment implements View.OnCl
     }
 
     private void initView(View view) {
-        llSels = view.findViewById(R.id.ll_sels);
-        ivSwitch = view.findViewById(R.id.iv_switch);
-        ivSwitch.setOnClickListener(this);
         RadioGroup rb = view.findViewById(R.id.rb_group);
         rbLift = view.findViewById(R.id.lift_sel1);
         rbLiftTripple = view.findViewById(R.id.lift_sel2);
-        rbLift.setOnClickListener(this);
-        rbLiftTripple.setOnClickListener(this);
+        //rbLift.setOnClickListener(this);
+        // rbLiftTripple.setOnClickListener(this);
+        BorderButton btnok = view.findViewById(R.id.btn_ok);
+        btnok.setOnClickListener(this);
     }
 
     /**
@@ -81,15 +78,18 @@ public class DeviceLiftMainFragment extends SupportFragment implements View.OnCl
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.iv_switch:
-                isShowSels = !isShowSels;
-                llSels.setVisibility(isShowSels ? View.GONE : View.VISIBLE);
-                break;
             case R.id.lift_sel1:
                 showHideFragment(mFragment[0]);
                 break;
             case R.id.lift_sel2:
                 showHideFragment(mFragment[1]);
+                break;
+            case R.id.btn_ok:
+                if (rbLift.isChecked()) {
+                    showHideFragment(mFragment[0]);
+                } else if (rbLiftTripple.isChecked()) {
+                    showHideFragment(mFragment[1]);
+                }
                 break;
         }
     }

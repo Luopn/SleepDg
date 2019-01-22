@@ -289,13 +289,7 @@ public class MySeekBar extends View {
             canvas.restore();
         }
         // onSeekBarItemClick(realShowProgress);
-        onSeekBar.onSeekBarClick((int) realShowProgress);
-        //展示进度
-        // String str = (int)Math.floor(realShowProgress)+" C";//整数
-        // String str = realShowProgress + " C";//小数
-        // wordPaint.getTextBounds(str, 0, str.length(),rect);
-        // canvas.drawText(str, radius+getPaddingLeft() + specialScaleLineLength -rect.width()/2
-        //         , radius + getPaddingTop() + specialScaleLineLength , wordPaint);
+        //onSeekBar.onSeekBarClick((int) realShowProgress);
     }
 
     @Override
@@ -337,6 +331,9 @@ public class MySeekBar extends View {
             if ((int) Math.round(angle * 100) >= 0 && (int) Math.round(angle * 100) <= 100) {
                 progress = (int) Math.round(angle * 100);
                 realShowProgress = getShowProgress(progress);
+                if(onSeekBar != null){
+                    onSeekBar.onSeekBarClick((int) realShowProgress);
+                }
             }
         } else {
             double angle = Math.atan2(eventY - (radius + getPaddingTop())
@@ -346,6 +343,9 @@ public class MySeekBar extends View {
                 progress = (int) Math.round(angle * 100);
                 progress = 100 - progress;
                 realShowProgress = getShowProgress(progress);
+                if(onSeekBar != null){
+                    onSeekBar.onSeekBarClick((int) realShowProgress);
+                }
             }
         }
         Log.i(TAG, "updateProgress: "+progress);
