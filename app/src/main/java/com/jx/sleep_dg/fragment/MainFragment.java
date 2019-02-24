@@ -42,7 +42,7 @@ public class MainFragment extends SupportFragment {
         if (firstFragment == null) {
 
             mFragment[0] = DataFragment.newInstance();
-            mFragment[1] = DeviceLiftFragment.newInstance();
+            mFragment[1] = DeviceLiftMainFragment.newInstance();
             mFragment[2] = DeviseHardnessFragment.newInstance();
             mFragment[3] = DeviceTempFragment.newInstance();
             mFragment[4] = SettingFragment.newInstance();

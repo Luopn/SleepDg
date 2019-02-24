@@ -24,6 +24,7 @@
     <color name="default_blue_light">#ff33b5e5</color>
 
     <color name="green">#397c55</color>
+    <color name="green_light">#009944</color>
     <color name="grey">#7c7c7c</color>
     <color name="white">#ffffff</color>
     <color name="lightGray">#ddd</color>

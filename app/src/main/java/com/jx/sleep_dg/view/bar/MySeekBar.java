@@ -10,7 +10,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
-import android.graphics.Rect;
 import android.graphics.RectF;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -26,8 +25,8 @@ import java.text.DecimalFormat;
 public class MySeekBar extends View {
 
     private static final String TAG = "MySeekBar";
-
     private boolean isLeft;
+
     //圆环的宽度
     private float ringWidth;
     //底部的圆弧颜色
@@ -132,22 +131,19 @@ public class MySeekBar extends View {
     private void init(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         slideAbleLocation = CommonUtil.dip2px(context, 20);
 
-        bitmapWidth = CommonUtil.dip2px(context, 20);
-        bitmapHight = CommonUtil.dip2px(context, 20);
-
-        mDragBitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.color_seekbar_thum);
-        mDragBitmap = CommonUtil.conversionBitmap(mDragBitmap
-                , bitmapWidth
-                , bitmapHight);
+        bitmapWidth = CommonUtil.dip2px(context, 30);
+        bitmapHight = CommonUtil.dip2px(context, 30);
 
         TypedArray array = context.getTheme().obtainStyledAttributes(attrs
                 , R.styleable.MySeekBar
                 , defStyleAttr, 0);
         isLeft = array.getBoolean(R.styleable.MySeekBar_seek_left, true);
-        ringWidth = array.getInt(R.styleable.MySeekBar_ringWidth, CommonUtil.dip2px(context, 10));
-        slideRingCorlor = array.getColor(R.styleable.MySeekBar_slideRingCorlor, Color.parseColor("#6d70ff"));
-        ringBgCorlor = array.getColor(R.styleable.MySeekBar_ringBgCorlor,  Color.parseColor("#191b32"));
-
+        ringWidth = array.getInt(R.styleable.MySeekBar_ringWidth, CommonUtil.dip2px(context, 15));
+        slideRingCorlor = array.getColor(R.styleable.MySeekBar_slideRingCorlor, Color.parseColor("#9f64ae"));
+        ringBgCorlor = array.getColor(R.styleable.MySeekBar_ringBgCorlor, Color.parseColor("#00276d"));
+        int resID = array.getResourceId(R.styleable.MySeekBar_dragImage, R.mipmap.color_seekbar_thum);
+        mDragBitmap = BitmapFactory.decodeResource(context.getResources(), resID);
+        mDragBitmap = CommonUtil.conversionBitmap(mDragBitmap, bitmapWidth, bitmapHight);
         radius = array.getDimension(R.styleable.MySeekBar_radius, CommonUtil.dip2px(context, 100));
         maxProgress = array.getInt(R.styleable.MySeekBar_maxProgress, 100);
         minProgress = array.getInt(R.styleable.MySeekBar_minProgress, 0);
@@ -182,7 +178,7 @@ public class MySeekBar extends View {
         ringBgExtraPaint.setColor(ringBgCorlor);
         ringBgExtraPaint.setAntiAlias(true);// 抗锯齿效果
         ringBgExtraPaint.setStyle(Paint.Style.STROKE);//设置空心
-        ringBgExtraPaint.setStrokeWidth(ringWidth-10);//线宽度，即环宽
+        ringBgExtraPaint.setStrokeWidth(ringWidth - 10);//线宽度，即环宽
         ringBgExtraPaint.setStrokeCap(Paint.Cap.ROUND);//圆形笔头
 
         //画滑动圆弧的画笔初始化
@@ -252,7 +248,7 @@ public class MySeekBar extends View {
                             , ringWidth / 2 + getPaddingTop()
                             , 2 * radius - ringWidth / 2 + getPaddingLeft()
                             , 2 * radius - ringWidth / 2 + getPaddingTop())
-                    , beginLocation, progress * sweepLocation / 100.0f+0.01f, false, slideRingPaint);
+                    , beginLocation, progress * sweepLocation / 100.0f + 0.01f, false, slideRingPaint);
             //画上滑动图标
             PointF progressPoint = CommonUtil.calcArcEndPointXY(radius + getPaddingLeft()
                     , radius + getPaddingTop()
@@ -276,7 +272,7 @@ public class MySeekBar extends View {
                             , ringWidth / 2 + getPaddingTop()
                             , 2 * radius - ringWidth / 2 + getPaddingLeft()
                             , 2 * radius - ringWidth / 2 + getPaddingTop())
-                    , beginLocation, (100 - progress) * sweepLocation / 100+0.01f, false, ringBgPaint);
+                    , beginLocation, (100 - progress) * sweepLocation / 100 + 0.01f, false, ringBgPaint);
             //画上滑动图标
             PointF progressPoint = CommonUtil.calcArcEndPointXY(radius + getPaddingLeft()
                     , radius + getPaddingTop()
@@ -327,28 +323,28 @@ public class MySeekBar extends View {
         if (isLeft) {
             double angle = Math.atan2(eventY - (radius + getPaddingTop())
                     , eventX - (radius + getPaddingLeft())) / Math.PI;
-            angle = (((2+1/9.0f) + angle) % 2 + (-beginLocation / 180.0f)) % 2;
+            angle = (((2 + 1 / 9.0f) + angle) % 2 + (-beginLocation / 180.0f)) % 2;
             if ((int) Math.round(angle * 100) >= 0 && (int) Math.round(angle * 100) <= 100) {
                 progress = (int) Math.round(angle * 100);
                 realShowProgress = getShowProgress(progress);
-                if(onSeekBar != null){
+                if (onSeekBar != null) {
                     onSeekBar.onSeekBarClick((int) realShowProgress);
                 }
             }
         } else {
             double angle = Math.atan2(eventY - (radius + getPaddingTop())
                     , eventX - getPaddingLeft()) / Math.PI;
-            angle = (((2+1/9.0f) + angle) % 2 + (-beginLocation / 180.0f)) % 2;
+            angle = (((2 + 1 / 9.0f) + angle) % 2 + (-beginLocation / 180.0f)) % 2;
             if ((int) Math.round(angle * 100) >= 0 && (int) Math.round(angle * 100) <= 100) {
                 progress = (int) Math.round(angle * 100);
                 progress = 100 - progress;
                 realShowProgress = getShowProgress(progress);
-                if(onSeekBar != null){
+                if (onSeekBar != null) {
                     onSeekBar.onSeekBarClick((int) realShowProgress);
                 }
             }
         }
-        Log.i(TAG, "updateProgress: "+progress);
+        Log.i(TAG, "updateProgress: " + progress);
         invalidate();
     }
 

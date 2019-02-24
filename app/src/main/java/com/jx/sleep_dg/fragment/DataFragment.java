@@ -21,6 +21,7 @@ import com.jx.sleep_dg.ui.StatisticsActivity;
 import com.jx.sleep_dg.ui.UserInfoActivity;
 import com.jx.sleep_dg.utils.CommonUtil;
 import com.jx.sleep_dg.utils.Constance;
+import com.jx.sleep_dg.view.ColorArcProgressBar;
 import com.jx.sleep_dg.view.EcgView;
 import com.jx.sleep_dg.view.HuxiEcgView;
 import com.jx.sleep_dg.view.NumberRollingView;
@@ -42,7 +43,7 @@ public class DataFragment extends BaseMainFragment {
     private NumberRollingView tvSleepScore;
     private TextView tvXinlvRight, tvXinlvLeft, tvHuxiLeft, tvHuxiRight;
 
-    private ImageView ivSleepProgress;
+    private ColorArcProgressBar ivSleepProgress;
 
     private EcgView lecgXinlv;
     private HuxiEcgView recgXinlv;
@@ -77,6 +78,8 @@ public class DataFragment extends BaseMainFragment {
         if (_mActivity.getApplication().getApplicationInfo().packageName.equals(Constance.QM)) {
             ivUserImage.setVisibility(View.INVISIBLE);
             ivRight.setVisibility(View.INVISIBLE);
+        }else{
+            tvMore.setVisibility(View.GONE);
         }
 
         ivSleepProgress = view.findViewById(R.id.iv_circle_progress);
@@ -101,7 +104,9 @@ public class DataFragment extends BaseMainFragment {
         CommonUtil.drawableTint(_mActivity, tvTitleClearSleep, ContextCompat.getColor(_mActivity, R.color.default_blue_light));
         CommonUtil.drawableTint(_mActivity, tvTitleTimeSleep, ContextCompat.getColor(_mActivity, R.color.textTitleColor));
 
-        dummyProgress();
+        //dummyProgress();
+        ivSleepProgress.setCurrentValues(90);
+        tvSleepScore.startNumAnim(90 + "");
 
         mspProtocol = MSPProtocol.getInstance();
         bindViewData();
@@ -238,6 +243,7 @@ public class DataFragment extends BaseMainFragment {
     @Override
     public void onStop() {
         super.onStop();
-        rotate.cancel();
+        if (rotate != null)
+            rotate.cancel();
     }
 }

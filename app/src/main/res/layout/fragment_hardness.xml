@@ -29,7 +29,7 @@
                     android:id="@+id/iv_hardness"
                     android:layout_width="200dp"
                     android:layout_height="120dp"
-                    android:background="@mipmap/pic_bed" />
+                    android:src="@mipmap/pic_bed" />
             </FrameLayout>
 
             <LinearLayout
@@ -44,22 +44,22 @@
                 <com.jx.sleep_dg.view.BorderButton
                     android:id="@+id/tv_lcur_hardless"
                     android:layout_width="70dp"
-                    android:layout_height="24dp"
+                    android:layout_height="30dp"
                     android:text="0"
                     android:textColor="@android:color/white"
-                    android:textSize="@dimen/textSize_12"
-                    app:lb_corner="12dp"
-                    app:lt_corner="12dp"
+                    android:textSize="15sp"
+                    app:lb_corner="15dp"
+                    app:lt_corner="15dp"
                     app:normal_color="@android:color/transparent"
                     app:stroke_color="@color/textTitleColor"
                     app:stroke_width="1dp" />
 
                 <com.jx.sleep_dg.view.BorderButton
                     android:layout_width="80dp"
-                    android:layout_height="24dp"
+                    android:layout_height="30dp"
                     android:text="@string/hardness_cur_title"
                     android:textColor="@android:color/white"
-                    android:textSize="@dimen/textSize_12"
+                    android:textSize="15sp"
                     app:corner="0dp"
                     app:normal_color="@color/textTitleColor"
                     app:stroke_color="@color/textTitleColor"
@@ -68,13 +68,13 @@
                 <com.jx.sleep_dg.view.BorderButton
                     android:id="@+id/tv_rcur_hardness"
                     android:layout_width="70dp"
-                    android:layout_height="24dp"
+                    android:layout_height="30dp"
                     android:text="0"
                     android:textColor="@android:color/white"
-                    android:textSize="@dimen/textSize_12"
+                    android:textSize="15sp"
                     app:normal_color="@android:color/transparent"
-                    app:rb_corner="12dp"
-                    app:rt_corner="12dp"
+                    app:rb_corner="15dp"
+                    app:rt_corner="15dp"
                     app:stroke_color="@color/textTitleColor"
                     app:stroke_width="1dp" />
             </LinearLayout>
@@ -122,6 +122,7 @@
                         android:layout_height="match_parent"
                         android:paddingLeft="10dp"
                         android:paddingTop="5dp"
+                        app:dragImage="@mipmap/seekbar_thum_l"
                         app:maxProgress="20"
                         app:minProgress="1"
                         app:progress="0"
@@ -140,7 +141,8 @@
                             android:layout_height="wrap_content"
                             android:text="@string/left"
                             android:textColor="@android:color/white"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"
+                            android:visibility="gone" />
 
                         <TextView
                             android:id="@+id/tv_cur_l"
@@ -148,7 +150,7 @@
                             android:layout_height="wrap_content"
                             android:text="0"
                             android:textColor="@color/textAccentColor"
-                            android:textSize="18sp" />
+                            android:textSize="20sp" />
                     </LinearLayout>
                 </FrameLayout>
 
@@ -183,6 +185,7 @@
                         android:layout_width="100dp"
                         android:layout_height="match_parent"
                         android:paddingTop="5dp"
+                        app:dragImage="@mipmap/seekbar_thum_r"
                         app:maxProgress="20"
                         app:minProgress="1"
                         app:progress="0"
@@ -202,7 +205,8 @@
                             android:layout_height="wrap_content"
                             android:text="@string/right"
                             android:textColor="@android:color/white"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"
+                            android:visibility="gone" />
 
                         <TextView
                             android:id="@+id/tv_cur_r"
@@ -210,7 +214,7 @@
                             android:layout_height="wrap_content"
                             android:text="0"
                             android:textColor="@color/textAccentColor"
-                            android:textSize="18sp" />
+                            android:textSize="20sp" />
                     </LinearLayout>
                 </FrameLayout>
 
