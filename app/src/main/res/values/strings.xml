@@ -105,6 +105,11 @@
     <string name="low">LOW</string>
     <string name="mid">MID</string>
     <string name="high">HIGH</string>
+    <string name="tv_mode">TV&#x000A;Mode</string>
+    <string name="sleep_mode">Sleep&#x000A;Mode</string>
+    <string name="read_mode">Read&#x000A;Mode</string>
+    <string name="relax_mode">Relax&#x000A;Mode</string>
+    <string name="yoga_mode">Roga&#x000A;Mode</string>
 
     <!--设置页面-->
     <string name="one_key_check">Detection</string>

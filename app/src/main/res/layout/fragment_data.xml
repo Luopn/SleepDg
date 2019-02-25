@@ -29,27 +29,34 @@
             android:textColor="@color/textTitleColor"
             android:textSize="@dimen/textSize_18" />
 
-        <TextView
-            android:id="@+id/tv_more"
-            android:layout_width="wrap_content"
+        <ImageView
+            android:id="@+id/iv_wifi"
+            android:layout_width="35dp"
             android:layout_height="35dp"
-            android:gravity="center"
-            android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@id/iv_ble"
             android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/iv_ble"
             android:padding="5dp"
-            android:textSize="12sp"
-            android:textColor="@color/textTitleColor"
-            android:text="@string/statistics_title" />
+            android:scaleType="centerInside"
+            android:src="@mipmap/ic_wifi" />
 
         <ImageView
             android:id="@+id/iv_ble"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_centerVertical="true"
+            android:padding="8dp"
+            android:layout_toLeftOf="@id/iv_more"
+            android:src="@mipmap/ic_ble" />
+
+        <ImageView
+            android:id="@+id/iv_more"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:padding="3dp"
-            android:src="@mipmap/ic_hardware" />
+            android:gravity="center"
+            android:padding="7dp"
+            android:src="@mipmap/ic_more" />
     </RelativeLayout>
 
     <!--主要布局-->
@@ -131,9 +138,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentBottom="true"
+                                android:layout_below="@id/tv_sleep_score"
                                 android:layout_centerHorizontal="true"
                                 android:padding="5dp"
-                                android:layout_below="@id/tv_sleep_score"
                                 android:text="优"
                                 android:textColor="@color/green_light"
                                 android:textSize="@dimen/textSize_12" />
@@ -143,8 +150,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentBottom="true"
                                 android:layout_centerHorizontal="true"
-                                android:padding="5dp"
                                 android:background="@drawable/shape_corner_rectangle"
+                                android:padding="5dp"
                                 android:text="@string/sleep_total"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/textSize_10" />

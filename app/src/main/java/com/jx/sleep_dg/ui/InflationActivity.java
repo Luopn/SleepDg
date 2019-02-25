@@ -20,6 +20,7 @@ import com.jx.sleep_dg.protocol.MSPProtocol;
 import com.jx.sleep_dg.utils.Constance;
 import com.jx.sleep_dg.utils.PreferenceUtils;
 import com.jx.sleep_dg.utils.ToastUtil;
+import com.jx.sleep_dg.view.SegmentControl;
 import com.wx.wheelview.adapter.BaseWheelAdapter;
 import com.wx.wheelview.widget.WheelView;
 
@@ -30,6 +31,7 @@ public class InflationActivity extends BaseActivity {
 
     private WheelView<String> hourWv, minuteWv;
     private TextView tvCurTime;
+    private SegmentControl scOnOff;
 
     private boolean isInitialDatas;
     private String hour, minute;
@@ -76,7 +78,7 @@ public class InflationActivity extends BaseActivity {
                 isInitialDatas = true;
             }
             if (tvCurTime != null) {
-                tvCurTime.setText(String.format("当前设置时间 %s:%s",
+                tvCurTime.setText(String.format("机器时间 %s:%s",
                         String.format(Locale.getDefault(), "%02d", mspProtocol.getTire_hour() & 0xff),
                         String.format(Locale.getDefault(), "%02d", mspProtocol.getTire_minute() & 0xff)));
             }
@@ -89,6 +91,26 @@ public class InflationActivity extends BaseActivity {
         Button okButton = findViewById(R.id.ok);
         hourWv = findViewById(R.id.wv_hour);
         minuteWv = findViewById(R.id.wv_minute);
+        scOnOff = findViewById(R.id.sc_on_off);
+
+        if (PreferenceUtils.getBoolean(Constance.KEY_INFLATION_SWITCH, true)) {
+            scOnOff.setSelectedIndex(0);
+        } else {
+            scOnOff.setSelectedIndex(1);
+        }
+        scOnOff.setOnSegmentChangedListener(new SegmentControl.OnSegmentChangedListener() {
+            @Override
+            public void onSegmentChanged(int newSelectedIndex) {
+                int hourInt = Integer.valueOf(hour);
+                int minuteInt = Integer.valueOf(minute);
+                PreferenceUtils.putBoolean(Constance.KEY_INFLATION_SWITCH, newSelectedIndex == 0);
+                if (newSelectedIndex == 0) {
+                    BleComUtils.sendInflation(hourInt, minuteInt, 0xff);
+                } else {
+                    BleComUtils.sendInflation(hourInt, minuteInt, 0x0);
+                }
+            }
+        });
 
         WheelView.WheelViewStyle wheelViewStyle = new WheelView.WheelViewStyle();
         wheelViewStyle.backgroundColor = Color.TRANSPARENT;
@@ -160,7 +182,7 @@ public class InflationActivity extends BaseActivity {
                 if (!TextUtils.isEmpty(hour) && !TextUtils.isEmpty(minute)) {
                     int hourInt = Integer.valueOf(hour);
                     int minuteInt = Integer.valueOf(minute);
-                    BleComUtils.sendInflation(hourInt, minuteInt);
+                    BleComUtils.sendInflation(hourInt, minuteInt, 0xff);
 
                     PreferenceUtils.putInt(Constance.KEY_INFLATION_HOUR, hourInt);
                     PreferenceUtils.putInt(Constance.KEY_INFLATION_MINUTE, minuteInt);

@@ -22,6 +22,8 @@ public class Constance {
     public static final String PASSWORD = "password";
     //Mac
     public static final String MAC = "Mac";
+    //自动补气的开关
+    public static final String KEY_INFLATION_SWITCH = "com.yunzhimian.inflation_switch";
     //自动补气的时
     public static final String KEY_INFLATION_HOUR = "com.yunzhimian.inflation_hour";
     //自动补气的分

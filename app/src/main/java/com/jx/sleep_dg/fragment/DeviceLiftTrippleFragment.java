@@ -1,5 +1,6 @@
 package com.jx.sleep_dg.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.AudioManager;
@@ -7,6 +8,7 @@ import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ScrollView;
@@ -34,6 +36,7 @@ public class DeviceLiftTrippleFragment extends BaseMainFragment implements View.
 
     private static final int MAX_TOU = 15;
     private static final int MAX_JIAO = 25;
+    private static final int LONG_PRESS_DELAY = 400;//ms
 
     private boolean isInitSeekbarVal;
     private MSPProtocol mspProtocol;
@@ -47,6 +50,9 @@ public class DeviceLiftTrippleFragment extends BaseMainFragment implements View.
     private VerticalSeekBar seebRightTou;
     private Ruler rulerLTou, rulerRTou, rulerJiao;
     private ImageView ivChuang;
+    private ImageView ivAllJia,ivAllJian;
+
+    private Runnable jiaRunnable,jianRunnable;
 
     private BorderButton mBtnTvMode;
     private BorderButton mBtnSleepMode;
@@ -69,6 +75,7 @@ public class DeviceLiftTrippleFragment extends BaseMainFragment implements View.
         return R.layout.fragment_device_lift_tripple;
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onBindView(View view) {
         ScrollView mScrollView = view.findViewById(R.id.scrollView);
@@ -80,6 +87,60 @@ public class DeviceLiftTrippleFragment extends BaseMainFragment implements View.
         view.findViewById(R.id.iv_tou_jian_r).setOnClickListener(this);
         view.findViewById(R.id.iv_jiao_jia).setOnClickListener(this);
         view.findViewById(R.id.iv_jiao_jian).setOnClickListener(this);
+        ivAllJia = view.findViewById(R.id.iv_all_jia);
+        ivAllJian = view.findViewById(R.id.iv_all_jian);
+        //长按加
+        ivAllJia.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        allUp();
+                        ivAllJia.postDelayed(jiaRunnable = new Runnable() {
+                            @Override
+                            public void run() {
+                                allUp();
+                                ivAllJia.postDelayed(this,LONG_PRESS_DELAY);
+                            }
+                        },LONG_PRESS_DELAY);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        if(jiaRunnable != null){
+                            ivAllJia.removeCallbacks(jiaRunnable);
+                        }
+                        onAll();
+                        sendCMD();
+                        break;
+                }
+                return true;
+            }
+        });
+        //长按减
+        ivAllJian.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        allDown();
+                        ivAllJian.postDelayed(jianRunnable = new Runnable() {
+                            @Override
+                            public void run() {
+                                allDown();
+                                ivAllJian.postDelayed(this,LONG_PRESS_DELAY);
+                            }
+                        },LONG_PRESS_DELAY);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        if(jianRunnable != null){
+                            ivAllJian.removeCallbacks(jianRunnable);
+                        }
+                        onAll();
+                        sendCMD();
+                        break;
+                }
+                return true;
+            }
+        });
 
         rulerLTou = view.findViewById(R.id.ruler_tou_l);
         rulerRTou = view.findViewById(R.id.ruler_tou_r);
@@ -94,10 +155,13 @@ public class DeviceLiftTrippleFragment extends BaseMainFragment implements View.
 
         ivChuang = view.findViewById(R.id.iv_chuang);
 
+        seebLeftTou.setThumb(R.mipmap.ic_head_purple);
         seebLeftTou.setThumbSize(25, 25);
         seebLeftTou.setOnSlideChangeListener(this);
+        seebRightTou.setThumb(R.mipmap.ic_head_purple_r);
         seebRightTou.setThumbSize(25, 25);
         seebRightTou.setOnSlideChangeListener(this);
+        seebJiao.setThumb(R.mipmap.ic_foot_purple);
         seebJiao.setThumbSize(25, 25);
         seebJiao.setOnSlideChangeListener(this);
 
@@ -180,10 +244,7 @@ public class DeviceLiftTrippleFragment extends BaseMainFragment implements View.
                     LogUtil.e("左  leftTouIndex:" + touLIndex);
                 }
                 onLTou();
-                BleComUtils.senddianji(BleUtils.convertDecimalToBinary(touLIndex + "")
-                        + BleUtils.convertDecimalToBinary(jiaoIndex + "")
-                        + BleUtils.convertDecimalToBinary(touRIndex + "")
-                        + BleUtils.convertDecimalToBinary(jiaoIndex + ""));
+                sendCMD();
 
                 break;
             case R.id.iv_tou_jian_l:
@@ -193,10 +254,7 @@ public class DeviceLiftTrippleFragment extends BaseMainFragment implements View.
                     LogUtil.e("左  leftJiaoIndex:" + touLIndex);
                 }
                 onLTou();
-                BleComUtils.senddianji(BleUtils.convertDecimalToBinary(touLIndex + "")
-                        + BleUtils.convertDecimalToBinary(jiaoIndex + "")
-                        + BleUtils.convertDecimalToBinary(touRIndex + "")
-                        + BleUtils.convertDecimalToBinary(jiaoIndex + ""));
+                sendCMD();
 
                 break;
             case R.id.iv_tou_jia_r:
@@ -206,10 +264,7 @@ public class DeviceLiftTrippleFragment extends BaseMainFragment implements View.
                     LogUtil.e("右  rightTouIndex:" + touRIndex);
                 }
                 onRTou();
-                BleComUtils.senddianji(BleUtils.convertDecimalToBinary(touLIndex + "")
-                        + BleUtils.convertDecimalToBinary(jiaoIndex + "")
-                        + BleUtils.convertDecimalToBinary(touRIndex + "")
-                        + BleUtils.convertDecimalToBinary(jiaoIndex + ""));
+                sendCMD();
 
                 break;
             case R.id.iv_tou_jian_r:
@@ -219,10 +274,7 @@ public class DeviceLiftTrippleFragment extends BaseMainFragment implements View.
                     LogUtil.e("右  rightTouIndex:" + touRIndex);
                 }
                 onRTou();
-                BleComUtils.senddianji(BleUtils.convertDecimalToBinary(touLIndex + "")
-                        + BleUtils.convertDecimalToBinary(jiaoIndex + "")
-                        + BleUtils.convertDecimalToBinary(touRIndex + "")
-                        + BleUtils.convertDecimalToBinary(jiaoIndex + ""));
+                sendCMD();
 
                 break;
             case R.id.iv_jiao_jia:
@@ -233,10 +285,7 @@ public class DeviceLiftTrippleFragment extends BaseMainFragment implements View.
                     LogUtil.e("左  leftJiaoIndex:" + jiaoIndex);
                 }
                 onJiao();
-                BleComUtils.senddianji(BleUtils.convertDecimalToBinary(touLIndex + "")
-                        + BleUtils.convertDecimalToBinary(jiaoIndex + "")
-                        + BleUtils.convertDecimalToBinary(touRIndex + "")
-                        + BleUtils.convertDecimalToBinary(jiaoIndex + ""));
+                sendCMD();
 
                 break;
             case R.id.iv_jiao_jian:
@@ -247,10 +296,19 @@ public class DeviceLiftTrippleFragment extends BaseMainFragment implements View.
                     LogUtil.e("左  leftJiaoIndex:" + jiaoIndex);
                 }
                 onJiao();
-                BleComUtils.senddianji(BleUtils.convertDecimalToBinary(touLIndex + "")
-                        + BleUtils.convertDecimalToBinary(jiaoIndex + "")
-                        + BleUtils.convertDecimalToBinary(touRIndex + "")
-                        + BleUtils.convertDecimalToBinary(jiaoIndex + ""));
+                sendCMD();
+
+                break;
+            case R.id.iv_all_jia:
+                //同时升
+                allUp();
+                sendCMD();
+
+                break;
+            case R.id.iv_all_jian:
+                //同时降
+                allDown();
+                sendCMD();
 
                 break;
             case R.id.btn_tv_mode:
@@ -291,6 +349,38 @@ public class DeviceLiftTrippleFragment extends BaseMainFragment implements View.
         }
     }
 
+    //同时升
+    private void allUp() {
+        if (touLIndex < MAX_TOU) {
+            touLIndex++;
+            touRIndex = touLIndex;
+            jiaoIndex = (int) ((float) touLIndex / MAX_TOU * MAX_JIAO);
+            seebJiao.setProgress(jiaoIndex);
+            seebRightTou.setProgress(touRIndex);
+            seebLeftTou.setProgress(touLIndex);
+        }
+    }
+
+    //同时降
+    private void allDown() {
+        if (touLIndex > 0) {
+            touLIndex--;
+            touRIndex = touLIndex;
+            jiaoIndex = (int) ((float) touLIndex / MAX_TOU * MAX_JIAO);
+            seebJiao.setProgress(jiaoIndex);
+            seebRightTou.setProgress(touRIndex);
+            seebLeftTou.setProgress(touLIndex);
+        }
+    }
+
+    //发送指令
+    private void sendCMD() {
+        BleComUtils.senddianji(BleUtils.convertDecimalToBinary(touLIndex + "")
+                + BleUtils.convertDecimalToBinary(jiaoIndex + "")
+                + BleUtils.convertDecimalToBinary(touRIndex + "")
+                + BleUtils.convertDecimalToBinary(jiaoIndex + ""));
+    }
+
     //左边头高度变化
     private void onLTou() {
         ivChuang.setImageResource(R.drawable.anim_lift_headl);
@@ -310,6 +400,14 @@ public class DeviceLiftTrippleFragment extends BaseMainFragment implements View.
     //脚高度变化
     private void onJiao() {
         ivChuang.setImageResource(R.drawable.anim_lift_headc);
+        animationDrawableC = (AnimationDrawable) ivChuang.getDrawable();
+        animationDrawableC.start();
+        stopShan();
+    }
+
+    //同时变化
+    private void onAll() {
+        ivChuang.setImageResource(R.drawable.anim_lift_all);
         animationDrawableC = (AnimationDrawable) ivChuang.getDrawable();
         animationDrawableC.start();
         stopShan();
@@ -356,10 +454,7 @@ public class DeviceLiftTrippleFragment extends BaseMainFragment implements View.
             jiaoIndex = progress;
             onJiao();
         }
-        BleComUtils.senddianji(BleUtils.convertDecimalToBinary(touLIndex + "")
-                + BleUtils.convertDecimalToBinary(jiaoIndex + "")
-                + BleUtils.convertDecimalToBinary(touRIndex + "")
-                + BleUtils.convertDecimalToBinary(jiaoIndex + ""));
+        sendCMD();
     }
 
     @Override

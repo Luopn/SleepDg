@@ -5,11 +5,9 @@ import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.jx.sleep_dg.R;
@@ -38,8 +36,7 @@ public class DataFragment extends BaseMainFragment {
     private static final int SEARCH_DURATION = 1000;
     private static final int SEARCH_REACPEAT_COUNT = 5;
 
-    private ImageView ivRight, ivUserImage;
-    private TextView tvMore;
+    private ImageView ivWifi, ivBle, ivMore, ivUserImage;
     private NumberRollingView tvSleepScore;
     private TextView tvXinlvRight, tvXinlvLeft, tvHuxiLeft, tvHuxiRight;
 
@@ -69,17 +66,17 @@ public class DataFragment extends BaseMainFragment {
     @Override
     public void onBindView(View view) {
 
-        ivRight = view.findViewById(R.id.iv_ble);
-        ivRight.setOnClickListener(this);
-        tvMore = view.findViewById(R.id.tv_more);
-        tvMore.setOnClickListener(this);
+        ivWifi = view.findViewById(R.id.iv_wifi);
+        ivWifi.setOnClickListener(this);
+        ivBle = view.findViewById(R.id.iv_ble);
+        ivBle.setOnClickListener(this);
+        ivMore = view.findViewById(R.id.iv_more);
+        ivMore.setOnClickListener(this);
         ivUserImage = view.findViewById(R.id.iv_user_image);
         ivUserImage.setOnClickListener(this);
         if (_mActivity.getApplication().getApplicationInfo().packageName.equals(Constance.QM)) {
             ivUserImage.setVisibility(View.INVISIBLE);
-            ivRight.setVisibility(View.INVISIBLE);
-        }else{
-            tvMore.setVisibility(View.GONE);
+            ivBle.setVisibility(View.INVISIBLE);
         }
 
         ivSleepProgress = view.findViewById(R.id.iv_circle_progress);
@@ -172,28 +169,13 @@ public class DataFragment extends BaseMainFragment {
                 _mActivity.startActivity(intent);
             }
             break;
-            case R.id.tv_more: {
-                //PopupMenu menu = new PopupMenu(_mActivity, ivMore);
-                //menu.getMenuInflater().inflate(R.menu.menu_more, menu.getMenu());
-                //menu.show();
-                //menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                //    @Override
-                //    public boolean onMenuItemClick(MenuItem item) {
-                //        Intent intent = new Intent();
-                //        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                //        switch (item.getItemId()) {
-                //            case R.id.action_sleep_statistic:
-                //                intent.setClass(_mActivity, StatisticsActivity.class);
-                //                _mActivity.startActivity(intent);
-                //                break;
-                //            case R.id.action_config_net:
-                //                intent.setClass(_mActivity, DeviceNetConfigAcyivity.class);
-                //                _mActivity.startActivity(intent);
-                //                break;
-                //        }
-                //        return true;
-                //    }
-                //});
+            case R.id.iv_wifi: {
+                Intent intent = new Intent();
+                intent.setClass(_mActivity, DeviceNetConfigAcyivity.class);
+                _mActivity.startActivity(intent);
+            }
+            break;
+            case R.id.iv_more: {
                 Intent intent = new Intent(_mActivity, StatisticsActivity.class);
                 _mActivity.startActivity(intent);
             }

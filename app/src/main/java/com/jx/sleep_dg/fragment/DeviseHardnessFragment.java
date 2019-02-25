@@ -131,6 +131,8 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
             @Override
             public void onSeekBarClick(int position) {
                 leftIndex = position;
+                tvCurL.setText(String.format(Locale.getDefault(), "%d", leftIndex));
+
                 shanshuo(true);
                 BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary(leftIndex * 5 + "")
                         + BleUtils.convertDecimalToBinary(rightIndex * 5 + ""));
@@ -141,6 +143,8 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
             @Override
             public void onSeekBarClick(int position) {
                 rightIndex = position;
+                tvCurR.setText(String.format(Locale.getDefault(), "%d", rightIndex));
+
                 shanshuo(false);
                 BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary(leftIndex * 5 + "")
                         + BleUtils.convertDecimalToBinary(rightIndex * 5 + ""));
@@ -163,8 +167,6 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
         int rPresureCurVal = mspProtocol.getrPresureCurVal() & 0xff;
         tvLCurHardless.setText(String.format(Locale.getDefault(), "%d", lPresureCurVal));
         tvRCurHardness.setText(String.format(Locale.getDefault(), "%d", rPresureCurVal));
-        tvCurL.setText(String.format(Locale.getDefault(), "%d", lPresureCurVal));
-        tvCurR.setText(String.format(Locale.getDefault(), "%d", rPresureCurVal));
 
         leftIndex = (int) Math.ceil((double) lPresureCurVal / 5);
         leftIndex = leftIndex < 1 ? 1 : leftIndex > 20 ? 20 : leftIndex;
@@ -176,6 +178,9 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
             isInitSeekbarVal = true;
             leftSeekbar.setProgress(Double.valueOf(leftIndex + ""));
             rightSeekbar.setProgress(Double.valueOf(rightIndex + ""));
+
+            tvCurL.setText(String.format(Locale.getDefault(), "%d", lPresureCurVal));
+            tvCurR.setText(String.format(Locale.getDefault(), "%d", rPresureCurVal));
         }
     }
 

@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    android:orientation="vertical"
     tools:context=".ui.InflationActivity">
 
     <LinearLayout
+        android:id="@+id/time_sel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="50dp"
         android:layout_marginRight="20dp"
+        android:layout_marginTop="50dp"
         android:orientation="horizontal">
 
         <com.wx.wheelview.widget.WheelView
@@ -41,25 +42,47 @@
             android:background="@android:color/transparent" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_cur_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:text="当前设置时间：00:00"
-        android:textColor="@color/colorAccent"
-        android:textSize="10sp" />
-
     <Button
         android:id="@+id/ok"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"
+        android:layout_below="@id/time_sel"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
         android:background="@drawable/sel_blue_bg_btn"
         android:text="@android:string/ok"
         android:textColor="@color/white"
         android:textSize="15sp" />
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_cur_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            android:text="机器时间：00:00"
+            android:textColor="@color/colorAccent"
+            android:textSize="10sp" />
+
+        <com.jx.sleep_dg.view.SegmentControl
+            android:id="@+id/sc_on_off"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            app:scv_BackgroundNormalColor="@android:color/transparent"
+            app:scv_BackgroundSelectedColor="@color/textTitleColor"
+            app:scv_FrameColor="@color/textTitleColor"
+            app:scv_FrameCornerRadius="20dp"
+            app:scv_TextArray="@array/on_off"
+            app:scv_TextNormalColor="@android:color/white" />
+    </LinearLayout>
+
+
+</RelativeLayout>

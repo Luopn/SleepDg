@@ -45,43 +45,14 @@
                         android:adjustViewBounds="true"
                         android:background="@mipmap/ic_foot0" />
                 </LinearLayout>
-
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp">
-
-                    <View
-                        android:id="@+id/centerView"
-                        android:layout_width="1dp"
-                        android:layout_height="1dp"
-                        android:layout_centerInParent="true" />
-
-                    <ImageView
-                        android:id="@+id/iv_tou"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="50dp"
-                        android:layout_toLeftOf="@id/centerView"
-                        android:background="@mipmap/ic_head" />
-
-                    <ImageView
-                        android:id="@+id/iv_jiao"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="50dp"
-                        android:layout_toRightOf="@id/centerView"
-                        android:background="@mipmap/ic_foot" />
-                </RelativeLayout>
             </LinearLayout>
 
             <!--垂直Seekbar-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
                 android:baselineAligned="false"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
@@ -137,9 +108,10 @@
                 </LinearLayout>
 
                 <!--中间-->
-                <FrameLayout
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -150,6 +122,45 @@
                         android:textColor="@color/textAccentColor"
                         android:textSize="@dimen/textSize_20" />
 
+                    <RelativeLayout
+                        android:layout_width="40dp"
+                        android:layout_height="180dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="150dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="20dp"
+                            android:background="@color/textTitleColor"
+                            android:ems="1"
+                            android:gravity="center"
+                            android:text="同步升降"
+                            android:textColor="@android:color/white"
+                            android:textSize="12sp"
+                            android:visibility="visible" />
+
+                        <ImageView
+                            android:id="@+id/iv_all_jia"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_gravity="center_horizontal"
+                            android:padding="2dp"
+                            android:scaleType="fitXY"
+                            android:src="@mipmap/ic_add_big" />
+
+                        <ImageView
+                            android:id="@+id/iv_all_jian"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_gravity="center_horizontal"
+                            android:padding="2dp"
+                            android:scaleType="fitXY"
+                            android:src="@mipmap/ic_reduce_big" />
+                    </RelativeLayout>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -158,7 +169,7 @@
                         android:text="降"
                         android:textColor="@color/textAccentColor"
                         android:textSize="@dimen/textSize_20" />
-                </FrameLayout>
+                </LinearLayout>
 
                 <!--右边-->
                 <LinearLayout
@@ -256,28 +267,24 @@
 
                         <com.jx.sleep_dg.view.BorderButton
                             android:id="@+id/btn_tv_mode"
-                            android:layout_width="match_parent"
-                            android:layout_height="30dp"
-                            android:text="电视模式"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:text="@string/tv_mode"
                             android:textColor="@android:color/white"
                             android:textSize="12sp"
-                            app:corner="20dp"
+                            app:corner="25dp"
                             app:type="ok" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="床头45°"
+                            android:ems="3"
+                            android:text="床头45°床尾15°"
                             android:textColor="@color/textTitleColorLight"
-                            android:textSize="@dimen/textSize_10" />
+                            android:textSize="@dimen/textSize_10"
+                            android:visibility="gone" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="床尾15°"
-                            android:textColor="@color/textTitleColorLight"
-                            android:textSize="@dimen/textSize_10" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -290,69 +297,27 @@
 
                         <com.jx.sleep_dg.view.BorderButton
                             android:id="@+id/btn_read_mode"
-                            android:layout_width="match_parent"
-                            android:layout_height="30dp"
-                            android:text="阅读模式"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:text="@string/read_mode"
                             android:textColor="@android:color/white"
                             android:textSize="12sp"
-                            app:corner="20dp"
+                            app:corner="25dp"
                             app:type="ok" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="床头40°"
+                            android:ems="3"
+                            android:text="床头40°床尾25"
                             android:textColor="@color/textTitleColorLight"
-                            android:textSize="@dimen/textSize_10" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="床尾25°"
-                            android:textColor="@color/textTitleColorLight"
-                            android:textSize="@dimen/textSize_10" />
+                            android:textSize="@dimen/textSize_10"
+                            android:visibility="gone" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <!--第二列-->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_weight="1">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <com.jx.sleep_dg.view.BorderButton
-                            android:id="@+id/btn_sleep_mode"
-                            android:layout_width="match_parent"
-                            android:layout_height="30dp"
-                            android:text="睡眠模式"
-                            android:textColor="@android:color/white"
-                            android:textSize="12sp"
-                            app:corner="20dp"
-                            app:type="ok" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:maxWidth="70dp"
-                            android:text="一键放平"
-                            android:textColor="@color/textTitleColorLight"
-                            android:textSize="@dimen/textSize_10" />
-                    </LinearLayout>
-                </LinearLayout>
-
-
-                <!--第三列-->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -368,28 +333,23 @@
 
                         <com.jx.sleep_dg.view.BorderButton
                             android:id="@+id/btn_relax_mode"
-                            android:layout_width="match_parent"
-                            android:layout_height="30dp"
-                            android:text="休闲模式"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:text="@string/relax_mode"
                             android:textColor="@android:color/white"
                             android:textSize="12sp"
-                            app:corner="20dp"
+                            app:corner="25dp"
                             app:type="ok" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="床头30°"
+                            android:ems="3"
+                            android:text="床头30°床尾10°"
                             android:textColor="@color/textTitleColorLight"
-                            android:textSize="@dimen/textSize_10" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="床尾10°"
-                            android:textColor="@color/textTitleColorLight"
-                            android:textSize="@dimen/textSize_10" />
+                            android:textSize="@dimen/textSize_10"
+                            android:visibility="gone" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -402,29 +362,90 @@
 
                         <com.jx.sleep_dg.view.BorderButton
                             android:id="@+id/btn_yujia_mode"
-                            android:layout_width="match_parent"
-                            android:layout_height="30dp"
-                            android:text="瑜伽模式"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:text="@string/yoga_mode"
                             android:textColor="@android:color/white"
                             android:textSize="12sp"
-                            app:corner="20dp"
+                            app:corner="25dp"
                             app:type="ok" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="床头45°"
+                            android:ems="3"
+                            android:text="床头45°床尾30°"
                             android:textColor="@color/textTitleColorLight"
-                            android:textSize="@dimen/textSize_10" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="床尾30°"
-                            android:textColor="@color/textTitleColorLight"
-                            android:textSize="@dimen/textSize_10" />
+                            android:textSize="@dimen/textSize_10"
+                            android:visibility="gone" />
                     </LinearLayout>
+                </LinearLayout>
+
+                <!--一键放平-->
+                <com.jx.sleep_dg.view.BorderButton
+                    android:id="@+id/btn_sleep_mode"
+                    android:layout_width="70dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:text="一键放平"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp"
+                    app:corner="7dp"
+                    app:normal_color="@color/textAccentColor" />
+
+                <!--第三列-->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <com.jx.sleep_dg.view.BorderButton
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:text="模式\n1"
+                        android:textColor="@android:color/white"
+                        android:textSize="12sp"
+                        app:corner="25dp"
+                        app:type="ok" />
+
+                    <com.jx.sleep_dg.view.BorderButton
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="20dp"
+                        android:text="模式\n3"
+                        android:textColor="@android:color/white"
+                        android:textSize="12sp"
+                        app:corner="25dp"
+                        app:type="ok" />
+                </LinearLayout>
+
+                <!--第四列-->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <com.jx.sleep_dg.view.BorderButton
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:text="模式\n2"
+                        android:textColor="@android:color/white"
+                        android:textSize="12sp"
+                        app:corner="25dp"
+                        app:type="ok" />
+
+                    <com.jx.sleep_dg.view.BorderButton
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="20dp"
+                        android:text="模式\n4"
+                        android:textColor="@android:color/white"
+                        android:textSize="12sp"
+                        app:corner="25dp"
+                        app:type="ok" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

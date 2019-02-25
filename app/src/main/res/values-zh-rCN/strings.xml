@@ -105,6 +105,11 @@
     <string name="low">低</string>
     <string name="mid">中</string>
     <string name="high">高</string>
+    <string name="tv_mode">电视\n模式</string>
+    <string name="sleep_mode">睡眠\n模式</string>
+    <string name="read_mode">阅读\n模式</string>
+    <string name="relax_mode">休闲\n模式</string>
+    <string name="yoga_mode">瑜伽\n模式</string>
 
     <!--设置页面-->
     <string name="one_key_check">一键检测</string>

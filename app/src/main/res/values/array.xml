@@ -4,4 +4,9 @@
         <item >右</item>
         <item >左</item>
     </string-array>
+
+    <string-array name="on_off">
+        <item >开</item>
+        <item >关</item>
+    </string-array>
 </resources>

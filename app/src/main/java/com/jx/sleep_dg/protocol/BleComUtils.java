@@ -175,19 +175,20 @@ public class BleComUtils {
     /**
      * 发送自动补气时间数据
      */
-    public static void sendInflation(int hour, int minute) {
-        byte[] data = new byte[7];
+    public static void sendInflation(int hour, int minute, int weeks) {
+        byte[] data = new byte[8];
         data[0] = (byte) 0xAA;
-        data[1] = (byte) 0x07;
+        data[1] = (byte) 0x08;
         data[2] = (byte) 0xC8;
         data[3] = (byte) hour;
         data[4] = (byte) minute;
-        data[5] = (byte) 0x00;
+        data[5] = (byte) weeks;
+        data[6] = (byte) 0x00;
         byte checkSum = 0;
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 6; i++) {
             checkSum ^= data[i + 1];
         }
-        data[6] = checkSum;
+        data[7] = checkSum;
         if (BluetoothLeService.mThis != null)
             BluetoothLeService.mThis.writeCMD(data);
     }
