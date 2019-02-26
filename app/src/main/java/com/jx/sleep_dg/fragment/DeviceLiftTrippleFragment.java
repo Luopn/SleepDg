@@ -36,7 +36,7 @@ public class DeviceLiftTrippleFragment extends BaseMainFragment implements View.
 
     private static final int MAX_TOU = 15;
     private static final int MAX_JIAO = 25;
-    private static final int LONG_PRESS_DELAY = 400;//ms
+    private static final int LONG_PRESS_DELAY = 300;//ms
 
     private boolean isInitSeekbarVal;
     private MSPProtocol mspProtocol;

@@ -2,7 +2,10 @@ package com.jx.sleep_dg.ui;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -11,6 +14,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jx.sleep_dg.R;
@@ -18,6 +24,7 @@ import com.jx.sleep_dg.base.BaseActivity;
 import com.jx.sleep_dg.protocol.BleComUtils;
 import com.jx.sleep_dg.protocol.MSPProtocol;
 import com.jx.sleep_dg.utils.Constance;
+import com.jx.sleep_dg.utils.DisplayUtils;
 import com.jx.sleep_dg.utils.PreferenceUtils;
 import com.jx.sleep_dg.utils.ToastUtil;
 import com.jx.sleep_dg.view.SegmentControl;
@@ -29,8 +36,11 @@ import java.util.Locale;
 
 public class InflationActivity extends BaseActivity {
 
+    private RelativeLayout container;
     private WheelView<String> hourWv, minuteWv;
     private TextView tvCurTime;
+    private LinearLayout llWeeksSel;
+    private PopupWindow weeksPop;
     private SegmentControl scOnOff;
 
     private boolean isInitialDatas;
@@ -87,6 +97,8 @@ public class InflationActivity extends BaseActivity {
 
     @Override
     public void bindView() {
+        container = findViewById(R.id.container);
+        llWeeksSel = findViewById(R.id.ll_weeks);
         tvCurTime = findViewById(R.id.tv_cur_time);
         Button okButton = findViewById(R.id.ok);
         hourWv = findViewById(R.id.wv_hour);
@@ -196,6 +208,25 @@ public class InflationActivity extends BaseActivity {
         int minute = PreferenceUtils.getInt(Constance.KEY_INFLATION_MINUTE, 0);
         hourWv.setSelection(hour);
         minuteWv.setSelection(minute);
+
+        //选择重复星期
+        llWeeksSel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (weeksPop == null) {
+                    View contentView = LayoutInflater.from(InflationActivity.this).
+                            inflate(R.layout.layout_weeks, null);
+                    weeksPop = new PopupWindow(contentView, ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.WRAP_CONTENT, true);
+                    //weeksPop.setBackgroundDrawable(new ColorDrawable());
+                    weeksPop.setAnimationStyle(R.style.AnimBottom);
+                    weeksPop.showAtLocation(container, Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, 0, 0);
+                } else {
+                    weeksPop.dismiss();
+                    weeksPop = null;
+                }
+            }
+        });
     }
 
     static class ViewHolder {
