@@ -28,6 +28,8 @@ public class Constance {
     public static final String KEY_INFLATION_HOUR = "com.yunzhimian.inflation_hour";
     //自动补气的分
     public static final String KEY_INFLATION_MINUTE = "com.yunzhimian.inflation_minute";
+    //自动补气的周
+    public static final String KEY_INFLATION_WEEK = "com.yunzhimian.inflation_week";
     //
     public static final String KEY_LIFT_SELECT = "com.yunzhimian.lift_select";
 }

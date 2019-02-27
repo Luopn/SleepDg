@@ -4,14 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="280dp"
-    android:background="@drawable/shape_share_rectangle_bg"
+    android:background="@drawable/shape_weeks_rectangle_bg"
     android:orientation="vertical">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_weeks"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:layout_weight="1"
+        android:overScrollMode="never"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         tools:listitem="@layout/item_weeks" />
 
@@ -20,12 +23,13 @@
         android:layout_height="50dp">
 
         <com.jx.sleep_dg.view.BorderButton
+            android:id="@+id/cancel"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="取消"
             android:textColor="@android:color/white"
-            app:lb_corner="10dp"
+            app:corner="0dp"
             app:normal_color="@color/textTitleColor" />
 
         <View
@@ -34,12 +38,13 @@
             android:background="@color/textTitleColorLight" />
 
         <com.jx.sleep_dg.view.BorderButton
+            android:id="@+id/ok"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="确定"
             android:textColor="@android:color/white"
-            app:normal_color="@color/textTitleColor"
-            app:rb_corner="10dp" />
+            app:corner="0dp"
+            app:normal_color="@color/textTitleColor" />
     </LinearLayout>
 </LinearLayout>

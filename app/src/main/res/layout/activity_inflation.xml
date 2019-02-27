@@ -43,23 +43,11 @@
             android:background="@android:color/transparent" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/ok"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_below="@id/time_sel"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/sel_blue_bg_btn"
-        android:text="@android:string/ok"
-        android:textColor="@color/white"
-        android:textSize="15sp" />
-
     <LinearLayout
         android:id="@+id/ll_weeks"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@id/ok"
+        android:layout_below="@id/time_sel"
         android:layout_marginTop="10dp"
         android:background="@drawable/sel_btn_normal"
         android:gravity="center_vertical">
@@ -69,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:text="重复"
-            android:textColor="@color/textTitleColor"
+            android:textColor="@android:color/white"
             android:textSize="15sp" />
 
         <TextView
@@ -79,7 +67,7 @@
             android:layout_marginLeft="100dp"
             android:layout_weight="1"
             android:gravity="right"
-            android:textColor="@color/textTitleColor" />
+            android:textColor="@android:color/white" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -87,6 +75,18 @@
             android:layout_marginRight="16dp"
             android:src="@mipmap/ic_arrow_right" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/ok"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/ll_weeks"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/sel_blue_bg_btn"
+        android:text="设置"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
