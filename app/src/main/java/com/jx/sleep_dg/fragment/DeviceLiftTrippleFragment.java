@@ -105,6 +105,7 @@ public class DeviceLiftTrippleFragment extends BaseMainFragment implements View.
                         },LONG_PRESS_DELAY);
                         break;
                     case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_CANCEL:
                         if(jiaRunnable != null){
                             ivAllJia.removeCallbacks(jiaRunnable);
                         }
@@ -131,6 +132,7 @@ public class DeviceLiftTrippleFragment extends BaseMainFragment implements View.
                         },LONG_PRESS_DELAY);
                         break;
                     case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_CANCEL:
                         if(jianRunnable != null){
                             ivAllJian.removeCallbacks(jianRunnable);
                         }

@@ -121,6 +121,7 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
                             }
                         },LONG_PRESS_DELAY);
                         break;
+                    case MotionEvent.ACTION_CANCEL:
                     case MotionEvent.ACTION_UP:
                         if(jiaRunnable != null){
                             ivAllJia.removeCallbacks(jiaRunnable);
@@ -146,6 +147,7 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
                             }
                         },LONG_PRESS_DELAY);
                         break;
+                    case MotionEvent.ACTION_CANCEL:
                     case MotionEvent.ACTION_UP:
                         if(jianRunnable != null){
                             ivAllJian.removeCallbacks(jianRunnable);
@@ -172,10 +174,10 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
         icWeiChuang.setBackgroundResource(R.mipmap.ic_foot0);
 
         seebLeftTou.setThumb(R.mipmap.ic_head_purple);
-        seebLeftTou.setThumbSize(25, 25);
+        seebLeftTou.setThumbSize(30, 30);
         seebLeftTou.setOnSlideChangeListener(this);
         seebLeftJiao.setThumb(R.mipmap.ic_foot_purple);
-        seebLeftJiao.setThumbSize(25, 25);
+        seebLeftJiao.setThumbSize(30, 30);
         seebLeftJiao.setOnSlideChangeListener(this);
 
         mBtnTvMode = view.findViewById(R.id.btn_tv_mode);

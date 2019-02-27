@@ -258,35 +258,35 @@ public class InflationActivity extends BaseActivity {
 
     //显示选择的星期
     private void onWeeksSelected() {
-        StringBuilder weeksStr = new StringBuilder("");
+        String weeksStr = "";
         for (int i = 0; i < 7; i++) {
             boolean select = ((weeksByte >> i) & 1) == 1;
             if (!select) continue;
             switch (i) {
                 case 0:
-                    weeksStr.append(" 周一");
+                    weeksStr = " 周一..";
                     break;
                 case 1:
-                    weeksStr.append(" 周二");
+                    weeksStr = " 周二..";
                     break;
                 case 2:
-                    weeksStr.append(" 周三");
+                    weeksStr = " 周三..";
                     break;
                 case 3:
-                    weeksStr.append(" 周四");
+                    weeksStr = " 周四..";
                     break;
                 case 4:
-                    weeksStr.append(" 周五");
+                    weeksStr = " 周五..";
                     break;
                 case 5:
-                    weeksStr.append(" 周六");
+                    weeksStr = " 周六..";
                     break;
                 case 6:
-                    weeksStr.append(" 周日");
+                    weeksStr = " 周日..";
                     break;
             }
         }
-        tvWeeks.setText(weeksStr.toString());
+        tvWeeks.setText(weeksStr);
     }
 
     //显示星期选择菜单

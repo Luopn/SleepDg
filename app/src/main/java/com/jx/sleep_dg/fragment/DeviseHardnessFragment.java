@@ -131,7 +131,7 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
             @Override
             public void onSeekBarClick(int position) {
                 leftIndex = position;
-                tvCurL.setText(String.format(Locale.getDefault(), "%d", leftIndex));
+                tvCurL.setText(String.format(Locale.getDefault(), "%d", leftIndex * 5));
 
                 shanshuo(true);
                 BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary(leftIndex * 5 + "")
@@ -143,7 +143,7 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
             @Override
             public void onSeekBarClick(int position) {
                 rightIndex = position;
-                tvCurR.setText(String.format(Locale.getDefault(), "%d", rightIndex));
+                tvCurR.setText(String.format(Locale.getDefault(), "%d", rightIndex * 5));
 
                 shanshuo(false);
                 BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary(leftIndex * 5 + "")
@@ -187,6 +187,7 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
     @Override
     public void onClick(View view) {
         super.onClick(view);
+        int lSetIndex,rSetIndex;
         switch (view.getId()) {
             case R.id.iv_user_image:
                 _mActivity.startActivity(new Intent(_mActivity, UserInfoActivity.class));
@@ -201,6 +202,7 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
                 if (leftIndex > 1) {
                     leftIndex--;
                     leftSeekbar.setProgress(Double.valueOf(leftIndex + ""));
+                    tvCurL.setText(String.format(Locale.getDefault(), "%d", leftIndex * 5));
                 }
                 shanshuo(true);
                 BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary(leftIndex * 5 + "") + BleUtils.convertDecimalToBinary(rightIndex * 5 + ""));
@@ -209,6 +211,7 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
                 if (leftIndex < 20) {
                     leftIndex++;
                     leftSeekbar.setProgress(Double.valueOf(leftIndex + ""));
+                    tvCurL.setText(String.format(Locale.getDefault(), "%d", leftIndex * 5));
                 }
                 shanshuo(true);
                 BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary(leftIndex * 5 + "") + BleUtils.convertDecimalToBinary(rightIndex * 5 + ""));
@@ -217,6 +220,7 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
                 if (rightIndex > 1) {
                     rightIndex--;
                     rightSeekbar.setProgress(Double.valueOf(rightIndex + ""));
+                    tvCurR.setText(String.format(Locale.getDefault(), "%d", rightIndex * 5));
                 }
                 shanshuo(false);
                 BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary(leftIndex * 5 + "") + BleUtils.convertDecimalToBinary(rightIndex * 5 + ""));
@@ -225,6 +229,7 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
                 if (rightIndex < 20) {
                     rightIndex++;
                     rightSeekbar.setProgress(Double.valueOf(rightIndex + ""));
+                    tvCurR.setText(String.format(Locale.getDefault(), "%d", rightIndex * 5));
                 }
                 shanshuo(false);
                 BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary(leftIndex * 5 + "") + BleUtils.convertDecimalToBinary(rightIndex * 5 + ""));

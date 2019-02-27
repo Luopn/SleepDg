@@ -117,6 +117,4 @@
             app:scv_TextArray="@array/on_off"
             app:scv_TextNormalColor="@android:color/white" />
     </LinearLayout>
-
-
 </RelativeLayout>

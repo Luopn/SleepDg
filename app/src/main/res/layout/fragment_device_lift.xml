@@ -50,8 +50,7 @@
             <!--垂直Seekbar-->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_marginBottom="20dp"
+                android:layout_height="200dp"
                 android:layout_marginTop="20dp"
                 android:baselineAligned="false"
                 android:gravity="center_horizontal"
@@ -61,18 +60,18 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginRight="20dp">
+                    android:layout_marginRight="35dp">
 
                     <FrameLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="20dp">
 
                         <ImageView
                             android:id="@+id/iv_tou_jia"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center_horizontal"
-                            android:padding="2dp"
                             android:scaleType="fitXY"
                             android:src="@mipmap/ic_add_big" />
 
@@ -81,7 +80,6 @@
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center_horizontal|bottom"
-                            android:padding="2dp"
                             android:scaleType="fitXY"
                             android:src="@mipmap/ic_reduce_big" />
                     </FrameLayout>
@@ -91,6 +89,7 @@
                         android:layout_width="40dp"
                         android:layout_height="match_parent"
                         android:background="@android:color/transparent"
+                        android:visibility="gone"
                         app:currentValue="0"
                         app:fromValue="0"
                         app:intervalsBetweenValues="5"
@@ -103,83 +102,27 @@
 
                     <com.jx.sleep_dg.view.bar.VerticalSeekBar
                         android:id="@+id/seeb_left_tou"
-                        android:layout_width="30dp"
+                        android:layout_width="35dp"
                         android:layout_height="match_parent" />
                 </LinearLayout>
 
-                <!--中间-->
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="10dp"
-                        android:text="升"
-                        android:textColor="@color/textAccentColor"
-                        android:textSize="@dimen/textSize_20" />
-
-                    <RelativeLayout
-                        android:layout_width="40dp"
-                        android:layout_height="180dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="150dp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="20dp"
-                            android:background="@color/textTitleColor"
-                            android:ems="1"
-                            android:gravity="center"
-                            android:text="同步升降"
-                            android:textColor="@android:color/white"
-                            android:textSize="12sp"
-                            android:visibility="visible" />
-
-                        <ImageView
-                            android:id="@+id/iv_all_jia"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_gravity="center_horizontal"
-                            android:padding="2dp"
-                            android:scaleType="fitXY"
-                            android:src="@mipmap/ic_add_big" />
-
-                        <ImageView
-                            android:id="@+id/iv_all_jian"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_alignParentBottom="true"
-                            android:layout_centerHorizontal="true"
-                            android:layout_gravity="center_horizontal"
-                            android:padding="2dp"
-                            android:scaleType="fitXY"
-                            android:src="@mipmap/ic_reduce_big" />
-                    </RelativeLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal|bottom"
-                        android:layout_marginBottom="10dp"
-                        android:text="降"
-                        android:textColor="@color/textAccentColor"
-                        android:textSize="@dimen/textSize_20" />
-                </LinearLayout>
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/ic_ruler" />
 
                 <!--右边-->
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="20dp">
+                    android:layout_marginLeft="35dp">
 
                     <com.jx.sleep_dg.view.bar.VerticalSeekBar
                         android:id="@+id/seeb_left_jiao"
-                        android:layout_width="30dp"
+                        android:layout_width="35dp"
                         android:layout_height="match_parent" />
 
                     <com.jx.sleep_dg.view.Ruler
@@ -187,6 +130,7 @@
                         android:layout_width="40dp"
                         android:layout_height="match_parent"
                         android:background="@android:color/transparent"
+                        android:visibility="gone"
                         app:currentValue="0"
                         app:fromValue="0"
                         app:intervalsBetweenValues="5"
@@ -200,14 +144,14 @@
 
                     <FrameLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="20dp">
 
                         <ImageView
                             android:id="@+id/iv_jiao_jia"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center_horizontal"
-                            android:padding="2dp"
                             android:scaleType="fitXY"
                             android:src="@mipmap/ic_add_big" />
 
@@ -216,12 +160,53 @@
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_gravity="center_horizontal|bottom"
-                            android:padding="2dp"
                             android:scaleType="fitXY"
                             android:src="@mipmap/ic_reduce_big" />
                     </FrameLayout>
                 </LinearLayout>
             </LinearLayout>
+
+            <!--中间-->
+            <RelativeLayout
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="25dp"
+                    android:layout_centerInParent="true"
+                    android:layout_centerVertical="true"
+                    android:background="@mipmap/ic_textview_back"
+                    android:gravity="center"
+                    android:text="同步升降"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp"
+                    android:visibility="visible" />
+
+                <ImageView
+                    android:id="@+id/iv_all_jia"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/ic_add_big" />
+
+                <ImageView
+                    android:id="@+id/iv_all_jian"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/ic_reduce_big" />
+
+            </RelativeLayout>
 
             <!--一键部分-->
             <FrameLayout
