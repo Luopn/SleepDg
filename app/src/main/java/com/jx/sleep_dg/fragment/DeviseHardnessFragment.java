@@ -41,6 +41,8 @@ import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 public class DeviseHardnessFragment extends BaseMainFragment implements View.OnClickListener {
 
     private boolean isInitSeekbarVal;
+    private boolean isClickToChangeVal;//点按时，延时设备数据刷新
+    private Runnable delayRunnbale;
 
     private MySeekBar leftSeekbar;
     private MySeekBar rightSeekbar;
@@ -88,7 +90,7 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        isInitSeekbarVal = false;
+        isClickToChangeVal = isInitSeekbarVal = false;
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -168,11 +170,13 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
         tvLCurHardless.setText(String.format(Locale.getDefault(), "%d", lPresureCurVal));
         tvRCurHardness.setText(String.format(Locale.getDefault(), "%d", rPresureCurVal));
 
-        leftIndex = (int) Math.ceil((double) lPresureCurVal / 5);
-        leftIndex = leftIndex < 1 ? 1 : leftIndex > 20 ? 20 : leftIndex;
+        if (!isClickToChangeVal) {
+            leftIndex = (int) Math.ceil((double) lPresureCurVal / 5);//换算为档位
+            leftIndex = leftIndex < 1 ? 1 : leftIndex > 20 ? 20 : leftIndex;
 
-        rightIndex = (int) Math.ceil((double) rPresureCurVal / 5);
-        rightIndex = rightIndex < 1 ? 1 : rightIndex > 20 ? 20 : rightIndex;
+            rightIndex = (int) Math.ceil((double) rPresureCurVal / 5);//换算为档位
+            rightIndex = rightIndex < 1 ? 1 : rightIndex > 20 ? 20 : rightIndex;
+        }
 
         if (!isInitSeekbarVal) {
             isInitSeekbarVal = true;
@@ -187,7 +191,6 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
     @Override
     public void onClick(View view) {
         super.onClick(view);
-        int lSetIndex,rSetIndex;
         switch (view.getId()) {
             case R.id.iv_user_image:
                 _mActivity.startActivity(new Intent(_mActivity, UserInfoActivity.class));
@@ -199,6 +202,9 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
                 _mActivity.startActivity(new Intent(_mActivity, DeviceNetConfigAcyivity.class));
                 break;
             case R.id.iv_jian_l:
+
+                delayDataRefresh();
+
                 if (leftIndex > 1) {
                     leftIndex--;
                     leftSeekbar.setProgress(Double.valueOf(leftIndex + ""));
@@ -208,6 +214,9 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
                 BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary(leftIndex * 5 + "") + BleUtils.convertDecimalToBinary(rightIndex * 5 + ""));
                 break;
             case R.id.iv_jia_l:
+
+                delayDataRefresh();
+
                 if (leftIndex < 20) {
                     leftIndex++;
                     leftSeekbar.setProgress(Double.valueOf(leftIndex + ""));
@@ -217,6 +226,9 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
                 BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary(leftIndex * 5 + "") + BleUtils.convertDecimalToBinary(rightIndex * 5 + ""));
                 break;
             case R.id.iv_jian_r:
+
+                delayDataRefresh();
+
                 if (rightIndex > 1) {
                     rightIndex--;
                     rightSeekbar.setProgress(Double.valueOf(rightIndex + ""));
@@ -226,6 +238,9 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
                 BleComUtils.sendChongqi(BleUtils.convertDecimalToBinary(leftIndex * 5 + "") + BleUtils.convertDecimalToBinary(rightIndex * 5 + ""));
                 break;
             case R.id.iv_jia_r:
+
+                delayDataRefresh();
+
                 if (rightIndex < 20) {
                     rightIndex++;
                     rightSeekbar.setProgress(Double.valueOf(rightIndex + ""));
@@ -281,4 +296,18 @@ public class DeviseHardnessFragment extends BaseMainFragment implements View.OnC
         };
         countDownTimer.start();
     }
+
+    //停止数据刷新 1500毫秒
+    private void delayDataRefresh() {
+        isClickToChangeVal = true;
+        if (delayRunnbale != null)
+            ivLDecrease.removeCallbacks(delayRunnbale);
+        ivLDecrease.postDelayed(delayRunnbale = new Runnable() {
+            @Override
+            public void run() {
+                isClickToChangeVal = false;
+            }
+        }, 1500);
+    }
+
 }
