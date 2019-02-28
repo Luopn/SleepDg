@@ -128,7 +128,7 @@ public class BluetoothLeService extends Service {
         public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
             String intentAction;
             if (newState == BluetoothProfile.STATE_CONNECTED) {
-                ToastUtil.showMessage("蓝牙已连接");
+                //ToastUtil.showMessage("蓝牙已连接");
                 intentAction = ACTION_GATT_CONNECTED;
                 broadcastUpdate(intentAction, gatt.getDevice().getAddress());
 
@@ -149,7 +149,7 @@ public class BluetoothLeService extends Service {
                 Log.i(TAG, "Attempting to start service discovery:(" + gatt.getDevice().getAddress() + ")"
                         + gatt.discoverServices());
             } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
-                ToastUtil.showMessage("蓝牙断开");
+                //ToastUtil.showMessage("蓝牙断开");
                 if (!TextUtils.isEmpty(lastConnectAddress)) {
                     lastConnectAddress = gatt.getDevice().getAddress();
                     broadcastUpdate(ACTION_RSSI_AVAILABLE);
@@ -287,7 +287,7 @@ public class BluetoothLeService extends Service {
                         return true;
                     } else {
                         if (bg.connect()) {
-                            ToastUtil.showMessage(getResources().getString(R.string.connect) + ":" + address);
+                            //ToastUtil.showMessage(getResources().getString(R.string.connect) + ":" + address);
                             return true;
                         } else {
                             bg.disconnect();

@@ -87,7 +87,6 @@ public class DeviceScanActivity extends BaseActivity {
 
         mBLE = new BluetoothLeClass(this);
         if (!mBLE.initialize()) {
-            Log.e(TAG, "Unable to initialize Bluetooth");
             finish();
         }
         // 发现BLE终端的Service时回调
@@ -115,8 +114,6 @@ public class DeviceScanActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
-        // Initializes list view adapter.
         mLeDeviceListAdapter = new LeDeviceListAdapter(this);
         listview.setAdapter(mLeDeviceListAdapter);
         scanLeDevice(true);
@@ -141,22 +138,22 @@ public class DeviceScanActivity extends BaseActivity {
         @Override
         public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
             device = mLeDeviceListAdapter.getDevice(arg2);
-//            LauncherActivity.mBLE.connect(device.getAddress());
-//            LauncherActivity.Connect(device.getAddress());
-//			Intent intent = new Intent(DeviceScanActivity.this, DeviceStartActivirty.class);
-//			intent.putExtra("deviceName", device.getName());
-//			intent.putExtra("Address", device.getAddress());
-//			startActivity(intent);
-//			finish();
+            //LauncherActivity.mBLE.connect(device.getAddress());
+            //LauncherActivity.Connect(device.getAddress());
+            //Intent intent = new Intent(DeviceScanActivity.this, DeviceStartActivirty.class);
+            //intent.putExtra("deviceName", device.getName());
+            //intent.putExtra("Address", device.getAddress());
+            //startActivity(intent);
+            //finish();
         }
 
     }
 
-//    @Override
-//    public void onRightLisenter() {
-//        super.onRightLisenter();
-//        LauncherActivity.bcWrite.setValue("Battery;");
-//    }
+    //@Override
+    //public void onRightLisenter() {
+    //    super.onRightLisenter();
+    //    LauncherActivity.bcWrite.setValue("Battery;");
+    //}
 
     private void scanLeDevice(final boolean enable) {
         if (enable) {
