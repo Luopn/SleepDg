@@ -31,7 +31,7 @@ import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
  * Created by Administrator on 2018/7/20.
  */
 
-public class SettingFragment extends BaseMainFragment implements CompoundButton.OnCheckedChangeListener {
+public class SettingFragment extends BaseMainFragment {
 
     private boolean isInitialDatas;
     private MSPProtocol mspProtocol;
@@ -65,13 +65,13 @@ public class SettingFragment extends BaseMainFragment implements CompoundButton.
 
         tvChongqi = view.findViewById(R.id.tv_auto_chongqi);
         swYunfu = view.findViewById(R.id.sw_yunfu);
-        swYunfu.setOnCheckedChangeListener(this);
+        swYunfu.setOnClickListener(this);
         swErTong = view.findViewById(R.id.sw_ertong);
-        swErTong.setOnCheckedChangeListener(this);
+        swErTong.setOnClickListener(this);
         swSiRen = view.findViewById(R.id.sw_siren);
-        swSiRen.setOnCheckedChangeListener(this);
+        swSiRen.setOnClickListener(this);
         swZhiHan = view.findViewById(R.id.sw_zhihan);
-        swZhiHan.setOnCheckedChangeListener(this);
+        swZhiHan.setOnClickListener(this);
 
         rbZhSimple = view.findViewById(R.id.rb_ch_simple);
         rbZhTradion = view.findViewById(R.id.rb_ch_tradition);
@@ -177,36 +177,33 @@ public class SettingFragment extends BaseMainFragment implements CompoundButton.
                 LanguageUtil.changeAppLanguage(_mActivity, Locale.US, true);
                 restartApplication();
                 break;
-        }
-    }
-
-    @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        isInitialDatas = false;
-        switch (buttonView.getId()) {
             case R.id.sw_zhihan:
-                if (isChecked) {
+                isInitialDatas = false;
+                if (swZhiHan.isChecked()) {
                     BleComUtils.sendMoShi("01");
                 } else {
                     BleComUtils.sendMoShi("00");
                 }
                 break;
             case R.id.sw_ertong:
-                if (isChecked) {
+                isInitialDatas = false;
+                if (swErTong.isChecked()) {
                     BleComUtils.sendMoShi("02");
                 } else {
                     BleComUtils.sendMoShi("00");
                 }
                 break;
             case R.id.sw_siren:
-                if (isChecked) {
+                isInitialDatas = false;
+                if (swSiRen.isChecked()) {
                     BleComUtils.sendMoShi("03");
                 } else {
                     BleComUtils.sendMoShi("00");
                 }
                 break;
             case R.id.sw_yunfu:
-                if (isChecked) {
+                isInitialDatas = false;
+                if (swYunfu.isChecked()) {
                     BleComUtils.sendMoShi("04");
                 } else {
                     BleComUtils.sendMoShi("00");
