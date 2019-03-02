@@ -137,7 +137,7 @@ public class BleComUtils {
 
     public static void sendMoShi(String data) {
         if (BluetoothLeService.mThis != null)
-            BluetoothLeService.mThis.writeCMD(toByteArray("aa0ac8" + data + "0000000000"));
+            BluetoothLeService.mThis.writeCMD(toByteArray("aa0ad8" + data + "0000000000"));
     }
 
     public static void sendJiyi() {
