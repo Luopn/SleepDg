@@ -29,59 +29,70 @@
         android:id="@+id/ll_sels"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#202344"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:textColor="@color/textAccentColor"
-            android:text="床型选择"/>
+            android:layout_marginLeft="20dp"
+            android:background="@mipmap/ic_rectangle_back"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="5dp"
+            android:text="选择"
+            android:textColor="@android:color/white" />
 
         <RadioGroup
             android:id="@+id/rb_group"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="5dp">
+            android:paddingTop="5dp"
+            android:paddingRight="10dp">
 
             <RadioButton
                 android:id="@+id/lift_sel1"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
-                android:checked="true"
                 android:button="@null"
+                android:checked="true"
                 android:drawableTop="@drawable/sel_bed_lift_twice"
                 android:textColor="@color/textAccentColor" />
 
             <RadioButton
                 android:id="@+id/lift_sel2"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:button="@null"
                 android:background="@android:color/transparent"
+                android:button="@null"
                 android:drawableTop="@drawable/sel_bed_lift_tripple"
                 android:textColor="@color/textAccentColor" />
         </RadioGroup>
 
-        <com.jx.sleep_dg.view.BorderButton
+        <TextView
             android:id="@+id/btn_ok"
-            android:layout_width="70dp"
-            android:layout_height="24dp"
-            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:background="@mipmap/ic_lidt_sel_back"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="5dp"
             android:text="@android:string/ok"
             android:textColor="@android:color/white"
-            android:textSize="12sp"
-            app:corner="12dp"
-            app:normal_color="@color/textAccentColor" />
+            android:textSize="12sp" />
     </LinearLayout>
 
     <!--内容-->

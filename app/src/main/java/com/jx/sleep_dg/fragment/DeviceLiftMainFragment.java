@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.jx.sleep_dg.R;
 import com.jx.sleep_dg.view.BorderButton;
@@ -64,7 +65,7 @@ public class DeviceLiftMainFragment extends SupportFragment implements View.OnCl
         rbLiftTripple = view.findViewById(R.id.lift_sel2);
         //rbLift.setOnClickListener(this);
         // rbLiftTripple.setOnClickListener(this);
-        BorderButton btnok = view.findViewById(R.id.btn_ok);
+        TextView btnok = view.findViewById(R.id.btn_ok);
         btnok.setOnClickListener(this);
     }
 
