@@ -43,7 +43,7 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
     private SoundPool soundPool;
 
     private static final int MAX_TOU = 20;
-    private static final int MAX_JIAO = 25;
+    private static final int MAX_JIAO = 20;
     private static final int LONG_PRESS_DELAY = 300;//ms
 
     private LinearLayout llBedContainer;
@@ -299,7 +299,7 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
         curMode = MODE_NONE;
         switch (view.getId()) {
             case R.id.iv_tou_jia:
-                if (touIndex < 30) {
+                if (touIndex < MAX_TOU) {
                     touIndex++;
                     seebLeftTou.setProgress(touIndex);
                 }
@@ -317,7 +317,7 @@ public class DeviceLiftFragment extends BaseMainFragment implements View.OnClick
                 break;
             case R.id.iv_jiao_jia:
                 //左
-                if (jiaoIndex < 25) {
+                if (jiaoIndex < MAX_JIAO) {
                     jiaoIndex++;
                     seebLeftJiao.setProgress(jiaoIndex);
                 }

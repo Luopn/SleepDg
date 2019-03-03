@@ -61,6 +61,9 @@ public class MSPProtocol {
     private byte tire_hour;//自动补气时
     private byte tire_minute;//自动补气分
 
+    private byte weeks;//补气星期
+    private byte liftTime;//床高度倍数
+
     public static MSPProtocol getInstance() {
         return mSPProtocol;
     }
@@ -191,6 +194,8 @@ public class MSPProtocol {
                 mode = dataList.get(8);
                 tire_hour = dataList.get(9);
                 tire_minute = dataList.get(10);
+                weeks = dataList.get(11);
+                liftTime = dataList.get(12);
                 break;
         }
     }
@@ -330,6 +335,14 @@ public class MSPProtocol {
 
     public byte getTire_minute() {
         return tire_minute;
+    }
+
+    public byte getWeeks() {
+        return weeks;
+    }
+
+    public byte getLiftTime() {
+        return liftTime;
     }
 
 }

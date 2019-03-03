@@ -35,6 +35,7 @@ public class SettingFragment extends BaseMainFragment {
 
     private boolean isInitialDatas;
     private MSPProtocol mspProtocol;
+    private Runnable delayRefreshRunnable;
 
     private Switch swYunfu, swErTong, swSiRen, swZhiHan;
     private RadioButton rbZhSimple, rbZhTradion, rbEn;
@@ -178,38 +179,67 @@ public class SettingFragment extends BaseMainFragment {
                 restartApplication();
                 break;
             case R.id.sw_zhihan:
-                isInitialDatas = false;
                 if (swZhiHan.isChecked()) {
                     BleComUtils.sendMoShi("01");
                 } else {
                     BleComUtils.sendMoShi("00");
                 }
+                swSiRen.setChecked(false);
+                swErTong.setChecked(false);
+                swYunfu.setChecked(false);
+
+                delayRefresh();
                 break;
             case R.id.sw_ertong:
-                isInitialDatas = false;
                 if (swErTong.isChecked()) {
-                    BleComUtils.sendMoShi("02");
-                } else {
-                    BleComUtils.sendMoShi("00");
-                }
-                break;
-            case R.id.sw_siren:
-                isInitialDatas = false;
-                if (swSiRen.isChecked()) {
                     BleComUtils.sendMoShi("03");
                 } else {
                     BleComUtils.sendMoShi("00");
                 }
+                swZhiHan.setChecked(false);
+                swSiRen.setChecked(false);
+                swYunfu.setChecked(false);
+
+                delayRefresh();
+                break;
+            case R.id.sw_siren:
+                if (swSiRen.isChecked()) {
+                    BleComUtils.sendMoShi("02");
+                } else {
+                    BleComUtils.sendMoShi("00");
+                }
+                swZhiHan.setChecked(false);
+                swErTong.setChecked(false);
+                swYunfu.setChecked(false);
+
+                delayRefresh();
                 break;
             case R.id.sw_yunfu:
-                isInitialDatas = false;
                 if (swYunfu.isChecked()) {
                     BleComUtils.sendMoShi("04");
                 } else {
                     BleComUtils.sendMoShi("00");
                 }
+                swZhiHan.setChecked(false);
+                swSiRen.setChecked(false);
+                swErTong.setChecked(false);
+
+                delayRefresh();
                 break;
         }
+    }
+
+    //延时蓝牙数据接收
+    private void delayRefresh() {
+        if (delayRefreshRunnable != null) {
+            swYunfu.removeCallbacks(delayRefreshRunnable);
+        }
+        swYunfu.postDelayed(delayRefreshRunnable = new Runnable() {
+            @Override
+            public void run() {
+                isInitialDatas = false;
+            }
+        }, 1000);
     }
 
     private void restartApplication() {

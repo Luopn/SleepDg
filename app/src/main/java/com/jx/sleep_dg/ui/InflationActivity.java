@@ -7,7 +7,6 @@ import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,7 +43,7 @@ public class InflationActivity extends BaseActivity {
     private PopupWindow weeksPop;
     private SegmentControl scOnOff;
 
-    private boolean isInitialDatas;
+    private boolean isInitialedDatas;
     private String hour, minute;
     private int weeksByte;
     private ArrayList<String> hourList, minuteList, weeksList;
@@ -62,9 +61,9 @@ public class InflationActivity extends BaseActivity {
     }
 
     private void initDatas() {
-        isInitialDatas = false;
+        isInitialedDatas = false;
         mspProtocol = MSPProtocol.getInstance();
-        BleComUtils.sendTime("F10100000001");
+        BleComUtils.sendTime("F10100000001");//先同步手机和设备的时间
 
         hourList = new ArrayList<>();
         minuteList = new ArrayList<>();
@@ -109,13 +108,17 @@ public class InflationActivity extends BaseActivity {
     protected void notifyBleDataChanged(Intent intent) {
         super.notifyBleDataChanged(intent);
         if (mspProtocol != null) {
-            if (!isInitialDatas && hourWv != null) {
+            if (!isInitialedDatas && hourWv != null) {
+                //获取到设备端的自动补气时间及星期
                 int hour = (mspProtocol.getTire_hour() & 0xff);
                 int minute = (mspProtocol.getTire_minute() & 0xff);
+                //weeksByte = (mspProtocol.getWeeks() & 0xff);
                 hourWv.setSelection(hour);
                 minuteWv.setSelection(minute);
+                //setWeeksSelected();
+                //PreferenceUtils.putInt(Constance.KEY_INFLATION_WEEK, weeksByte);
 
-                isInitialDatas = true;
+                isInitialedDatas = true;
             }
             if (tvCurTime != null) {
                 tvCurTime.setText(String.format("机器时间 %s:%s",
@@ -227,7 +230,14 @@ public class InflationActivity extends BaseActivity {
                 if (!TextUtils.isEmpty(hour) && !TextUtils.isEmpty(minute)) {
                     int hourInt = Integer.valueOf(hour);
                     int minuteInt = Integer.valueOf(minute);
-                    int weeksByte = PreferenceUtils.getInt(Constance.KEY_INFLATION_WEEK, 0xff);
+
+                    boolean on = PreferenceUtils.getBoolean(Constance.KEY_INFLATION_SWITCH, false);
+                    int weeksByte;
+                    if (on) {
+                        weeksByte = PreferenceUtils.getInt(Constance.KEY_INFLATION_WEEK, 0xff);
+                    } else {
+                        weeksByte = 0;
+                    }
                     BleComUtils.sendInflation(hourInt, minuteInt, weeksByte);
 
                     PreferenceUtils.putInt(Constance.KEY_INFLATION_HOUR, hourInt);
@@ -246,7 +256,7 @@ public class InflationActivity extends BaseActivity {
 
         //处理自动充气重复星期
         weeksByte = PreferenceUtils.getInt(Constance.KEY_INFLATION_WEEK, 0xff);
-        onWeeksSelected();
+        setWeeksSelected();
 
         llWeeksSel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -257,7 +267,7 @@ public class InflationActivity extends BaseActivity {
     }
 
     //显示选择的星期
-    private void onWeeksSelected() {
+    private void setWeeksSelected() {
         String weeksStr = "";
         for (int i = 0; i < 7; i++) {
             boolean select = ((weeksByte >> i) & 1) == 1;
@@ -303,7 +313,7 @@ public class InflationActivity extends BaseActivity {
                         weeksPop.dismiss();
                     }
                     PreferenceUtils.putInt(Constance.KEY_INFLATION_WEEK, weeksByte);
-                    onWeeksSelected();
+                    setWeeksSelected();
                 }
             });
             contentView.findViewById(R.id.cancel).setOnClickListener(new View.OnClickListener() {

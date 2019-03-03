@@ -142,7 +142,6 @@ public class BleComUtils {
 
     public static void sendJiyi() {
         String yihuo = BleUtils.XORAnd("06C60101");
-        //String data = "AA06C60101";
         byte[] data = new byte[5];
         data[0] = (byte) 0xaa;
         data[1] = (byte) 0x06;
@@ -156,9 +155,8 @@ public class BleComUtils {
     public static void senddianji(String data) {
 
         String yihuo = BleUtils.XORAnd("06C702040608");
-        LogUtil.i("data:" + data);
         if (BluetoothLeService.mThis != null)
-            BluetoothLeService.mThis.writeCMD(toByteArray("aa08c7" + data));
+            BluetoothLeService.mThis.writeCMD(toByteArray("aa08c7" + data + "0a0a"));
     }
 
     public static void sendShengji() {
